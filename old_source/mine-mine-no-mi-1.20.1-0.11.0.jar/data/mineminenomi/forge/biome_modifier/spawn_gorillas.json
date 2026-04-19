@@ -1,0 +1,1 @@
+{"type":"forge:add_spawns","biomes":"#mineminenomi:can_spawn/gorillas","spawners":[{"type":"mineminenomi:blugori","maxCount":3,"minCount":1,"weight":8},{"type":"mineminenomi:blagori","maxCount":1,"minCount":1,"weight":3}]}

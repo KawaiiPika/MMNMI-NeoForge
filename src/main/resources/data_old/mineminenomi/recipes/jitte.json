@@ -1,0 +1,1 @@
+{"type":"minecraft:crafting_shaped","category":"equipment","key":{"i":{"item":"minecraft:iron_ingot"},"k":{"item":"mineminenomi:dense_kairoseki"}},"pattern":[" k "," i "," i "],"result":{"item":"mineminenomi:jitte"},"show_notification":true}

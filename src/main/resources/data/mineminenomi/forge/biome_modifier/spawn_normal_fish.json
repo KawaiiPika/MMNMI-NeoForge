@@ -1,0 +1,1 @@
+{"type":"forge:add_spawns","biomes":"#mineminenomi:can_spawn/fish","spawners":{"type":"mineminenomi:panda_shark","maxCount":1,"minCount":1,"weight":4}}

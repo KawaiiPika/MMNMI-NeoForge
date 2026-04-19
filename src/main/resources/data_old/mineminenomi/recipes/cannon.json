@@ -1,0 +1,1 @@
+{"type":"minecraft:crafting_shaped","category":"equipment","key":{"c":{"item":"minecraft:cobblestone"},"i":{"item":"minecraft:iron_block"},"s":{"item":"minecraft:string"}},"pattern":["s  ","iii","ccc"],"result":{"item":"mineminenomi:cannon"},"show_notification":true}

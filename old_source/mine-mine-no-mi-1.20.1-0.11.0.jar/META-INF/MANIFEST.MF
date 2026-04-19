@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+MixinConfigs: mine-mine-no-mi.mixins.json
+Implementation-Title: Mine Mine no Mi
+Implementation-Version: 0.11.0
+Implementation-Commit: 8aaff1418
+Implementation-Vendor: xyz.pixelatedw.mineminenomi
+Implementation-Mode: RELEASE
+Implementation-Timestamp: 2026-03-27T15:33:12+0200
+

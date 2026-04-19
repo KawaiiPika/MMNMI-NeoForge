@@ -1,0 +1,1 @@
+{"structures":[{"structure":"mineminenomi:pirate/small_ship","weight":1}],"placement":{"type":"mineminenomi:extended_random_spread","exclusion_zones":[{"chunk_count":6,"other_set":"mineminenomi:medium_ships"},{"chunk_count":6,"other_set":"mineminenomi:large_ships"}],"frequency":0.8,"spacing":16,"separation":10,"salt":1646207470}}

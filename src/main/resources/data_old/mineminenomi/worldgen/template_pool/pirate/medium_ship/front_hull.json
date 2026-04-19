@@ -1,0 +1,1 @@
+{"name":"mineminenomi:pirate/medium_ship/front_hull","fallback":"minecraft:empty","elements":[{"weight":1,"element":{"element_type":"minecraft:single_pool_element","location":"mineminenomi:pirate/medium_ship/front_hull","projection":"rigid","processors":"mineminenomi:ignore_waterlogging"}}]}

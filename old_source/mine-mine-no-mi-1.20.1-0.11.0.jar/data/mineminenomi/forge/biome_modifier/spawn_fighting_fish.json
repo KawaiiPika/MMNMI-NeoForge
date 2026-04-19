@@ -1,0 +1,1 @@
+{"type":"forge:add_spawns","biomes":"#mineminenomi:can_spawn/fighting_fish","spawners":{"type":"mineminenomi:fighting_fish","maxCount":1,"minCount":1,"weight":1}}

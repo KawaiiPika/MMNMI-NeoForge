@@ -1,0 +1,1 @@
+{"type":"forge:add_spawns","biomes":"#mineminenomi:can_spawn/humandrill","spawners":{"type":"mineminenomi:humandrill","maxCount":3,"minCount":1,"weight":8}}

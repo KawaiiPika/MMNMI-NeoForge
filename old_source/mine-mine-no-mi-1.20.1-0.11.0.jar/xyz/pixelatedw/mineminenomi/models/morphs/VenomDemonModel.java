@@ -1,0 +1,206 @@
+package xyz.pixelatedw.mineminenomi.models.morphs;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.LivingEntity;
+import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
+import xyz.pixelatedw.mineminenomi.api.morph.HumanoidMorphModel;
+
+public class VenomDemonModel<T extends LivingEntity> extends HumanoidMorphModel<T> {
+   public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("mineminenomi", "venom_demon"), "main");
+   private final ModelPart jaw;
+   private final ModelPart mouth;
+   private final ModelPart leftHorn;
+   private final ModelPart leftHorn2;
+   private final ModelPart leftHorn3;
+   private final ModelPart leftHorn3_r1;
+   private final ModelPart rightHorn;
+   private final ModelPart rightHorn2;
+   private final ModelPart rightHorn3;
+   private final ModelPart rightHorn3_r1;
+   private final ModelPart body2;
+   private final ModelPart body3;
+   private final ModelPart body4;
+   private final ModelPart body5;
+   private final ModelPart base;
+   private final ModelPart base2;
+   private final ModelPart base3;
+   private final ModelPart shoulders;
+   private final ModelPart spine;
+   private final ModelPart spineb;
+   private final ModelPart neck;
+   private final ModelPart spine2;
+   private final ModelPart spine2b;
+   private final ModelPart leftWing;
+   private final ModelPart rightWing;
+   private final ModelPart leftArm2;
+   private final ModelPart leftHand;
+   private final ModelPart leftHandFinger1;
+   private final ModelPart leftHandFinger1b;
+   private final ModelPart leftHandFinger2;
+   private final ModelPart leftHandFinger2b;
+   private final ModelPart leftHandFinger3;
+   private final ModelPart leftHandFinger3b;
+   private final ModelPart leftHandFinger4;
+   private final ModelPart leftHandFinger4b;
+   private final ModelPart leftHandFinger5;
+   private final ModelPart leftHandFinger5b;
+   private final ModelPart rightArm2;
+   private final ModelPart rightHand;
+   private final ModelPart rightHandFinger1;
+   private final ModelPart rightHandFinger1b;
+   private final ModelPart rightHandFinger2;
+   private final ModelPart rightHandFinger2b;
+   private final ModelPart rightHandFinger3;
+   private final ModelPart rightHandFinger3b;
+   private final ModelPart rightHandFinger4;
+   private final ModelPart rightHandFinger4b;
+   private final ModelPart rightHandFinger5;
+   private final ModelPart rightHandFinger5b;
+
+   public VenomDemonModel(ModelPart root) {
+      super(root);
+      this.jaw = this.f_102808_.m_171324_("jaw");
+      this.mouth = this.f_102808_.m_171324_("mouth");
+      this.leftHorn = this.f_102808_.m_171324_("leftHorn");
+      this.leftHorn2 = this.leftHorn.m_171324_("leftHorn2");
+      this.leftHorn3 = this.leftHorn2.m_171324_("leftHorn3");
+      this.leftHorn3_r1 = this.leftHorn3.m_171324_("leftHorn3_r1");
+      this.rightHorn = this.f_102808_.m_171324_("rightHorn");
+      this.rightHorn2 = this.rightHorn.m_171324_("rightHorn2");
+      this.rightHorn3 = this.rightHorn2.m_171324_("rightHorn3");
+      this.rightHorn3_r1 = this.rightHorn3.m_171324_("rightHorn3_r1");
+      this.body2 = this.f_102810_.m_171324_("body2");
+      this.body3 = this.body2.m_171324_("body3");
+      this.body4 = this.body3.m_171324_("body4");
+      this.body5 = this.body4.m_171324_("body5");
+      this.base = this.body5.m_171324_("base");
+      this.base2 = this.base.m_171324_("base2");
+      this.base3 = this.base2.m_171324_("base3");
+      this.shoulders = this.f_102810_.m_171324_("shoulders");
+      this.spine = this.shoulders.m_171324_("spine");
+      this.spineb = this.spine.m_171324_("spineb");
+      this.neck = this.shoulders.m_171324_("neck");
+      this.spine2 = this.f_102810_.m_171324_("spine2");
+      this.spine2b = this.spine2.m_171324_("spine2b");
+      this.leftWing = this.f_102810_.m_171324_("leftWing");
+      this.rightWing = this.f_102810_.m_171324_("rightWing");
+      this.leftArm2 = this.f_102812_.m_171324_("leftArm2");
+      this.leftHand = this.leftArm2.m_171324_("leftHand");
+      this.leftHandFinger1 = this.leftHand.m_171324_("leftHandFinger1");
+      this.leftHandFinger1b = this.leftHandFinger1.m_171324_("leftHandFinger1b");
+      this.leftHandFinger2 = this.leftHand.m_171324_("leftHandFinger2");
+      this.leftHandFinger2b = this.leftHandFinger2.m_171324_("leftHandFinger2b");
+      this.leftHandFinger3 = this.leftHand.m_171324_("leftHandFinger3");
+      this.leftHandFinger3b = this.leftHandFinger3.m_171324_("leftHandFinger3b");
+      this.leftHandFinger4 = this.leftHand.m_171324_("leftHandFinger4");
+      this.leftHandFinger4b = this.leftHandFinger4.m_171324_("leftHandFinger4b");
+      this.leftHandFinger5 = this.leftHand.m_171324_("leftHandFinger5");
+      this.leftHandFinger5b = this.leftHandFinger5.m_171324_("leftHandFinger5b");
+      this.rightArm2 = this.f_102811_.m_171324_("rightArm2");
+      this.rightHand = this.rightArm2.m_171324_("rightHand");
+      this.rightHandFinger1 = this.rightHand.m_171324_("rightHandFinger1");
+      this.rightHandFinger1b = this.rightHandFinger1.m_171324_("rightHandFinger1b");
+      this.rightHandFinger2 = this.rightHand.m_171324_("rightHandFinger2");
+      this.rightHandFinger2b = this.rightHandFinger2.m_171324_("rightHandFinger2b");
+      this.rightHandFinger3 = this.rightHand.m_171324_("rightHandFinger3");
+      this.rightHandFinger3b = this.rightHandFinger3.m_171324_("rightHandFinger3b");
+      this.rightHandFinger4 = this.rightHand.m_171324_("rightHandFinger4");
+      this.rightHandFinger4b = this.rightHandFinger4.m_171324_("rightHandFinger4b");
+      this.rightHandFinger5 = this.rightHand.m_171324_("rightHandFinger5");
+      this.rightHandFinger5b = this.rightHandFinger5.m_171324_("rightHandFinger5b");
+   }
+
+   public static LayerDefinition createBodyLayer() {
+      MeshDefinition meshdefinition = HumanoidModel.m_170681_(CubeDeformation.f_171458_, 0.0F);
+      PartDefinition partdefinition = meshdefinition.m_171576_();
+      PartDefinition head = partdefinition.m_171599_("head", CubeListBuilder.m_171558_().m_171514_(74, 23).m_171488_(-3.0F, -3.0F, -6.0F, 5.0F, 4.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.m_171419_(0.5F, -21.0F, -11.5F));
+      head.m_171599_("jaw", CubeListBuilder.m_171558_().m_171514_(112, 26).m_171488_(-2.0F, -1.0F, -2.0F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0.01F)), PartPose.m_171423_(-0.5F, 3.9619F, -2.8224F, 0.4363F, 0.0F, 0.0F));
+      head.m_171599_("mouth", CubeListBuilder.m_171558_().m_171514_(95, 26).m_171488_(0.5F, 3.9F, 0.6F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.m_171419_(-3.0F, -3.0F, -6.0F));
+      PartDefinition leftHorn = head.m_171599_("leftHorn", CubeListBuilder.m_171558_().m_171514_(44, 61).m_171488_(-2.0F, 0.0F, 0.0F, 2.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(1.0F, -2.0F, -2.5F, 0.8727F, 0.9599F, 0.1222F));
+      PartDefinition leftHorn2 = leftHorn.m_171599_("leftHorn2", CubeListBuilder.m_171558_().m_171514_(44, 61).m_171488_(-2.0F, 0.0F, 0.0F, 2.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(0.0F, 0.0F, 2.8F, -0.4363F, 0.1222F, 0.0F));
+      PartDefinition leftHorn3 = leftHorn2.m_171599_("leftHorn3", CubeListBuilder.m_171558_(), PartPose.m_171423_(-1.3145F, 0.4024F, 2.5599F, -0.2967F, -0.0524F, 0.0F));
+      leftHorn3.m_171599_("leftHorn3_r1", CubeListBuilder.m_171558_().m_171514_(55, 62).m_171488_(0.1012F, -2.3755F, -1.03F, 1.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(-0.142F, 0.2276F, -0.077F, 0.0873F, 0.0F, 0.0F));
+      PartDefinition rightHorn = head.m_171599_("rightHorn", CubeListBuilder.m_171558_().m_171514_(44, 61).m_171480_().m_171488_(0.0F, 0.0F, 0.0F, 2.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)).m_171555_(false), PartPose.m_171423_(-2.0F, -2.0F, -2.5F, 0.8727F, -0.9599F, -0.1222F));
+      PartDefinition rightHorn2 = rightHorn.m_171599_("rightHorn2", CubeListBuilder.m_171558_().m_171514_(44, 61).m_171480_().m_171488_(0.0F, 0.0F, 0.0F, 2.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)).m_171555_(false), PartPose.m_171423_(0.0F, 0.0F, 2.8F, -0.4363F, -0.1222F, 0.0F));
+      PartDefinition rightHorn3 = rightHorn2.m_171599_("rightHorn3", CubeListBuilder.m_171558_(), PartPose.m_171423_(1.3145F, 0.4024F, 2.5599F, -0.2967F, 0.0524F, 0.0F));
+      rightHorn3.m_171599_("rightHorn3_r1", CubeListBuilder.m_171558_().m_171514_(55, 62).m_171480_().m_171488_(-1.1012F, -2.3755F, -1.03F, 1.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)).m_171555_(false), PartPose.m_171423_(0.142F, 0.2276F, -0.077F, 0.0873F, 0.0F, 0.0F));
+      PartDefinition body = partdefinition.m_171599_("body", CubeListBuilder.m_171558_().m_171514_(52, 100).m_171488_(0.0F, 0.0F, -18.0F, 20.0F, 10.0F, 18.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(-10.0F, -19.5F, 6.5F, 0.0524F, 0.0F, 0.0F));
+      PartDefinition body2 = body.m_171599_("body2", CubeListBuilder.m_171558_().m_171514_(54, 62).m_171488_(0.0F, -0.0349F, -17.4988F, 20.0F, 8.0F, 17.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(0.0F, 9.5F, 0.0F, 0.0175F, 0.0F, 0.0F));
+      PartDefinition body3 = body2.m_171599_("body3", CubeListBuilder.m_171558_().m_171514_(0, 94).m_171488_(0.0F, 0.0F, -16.0F, 18.0F, 5.0F, 16.0F, new CubeDeformation(0.0F)), PartPose.m_171419_(1.0F, 7.9477F, -0.7482F));
+      PartDefinition body4 = body3.m_171599_("body4", CubeListBuilder.m_171558_().m_171514_(0, 73).m_171488_(0.0F, 0.0F, -15.0F, 16.0F, 5.0F, 15.0F, new CubeDeformation(0.0F)), PartPose.m_171419_(1.0F, 4.9651F, -0.4988F));
+      PartDefinition body5 = body4.m_171599_("body5", CubeListBuilder.m_171558_().m_171514_(0, 55).m_171488_(0.0F, 0.0F, -14.0F, 14.0F, 3.0F, 14.0F, new CubeDeformation(0.0F)), PartPose.m_171419_(1.0F, 4.9651F, -0.4988F));
+      PartDefinition base = body5.m_171599_("base", CubeListBuilder.m_171558_().m_171514_(0, 34).m_171488_(0.0F, 0.0F, 0.0F, 12.0F, 8.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(1.0F, 2.2344F, -12.6971F, -0.0524F, 0.0F, 0.0F));
+      PartDefinition base2 = base.m_171599_("base2", CubeListBuilder.m_171558_().m_171514_(0, 17).m_171488_(0.0F, 0.0F, 0.0F, 13.0F, 3.0F, 13.0F, new CubeDeformation(0.0F)), PartPose.m_171419_(-0.5F, 8.1029F, -0.5438F));
+      base2.m_171599_("base3", CubeListBuilder.m_171558_().m_171514_(0, 0).m_171488_(0.0F, 0.0044F, 0.25F, 14.0F, 2.0F, 14.0F, new CubeDeformation(0.0F)), PartPose.m_171419_(-0.5F, 2.9956F, -0.75F));
+      PartDefinition shoulders = body.m_171599_("shoulders", CubeListBuilder.m_171558_().m_171514_(56, 36).m_171488_(0.0F, 0.0F, -17.0F, 19.0F, 5.0F, 17.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(0.5F, -2.4993F, -0.3738F, -0.1047F, 0.0F, 0.0F));
+      PartDefinition spine = shoulders.m_171599_("spine", CubeListBuilder.m_171558_().m_171514_(52, 17).m_171488_(0.0F, -7.191F, 1.0063F, 1.0F, 17.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(9.0F, 1.1399F, -8.8429F, 1.5708F, 0.0F, 0.0F));
+      spine.m_171599_("spineb", CubeListBuilder.m_171558_().m_171514_(61, 15).m_171488_(0.0F, 0.9193F, 0.0523F, 0.0F, 17.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.m_171419_(0.5F, -8.1102F, 1.1063F));
+      shoulders.m_171599_("neck", CubeListBuilder.m_171558_().m_171514_(114, 36).m_171488_(0.0F, 0.0F, 0.0F, 4.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.m_171419_(7.5F, -0.0021F, -18.8738F));
+      PartDefinition spine2 = body.m_171599_("spine2", CubeListBuilder.m_171558_().m_171514_(56, 15).m_171488_(0.0F, 0.0F, 0.0F, 1.0F, 19.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(9.5F, -2.7F, -0.5F, -0.0087F, 0.0F, 0.0F));
+      spine2.m_171599_("spine2b", CubeListBuilder.m_171558_().m_171514_(68, 14).m_171488_(0.0F, 0.0F, 0.0F, 0.0F, 18.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.m_171419_(0.5F, 0.2F, 1.0F));
+      body.m_171599_("leftWing", CubeListBuilder.m_171558_().m_171514_(47, 1).m_171488_(0.0F, 0.0F, 0.0F, 14.0F, 9.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(16.0F, -0.5F, -0.5F, 0.203F, -0.2261F, -0.5387F));
+      body.m_171599_("rightWing", CubeListBuilder.m_171558_().m_171514_(47, 1).m_171480_().m_171488_(-14.0F, 0.0F, 0.0F, 14.0F, 9.0F, 0.0F, new CubeDeformation(0.0F)).m_171555_(false), PartPose.m_171423_(4.0F, -0.5F, -0.5F, 0.203F, 0.2261F, 0.5387F));
+      PartDefinition leftArm = partdefinition.m_171599_("left_arm", CubeListBuilder.m_171558_().m_171514_(79, 0).m_171488_(0.0F, 0.0F, -6.0F, 6.0F, 15.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(8.0F, -17.0F, 0.0F, -0.5236F, -0.5236F, 0.0F));
+      PartDefinition leftArm2 = leftArm.m_171599_("leftArm2", CubeListBuilder.m_171558_().m_171514_(104, 0).m_171488_(-0.8613F, 0.2473F, -6.5225F, 6.0F, 15.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(1.2067F, 13.3142F, 0.4276F, -0.3665F, 0.0436F, 0.4363F));
+      PartDefinition leftHand = leftArm2.m_171599_("leftHand", CubeListBuilder.m_171558_().m_171514_(48, 36).m_171488_(0.0F, 0.0F, -6.0F, 6.0F, 2.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(-0.9984F, 14.6745F, -0.5989F, 0.0262F, 0.0F, 0.0611F));
+      PartDefinition leftHandFinger1 = leftHand.m_171599_("leftHandFinger1", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171488_(-1.0F, 0.0F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(1.4422F, 0.743F, -6.0F, 0.8552F, 0.1309F, 0.0087F));
+      leftHandFinger1.m_171599_("leftHandFinger1b", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171488_(-1.0F, 0.0828F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(0.0131F, -0.0528F, -1.9653F, 0.3142F, 0.0F, 0.0524F));
+      PartDefinition leftHandFinger2 = leftHand.m_171599_("leftHandFinger2", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171488_(-1.0F, 0.0F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(2.9283F, 0.7596F, -6.203F, 0.8552F, 0.0873F, 0.0087F));
+      leftHandFinger2.m_171599_("leftHandFinger2b", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171488_(-1.0F, 0.0828F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(0.0131F, -0.0528F, -1.9653F, 0.3142F, 0.0F, 0.0524F));
+      PartDefinition leftHandFinger3 = leftHand.m_171599_("leftHandFinger3", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171488_(-1.0F, 0.0F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(4.4405F, 0.9206F, -6.2036F, 0.8552F, -0.0436F, 0.0087F));
+      leftHandFinger3.m_171599_("leftHandFinger3b", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171488_(-1.0F, 0.0828F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(0.0131F, -0.0528F, -1.9653F, 0.3142F, 0.0F, 0.0524F));
+      PartDefinition leftHandFinger4 = leftHand.m_171599_("leftHandFinger4", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171488_(-1.0F, 0.0F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(5.9266F, 0.9372F, -6.4066F, 0.9425F, -0.1309F, 0.0087F));
+      leftHandFinger4.m_171599_("leftHandFinger4b", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171488_(-1.0F, 0.0828F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(0.0131F, -0.0528F, -1.9653F, 0.3142F, 0.0F, 0.0524F));
+      PartDefinition leftHandFinger5 = leftHand.m_171599_("leftHandFinger5", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171488_(-1.0F, 0.0F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(0.117F, 0.3919F, -2.7991F, 0.9425F, 1.6581F, -0.2531F));
+      leftHandFinger5.m_171599_("leftHandFinger5b", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171488_(-1.0F, 0.0828F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.m_171423_(0.0131F, -0.0528F, -1.9653F, 0.3142F, 0.0F, 0.0524F));
+      PartDefinition rightArm = partdefinition.m_171599_("right_arm", CubeListBuilder.m_171558_().m_171514_(79, 0).m_171480_().m_171488_(-6.0F, 0.0F, -6.0F, 6.0F, 15.0F, 6.0F, new CubeDeformation(0.0F)).m_171555_(false), PartPose.m_171423_(-8.0F, -17.0F, 0.0F, -0.5236F, 0.5236F, 0.0F));
+      PartDefinition rightArm2 = rightArm.m_171599_("rightArm2", CubeListBuilder.m_171558_().m_171514_(104, 0).m_171480_().m_171488_(-5.1387F, 0.2473F, -6.5225F, 6.0F, 15.0F, 6.0F, new CubeDeformation(0.0F)).m_171555_(false), PartPose.m_171423_(-1.2067F, 13.3142F, 0.4276F, -0.3665F, -0.0436F, -0.4363F));
+      PartDefinition rightHand = rightArm2.m_171599_("rightHand", CubeListBuilder.m_171558_().m_171514_(48, 36).m_171480_().m_171488_(-6.0F, 0.0F, -6.0F, 6.0F, 2.0F, 6.0F, new CubeDeformation(0.0F)).m_171555_(false), PartPose.m_171423_(0.9984F, 14.6745F, -0.5989F, 0.0262F, 0.0F, -0.0611F));
+      PartDefinition rightHandFinger1 = rightHand.m_171599_("rightHandFinger1", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171480_().m_171488_(0.0F, 0.0F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).m_171555_(false), PartPose.m_171423_(-1.4422F, 0.743F, -6.0F, 0.8552F, -0.1309F, -0.0087F));
+      rightHandFinger1.m_171599_("rightHandFinger1b", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171480_().m_171488_(0.0F, 0.0828F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).m_171555_(false), PartPose.m_171423_(-0.0131F, -0.0528F, -1.9653F, 0.3142F, 0.0F, -0.0524F));
+      PartDefinition rightHandFinger2 = rightHand.m_171599_("rightHandFinger2", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171480_().m_171488_(0.0F, 0.0F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).m_171555_(false), PartPose.m_171423_(-2.9283F, 0.7596F, -6.203F, 0.8552F, -0.0873F, -0.0087F));
+      rightHandFinger2.m_171599_("rightHandFinger2b", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171480_().m_171488_(0.0F, 0.0828F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).m_171555_(false), PartPose.m_171423_(-0.0131F, -0.0528F, -1.9653F, 0.3142F, 0.0F, -0.0524F));
+      PartDefinition rightHandFinger3 = rightHand.m_171599_("rightHandFinger3", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171480_().m_171488_(0.0F, 0.0F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).m_171555_(false), PartPose.m_171423_(-4.4405F, 0.9206F, -6.2036F, 0.8552F, 0.0436F, -0.0087F));
+      rightHandFinger3.m_171599_("rightHandFinger3b", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171480_().m_171488_(0.0F, 0.0828F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).m_171555_(false), PartPose.m_171423_(-0.0131F, -0.0528F, -1.9653F, 0.3142F, 0.0F, -0.0524F));
+      PartDefinition rightHandFinger4 = rightHand.m_171599_("rightHandFinger4", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171480_().m_171488_(0.0F, 0.0F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).m_171555_(false), PartPose.m_171423_(-5.9266F, 0.9372F, -6.4066F, 0.9425F, 0.1309F, -0.0087F));
+      rightHandFinger4.m_171599_("rightHandFinger4b", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171480_().m_171488_(0.0F, 0.0828F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).m_171555_(false), PartPose.m_171423_(-0.0131F, -0.0528F, -1.9653F, 0.3142F, 0.0F, -0.0524F));
+      PartDefinition rightHandFinger5 = rightHand.m_171599_("rightHandFinger5", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171480_().m_171488_(0.0F, 0.0F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).m_171555_(false), PartPose.m_171423_(-0.117F, 0.3919F, -2.7991F, 0.9425F, -1.6581F, 0.2531F));
+      rightHandFinger5.m_171599_("rightHandFinger5b", CubeListBuilder.m_171558_().m_171514_(47, 37).m_171480_().m_171488_(0.0F, 0.0828F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).m_171555_(false), PartPose.m_171423_(-0.0131F, -0.0528F, -1.9653F, 0.3142F, 0.0F, -0.0524F));
+      return LayerDefinition.m_171565_(meshdefinition, 128, 128);
+   }
+
+   public void m_6973_(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+      RendererHelper.resetModelToDefaultPivots(this);
+      this.setupHeadRotation(entity, headPitch, netHeadYaw);
+      this.m_7884_(entity, ageInTicks);
+   }
+
+   public void m_7695_(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+      this.f_102808_.m_104306_(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+      this.f_102810_.m_104306_(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+      this.f_102812_.m_104306_(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+      this.f_102811_.m_104306_(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+   }
+
+   public void renderFirstPersonArm(PoseStack stack, VertexConsumer vertex, int packedLight, int overlay, float red, float green, float blue, float alpha, HumanoidArm side, boolean isLeg) {
+      float sideMod = side == HumanoidArm.RIGHT ? 1.0F : -1.0F;
+      stack.m_85837_((double)0.0F, 0.2, -0.2);
+      stack.m_252781_(Axis.f_252436_.m_252977_(60.0F * sideMod));
+      stack.m_252781_(Axis.f_252403_.m_252977_(10.0F * sideMod));
+      stack.m_252781_(Axis.f_252529_.m_252977_(40.0F));
+      super.renderFirstPersonArm(stack, vertex, packedLight, overlay, red, green, blue, alpha, side, isLeg);
+   }
+}

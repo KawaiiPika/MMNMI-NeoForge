@@ -1,0 +1,19 @@
+// 1.20.1	2026-03-22T01:04:37.266241749	Tags for minecraft:worldgen/biome mod id mineminenomi
+9093173c1fc90e8fb11c0e8c886d286c7267b075 data/mineminenomi/tags/worldgen/biome/can_spawn/bananawani.json
+0539c423fef4376a475dd968b09a1134c6a78905 data/mineminenomi/tags/worldgen/biome/can_spawn/big_duck.json
+e28e03792796953a65780f1a82bee510db5af9cb data/mineminenomi/tags/worldgen/biome/can_spawn/den_den_mushi.json
+09c02f9253d9aac6c2dba76d80453792e79ed0da data/mineminenomi/tags/worldgen/biome/can_spawn/dugongs.json
+89c9f78db44544dff1780ae7095fc930c33ec6f0 data/mineminenomi/tags/worldgen/biome/can_spawn/fighting_fish.json
+b32c1cd6aaee18b1a95d47268017af022691c214 data/mineminenomi/tags/worldgen/biome/can_spawn/fish.json
+6b35771c8d400b0921c04386d79e88b834c282ad data/mineminenomi/tags/worldgen/biome/can_spawn/gorillas.json
+490705c560974f023f9fca41a8e913323f11d0c0 data/mineminenomi/tags/worldgen/biome/can_spawn/humandrill.json
+476c6b5bb39ad58a4bb3992fa0f1e0f473f23693 data/mineminenomi/tags/worldgen/biome/can_spawn/humans.json
+627894a56d6c84e39bb30d7d9c879335f21af270 data/mineminenomi/tags/worldgen/biome/can_spawn/lapahn.json
+2978f57f1709736bbf4e16a92488bf6774f4a1a1 data/mineminenomi/tags/worldgen/biome/has_structure/camp.json
+c9791e8649b8343b996b825b798226ca12a249f1 data/mineminenomi/tags/worldgen/biome/has_structure/large_base.json
+b23a905c1424fcace91315970c531b5519e772aa data/mineminenomi/tags/worldgen/biome/has_structure/sky_island.json
+c9791e8649b8343b996b825b798226ca12a249f1 data/mineminenomi/tags/worldgen/biome/has_structure/small_base.json
+c9791e8649b8343b996b825b798226ca12a249f1 data/mineminenomi/tags/worldgen/biome/has_structure/trainer_building.json
+2978f57f1709736bbf4e16a92488bf6774f4a1a1 data/mineminenomi/tags/worldgen/biome/has_structure/watch_tower.json
+3e00d0ecf4c9744bbf1b1c80ff5270a55488fc87 data/mineminenomi/tags/worldgen/biome/is_swamp.json
+5933f022ef9c14f6184ed073d6517f36a284287e data/mineminenomi/tags/worldgen/biome/ores/kairoseki.json

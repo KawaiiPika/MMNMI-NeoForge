@@ -1,0 +1,1 @@
+{"type":"forge:add_spawns","biomes":"#mineminenomi:can_spawn/humans","spawners":[{"type":"mineminenomi:pirate_grunt","maxCount":4,"minCount":2,"weight":96},{"type":"mineminenomi:pirate_brute","maxCount":2,"minCount":1,"weight":2},{"type":"mineminenomi:pirate_captain","maxCount":1,"minCount":1,"weight":2}]}

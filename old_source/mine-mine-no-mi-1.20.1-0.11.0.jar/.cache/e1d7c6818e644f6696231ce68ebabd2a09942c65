@@ -1,0 +1,11 @@
+// 1.20.1	2026-02-09T19:19:27.021726904	Tags for minecraft:damage_type mod id mineminenomi
+9aa7944cb39f8c24568641fbad38fe404aa5f901 data/minecraft/tags/damage_type/bypasses_armor.json
+d3c015be1e515d0069edcf77a96f8702c355ddd2 data/minecraft/tags/damage_type/bypasses_effects.json
+9aa7944cb39f8c24568641fbad38fe404aa5f901 data/minecraft/tags/damage_type/bypasses_enchantments.json
+9aa7944cb39f8c24568641fbad38fe404aa5f901 data/minecraft/tags/damage_type/bypasses_resistance.json
+c6292c606dc8e8082eaa972f7f7c594b06c98fed data/minecraft/tags/damage_type/bypasses_shield.json
+804c311c9b8692fe83be8cbad78e8536f0a42813 data/minecraft/tags/damage_type/is_fire.json
+3205437437867ad8b1bb4b655047cd0eae7eb01c data/minecraft/tags/damage_type/is_freezing.json
+ece2cd0654266e5b7a4589a05454ebd717f69f39 data/minecraft/tags/damage_type/is_projectile.json
+9aa7944cb39f8c24568641fbad38fe404aa5f901 data/mineminenomi/tags/damage_type/bypasses_logia.json
+cedae37254169a4071c01f4c2d2919c0bdf50be6 data/mineminenomi/tags/damage_type/unavoidable.json

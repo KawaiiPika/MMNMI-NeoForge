@@ -1,0 +1,30 @@
+package xyz.pixelatedw.mineminenomi.mixins.client;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.At.Shift;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import xyz.pixelatedw.mineminenomi.api.animations.Animation;
+
+@Mixin({ItemInHandLayer.class})
+public class ItemInHandLayerMixin {
+   @Inject(
+      method = {"renderArmWithItem"},
+      at = {@At(
+   value = "INVOKE",
+   target = "Lnet/minecraft/client/renderer/ItemInHandRenderer;renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemDisplayContext;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
+   shift = Shift.BEFORE
+)}
+   )
+   public void mineminenomi$renderItemStack(LivingEntity entity, ItemStack itemStack, ItemDisplayContext transformType, HumanoidArm handSide, PoseStack matrixType, MultiBufferSource renderBuffer, int packedLight, CallbackInfo info) {
+      Animation.animationHeldItem(entity, itemStack, transformType, handSide, matrixType, renderBuffer, packedLight);
+   }
+}

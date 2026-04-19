@@ -1,0 +1,27 @@
+// 1.20.1	2026-03-07T00:50:14.522562331	Tags for minecraft:item mod id mineminenomi
+34be59f82e1f913953137eb2e22241c9d4f332ac data/forge/tags/items/tools/bows.json
+a66029873adfcf6c1caca91fe773e6c9903e1523 data/minecraft/tags/items/logs.json
+eaad6d434035ef3346d86f2c67943ecf4b50f254 data/minecraft/tags/items/planks.json
+45e360936a6c3ac57df88d025549e982223b35b6 data/minecraft/tags/items/swords.json
+aa4021be066448e732dd747abb6f153a1af7100b data/mineminenomi/tags/items/banned_items_challenges.json
+97ea7a88ffac12acc65ee59dcd7ee3c1257f95d7 data/mineminenomi/tags/items/bazooka_ammo.json
+bb02705313e04ce881ac55087ad27319fab7046e data/mineminenomi/tags/items/blunts.json
+3a3605ad96da92682bf34b582d5a2107e8d71bce data/mineminenomi/tags/items/clima_tacts.json
+f2a12535d4b4cc374e40ddc7e9edd9d3fec91d4f data/mineminenomi/tags/items/devil_fruit.json
+0cea7a75effd91aadb6a036493dcf8265cf90411 data/mineminenomi/tags/items/fruit_reincarnation.json
+d9cddff232e45ed47c7291b0c78b671e60c88266 data/mineminenomi/tags/items/great_grade.json
+186a66390a2b5dea51490d2afb36664bb75db06e data/mineminenomi/tags/items/gun_ammo.json
+aae4680f6cb76ed7fccbf8e3ed82a83b36ca8b01 data/mineminenomi/tags/items/guns.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/mineminenomi/tags/items/hardening_damage_bonus.json
+beeba0c711be18e93448f9784aceafde6c8b8299 data/mineminenomi/tags/items/imbuing_damage_bonus.json
+d4434b41c27116b2370b67671714b56f672490b2 data/mineminenomi/tags/items/kairoseki.json
+f2dc6dcb899b28e915e658bd224d74659ef87594 data/mineminenomi/tags/items/logia.json
+3603a3d44012e839799d525e1e0634a433c0bdb9 data/mineminenomi/tags/items/magnetic.json
+8821b5cced6d4db7eedb399373d1b31ccb2a6279 data/mineminenomi/tags/items/mangrove_logs.json
+cf22babb3c9460ce015e3f446c6d56d12f80f22f data/mineminenomi/tags/items/melee_enchantable_by_smithing.json
+17b1576e40948fe4608a061353de1c168363c388 data/mineminenomi/tags/items/paramecia.json
+6de4f51d521d0211c8fe7fbf2acafe781292f151 data/mineminenomi/tags/items/ranged_enchantable_by_smithing.json
+225bd03f8d013ba8ecd6bd4012fc46520b34a23a data/mineminenomi/tags/items/rust_immunity.json
+9a1ed2d28fa8f0c3291eb6df1bb475af5f16d72f data/mineminenomi/tags/items/rusty.json
+ceaf905e4b3068414077ae3ad82ab114bde8d3e2 data/mineminenomi/tags/items/supreme_grade.json
+617a65ce8994e3c3a659ea8a890323ba45315a2d data/mineminenomi/tags/items/zoan.json

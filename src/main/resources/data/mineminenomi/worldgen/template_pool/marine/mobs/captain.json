@@ -1,0 +1,1 @@
+{"name":"mineminenomi:marine/mobs/captain","fallback":"minecraft:empty","elements":[{"weight":1,"element":{"location":"mineminenomi:marine/mobs/captain","processors":"minecraft:empty","projection":"rigid","element_type":"minecraft:single_pool_element"}}]}

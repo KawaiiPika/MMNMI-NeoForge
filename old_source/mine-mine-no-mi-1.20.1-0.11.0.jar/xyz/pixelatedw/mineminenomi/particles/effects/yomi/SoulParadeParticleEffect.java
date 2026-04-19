@@ -1,0 +1,33 @@
+package xyz.pixelatedw.mineminenomi.particles.effects.yomi;
+
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
+import xyz.pixelatedw.mineminenomi.api.WyHelper;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTypes;
+import xyz.pixelatedw.mineminenomi.particles.data.SimpleParticleData;
+import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+
+public class SoulParadeParticleEffect extends ParticleEffect<ParticleEffect.NoDetails> {
+   public void spawn(Entity entity, Level world, double posX, double posY, double posZ, ParticleEffect.NoDetails details) {
+      for(int i = 0; i < 64; ++i) {
+         double motionX = WyHelper.randomWithRange(-3, 3) + WyHelper.randomDouble();
+         double motionY = WyHelper.randomWithRange(-3, 3) + WyHelper.randomDouble();
+         double motionZ = WyHelper.randomWithRange(-3, 3) + WyHelper.randomDouble();
+         double middlePoint = 0.1;
+         middlePoint *= WyHelper.randomDouble() * (double)2.0F + (double)0.3F;
+         motionX *= middlePoint / (double)2.0F;
+         motionY *= middlePoint / (double)2.0F;
+         motionZ *= middlePoint / (double)2.0F;
+         SimpleParticleData part = new SimpleParticleData((ParticleType)ModParticleTypes.HIE.get());
+         part.setLife(14);
+         part.setAnimationSpeed(2);
+         part.setRotation(0.0F, 0.0F, 1.0F);
+         part.setRotationSpeed(i % 2 == 0 ? 0.07F : -0.07F);
+         part.setSize(1.0F);
+         part.setMotion(motionX, motionY, motionZ);
+         world.m_6493_(part, true, posX, posY + (double)1.0F, posZ, (double)0.0F, (double)0.0F, (double)0.0F);
+      }
+
+   }
+}

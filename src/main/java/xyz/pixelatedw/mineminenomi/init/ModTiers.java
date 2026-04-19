@@ -1,0 +1,65 @@
+package xyz.pixelatedw.mineminenomi.init;
+
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.neoforge.common.SimpleTier;
+
+public class ModTiers {
+    public static final Tier KIKOKU = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1000, 8.0F, 3.0F, 15, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier SANDAI_KITETSU = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1200, 8.0F, 3.5F, 15, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier WADO_ICHIMONJI = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1200, 8.0F, 3.5F, 15, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier SHUSUI = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1500, 8.0F, 4.0F, 15, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier YORU = new SimpleTier(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2000, 9.0F, 5.0F, 15, () -> Ingredient.of(Items.DIAMOND));
+    
+    public static final Tier SCISSORS = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 500, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier KIRIBACHI = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 400, 8.0F, 3.0F, 10, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier MURAKUMOGIRI = new SimpleTier(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2500, 10.0F, 5.0F, 20, () -> Ingredient.of(Items.DIAMOND));
+    public static final Tier HOOK = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 250, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier UMBRELLA = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 200, 6.0F, 2.0F, 14, () -> Ingredient.of(net.minecraft.tags.ItemTags.PLANKS));
+    public static final Tier NONOSAMA_STAFF = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 400, 8.0F, 3.0F, 10, () -> Ingredient.of(Items.GOLD_INGOT));
+    public static final Tier NONOSAMA_TRIDENT = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 400, 8.0F, 3.0F, 10, () -> Ingredient.of(Items.GOLD_INGOT));
+    public static final Tier HAMMER_5T = new SimpleTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 250, 2.0F, 0.0F, 10, () -> Ingredient.EMPTY);
+    public static final Tier ACES_KNIFE = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 200, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier MIHAWKS_KNIFE = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 200, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier NIDAI_KITETSU = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1200, 8.0F, 3.5F, 15, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier ENMA = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1500, 8.0F, 4.0F, 15, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier AME_NO_HABAKIRI = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1500, 8.0F, 4.0F, 15, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier SOUL_SOLID = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 500, 8.0F, 3.0F, 10, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier DURANDAL = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 400, 8.0F, 3.0F, 10, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier DAISENSO = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 600, 8.0F, 3.0F, 10, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier ACE = new SimpleTier(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2500, 10.0F, 5.0F, 20, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier MOGURA = new SimpleTier(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 1700, 9.0F, 4.0F, 15, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier DALTONS_SPADE = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 800, 8.0F, 3.0F, 10, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier SAMEKIRI_BOCHO = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 900, 8.0F, 3.0F, 10, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier CAT_CLAWS = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 750, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier HASSAIKAI = new SimpleTier(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 3000, 10.0F, 5.0F, 20, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier GRYPHON = new SimpleTier(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2200, 9.0F, 4.0F, 15, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier AXE_HAND = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 500, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier PIPE = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 200, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier TONFA = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 500, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier JITTE = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 400, 6.0F, 2.0F, 14, () -> Ingredient.of(ModItems.KAIROSEKI.get()));
+    public static final Tier KATANA = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 250, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier CUTLASS = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 300, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier BROADSWORD = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 250, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier BISENTO = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 250, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier DAGGER = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 200, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier AXE = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 300, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier SPEAR = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 200, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier CLEAVER = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 250, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier MACE = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 600, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier CHAKRAM = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 300, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier CLIMA_TACT = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 300, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.STICK));
+    public static final Tier PERFECT_CLIMA_TACT = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 500, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.STICK));
+    public static final Tier SORCERY_CLIMA_TACT = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 800, 8.0F, 3.0F, 10, () -> Ingredient.of(Items.IRON_INGOT));
+    public static final Tier ICE_SABER = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2000, 8.0F, 3.0F, 10, () -> Ingredient.EMPTY);
+    public static final Tier AMA_NO_MURAKUMO = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2000, 8.0F, 3.0F, 10, () -> Ingredient.EMPTY);
+    public static final Tier NORO_NORO_BEAM_SWORD = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2000, 8.0F, 3.0F, 10, () -> Ingredient.EMPTY);
+    public static final Tier DORU_DORU_ARTS_KEN = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2000, 8.0F, 3.0F, 10, () -> Ingredient.EMPTY);
+    public static final Tier BLUE_SWORD = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1000, 8.0F, 3.0F, 10, () -> Ingredient.EMPTY);
+    public static final Tier TABIRA_YUKI = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2000, 8.0F, 3.0F, 10, () -> Ingredient.EMPTY);
+    public static final Tier WARABIDE_SWORD = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2000, 8.0F, 3.0F, 10, () -> Ingredient.EMPTY);
+    public static final Tier BARRIERBILITY_BAT = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2000, 8.0F, 3.0F, 10, () -> Ingredient.EMPTY);
+    public static final Tier GAMMA_KNIFE = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2000, 8.0F, 3.0F, 10, () -> Ingredient.EMPTY);
+}

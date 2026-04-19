@@ -1,0 +1,1 @@
+{"name":"mineminenomi:unaligned/ghost_ship","fallback":"minecraft:empty","elements":[{"weight":1,"element":{"element_type":"minecraft:single_pool_element","location":"mineminenomi:unaligned/ghost_ship","projection":"rigid","processors":"mineminenomi:ignore_waterlogging"}}]}

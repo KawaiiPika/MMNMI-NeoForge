@@ -1,0 +1,1 @@
+{"type":"forge:add_spawns","biomes":"#mineminenomi:can_spawn/white_walkie","spawners":{"type":"mineminenomi:white_walkie","maxCount":2,"minCount":1,"weight":5}}

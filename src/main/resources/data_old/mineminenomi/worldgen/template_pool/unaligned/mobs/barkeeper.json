@@ -1,0 +1,1 @@
+{"name":"mineminenomi:unaligned/mobs/barkeeper","fallback":"minecraft:empty","elements":[{"weight":1,"element":{"element_type":"minecraft:single_pool_element","location":"mineminenomi:unaligned/mobs/barkeeper","projection":"rigid","processors":"minecraft:empty"}}]}

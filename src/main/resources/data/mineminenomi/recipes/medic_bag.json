@@ -1,0 +1,1 @@
+{"type":"minecraft:crafting_shaped","category":"equipment","key":{"b":{"item":"minecraft:lapis_lazuli"},"l":{"item":"minecraft:leather"},"s":{"item":"minecraft:string"}},"pattern":["s s","lbl","lll"],"result":{"item":"mineminenomi:medic_bag"},"show_notification":true}

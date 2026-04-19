@@ -1,0 +1,1 @@
+{"name":"mineminenomi:sky_islands/single","fallback":"minecraft:empty","elements":[{"weight":1,"element":{"element_type":"minecraft:single_pool_element","location":"mineminenomi:sky_islands/base_single","projection":"rigid","processors":"minecraft:empty"}}]}

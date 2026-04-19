@@ -1,0 +1,1 @@
+{"parent":"mineminenomi:block/den_den_mushi1","overrides":[{"predicate":{"den_type":0.0},"model":"mineminenomi:block/den_den_mushi1"},{"predicate":{"den_type":0.5},"model":"mineminenomi:block/den_den_mushi2"},{"predicate":{"den_type":1.0},"model":"mineminenomi:block/den_den_mushi3"}]}

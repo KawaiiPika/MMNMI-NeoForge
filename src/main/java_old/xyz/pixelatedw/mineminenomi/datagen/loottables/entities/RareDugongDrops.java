@@ -1,0 +1,26 @@
+package xyz.pixelatedw.mineminenomi.datagen.loottables.entities;
+
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithLootingCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+
+public class RareDugongDrops {
+   private static final LootPool.Builder ITEMS;
+   private static final LootPool.Builder ITEMS2;
+
+   public static LootTable.Builder getTable() {
+      LootTable.Builder drops = LootTable.m_79147_().m_79161_(ITEMS).m_79161_(ITEMS2);
+      return drops;
+   }
+
+   static {
+      ITEMS = LootPool.m_79043_().name("mineminenomi:items").m_165133_(ConstantValue.m_165692_(1.0F)).m_79076_(LootItem.m_79579_(Items.f_41867_).m_79707_(100).m_79078_(SetItemCountFunction.m_165412_(UniformGenerator.m_165780_(0.0F, 5.0F)))).m_79076_(LootItem.m_79579_(Items.f_41910_).m_79707_(100).m_79078_(SetItemCountFunction.m_165412_(UniformGenerator.m_165780_(1.0F, 5.0F)))).m_79076_(LootItem.m_79579_(Items.f_42715_).m_79707_(170));
+      ITEMS2 = LootPool.m_79043_().name("mineminenomi:items2").m_165133_(ConstantValue.m_165692_(1.0F)).m_79080_(LootItemKilledByPlayerCondition.m_81901_()).m_79080_(LootItemRandomChanceWithLootingCondition.m_81963_(0.4F, 0.04F)).m_79076_(LootItem.m_79579_(Items.f_42355_).m_79707_(100).m_79078_(SetItemCountFunction.m_165412_(UniformGenerator.m_165780_(2.0F, 3.0F))));
+   }
+}

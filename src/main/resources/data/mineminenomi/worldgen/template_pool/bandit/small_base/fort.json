@@ -1,0 +1,1 @@
+{"name":"mineminenomi:bandit/small_base/arena","fallback":"minecraft:empty","elements":[{"weight":1,"element":{"element_type":"minecraft:single_pool_element","location":"mineminenomi:bandit/small_base/fort","projection":"rigid","processors":"minecraft:empty"}}]}

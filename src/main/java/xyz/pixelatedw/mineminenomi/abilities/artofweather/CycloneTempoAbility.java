@@ -1,0 +1,52 @@
+package xyz.pixelatedw.mineminenomi.abilities.artofweather;
+
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
+import xyz.pixelatedw.mineminenomi.api.util.Result;
+import xyz.pixelatedw.mineminenomi.init.ModWeapons;
+
+public class CycloneTempoAbility extends Ability {
+
+    public CycloneTempoAbility() {}
+
+    @Override
+    public Result canUse(LivingEntity entity) {
+        ItemStack held = entity.getMainHandItem();
+        if (held.isEmpty() || (!held.is(ModWeapons.CLIMA_TACT.get()) && !held.is(ModWeapons.PERFECT_CLIMA_TACT.get()) && !held.is(ModWeapons.SORCERY_CLIMA_TACT.get()))) {
+            return Result.fail(Component.literal("You need a Clima Tact to use this!"));
+        }
+        return super.canUse(entity);
+    }
+
+    @Override
+    protected void startUsing(LivingEntity entity) {
+        if (!entity.level().isClientSide) {
+            Vec3 look = entity.getLookAngle();
+            for (int i = 1; i <= 6; i++) {
+                Vec3 pos = entity.getEyePosition().add(look.scale(i));
+                AABB area = new AABB(pos.subtract(1.5, 1.5, 1.5), pos.add(1.5, 1.5, 1.5));
+                
+                for (LivingEntity target : entity.level().getEntitiesOfClass(LivingEntity.class, area)) {
+                    if (target != entity) {
+                        target.hurt(entity.damageSources().mobAttack(entity), 8.0f);
+                        Vec3 knockback = look.scale(2.5);
+                        target.setDeltaMovement(knockback.x, 0.4, knockback.z);
+                    }
+                }
+            }
+            entity.sendSystemMessage(Component.literal("Cyclone Tempo!"));
+        }
+        
+        this.startCooldown(entity, 160);
+        this.stop(entity);
+    }
+
+    @Override
+    public Component getDisplayName() {
+        return Component.literal("Cyclone Tempo");
+    }
+}

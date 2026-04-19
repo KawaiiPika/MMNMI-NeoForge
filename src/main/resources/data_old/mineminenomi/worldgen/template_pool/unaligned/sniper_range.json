@@ -1,0 +1,1 @@
+{"name":"mineminenomi:unaligned/sniper_range","fallback":"minecraft:empty","elements":[{"weight":1,"element":{"element_type":"minecraft:single_pool_element","location":"mineminenomi:unaligned/sniper_range","projection":"rigid","processors":"minecraft:empty"}}]}

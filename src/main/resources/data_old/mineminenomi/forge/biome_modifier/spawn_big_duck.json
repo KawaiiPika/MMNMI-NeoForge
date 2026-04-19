@@ -1,0 +1,1 @@
+{"type":"forge:add_spawns","biomes":"#mineminenomi:can_spawn/big_duck","spawners":{"type":"mineminenomi:super_spotbilled_duck","maxCount":4,"minCount":1,"weight":5}}

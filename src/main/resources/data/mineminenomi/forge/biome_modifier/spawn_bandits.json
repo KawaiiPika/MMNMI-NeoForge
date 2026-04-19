@@ -1,0 +1,1 @@
+{"type":"forge:add_spawns","biomes":"#mineminenomi:can_spawn/humans","spawners":[{"type":"mineminenomi:bandit_grunt","maxCount":4,"minCount":2,"weight":94},{"type":"mineminenomi:bandit_brute","maxCount":2,"minCount":1,"weight":5},{"type":"mineminenomi:bandit_sniper","maxCount":1,"minCount":1,"weight":1}]}

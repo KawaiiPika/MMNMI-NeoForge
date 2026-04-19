@@ -1,0 +1,24 @@
+package xyz.pixelatedw.mineminenomi.particles.effects.cyborg;
+
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
+import xyz.pixelatedw.mineminenomi.api.WyHelper;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTypes;
+import xyz.pixelatedw.mineminenomi.particles.data.SimpleParticleData;
+import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+
+public class FreshFireParticleEffect extends ParticleEffect<ParticleEffect.NoDetails> {
+   public void spawn(Entity entity, Level world, double posX, double posY, double posZ, ParticleEffect.NoDetails details) {
+      for(int i = 0; i < 64; ++i) {
+         double offsetX = WyHelper.randomDouble() / 1.2;
+         double offsetY = WyHelper.randomDouble() / (double)2.0F;
+         double offsetZ = WyHelper.randomDouble() / 1.2;
+         SimpleParticleData data = new SimpleParticleData((ParticleType)ModParticleTypes.MERA.get());
+         data.setLife(5);
+         data.setSize(0.7F);
+         world.m_6493_(data, true, posX + offsetX, posY + offsetY, posZ + offsetZ, (double)0.0F, (double)0.0F, (double)0.0F);
+      }
+
+   }
+}
