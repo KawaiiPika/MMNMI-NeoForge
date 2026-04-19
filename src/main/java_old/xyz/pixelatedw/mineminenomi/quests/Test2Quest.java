@@ -1,5 +1,6 @@
 package xyz.pixelatedw.mineminenomi.quests;
 
+import com.mojang.logging.LogUtils;
 import java.util.function.Predicate;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -8,12 +9,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import xyz.pixelatedw.mineminenomi.api.quests.Quest;
 import xyz.pixelatedw.mineminenomi.api.quests.QuestId;
+import org.slf4j.Logger;
 import xyz.pixelatedw.mineminenomi.api.quests.objectives.Objective;
 import xyz.pixelatedw.mineminenomi.init.ModRegistry;
 import xyz.pixelatedw.mineminenomi.quests.objectives.CollectItemObjective;
 import xyz.pixelatedw.mineminenomi.quests.objectives.EquippedItemObjective;
 
 public class Test2Quest extends Quest {
+   private static final Logger LOGGER = LogUtils.getLogger();
    public static final String ID = "test2";
    public static final QuestId<Test2Quest> INSTANCE = (new QuestId.Builder<Test2Quest>(Test2Quest::new)).build();
    private static final int O1_COUNT = 64;
@@ -32,6 +35,6 @@ public class Test2Quest extends Quest {
    }
 
    public void giveReward(Player player) {
-      System.out.println("quest2 ended");
+      LOGGER.info("quest2 ended");
    }
 }
