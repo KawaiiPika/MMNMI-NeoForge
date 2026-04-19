@@ -27,9 +27,7 @@ class ParalysisEffectTest {
             Field instanceField = loadingModListClass.getDeclaredField("INSTANCE");
             instanceField.setAccessible(true);
             instanceField.set(null, mockList);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Throwable e) {}
 
         Bootstrap.bootStrap();
     }
@@ -37,6 +35,7 @@ class ParalysisEffectTest {
     @Test
     void shouldApplyEffectTick_alwaysReturnsTrue() {
         ParalysisEffect paralysisEffect = new ParalysisEffect();
+
         boolean result = paralysisEffect.shouldApplyEffectTick(10, 0);
         assertTrue(result, "shouldApplyEffectTick should always return true");
     }
@@ -51,6 +50,7 @@ class ParalysisEffectTest {
     })
     void shouldApplyEffectTick_withVariousDurationsAndAmplifiers_alwaysReturnsTrue(int duration, int amplifier) {
         ParalysisEffect paralysisEffect = new ParalysisEffect();
+
         boolean result = paralysisEffect.shouldApplyEffectTick(duration, amplifier);
         assertTrue(result, "shouldApplyEffectTick should return true for duration " + duration + " and amplifier " + amplifier);
     }
