@@ -22,8 +22,8 @@ public class CienFleurAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         if (!entity.level().isClientSide) {
-            for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(8.0))) {
-                if (target instanceof LivingEntity living) {
+            for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(8.0))) {
+                if (living != entity) {
                     living.hurt(entity.damageSources().mobAttack(entity), 9.0F);
                     living.addEffect(new MobEffectInstance(ModEffects.MOVEMENT_BLOCKED, 80, 0));
                     living.hurtMarked = true;

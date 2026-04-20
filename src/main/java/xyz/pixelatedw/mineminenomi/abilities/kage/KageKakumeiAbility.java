@@ -21,8 +21,8 @@ public class KageKakumeiAbility extends Ability {
         entity.addEffect(new net.minecraft.world.effect.MobEffectInstance(
             net.minecraft.world.effect.MobEffects.INVISIBILITY, 60, 0));
         // Burst adjacent enemies
-        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(3.0))) {
-            if (target instanceof LivingEntity living) {
+        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(3.0))) {
+            if (living != entity) {
                 living.hurt(entity.damageSources().mobAttack(entity), 8.0F);
                 var dir = living.position().subtract(entity.position()).normalize();
                 living.setDeltaMovement(dir.scale(2.5).add(0, 0.3, 0));

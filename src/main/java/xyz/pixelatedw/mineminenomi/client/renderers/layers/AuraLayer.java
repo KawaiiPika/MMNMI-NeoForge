@@ -51,7 +51,7 @@ public class AuraLayer<T extends LivingEntity, M extends EntityModel<T>> extends
                 float hakiPower = kenExp / 2.0f;
                 double finalPower = (dorikiPower + hakiPower) * 1.06 * (hasGoro ? 4.0 : 1.0);
 
-                if (entity.distanceTo(player) <= finalPower) {
+                if (entity.distanceToSqr(player) <= finalPower * finalPower) {
                     matrixStack.pushPose();
                     
                     int rgb = 0x5555FF; // Default blue-ish

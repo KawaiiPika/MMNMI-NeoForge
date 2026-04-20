@@ -18,8 +18,8 @@ public class KaishinAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         if (!entity.level().isClientSide) {
-            for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(12.0))) {
-                if (target instanceof LivingEntity living) {
+            for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(12.0))) {
+                if (living != entity) {
                     Vec3 dir = living.position().subtract(entity.position()).normalize();
                     living.hurt(entity.damageSources().mobAttack(entity), 12.0F);
                     living.setDeltaMovement(dir.scale(4.0).add(0, 0.8, 0));
