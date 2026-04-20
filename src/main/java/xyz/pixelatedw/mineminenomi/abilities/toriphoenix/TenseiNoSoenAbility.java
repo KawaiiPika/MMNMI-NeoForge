@@ -54,7 +54,7 @@ public class TenseiNoSoenAbility extends Ability {
                 // Slam impact
                 if (!entity.level().isClientSide) {
                     AABB area = entity.getBoundingBox().inflate(RANGE);
-                    List<LivingEntity> targets = entity.level().getEntitiesOfClass(LivingEntity.class, area, e -> e != entity && e.distanceTo(entity) <= RANGE);
+                    List<LivingEntity> targets = entity.level().getEntitiesOfClass(LivingEntity.class, area, e -> e != entity && e.distanceToSqr(entity) <= RANGE * RANGE);
                     for (LivingEntity target : targets) {
                         target.hurt(entity.damageSources().mobAttack(entity), DAMAGE);
                     }

@@ -16,8 +16,8 @@ public class NightmareSoldiersAbility extends Ability {
 
     @Override
     protected void startUsing(LivingEntity entity) {
-        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(6.0))) {
-            if (target instanceof LivingEntity living) {
+        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(6.0))) {
+            if (living != entity) {
                 living.hurt(entity.damageSources().mobAttack(entity), 10.0F);
                 Vec3 push = living.position().subtract(entity.position()).normalize().scale(3.0).add(0, 0.5, 0);
                 living.setDeltaMovement(push);

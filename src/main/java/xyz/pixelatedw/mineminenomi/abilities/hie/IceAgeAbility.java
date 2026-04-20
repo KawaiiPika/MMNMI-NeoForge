@@ -34,8 +34,8 @@ public class IceAgeAbility extends Ability {
             }
         } else if (duration == CHARGE_TICKS) {
             if (!entity.level().isClientSide) {
-                for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(25.0))) {
-                    if (target instanceof LivingEntity living) {
+                for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(25.0))) {
+                    if (living != entity) {
                         living.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 600, 9));
                         living.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.WEAKNESS, 600, 2));
                         living.hurt(entity.damageSources().freeze(), 20.0F);

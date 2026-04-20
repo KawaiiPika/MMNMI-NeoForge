@@ -16,8 +16,8 @@ public class WhiteStrikeAbility extends Ability {
         Vec3 look = entity.getLookAngle();
         // Dash forward through targets
         entity.setDeltaMovement(look.scale(2.5));
-        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(2.0).move(look.scale(3.0)))) {
-            if (target instanceof LivingEntity living) {
+        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(2.0).move(look.scale(3.0)))) {
+            if (living != entity) {
                 living.hurt(entity.damageSources().mobAttack(entity), 9.0F);
                 living.setDeltaMovement(look.scale(2.0).add(0, 0.3, 0));
                 living.hurtMarked = true;
