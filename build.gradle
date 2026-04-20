@@ -219,6 +219,25 @@ idea {
         downloadJavadoc = true
     }
 }
+tasks.withType(Test).configureEach {
+    jvmArgs += [
+        '--add-exports=java.base/sun.security.util=ALL-UNNAMED',
+        '--add-opens=java.base/java.util.jar=ALL-UNNAMED'
+    ]
+}
+
+dependencies {
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.10.0"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.10.0"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+}
+
+tasks.named('test', Test) {
+    useJUnitPlatform()
+}
+
+sourceSets.test.compileClasspath += sourceSets.main.compileClasspath
+sourceSets.test.runtimeClasspath += sourceSets.main.runtimeClasspath
 
 // Allow tests to access NeoForge/Minecraft classes
 sourceSets {
