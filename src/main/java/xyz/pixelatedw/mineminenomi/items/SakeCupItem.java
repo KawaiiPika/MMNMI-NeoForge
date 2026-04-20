@@ -12,13 +12,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import xyz.pixelatedw.mineminenomi.init.ModDataComponents;
-import xyz.pixelatedw.mineminenomi.init.ModFoods;
 
 import java.util.UUID;
 
 public class SakeCupItem extends Item {
     public SakeCupItem() {
-        super(new Item.Properties().stacksTo(1).food(ModFoods.ALCOHOL));
+        // TODO: Port ModFoods.ALCOHOL
+        super(new Item.Properties().stacksTo(1));
     }
 
     @Override

@@ -9,11 +9,31 @@ import xyz.pixelatedw.mineminenomi.init.ModDataComponents;
 
 import java.util.List;
 
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import xyz.pixelatedw.mineminenomi.api.entities.WantedPosterData;
+
 // WantedPosterItem stores the canvas size as a Data Component.
 // WantedData (the player photo/canvas) will require a custom component codec in Phase 3.
 public class WantedPosterItem extends Item {
     public WantedPosterItem() {
         super(new Item.Properties().stacksTo(1));
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
+        if (!level.isClientSide() && itemstack.has(net.minecraft.core.component.DataComponents.CUSTOM_DATA)) {
+            net.minecraft.world.item.component.CustomData customData = itemstack.get(net.minecraft.core.component.DataComponents.CUSTOM_DATA);
+            if (customData != null && customData.contains("WPData")) {
+                WantedPosterData wantedPosterData = WantedPosterData.from(customData.copyTag().getCompound("WPData"));
+                wantedPosterData.checkIfExpired();
+                // TODO: SOpenWantedPosterScreenPacket
+            }
+        }
+        return InteractionResultHolder.consume(itemstack);
     }
 
     @Override

@@ -66,10 +66,9 @@ public class HeartItem extends Item {
             player.displayClientMessage(Component.translatable("item.mineminenomi.heart.squeezed", owner.getDisplayName()), true);
             
             if (owner.getHealth() <= 0.0F) {
-                // If the owner dies from this, the heart is consumed? 
-                // Legacy code says so if owner dies.
+                itemStack.shrink(1);
             }
-            return InteractionResultHolder.success(itemStack);
+            return InteractionResultHolder.consume(itemStack);
         }
     }
 

@@ -16,7 +16,7 @@ public class AntidoteEffect extends MobEffect {
     }
 
     public boolean shouldApplyEffectTick(int duration, int amplifier) {
-        return duration % 10 == 0;
+        return duration % 20 == 0;
     }
 
     @Override

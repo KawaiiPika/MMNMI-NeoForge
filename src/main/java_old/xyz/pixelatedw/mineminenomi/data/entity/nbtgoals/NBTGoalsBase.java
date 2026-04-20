@@ -10,7 +10,6 @@ import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityCore;
 import xyz.pixelatedw.mineminenomi.api.entities.ai.NBTGoal;
 import xyz.pixelatedw.mineminenomi.api.enums.NBTGoalType;
-import xyz.pixelatedw.mineminenomi.ModMain;
 
 public class NBTGoalsBase implements INBTGoals {
    private Set<NBTGoal> goals = new HashSet();
@@ -49,7 +48,7 @@ public class NBTGoalsBase implements INBTGoals {
                this.goals.add(goal);
             }
          } catch (Exception e) {
-            ModMain.LOGGER.error("Failed to deserialize NBTGoal", e);
+            e.printStackTrace();
          }
       }
 

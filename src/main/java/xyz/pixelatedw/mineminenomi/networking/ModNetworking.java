@@ -61,6 +61,18 @@ public class ModNetworking {
                 xyz.pixelatedw.mineminenomi.networking.packets.CFinishCharacterCreatorPacket.CODEC,
                 xyz.pixelatedw.mineminenomi.networking.packets.CFinishCharacterCreatorPacket::handle
         );
+
+        registrar.playToClient(
+                xyz.pixelatedw.mineminenomi.networking.packets.SOpenCreateCrewScreenPacket.TYPE,
+                xyz.pixelatedw.mineminenomi.networking.packets.SOpenCreateCrewScreenPacket.STREAM_CODEC,
+                xyz.pixelatedw.mineminenomi.networking.packets.SOpenCreateCrewScreenPacket::handle
+        );
+
+        registrar.playToServer(
+                xyz.pixelatedw.mineminenomi.networking.packets.CCreateCrewPacket.TYPE,
+                xyz.pixelatedw.mineminenomi.networking.packets.CCreateCrewPacket.STREAM_CODEC,
+                xyz.pixelatedw.mineminenomi.networking.packets.CCreateCrewPacket::handle
+        );
     }
 
     public static void sendTo(CustomPacketPayload payload, net.minecraft.server.level.ServerPlayer player) {
