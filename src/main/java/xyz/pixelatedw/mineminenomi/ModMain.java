@@ -16,10 +16,12 @@ public class ModMain {
     public static final String PROJECT_ID = "mineminenomi";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public ModMain(IEventBus modEventBus) {
+    public ModMain(IEventBus modEventBus, net.neoforged.fml.ModContainer modContainer) {
         // Register the setup methods
         modEventBus.addListener(this::commonSetup);
         
+        modContainer.registerConfig(net.neoforged.fml.config.ModConfig.Type.SERVER, xyz.pixelatedw.mineminenomi.config.ServerConfig.SPEC);
+
         xyz.pixelatedw.mineminenomi.init.ModRegistries.init(modEventBus);
         xyz.pixelatedw.mineminenomi.init.ModRegistry.init(modEventBus);
         xyz.pixelatedw.mineminenomi.init.ModDataComponents.init(modEventBus);
