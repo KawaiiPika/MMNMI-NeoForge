@@ -14,14 +14,26 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
+import xyz.pixelatedw.mineminenomi.data.world.FactionsWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModAbilities;
 
 import java.util.ArrayList;
 
 @EventBusSubscriber(modid = ModMain.PROJECT_ID)
 public class CommonEvents {
+
+    @SubscribeEvent
+    public static void onLevelTick(LevelTickEvent.Post event) {
+        if (event.getLevel() instanceof ServerLevel level) {
+            FactionsWorldData data = FactionsWorldData.get();
+            if (data != null) {
+                data.tick(level);
+            }
+        }
+    }
 
     @SubscribeEvent
     public static void onEntityTick(EntityTickEvent.Post event) {
