@@ -12,26 +12,29 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class WyHelper {
+    private static final SecureRandom SECURE_RANDOM = new SecureRandom();
+
     public static String capitalize(String text) {
         if (text == null || text.isEmpty()) return text;
         return Character.toUpperCase(text.charAt(0)) + text.substring(1).toLowerCase();
     }
 
     public static double randomDouble() {
-        return Math.random() * 2.0D - 1.0D;
+        return SECURE_RANDOM.nextDouble() * 2.0D - 1.0D;
     }
 
     public static double randomWithRange(double min, double max) {
-        return min + (max - min) * Math.random();
+        return min + (max - min) * SECURE_RANDOM.nextDouble();
     }
 
     public static double randomWithRange(int min, int max) {
-        return (double) (new java.util.Random().nextInt(max - min + 1) + min);
+        return (double) (SECURE_RANDOM.nextInt(max - min + 1) + min);
     }
 
     public static BlockHitResult rayTraceBlockSafe(LivingEntity entity, float range) {
