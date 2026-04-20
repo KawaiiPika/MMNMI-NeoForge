@@ -90,6 +90,31 @@ public class ClientEvents {
 
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.SPHERE.get(),
             xyz.pixelatedw.mineminenomi.client.renderers.entities.SphereRenderer::new);
+
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.SNIPER_PELLET.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.GEKISHIN.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.PAD_HO.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.OVERHEAT.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.MERO_MERO_MELLOW.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.NOSE_FANCY_CANNON.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.BRICK_BAT.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.BARA_BARA_HO.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.NEGATIVE_HOLLOW.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.GOMU_GOMU_NO_BAZOOKA.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.NORO_NORO_BEAM.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.PISTOL_KISS.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.WHITE_OUT.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.THROWN_SPEAR.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.YAKKODORI.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.SANBYAKUROKUJU_POUND_HO.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.SANJUROKU_POUND_HO_PROJECTILE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.TATSU_MAKI_PROJECTILE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.NANAJUNI_POUND_HO_PROJECTILE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.NANAHYAKUNIJU_POUND_HO_PROJECTILE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.HYAKUHACHI_POUND_HO_PROJECTILE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.SENHACHIJU_POUND_HO_PROJECTILE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.RELAX_HOUR_PROJECTILE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.VIVRE_CARD.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
     }
 
     @SubscribeEvent
