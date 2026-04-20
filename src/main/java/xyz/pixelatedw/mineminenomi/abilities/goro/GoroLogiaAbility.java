@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.abilities.mera;
+package xyz.pixelatedw.mineminenomi.abilities.goro;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -6,9 +6,9 @@ import net.minecraft.world.entity.LivingEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 
-public class MeraLogiaAbility extends Ability {
-    private static final ResourceLocation FRUIT = ResourceLocation.fromNamespaceAndPath("mineminenomi", "mera_mera_no_mi");
-    public MeraLogiaAbility() { super(FRUIT); }
+public class GoroLogiaAbility extends Ability {
+    private static final ResourceLocation FRUIT = ResourceLocation.fromNamespaceAndPath("mineminenomi", "goro_goro_no_mi");
+    public GoroLogiaAbility() { super(FRUIT); }
 
     @Override
     public boolean isUsing(LivingEntity entity) {
@@ -35,8 +35,10 @@ public class MeraLogiaAbility extends Ability {
     }
 
     @Override
-    public boolean isPassive() { return true; }
+    public boolean isPassive() {
+        return true;
+    }
 
     @Override
-    public Component getDisplayName() { return Component.translatable("ability.mineminenomi.mera_logia"); }
+    public Component getDisplayName() { return Component.translatable("ability.mineminenomi.goro_logia"); }
 }

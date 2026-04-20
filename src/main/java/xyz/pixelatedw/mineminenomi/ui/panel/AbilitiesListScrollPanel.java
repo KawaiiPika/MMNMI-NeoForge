@@ -83,8 +83,14 @@ public class AbilitiesListScrollPanel extends AbstractWidget {
         String name = ability.getClass().getSimpleName().toLowerCase();
         
         if (category == 0) { // Devil Fruit
-            return requiredFruit != null && stats.getDevilFruit().isPresent() && stats.getDevilFruit().get().equals(requiredFruit);
+            return !ability.isPassive() && requiredFruit != null && stats.getDevilFruit().isPresent() && stats.getDevilFruit().get().equals(requiredFruit);
         } else if (category == 1) { // Passives
+            if (ability.isPassive()) {
+                if (requiredFruit != null) {
+                    return stats.getDevilFruit().isPresent() && stats.getDevilFruit().get().equals(requiredFruit);
+                }
+                return true;
+            }
             return requiredFruit == null && (name.contains("passive") || name.contains("punch") || name.contains("knockdown") || name.contains("emptyhands"));
         } else if (category == 2) { // Haki
             return name.contains("haki");
