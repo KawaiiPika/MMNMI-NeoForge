@@ -29,7 +29,7 @@ public abstract class ZoanAbility extends Ability {
     protected void startUsing(LivingEntity entity) {
         xyz.pixelatedw.mineminenomi.data.entity.PlayerStats stats = xyz.pixelatedw.mineminenomi.data.entity.PlayerStats.get(entity);
         if (stats != null) {
-            for (String abilityIdStr : new java.util.ArrayList<>(stats.getActiveAbilities())) {
+            for (String abilityIdStr : stats.getActiveAbilities()) {
                 ResourceLocation id = ResourceLocation.parse(abilityIdStr);
                 Ability activeAbility = xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.get(id);
                 if (activeAbility instanceof ZoanAbility && activeAbility != this) {
