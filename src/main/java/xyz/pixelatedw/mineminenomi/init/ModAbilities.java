@@ -396,6 +396,11 @@ public class ModAbilities {
     public static final Supplier<Ability> SNIPER_GOGGLES_PERK_OLD = ABILITIES.register("sniper_goggles_old", () -> new xyz.pixelatedw.mineminenomi.api.abilities.basic.PerkAbility("Sniper Goggles", "Toggleable zoom"));
     public static final Supplier<Ability> BRAWLER_DAMAGE_PERK_OLD = ABILITIES.register("brawler_damage_old", () -> new xyz.pixelatedw.mineminenomi.api.abilities.basic.PerkAbility("Brawler Damage", "Increased punch damage"));
 
+    // Awa Awa no Mi
+    public static final Supplier<Ability> GOLDEN_HOUR = ABILITIES.register("golden_hour", xyz.pixelatedw.mineminenomi.abilities.awa.GoldenHourAbility::new);
+    public static final Supplier<Ability> RELAX_HOUR = ABILITIES.register("relax_hour", xyz.pixelatedw.mineminenomi.abilities.awa.RelaxHourAbility::new);
+    public static final Supplier<Ability> SOAP_DEFENSE = ABILITIES.register("soap_defense", xyz.pixelatedw.mineminenomi.abilities.awa.SoapDefenseAbility::new);
+
     public static void register(IEventBus bus) {
         bus.addListener(ModAbilities::onNewRegistry);
         ABILITIES.register(bus);
