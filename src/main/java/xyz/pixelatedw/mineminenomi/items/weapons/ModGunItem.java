@@ -3,9 +3,6 @@ package xyz.pixelatedw.mineminenomi.items.weapons;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
@@ -16,11 +13,8 @@ import java.util.function.Predicate;
 
 public class ModGunItem extends ProjectileWeaponItem {
 
-    public static final TagKey<Item> GUN_AMMO_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("mineminenomi", "gun_ammo"));
-    public static final TagKey<Item> BAZOOKA_AMMO_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("mineminenomi", "bazooka_ammo"));
-
-    public static final Predicate<ItemStack> GUN_AMMO = (stack) -> stack.is(GUN_AMMO_TAG);
-    public static final Predicate<ItemStack> BAZOOKA_AMMO = (stack) -> stack.is(BAZOOKA_AMMO_TAG);
+    public static final Predicate<ItemStack> GUN_AMMO = (stack) -> false; // TODO: Implement ammo check
+    public static final Predicate<ItemStack> BAZOOKA_AMMO = (stack) -> false;
 
     private int maxGunpowder = 3;
     private float bulletSpeed = 2.0F;

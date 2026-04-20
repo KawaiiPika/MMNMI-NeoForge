@@ -6,30 +6,34 @@ import static org.junit.jupiter.api.Assertions.*;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
+import javassist.CtConstructor;
 
 class AntidoteEffectTest {
     @Test
     void testShouldApplyEffectTick() throws Exception {
         ClassPool pool = ClassPool.getDefault();
         // Set up the class path for javassist
-        pool.appendClassPath("build/classes/java/main");
+        pool.insertClassPath(new javassist.ClassClassPath(this.getClass()));
 
         CtClass ctClass = pool.get("xyz.pixelatedw.mineminenomi.effects.AntidoteEffect");
         // Remove superclass so it doesn't load MobEffect and crash JVM
         ctClass.setSuperclass(pool.get("java.lang.Object"));
 
-        // Remove constructor because it calls super(MobEffectCategory.BENEFICIAL, 0x36BE4E)
-        ctClass.removeConstructor(ctClass.getConstructors()[0]);
+        // Remove all constructors because they call super(MobEffectCategory.BENEFICIAL, 0x36BE4E)
+        for (CtConstructor constructor : ctClass.getConstructors()) {
+            ctClass.removeConstructor(constructor);
+        }
         // Add default constructor
         ctClass.addConstructor(javassist.CtNewConstructor.defaultConstructor(ctClass));
 
         // Remove applyEffectTick method which uses MobEffectInstance, MobEffects, LivingEntity
-        CtMethod applyMethod = ctClass.getDeclaredMethod("applyEffectTick");
-        ctClass.removeMethod(applyMethod);
+        for (CtMethod m : ctClass.getDeclaredMethods()) {
+            if (!m.getName().equals("shouldApplyEffectTick")) {
+                ctClass.removeMethod(m);
+            }
+        }
 
-        CtMethod isImmuneToMethod = ctClass.getDeclaredMethod("isImmuneTo");
-        ctClass.removeMethod(isImmuneToMethod);
-
+        ctClass.setName("xyz.pixelatedw.mineminenomi.effects.AntidoteEffect_IsolatedTestVersion");
         Class<?> clazz = ctClass.toClass(AntidoteEffectTest.class.getClassLoader(), null);
         Object effect = clazz.getDeclaredConstructor().newInstance();
 
