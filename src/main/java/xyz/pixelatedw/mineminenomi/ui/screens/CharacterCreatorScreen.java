@@ -91,7 +91,7 @@ public class CharacterCreatorScreen extends Screen {
         graphics.blit(ModResources.BOOK, 0, 0, 0, 0, 256, 256);
         graphics.pose().popPose();
         
-        if (!this.allowSubRaceSelect && this.renderTick % 150 == 0) {
+        if (this.hasSubRaces && this.subRaces != null && !this.allowSubRaceSelect && this.renderTick % 150 == 0) {
             this.increaseSubRace();
         }
 
@@ -329,6 +329,7 @@ public class CharacterCreatorScreen extends Screen {
     }
 
     public void increaseSubRace() {
+        if (!this.hasSubRaces || this.subRaces == null || this.subRaces.length == 0) return;
         if (this.subRaceId == this.subRaces.length - 1) {
             this.subRaceId = 0;
         } else {
@@ -338,6 +339,7 @@ public class CharacterCreatorScreen extends Screen {
     }
 
     public void decreaseSubRace() {
+        if (!this.hasSubRaces || this.subRaces == null || this.subRaces.length == 0) return;
         if (this.subRaceId == 0) {
             this.subRaceId = this.subRaces.length - 1;
         } else {
