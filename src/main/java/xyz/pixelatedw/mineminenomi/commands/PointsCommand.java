@@ -10,6 +10,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.enums.TrainingPointType;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 
@@ -48,7 +49,7 @@ public class PointsCommand {
             }
             context.getSource().sendSuccess(() -> Component.literal("Altered " + type.name() + " points for " + targets.size() + " players"), true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ModMain.LOGGER.error("Failed to alter training points", e);
         }
         return 1;
     }
@@ -63,7 +64,7 @@ public class PointsCommand {
             }
             context.getSource().sendSuccess(() -> Component.literal("Set " + type.name() + " points to " + amount + " for " + targets.size() + " players"), true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ModMain.LOGGER.error("Failed to set training points", e);
         }
         return 1;
     }
