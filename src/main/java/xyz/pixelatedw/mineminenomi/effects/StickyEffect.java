@@ -22,7 +22,7 @@ public class StickyEffect extends MobEffect {
     }
 
     public boolean shouldApplyEffectTick(int duration, int amplifier) {
-        return true;
+        return duration % 10 == 0;
     }
 
     @Override
