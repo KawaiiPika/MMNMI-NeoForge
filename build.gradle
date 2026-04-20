@@ -190,3 +190,16 @@ idea {
         downloadJavadoc = true
     }
 }
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.javassist:javassist:3.29.2-GA'
+}
+
+test {
+    useJUnitPlatform()
+
+    // Attempt to bypass classloading issues
+    jvmArgs "-Djava.awt.headless=true", "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+}
