@@ -53,7 +53,7 @@ public class NuWorld {
 
          if (rule.check(world, pos, currentBlockState)) {
             if (currentBlockState.m_60713_(Blocks.f_50003_)) {
-               WyDebug.debug(pos);
+               System.out.println(pos);
             }
 
             return true;

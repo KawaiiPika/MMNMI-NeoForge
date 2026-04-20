@@ -47,8 +47,9 @@ public class DandelionItem extends Item {
     }
 
     public static void setHealAmount(ItemStack itemStack, float amount) {
-        float maxHealth = (float) xyz.pixelatedw.mineminenomi.config.ServerConfig.DORIKI_LIMIT.get() /
-                          xyz.pixelatedw.mineminenomi.config.ServerConfig.HEALTH_GAIN_FREQUENCY.get();
+        // TODO: Port ServerConfig for maxHealth limit
+        // float maxHealth = (float)(ServerConfig.getDorikiLimit() / ServerConfig.getHealthGainFrequency());
+        float maxHealth = 100f; // Temporary
         itemStack.set(ModDataComponents.AMOUNT.get(), Mth.clamp(amount, 0.0F, maxHealth));
     }
 }

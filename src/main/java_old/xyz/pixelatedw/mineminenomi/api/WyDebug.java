@@ -44,10 +44,6 @@ public class WyDebug {
       LogManager.getLogger(getCallerClassName()).error(message);
    }
 
-   public static void error(Object message, Throwable t) {
-      LogManager.getLogger(getCallerClassName()).error(message, t);
-   }
-
    public static String getCallerClassName() {
       StackTraceElement[] stElements = Thread.currentThread().getStackTrace();
 
