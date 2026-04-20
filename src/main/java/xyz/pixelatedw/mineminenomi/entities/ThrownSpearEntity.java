@@ -105,6 +105,10 @@ public class ThrownSpearEntity extends AbstractArrow {
         this.attackDamage = damage;
     }
 
+    public boolean isFoil() {
+        return this.entityData.get(ID_FOIL);
+    }
+
     @Nullable
     @Override
     protected EntityHitResult findHitEntity(Vec3 start, Vec3 end) {
@@ -118,7 +122,7 @@ public class ThrownSpearEntity extends AbstractArrow {
 
         Entity owner = this.getOwner();
         DamageSource damagesource = this.damageSources().trident(this, (owner == null ? this : owner));
-        if (this.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+        if (this.level() instanceof ServerLevel serverLevel) {
             damage = EnchantmentHelper.modifyDamage(serverLevel, this.itemStack, target, damagesource, damage);
         }
 
@@ -126,7 +130,7 @@ public class ThrownSpearEntity extends AbstractArrow {
         SoundEvent soundevent = net.minecraft.sounds.SoundEvents.TRIDENT_HIT;
         if (target.hurt(damagesource, damage)) {
             if (target instanceof LivingEntity livingTarget) {
-                if (owner instanceof LivingEntity livingOwner && this.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                if (owner instanceof LivingEntity livingOwner && this.level() instanceof ServerLevel serverLevel) {
                     EnchantmentHelper.doPostAttackEffects(serverLevel, livingTarget, damagesource);
                 }
                 this.doPostHurtEffects(livingTarget);
@@ -166,10 +170,12 @@ public class ThrownSpearEntity extends AbstractArrow {
         tag.putBoolean("DealtDamage", this.dealtDamage);
     }
 
-    private byte getLoyaltyFromItem(ItemStack stack) {
-        return this.level() instanceof ServerLevel serverlevel
-            ? (byte)Mth.clamp(EnchantmentHelper.getTridentReturnToOwnerAcceleration(serverlevel, stack, this), 0, 127)
-            : 0;
+    @Override
+    public void tickDespawn() {
+        int i = this.entityData.get(ID_LOYALTY);
+        if (this.pickup != AbstractArrow.Pickup.ALLOWED || i <= 0) {
+            super.tickDespawn();
+        }
     }
 
     @Override
@@ -180,5 +186,11 @@ public class ThrownSpearEntity extends AbstractArrow {
     @Override
     public boolean shouldRenderAtSqrDistance(double distance) {
         return true;
+    }
+
+    private byte getLoyaltyFromItem(ItemStack stack) {
+        return this.level() instanceof ServerLevel serverlevel
+            ? (byte)Mth.clamp(EnchantmentHelper.getTridentReturnToOwnerAcceleration(serverlevel, stack, this), 0, 127)
+            : 0;
     }
 }
