@@ -14,7 +14,6 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import xyz.pixelatedw.mineminenomi.init.ModFactions;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 
 public class GruntEntity extends OPEntity {

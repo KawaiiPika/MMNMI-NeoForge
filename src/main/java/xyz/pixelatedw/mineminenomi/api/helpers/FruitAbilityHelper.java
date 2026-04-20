@@ -1,11 +1,9 @@
 package xyz.pixelatedw.mineminenomi.api.helpers;
 
 import net.minecraft.resources.ResourceLocation;
-import xyz.pixelatedw.mineminenomi.init.ModAbilities;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 import net.minecraft.world.entity.LivingEntity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

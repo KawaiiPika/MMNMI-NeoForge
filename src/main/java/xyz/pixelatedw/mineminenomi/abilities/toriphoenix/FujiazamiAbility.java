@@ -2,7 +2,6 @@ package xyz.pixelatedw.mineminenomi.abilities.toriphoenix;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -14,7 +13,6 @@ import xyz.pixelatedw.mineminenomi.api.entities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityUseConditions;
 import xyz.pixelatedw.mineminenomi.api.util.Result;
-import xyz.pixelatedw.mineminenomi.init.ModEffects;
 
 public class FujiazamiAbility extends Ability {
 

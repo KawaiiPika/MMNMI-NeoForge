@@ -22,7 +22,6 @@ import xyz.pixelatedw.mineminenomi.init.ModItems;
 import xyz.pixelatedw.mineminenomi.items.VivreCardItem;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 public class VivreCardEntity extends Entity implements ItemSupplier {

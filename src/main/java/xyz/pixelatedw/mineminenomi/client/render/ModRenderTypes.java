@@ -7,7 +7,6 @@ import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat.Mode;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.client.Minecraft;
 
 public class ModRenderTypes extends RenderType {
 
