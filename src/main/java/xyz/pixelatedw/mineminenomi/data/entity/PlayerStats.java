@@ -51,7 +51,7 @@ public class PlayerStats {
 
     public record BasicStats(double doriki, int cola, int ultraCola, double loyalty, long bounty, long belly, long extol,
                              Identity identity, boolean hasShadow, boolean hasHeart, boolean hasStrawDoll,
-                             boolean isRogue, double stamina, double maxStamina, Map<String, Integer> trainingPoints) {
+                             boolean isRogue, double stamina, double maxStamina, Map<String, Integer> trainingPoints, boolean isHaoshokuBornOverride) {
         public static final Codec<BasicStats> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Codec.DOUBLE.fieldOf("doriki").forGetter(BasicStats::doriki),
                 Codec.INT.fieldOf("cola").forGetter(BasicStats::cola),
@@ -67,7 +67,8 @@ public class PlayerStats {
                 Codec.BOOL.fieldOf("isRogue").forGetter(BasicStats::isRogue),
                 Codec.DOUBLE.fieldOf("stamina").forGetter(BasicStats::stamina),
                 Codec.DOUBLE.fieldOf("maxStamina").forGetter(BasicStats::maxStamina),
-                Codec.unboundedMap(Codec.STRING, Codec.INT).fieldOf("trainingPoints").forGetter(BasicStats::trainingPoints)
+                Codec.unboundedMap(Codec.STRING, Codec.INT).fieldOf("trainingPoints").forGetter(BasicStats::trainingPoints),
+                Codec.BOOL.optionalFieldOf("isHaoshokuBornOverride", false).forGetter(BasicStats::isHaoshokuBornOverride)
         ).apply(instance, BasicStats::new));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, BasicStats> STREAM_CODEC = new StreamCodec<RegistryFriendlyByteBuf, BasicStats>() {
@@ -80,7 +81,8 @@ public class PlayerStats {
                         buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean(),
                         buffer.readBoolean(),
                         buffer.readDouble(), buffer.readDouble(),
-                        ByteBufCodecs.<RegistryFriendlyByteBuf, String, Integer, Map<String, Integer>>map(HashMap::new, ByteBufCodecs.STRING_UTF8, ByteBufCodecs.VAR_INT).decode(buffer)
+                        ByteBufCodecs.<RegistryFriendlyByteBuf, String, Integer, Map<String, Integer>>map(HashMap::new, ByteBufCodecs.STRING_UTF8, ByteBufCodecs.VAR_INT).decode(buffer),
+                        buffer.readBoolean()
                 );
             }
 
@@ -101,6 +103,7 @@ public class PlayerStats {
                 buffer.writeDouble(value.stamina());
                 buffer.writeDouble(value.maxStamina());
                 ByteBufCodecs.<RegistryFriendlyByteBuf, String, Integer, Map<String, Integer>>map(HashMap::new, ByteBufCodecs.STRING_UTF8, ByteBufCodecs.VAR_INT).encode(buffer, value.trainingPoints());
+                buffer.writeBoolean(value.isHaoshokuBornOverride());
             }
         };
     }
@@ -186,7 +189,7 @@ public class PlayerStats {
             }
     );
 
-    private BasicStats basic = new BasicStats(0, 100, 0, 0, 0, 0, 0, new Identity(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty()), true, true, true, false, 100.0, 100.0, new HashMap<>());
+    private BasicStats basic = new BasicStats(0, 100, 0, 0, 0, 0, 0, new Identity(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty()), true, true, true, false, 100.0, 100.0, new HashMap<>(), false);
     private CombatStats combat = new CombatStats(false, false, false, false, 0, 0, 0, new java.util.ArrayList<>(java.util.Collections.nCopies(24, "")), new java.util.ArrayList<>(), 0, 0, false, false, false, new java.util.HashMap<>(), new java.util.HashMap<>());
 
     public PlayerStats() {}
@@ -243,7 +246,7 @@ public class PlayerStats {
     public void setTrainingPoints(TrainingPointType type, int amount) {
         Map<String, Integer> map = new HashMap<>(basic.trainingPoints());
         map.put(type.name(), Math.max(0, amount));
-        this.basic = new BasicStats(basic.doriki(), basic.cola(), basic.ultraCola(), basic.loyalty(), basic.bounty(), basic.belly(), basic.extol(), basic.identity(), basic.hasShadow(), basic.hasHeart(), basic.hasStrawDoll(), basic.isRogue(), basic.stamina(), basic.maxStamina(), map);
+        this.basic = new BasicStats(basic.doriki(), basic.cola(), basic.ultraCola(), basic.loyalty(), basic.bounty(), basic.belly(), basic.extol(), basic.identity(), basic.hasShadow(), basic.hasHeart(), basic.hasStrawDoll(), basic.isRogue(), basic.stamina(), basic.maxStamina(), map, basic.isHaoshokuBornOverride());
     }
 
     public void alterTrainingPoints(TrainingPointType type, int amount) {
@@ -314,6 +317,10 @@ public class PlayerStats {
         this.basic = updateBasicStats(newIdentity);
     }
 
+    public void setHaoshokuBornOverride(boolean override) {
+        this.basic = new BasicStats(basic.doriki(), basic.cola(), basic.ultraCola(), basic.loyalty(), basic.bounty(), basic.belly(), basic.extol(), basic.identity(), basic.hasShadow(), basic.hasHeart(), basic.hasStrawDoll(), basic.isRogue(), basic.stamina(), basic.maxStamina(), basic.trainingPoints(), override);
+    }
+
     public void setDevilFruit(ResourceLocation devilFruit) {
         Identity newIdentity = new Identity(basic.identity().faction(), basic.identity().race(), basic.identity().subRace(), basic.identity().fightingStyle(), Optional.ofNullable(devilFruit));
         this.basic = updateBasicStats(newIdentity);
@@ -348,11 +355,11 @@ public class PlayerStats {
     }
 
     private BasicStats updateBasicStats(Identity identity) {
-        return new BasicStats(basic.doriki(), basic.cola(), basic.ultraCola(), basic.loyalty(), basic.bounty(), basic.belly(), basic.extol(), identity, basic.hasShadow(), basic.hasHeart(), basic.hasStrawDoll(), basic.isRogue(), basic.stamina(), basic.maxStamina(), basic.trainingPoints());
+        return new BasicStats(basic.doriki(), basic.cola(), basic.ultraCola(), basic.loyalty(), basic.bounty(), basic.belly(), basic.extol(), identity, basic.hasShadow(), basic.hasHeart(), basic.hasStrawDoll(), basic.isRogue(), basic.stamina(), basic.maxStamina(), basic.trainingPoints(), basic.isHaoshokuBornOverride());
     }
 
     private BasicStats updateBasicStats(double doriki, int cola, int ultraCola, double loyalty, long bounty, long belly, long extol, boolean hasShadow, boolean hasHeart, boolean hasStrawDoll, boolean isRogue, double stamina, double maxStamina) {
-        return new BasicStats(doriki, cola, ultraCola, loyalty, bounty, belly, extol, basic.identity(), hasShadow, hasHeart, hasStrawDoll, isRogue, stamina, maxStamina, basic.trainingPoints());
+        return new BasicStats(doriki, cola, ultraCola, loyalty, bounty, belly, extol, basic.identity(), hasShadow, hasHeart, hasStrawDoll, isRogue, stamina, maxStamina, basic.trainingPoints(), basic.isHaoshokuBornOverride());
     }
 
     public void setEquippedAbility(int slot, ResourceLocation ability) {

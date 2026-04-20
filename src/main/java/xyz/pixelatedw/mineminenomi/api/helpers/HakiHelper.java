@@ -48,6 +48,11 @@ public class HakiHelper {
     }
 
     public static boolean isHaoshokuBorn(net.minecraft.world.entity.player.Player player) {
+        PlayerStats stats = PlayerStats.get(player);
+        if (stats != null && stats.getBasic().isHaoshokuBornOverride()) {
+            return true;
+        }
+
         String[] bits = ("" + player.getUUID().getMostSignificantBits()).split("");
         int sum = 0;
         for (String bit : bits) {
