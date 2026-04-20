@@ -39,8 +39,9 @@ public class ThrownSpearEntity extends AbstractArrow {
     public ThrownSpearEntity(LivingEntity thrower, Level world, ItemStack stack) {
         super(ModEntities.THROWN_SPEAR.get(), thrower, world, stack, null);
         this.itemStack = stack.copy();
-        this.entityData.set(ID_LOYALTY, this.getLoyaltyFromItem(stack));
-        this.entityData.set(ID_FOIL, stack.hasFoil());
+        // TODO: Handle Loyalty and Foil properly in 1.21.1
+        this.entityData.set(ID_LOYALTY, (byte) 0);
+        this.entityData.set(ID_FOIL, stack.isEnchanted());
     }
 
     @Override
@@ -103,10 +104,6 @@ public class ThrownSpearEntity extends AbstractArrow {
         this.attackDamage = damage;
     }
 
-    public boolean isFoil() {
-        return this.entityData.get(ID_FOIL);
-    }
-
     @Nullable
     @Override
     protected EntityHitResult findHitEntity(Vec3 start, Vec3 end) {
@@ -157,7 +154,7 @@ public class ThrownSpearEntity extends AbstractArrow {
             this.itemStack = ItemStack.parseOptional(this.registryAccess(), tag.getCompound("Item"));
         }
         this.dealtDamage = tag.getBoolean("DealtDamage");
-        this.entityData.set(ID_LOYALTY, this.getLoyaltyFromItem(this.itemStack));
+        // TODO: Re-calc loyalty
     }
 
     @Override
@@ -168,14 +165,6 @@ public class ThrownSpearEntity extends AbstractArrow {
     }
 
     @Override
-    public void tickDespawn() {
-        int i = this.entityData.get(ID_LOYALTY);
-        if (this.pickup != AbstractArrow.Pickup.ALLOWED || i <= 0) {
-            super.tickDespawn();
-        }
-    }
-
-    @Override
     protected float getWaterInertia() {
         return 0.99F;
     }
@@ -183,11 +172,5 @@ public class ThrownSpearEntity extends AbstractArrow {
     @Override
     public boolean shouldRenderAtSqrDistance(double distance) {
         return true;
-    }
-
-    private byte getLoyaltyFromItem(ItemStack stack) {
-        return this.level() instanceof net.minecraft.server.level.ServerLevel serverlevel
-            ? (byte)net.minecraft.util.Mth.clamp(EnchantmentHelper.getTridentReturnToOwnerAcceleration(serverlevel, stack, this), 0, 127)
-            : 0;
     }
 }

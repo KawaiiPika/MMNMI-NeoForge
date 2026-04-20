@@ -14,8 +14,10 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
+import xyz.pixelatedw.mineminenomi.data.world.FactionsWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModAbilities;
 
 import java.util.ArrayList;
@@ -24,11 +26,21 @@ import java.util.ArrayList;
 public class CommonEvents {
 
     @SubscribeEvent
+    public static void onLevelTick(LevelTickEvent.Post event) {
+        if (event.getLevel() instanceof ServerLevel level) {
+            FactionsWorldData data = FactionsWorldData.get();
+            if (data != null) {
+                data.tick(level);
+            }
+        }
+    }
+
+    @SubscribeEvent
     public static void onEntityTick(EntityTickEvent.Post event) {
         if (event.getEntity() instanceof LivingEntity entity) {
             PlayerStats stats = PlayerStats.get(entity);
             if (stats != null) {
-                for (String abilityId : stats.getActiveAbilities()) {
+                for (String abilityId : new ArrayList<>(stats.getActiveAbilities())) {
                     Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                     if (ability != null) {
                         ability.tick(entity);
@@ -51,7 +63,7 @@ public class CommonEvents {
             PlayerStats attackerStats = PlayerStats.get(livingAttacker);
             if (attackerStats != null) {
                 // Ability damage hooks
-                for (String abilityId : attackerStats.getActiveAbilities()) {
+                for (String abilityId : new ArrayList<>(attackerStats.getActiveAbilities())) {
                     Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                     if (ability != null) {
                         float modifiedAmount = ability.onAttack(livingAttacker, target, source, event.getAmount());
@@ -98,7 +110,7 @@ public class CommonEvents {
         // Target Logic
         if (targetStats != null) {
             // Active abilities onHurt hook
-            for (String abilityId : targetStats.getActiveAbilities()) {
+            for (String abilityId : new ArrayList<>(targetStats.getActiveAbilities())) {
                 Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                 if (ability != null) {
                     float newAmount = ability.onHurt(target, source, event.getAmount());
