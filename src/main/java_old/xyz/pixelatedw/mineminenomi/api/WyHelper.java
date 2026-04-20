@@ -843,7 +843,7 @@ public class WyHelper {
 
             writer.close();
          } catch (Exception e) {
-            e.printStackTrace();
+            xyz.pixelatedw.mineminenomi.ModMain.LOGGER.error("Error", e);
          }
       }
 
@@ -998,7 +998,7 @@ public class WyHelper {
          field.setAccessible(true);
          return (T)field.get(instance);
       } catch (Exception e) {
-         e.printStackTrace();
+         xyz.pixelatedw.mineminenomi.ModMain.LOGGER.error("Error", e);
          return null;
       }
    }

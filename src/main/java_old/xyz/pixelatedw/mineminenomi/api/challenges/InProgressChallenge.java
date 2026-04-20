@@ -439,8 +439,7 @@ public class InProgressChallenge {
 
          });
       } catch (Exception e) {
-         WyDebug.error("Something went wrong while wiping old entities from a challenge: " + String.valueOf(this.challenge.getCore().getRegistryKey()));
-         e.printStackTrace();
+         WyDebug.error("Something went wrong while wiping old entities from a challenge: " + String.valueOf(this.challenge.getCore().getRegistryKey()), e);
       }
 
    }
@@ -461,7 +460,7 @@ public class InProgressChallenge {
                   player.f_8906_.m_9829_(new ClientboundSetSubtitleTextPacket(subtitleComponent));
                }
             } catch (Exception e) {
-               e.printStackTrace();
+               WyDebug.error("Failed to send group title", e);
             }
          }
       }
@@ -476,7 +475,7 @@ public class InProgressChallenge {
                Component titleComponent = ComponentUtils.m_130731_(player.m_20203_(), text, player, 0);
                player.f_8906_.m_9829_(new ClientboundSetActionBarTextPacket(titleComponent));
             } catch (Exception e) {
-               e.printStackTrace();
+               WyDebug.error("Failed to send group actionbar", e);
             }
          }
       }

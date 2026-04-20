@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
 import net.minecraftforge.common.ForgeConfigSpec;
+import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.config.IConfigEnum;
 import xyz.pixelatedw.mineminenomi.ui.screens.AbilitiesListScreen;
@@ -150,7 +151,7 @@ public class ClientConfig {
             color = new Color(n);
          }
       } catch (Exception e) {
-         e.printStackTrace();
+         ModMain.LOGGER.error("Haki Color configuration error", e);
       }
 
       return color;

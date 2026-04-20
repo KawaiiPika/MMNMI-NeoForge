@@ -1,5 +1,6 @@
 package xyz.pixelatedw.mineminenomi.quests;
 
+import com.mojang.logging.LogUtils;
 import java.util.function.Predicate;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -9,6 +10,7 @@ import net.minecraft.world.item.Items;
 import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
 import xyz.pixelatedw.mineminenomi.api.quests.Quest;
 import xyz.pixelatedw.mineminenomi.api.quests.QuestId;
+import org.slf4j.Logger;
 import xyz.pixelatedw.mineminenomi.api.quests.objectives.Objective;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
 import xyz.pixelatedw.mineminenomi.init.ModRegistry;
@@ -19,6 +21,7 @@ import xyz.pixelatedw.mineminenomi.quests.objectives.ReachDorikiObjective;
 import xyz.pixelatedw.mineminenomi.quests.objectives.SharedKillChecks;
 
 public class TestQuest extends Quest {
+   private static final Logger LOGGER = LogUtils.getLogger();
    public static final String ID = "test";
    public static final QuestId<TestQuest> INSTANCE;
    private static final int O1_DAMAGE_CHECK = 6;
@@ -50,7 +53,7 @@ public class TestQuest extends Quest {
    }
 
    public void giveReward(Player player) {
-      System.out.println("quest ended");
+      LOGGER.info("quest ended");
    }
 
    static {
