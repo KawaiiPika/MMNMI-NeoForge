@@ -15,8 +15,8 @@ public class BlackLegTrial04Quest extends Quest {
         this.addCompleteEvent(100, (player) -> {
             PlayerStats stats = PlayerStats.get(player);
             if (stats != null) {
-                stats.grantAbility(ModAbilities.DIABLE_JAMBE.get().getAbilityId());
-                stats.grantAbility(ModAbilities.SKYWALK.get().getAbilityId());
+                // ability removed for porting
+                // ability removed for porting
                 stats.sync(player);
                 player.sendSystemMessage(Component.literal("You have unlocked: Diable Jambe and Skywalk!"));
             }

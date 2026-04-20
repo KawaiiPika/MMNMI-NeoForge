@@ -40,7 +40,7 @@ public class SwordsmanTrial05Quest extends Quest {
         
         PlayerStats stats = PlayerStats.get(player);
         if (stats != null) {
-            stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.HIRYU_KAEN.get().getAbilityId());
+            // ability removed for porting
             stats.sync(player);
         }
     }

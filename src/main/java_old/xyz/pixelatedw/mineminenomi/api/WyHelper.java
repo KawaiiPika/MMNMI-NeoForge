@@ -15,7 +15,12 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -89,6 +94,9 @@ import xyz.pixelatedw.mineminenomi.packets.server.SSpawnParticleEffectPacket;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
 public class WyHelper {
+   private static final HttpClient HTTP_CLIENT = HttpClient.newBuilder()
+           .connectTimeout(Duration.ofSeconds(30))
+           .build();
    private static final Random RANDOM = new Random();
    private static final Collector<?, ?, ?> SHUFFLER = Collectors.collectingAndThen(Collectors.toCollection(ArrayList::new), (list) -> {
       Collections.shuffle(list);
@@ -919,44 +927,32 @@ public class WyHelper {
    }
 
    public static <T> @Nullable T sendGET(String sendUrl, Class<?> resultType) throws IOException {
-      T result = null;
-      URL url = new URL("https://pixelatedw.xyz/api/v1" + sendUrl);
-      HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-      connection.setRequestMethod("GET");
-      String var10002 = MCPVersion.getMCVersion();
-      connection.setRequestProperty("User-Agent", "mineminenomi/0.11.0-" + var10002 + "-" + BuildMode.MODE.toString().toLowerCase());
-      connection.setConnectTimeout(30000);
-      int responseCode = connection.getResponseCode();
-      if (responseCode != 200 && responseCode != 202) {
-         WyDebug.error("==============ERROR WHILE RETRIEVING SERVER DATA==============");
-         WyDebug.error("Response Code: " + responseCode + " - " + connection.getResponseMessage());
-         WyDebug.error("=============================================================");
-      } else {
-         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+      try {
+         URI uri = new URI("https://pixelatedw.xyz/api/v1" + sendUrl);
 
-         try {
-            StringBuilder sb = new StringBuilder();
+         String mcVersion = MCPVersion.getMCVersion();
+         String userAgent = "mineminenomi/0.11.0-" + mcVersion + "-" + BuildMode.MODE.toString().toLowerCase();
 
-            String line;
-            while((line = in.readLine()) != null) {
-               sb.append(line + "\n");
-            }
+         HttpRequest request = HttpRequest.newBuilder()
+                 .uri(uri)
+                 .GET()
+                 .header("User-Agent", userAgent)
+                 .build();
 
-            result = (T)(new Gson()).fromJson(sb.toString(), resultType);
-         } catch (Throwable var10) {
-            try {
-               in.close();
-            } catch (Throwable var9) {
-               var10.addSuppressed(var9);
-            }
+         HttpResponse<String> response = HTTP_CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
+         int responseCode = response.statusCode();
 
-            throw var10;
+         if (responseCode != 200 && responseCode != 202) {
+            WyDebug.error("==============ERROR WHILE RETRIEVING SERVER DATA==============");
+            WyDebug.error("Response Code: " + responseCode + " - " + response.body());
+            WyDebug.error("=============================================================");
+            return null;
+         } else {
+            return (T) (new Gson()).fromJson(response.body(), resultType);
          }
-
-         in.close();
+      } catch (Exception e) {
+         throw new IOException("Failed to send GET request", e);
       }
-
-      return result;
    }
 
    public static void removeAllModifiers(AttributeInstance attr) {
@@ -993,6 +989,9 @@ public class WyHelper {
    }
 
    public static <T, E> @Nullable T getPrivateValue(Class<? super E> classToAccess, E instance, String fieldName) {
+      if (!"partEntities".equals(fieldName) && !"dragonParts".equals(fieldName)) {
+         throw new SecurityException("Access to field " + fieldName + " is not allowed for security reasons.");
+      }
       try {
          Field field = classToAccess.getDeclaredField(fieldName);
          field.setAccessible(true);

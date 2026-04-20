@@ -14,12 +14,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
+import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.ui.TexturedRectUI;
-import org.slf4j.Logger;
-import com.mojang.logging.LogUtils;
 
 public class JollyRoger {
-   private static final Logger LOGGER = LogUtils.getLogger();
    private JollyRogerElement base;
    private JollyRogerElement[] backgrounds = new JollyRogerElement[3];
    private JollyRogerElement[] details = new JollyRogerElement[6];
@@ -78,7 +76,7 @@ public class JollyRoger {
 
          nbt.put("details", details);
       } catch (Exception ex) {
-         ex.printStackTrace();
+         ModMain.LOGGER.error("Failed to write JollyRoger NBT", ex);
       }
 
       return nbt;
@@ -147,7 +145,7 @@ public class JollyRoger {
             }
          }
       } catch (Exception ex) {
-         ex.printStackTrace();
+         ModMain.LOGGER.error("Failed to read JollyRoger NBT", ex);
       }
 
    }
@@ -307,7 +305,7 @@ public class JollyRoger {
 
          return Optional.of(jollyRogerImage);
       } catch (IOException e) {
-         LOGGER.error(e.getMessage());
+         ModMain.LOGGER.error(e.getMessage());
          return Optional.empty();
       }
    }

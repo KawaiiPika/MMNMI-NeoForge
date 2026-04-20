@@ -311,6 +311,12 @@ public class ModEntities {
                     .clientTrackingRange(10)
                     .updateInterval(20)
                     .build("phoenix_goen"));
+    public static final Supplier<EntityType<xyz.pixelatedw.mineminenomi.entities.VivreCardEntity>> VIVRE_CARD = ModRegistry.ENTITY_TYPES.register("vivre_card",
+            () -> EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.VivreCardEntity>of(xyz.pixelatedw.mineminenomi.entities.VivreCardEntity::new, net.minecraft.world.entity.MobCategory.MISC)
+                    .sized(0.4F, 0.4F)
+                    .clientTrackingRange(10)
+                    .updateInterval(20)
+                    .build("vivre_card"));
 
     public static void init() {}
 }

@@ -3,6 +3,8 @@ package xyz.pixelatedw.mineminenomi.handlers.entity;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -44,7 +46,8 @@ public class PatreonHandler {
    }
 
    private static @Nullable List<AccountType> getPatreonLevel(Player player) throws IOException {
-      String apiURL = "/patreon/" + player.m_20148_().toString();
+      String encodedUuid = URLEncoder.encode(player.m_20148_().toString(), StandardCharsets.UTF_8.name());
+      String apiURL = "/patreon/" + encodedUuid;
       String[] result = (String[])WyHelper.sendGET(apiURL, String[].class);
       if (result != null && result.length > 0) {
          List<AccountType> types = new ArrayList();

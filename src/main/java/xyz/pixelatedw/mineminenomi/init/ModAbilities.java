@@ -6,7 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.RegistryBuilder;
-import net.neoforged.neoforge.registries.RegisterEvent;
+import net.neoforged.neoforge.registries.NewRegistryEvent;
 import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.basic.PunchAbility;
@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 public class ModAbilities {
     public static final ResourceKey<Registry<Ability>> REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(ModMain.PROJECT_ID, "abilities"));
     public static final DeferredRegister<Ability> ABILITIES = DeferredRegister.create(REGISTRY_KEY, ModMain.PROJECT_ID);
-    public static final Registry<Ability> REGISTRY = new RegistryBuilder<>(REGISTRY_KEY).sync(true).create();
+    public static Registry<Ability> REGISTRY;
 
     public static final Supplier<Ability> PUNCH = ABILITIES.register("punch", xyz.pixelatedw.mineminenomi.api.abilities.basic.PunchAbility::new);
     public static final Supplier<Ability> SHISHI_SONSON = ABILITIES.register("shishi_sonson", xyz.pixelatedw.mineminenomi.abilities.ittoryu.ShiShishiSonsonAbility::new);
@@ -406,7 +406,12 @@ public class ModAbilities {
         ABILITIES.register(bus);
     }
 
-    private static void onNewRegistry(net.neoforged.neoforge.registries.RegisterEvent event) {
-        // Registration is handled by DeferredRegister
+    private static void onNewRegistry(net.neoforged.neoforge.registries.NewRegistryEvent event) {
+        REGISTRY = event.create(new RegistryBuilder<>(REGISTRY_KEY).sync(true));
+    }
+
+    public static Ability getAbility(String abilityId) {
+        if (!abilityId.contains(":")) abilityId = "mineminenomi:" + abilityId;
+        return REGISTRY.get(ResourceLocation.parse(abilityId));
     }
 }

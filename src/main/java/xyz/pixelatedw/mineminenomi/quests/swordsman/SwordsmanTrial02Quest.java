@@ -46,8 +46,8 @@ public class SwordsmanTrial02Quest extends Quest {
     public void giveReward(Player player) {
         PlayerStats stats = PlayerStats.get(player);
         if (stats != null) {
-            stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.YAKKODORI.get().getAbilityId());
-            stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.SWORDSMAN_DAMAGE_PERK.get().getAbilityId());
+            // ability removed for porting
+            // ability removed for porting
             stats.sync(player);
         }
     }
