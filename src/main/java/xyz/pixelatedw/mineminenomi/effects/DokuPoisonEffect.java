@@ -20,7 +20,9 @@ public class DokuPoisonEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(LivingEntity entity, int amplifier) {
-        entity.hurt(entity.damageSources().magic(), (float)(amplifier + 1));
+        if (entity.getHealth() > 1.0F) {
+            entity.hurt(xyz.pixelatedw.mineminenomi.init.ModDamageSources.getInstance().poison(entity), 1.0F);
+        }
         return true;
     }
 }
