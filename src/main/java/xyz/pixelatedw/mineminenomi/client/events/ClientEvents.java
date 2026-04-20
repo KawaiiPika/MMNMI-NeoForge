@@ -86,6 +86,8 @@ public class ClientEvents {
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.MIZU_SHURYUDAN.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.PACK_OF_SHARKS.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
 
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.VIVRE_CARD.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.SPHERE.get(),
             xyz.pixelatedw.mineminenomi.client.renderers.entities.SphereRenderer::new);
     }
