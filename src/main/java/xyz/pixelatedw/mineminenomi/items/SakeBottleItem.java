@@ -22,7 +22,7 @@ public class SakeBottleItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (player.isShiftKeyDown()) {
             if (!level.isClientSide) {
-                // TODO: Open Create Crew Screen
+                xyz.pixelatedw.mineminenomi.networking.ModNetworking.sendTo(new xyz.pixelatedw.mineminenomi.networking.packets.SOpenCreateCrewScreenPacket(), (net.minecraft.server.level.ServerPlayer) player);
             }
             return InteractionResultHolder.success(player.getItemInHand(hand));
         }
