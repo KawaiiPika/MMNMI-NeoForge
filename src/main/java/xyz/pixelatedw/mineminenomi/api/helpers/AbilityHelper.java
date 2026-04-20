@@ -41,4 +41,15 @@ public class AbilityHelper {
     public static void checkAndUnlockAbility(LivingEntity entity, AbilityCore<?> core) {
         // Stub
     }
+
+    public static double getDifferenceToFloor(net.minecraft.world.entity.Entity entity) {
+        return entity.position().distanceTo(getFloorLevel(entity));
+    }
+
+    public static net.minecraft.world.phys.Vec3 getFloorLevel(net.minecraft.world.entity.Entity entity) {
+        net.minecraft.world.phys.Vec3 startVec = entity.position();
+        net.minecraft.world.phys.Vec3 endVec = startVec.add(0.0D, -256.0D, 0.0D);
+        net.minecraft.world.phys.BlockHitResult blockResult = entity.level().clip(new net.minecraft.world.level.ClipContext(startVec, endVec, net.minecraft.world.level.ClipContext.Block.OUTLINE, net.minecraft.world.level.ClipContext.Fluid.ANY, entity));
+        return blockResult.getLocation();
+    }
 }

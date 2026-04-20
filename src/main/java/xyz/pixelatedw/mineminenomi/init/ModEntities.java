@@ -305,5 +305,12 @@ public class ModEntities {
 
     public static final java.util.function.Supplier<net.minecraft.world.entity.EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.awa.RelaxHourProjectile>> RELAX_HOUR_PROJECTILE = ModRegistry.ENTITY_TYPES.register("relax_hour_projectile", () -> net.minecraft.world.entity.EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.awa.RelaxHourProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.awa.RelaxHourProjectile::new, net.minecraft.world.entity.MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("relax_hour_projectile"));
 
+    public static final java.util.function.Supplier<net.minecraft.world.entity.EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.toriphoenix.PhoenixGoenProjectile>> PHOENIX_GOEN = ModRegistry.ENTITY_TYPES.register("phoenix_goen",
+            () -> net.minecraft.world.entity.EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.toriphoenix.PhoenixGoenProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.toriphoenix.PhoenixGoenProjectile::new, net.minecraft.world.entity.MobCategory.MISC)
+                    .sized(1.5F, 1.5F)
+                    .clientTrackingRange(10)
+                    .updateInterval(20)
+                    .build("phoenix_goen"));
+
     public static void init() {}
 }
