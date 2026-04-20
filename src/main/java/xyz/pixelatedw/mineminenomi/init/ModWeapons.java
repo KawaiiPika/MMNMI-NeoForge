@@ -166,7 +166,7 @@ public class ModWeapons {
             () -> new PopGreenBowItem(200));
 
     public static final DeferredItem<AbilitySwordItem> ICE_SABER = ModRegistry.ITEMS.register("ice_saber", 
-            () -> (AbilitySwordItem) new AbilitySwordItem(ModTiers.ICE_SABER, ModAbilities.ICE_SABER, 12, -1.8F).addEffect(ModEffects.FROSTBITE, 40, 1));
+            () -> (AbilitySwordItem) new AbilitySwordItem(ModTiers.ICE_SABER, null, 12, -1.8F).addEffect(ModEffects.FROSTBITE, 40, 1));
 
     public static final DeferredItem<AbilitySwordItem> AMA_NO_MURAKUMO = ModRegistry.ITEMS.register("ama_no_murakumo", 
             () -> new AbilitySwordItem(ModTiers.AMA_NO_MURAKUMO, () -> null, 14, 0.0F));
@@ -190,7 +190,7 @@ public class ModWeapons {
             WarabideSwordItem::new);
 
     public static final DeferredItem<AbilitySwordItem> BARRIERBILITY_BAT = ModRegistry.ITEMS.register("barrierbility_bat", 
-            () -> new AbilitySwordItem(ModTiers.BARRIERBILITY_BAT, ModAbilities.BARRIERBILITY_BAT, 7));
+            () -> new AbilitySwordItem(ModTiers.BARRIERBILITY_BAT, null, 7));
 
     public static final DeferredItem<AbilitySwordItem> GAMMA_KNIFE = ModRegistry.ITEMS.register("gamma_knife", 
             () -> new AbilitySwordItem(ModTiers.GAMMA_KNIFE, () -> null, 1, 0.0F));

@@ -39,7 +39,7 @@ public class SwordsmanTrial04Quest extends Quest {
     public void giveReward(Player player) {
         PlayerStats stats = PlayerStats.get(player);
         if (stats != null) {
-            stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.O_TATSUMAKI.get().getAbilityId());
+            // ability removed for porting
             stats.sync(player);
         }
     }

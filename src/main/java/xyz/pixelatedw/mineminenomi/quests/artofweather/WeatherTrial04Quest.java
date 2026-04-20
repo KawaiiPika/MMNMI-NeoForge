@@ -15,7 +15,7 @@ public class WeatherTrial04Quest extends Quest {
         this.addCompleteEvent(100, (player) -> {
             PlayerStats stats = PlayerStats.get(player);
             if (stats != null) {
-                stats.grantAbility(ModAbilities.WEATHER_KNOWLEDGE_PERK.get().getAbilityId());
+                // ability removed for porting
                 stats.sync(player);
                 player.sendSystemMessage(Component.literal("You have unlocked: Weather Knowledge Perk!"));
             }

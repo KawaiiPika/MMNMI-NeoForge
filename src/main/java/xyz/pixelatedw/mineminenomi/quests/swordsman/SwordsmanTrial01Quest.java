@@ -45,7 +45,7 @@ public class SwordsmanTrial01Quest extends Quest {
         if (QuestHelper.removeQuestItem(player, Items.BONE, 30)) {
             PlayerStats stats = PlayerStats.get(player);
             if (stats != null) {
-                stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.SHISHI_SONSON.get().getAbilityId());
+                // ability removed for porting
                 stats.sync(player);
             }
         }

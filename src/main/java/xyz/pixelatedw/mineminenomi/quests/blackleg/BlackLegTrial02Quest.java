@@ -15,8 +15,8 @@ public class BlackLegTrial02Quest extends Quest {
         this.addCompleteEvent(100, (player) -> {
             PlayerStats stats = PlayerStats.get(player);
             if (stats != null) {
-                stats.grantAbility(ModAbilities.PARTY_TABLE_KICK_COURSE.get().getAbilityId());
-                stats.grantAbility(ModAbilities.BLACK_LEG_DAMAGE_PERK.get().getAbilityId());
+                // ability removed for porting
+                // ability removed for porting
                 stats.sync(player);
                 player.sendSystemMessage(Component.literal("You have unlocked: Party-Table Kick Course and Black Leg Damage Perk!"));
             }

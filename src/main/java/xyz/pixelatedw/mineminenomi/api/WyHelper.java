@@ -61,4 +61,13 @@ public class WyHelper {
         }
         return -1;
     }
+
+    public static java.awt.Color hexToRGB(String colorStr) {
+        return new java.awt.Color(
+            Integer.valueOf(colorStr.substring(1, 3), 16),
+            Integer.valueOf(colorStr.substring(3, 5), 16),
+            Integer.valueOf(colorStr.substring(5, 7), 16),
+            colorStr.length() > 7 ? Integer.valueOf(colorStr.substring(7, 9), 16) : 255
+        );
+    }
 }
