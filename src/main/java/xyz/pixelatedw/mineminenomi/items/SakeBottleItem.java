@@ -22,7 +22,7 @@ public class SakeBottleItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (player.isShiftKeyDown()) {
             if (!level.isClientSide) {
-                xyz.pixelatedw.mineminenomi.networking.ModNetworking.sendTo(new xyz.pixelatedw.mineminenomi.networking.packets.SOpenCreateCrewScreenPacket(), (net.minecraft.server.level.ServerPlayer) player);
+                // TODO: Open Create Crew Screen
             }
             return InteractionResultHolder.success(player.getItemInHand(hand));
         }
@@ -30,31 +30,17 @@ public class SakeBottleItem extends Item {
     }
 
     @Override
-    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-        return false;
-    }
-
-    @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
-        if (!level.isClientSide && entity instanceof Player player) {
-            // Apply food effects manually or let super handle eating, then add extra side effects
-            player.awardStat(net.minecraft.stats.Stats.ITEM_USED.get(this));
-            level.playSound(null, player.getX(), player.getY(), player.getZ(), net.minecraft.sounds.SoundEvents.GENERIC_DRINK, net.minecraft.sounds.SoundSource.PLAYERS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
-
-            if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
-                net.minecraft.advancements.CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
-            }
-
+        if (!level.isClientSide) {
             if (entity.hasEffect(ModEffects.DRUNK)) {
                 MobEffectInstance effect = entity.getEffect(ModEffects.DRUNK);
                 int amp = effect.getAmplifier();
                 int duration = effect.getDuration();
-                entity.removeEffect(ModEffects.DRUNK);
                 entity.addEffect(new MobEffectInstance(ModEffects.DRUNK, duration + 200, Math.min(amp + 1, 4)));
             } else {
                 entity.addEffect(new MobEffectInstance(ModEffects.DRUNK, 400, 0));
             }
-            if (!player.getAbilities().instabuild) stack.shrink(1);
+            stack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
         }
         return super.finishUsingItem(stack, level, entity);
     }

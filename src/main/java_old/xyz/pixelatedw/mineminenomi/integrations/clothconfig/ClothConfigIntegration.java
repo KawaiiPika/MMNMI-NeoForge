@@ -31,6 +31,7 @@ import me.shedaniel.clothconfig2.impl.builders.DropdownMenuBuilder.TopCellElemen
 import me.shedaniel.math.Color;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
+import xyz.pixelatedw.mineminenomi.ModMain;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -234,7 +235,7 @@ public class ClothConfigIntegration {
 
    private static DropdownBoxEntry addItemDropdown(ConfigEntryBuilder entryBuilder) {
       DropdownBoxEntry.SelectionTopCellElement topCell = TopCellElementBuilder.ofItemObject(Items.f_42410_);
-      return entryBuilder.startDropdownMenu(Component.m_237113_("Title"), topCell, CellCreatorBuilder.ofItemObject()).setDefaultValue((Supplier)null).setSelections((Iterable)ForgeRegistries.ITEMS.getValues().stream().sorted(Comparator.comparing(Item::toString)).collect(Collectors.toCollection(LinkedHashSet::new))).setSaveConsumer((item) -> System.out.println("save this " + String.valueOf(item))).build();
+      return entryBuilder.startDropdownMenu(Component.m_237113_("Title"), topCell, CellCreatorBuilder.ofItemObject()).setDefaultValue((Supplier)null).setSelections((Iterable)ForgeRegistries.ITEMS.getValues().stream().sorted(Comparator.comparing(Item::toString)).collect(Collectors.toCollection(LinkedHashSet::new))).setSaveConsumer((item) -> ModMain.LOGGER.info("save this " + String.valueOf(item))).build();
    }
 
    private static <T extends Enum<T>> EnumListEntry<T> addEnumSelector(ConfigEntryBuilder entryBuilder, EnumOption<T> option) {
