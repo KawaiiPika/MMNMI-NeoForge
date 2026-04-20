@@ -4,9 +4,11 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -117,12 +119,13 @@ public class ThrownSpearEntity extends AbstractArrow {
     protected void onHitEntity(EntityHitResult result) {
         Entity target = result.getEntity();
         float damage = this.attackDamage;
-        if (target instanceof LivingEntity livingTarget) {
-            // damage += EnchantmentHelper.getDamageBonus(this.itemStack, livingTarget.getType()); // API changed in 1.21.1
-        }
 
         Entity owner = this.getOwner();
         DamageSource damagesource = this.damageSources().trident(this, (owner == null ? this : owner));
+        if (this.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+            damage = EnchantmentHelper.modifyDamage(serverLevel, this.itemStack, target, damagesource, damage);
+        }
+
         this.dealtDamage = true;
         SoundEvent soundevent = net.minecraft.sounds.SoundEvents.TRIDENT_HIT;
         if (target.hurt(damagesource, damage)) {
@@ -165,6 +168,12 @@ public class ThrownSpearEntity extends AbstractArrow {
         super.addAdditionalSaveData(tag);
         tag.put("Item", this.itemStack.save(this.registryAccess()));
         tag.putBoolean("DealtDamage", this.dealtDamage);
+    }
+
+    private byte getLoyaltyFromItem(ItemStack stack) {
+        return this.level() instanceof ServerLevel serverlevel
+            ? (byte)Mth.clamp(EnchantmentHelper.getTridentReturnToOwnerAcceleration(serverlevel, stack, this), 0, 127)
+            : 0;
     }
 
     @Override

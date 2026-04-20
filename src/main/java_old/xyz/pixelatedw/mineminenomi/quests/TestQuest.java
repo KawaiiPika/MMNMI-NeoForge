@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import xyz.pixelatedw.mineminenomi.api.quests.objectives.Objective;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
 import xyz.pixelatedw.mineminenomi.init.ModRegistry;
+import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.quests.objectives.CollectItemObjective;
 import xyz.pixelatedw.mineminenomi.quests.objectives.EquippedItemObjective;
 import xyz.pixelatedw.mineminenomi.quests.objectives.KillEntityObjective;

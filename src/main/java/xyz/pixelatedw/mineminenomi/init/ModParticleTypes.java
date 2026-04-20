@@ -52,6 +52,7 @@ public class ModParticleTypes {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> AWA2 = register("awa2_particle");
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> AWA3 = register("awa3_particle");
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> AWA_FOAM = register("awa_foam_particle");
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> WASHED = register("washed_particle");
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> BETA = register("beta_particle");
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> NETSU = register("netsu_particle");
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> NETSU2 = register("netsu2_particle");
@@ -106,6 +107,7 @@ public class ModParticleTypes {
             register(event, AWA2, "awa2");
             register(event, AWA3, "awa3");
             register(event, AWA_FOAM, "awa_foam");
+            register(event, WASHED, "washed");
             register(event, BETA, "beta");
             register(event, NETSU, "netsu");
             register(event, NETSU2, "netsu2");
