@@ -2,7 +2,6 @@ package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GruntEntity;
 

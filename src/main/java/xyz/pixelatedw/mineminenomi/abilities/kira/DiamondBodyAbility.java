@@ -9,7 +9,6 @@ import xyz.pixelatedw.mineminenomi.api.abilities.IOverlayProvider;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import java.awt.Color;
 
 public class DiamondBodyAbility extends Ability implements IOverlayProvider {
     private static final ResourceLocation FRUIT = ResourceLocation.fromNamespaceAndPath("mineminenomi", "kira_kira_no_mi");

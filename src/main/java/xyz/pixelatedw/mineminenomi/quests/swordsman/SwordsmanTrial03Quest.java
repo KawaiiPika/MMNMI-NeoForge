@@ -1,10 +1,8 @@
 package xyz.pixelatedw.mineminenomi.quests.swordsman;
 
-import java.util.function.Predicate;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
-import net.minecraft.world.item.ItemStack;
 import xyz.pixelatedw.mineminenomi.api.quests.Quest;
 import xyz.pixelatedw.mineminenomi.api.quests.QuestId;
 import xyz.pixelatedw.mineminenomi.api.quests.objectives.Objective;

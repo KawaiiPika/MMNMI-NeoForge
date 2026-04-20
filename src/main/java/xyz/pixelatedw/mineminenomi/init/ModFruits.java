@@ -1,6 +1,5 @@
 package xyz.pixelatedw.mineminenomi.init;
 
-import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 import xyz.pixelatedw.mineminenomi.api.enums.FruitType;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;

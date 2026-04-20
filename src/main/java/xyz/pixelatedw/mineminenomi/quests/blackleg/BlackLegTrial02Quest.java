@@ -1,11 +1,9 @@
 package xyz.pixelatedw.mineminenomi.quests.blackleg;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Player;
 import xyz.pixelatedw.mineminenomi.api.quests.Quest;
 import xyz.pixelatedw.mineminenomi.api.quests.QuestId;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
-import xyz.pixelatedw.mineminenomi.init.ModAbilities;
 
 public class BlackLegTrial02Quest extends Quest {
     

@@ -9,7 +9,6 @@ import xyz.pixelatedw.mineminenomi.api.abilities.IOverlayProvider;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import java.awt.Color;
 
 public class SoapCoatingAbility extends Ability implements IOverlayProvider {
     private static final ResourceLocation FRUIT = ResourceLocation.fromNamespaceAndPath("mineminenomi", "awa_awa_no_mi");

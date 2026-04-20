@@ -21,7 +21,6 @@ import net.minecraft.world.level.levelgen.blending.Blender;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
 
 import net.minecraft.resources.RegistryOps;
 import net.minecraft.world.level.biome.Biomes;
