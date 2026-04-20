@@ -15,7 +15,7 @@ public class WeatherTrial02Quest extends Quest {
         this.addCompleteEvent(100, (player) -> {
             PlayerStats stats = PlayerStats.get(player);
             if (stats != null) {
-                stats.grantAbility(ModAbilities.THUNDERBOLT_TEMPO.get().getAbilityId());
+                // ability removed for porting
                 stats.sync(player);
                 player.sendSystemMessage(Component.literal("You have unlocked: Thunderbolt Tempo!"));
             }

@@ -17,8 +17,8 @@ public class SniperTrial04Quest extends Quest {
         this.addCompleteEvent(100, (player) -> {
             PlayerStats stats = PlayerStats.get(player);
             if (stats != null) {
-                stats.grantAbility(ModAbilities.ZOOM_PERK.get().getAbilityId());
-                stats.grantAbility(ModAbilities.TOKUYO_ABURA_BOSHI.get().getAbilityId());
+                // ability removed for porting
+                // ability removed for porting
                 stats.sync(player);
                 player.sendSystemMessage(Component.literal("You have unlocked: Zoom Perk and Tokuyo Abura Boshi!"));
             }

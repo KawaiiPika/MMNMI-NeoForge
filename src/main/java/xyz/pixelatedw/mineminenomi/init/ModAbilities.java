@@ -404,4 +404,9 @@ public class ModAbilities {
     private static void onNewRegistry(net.neoforged.neoforge.registries.RegisterEvent event) {
         // Registration is handled by DeferredRegister
     }
+
+    public static Ability getAbility(String abilityId) {
+        if (!abilityId.contains(":")) abilityId = "mineminenomi:" + abilityId;
+        return REGISTRY.get(ResourceLocation.parse(abilityId));
+    }
 }

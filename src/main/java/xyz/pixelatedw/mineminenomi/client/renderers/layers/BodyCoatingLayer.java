@@ -10,8 +10,12 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import xyz.pixelatedw.mineminenomi.api.abilities.AbilityOverlay;
+import xyz.pixelatedw.mineminenomi.api.abilities.IOverlayProvider;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
-import xyz.pixelatedw.mineminenomi.init.ModResources;
+import xyz.pixelatedw.mineminenomi.init.ModAbilities;
+import xyz.pixelatedw.mineminenomi.client.render.ModRenderTypes;
 
 public class BodyCoatingLayer<T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
     public BodyCoatingLayer(RenderLayerParent<T, M> renderer) {
@@ -23,64 +27,55 @@ public class BodyCoatingLayer<T extends LivingEntity, M extends HumanoidModel<T>
         PlayerStats stats = PlayerStats.get(entity);
         if (stats == null) return;
 
-        // Busoshoku Haki
-        if (stats.isAbilityActive("mineminenomi:busoshoku_haki_full_body_hardening")) {
-            renderCoating(poseStack, buffer, packedLight, ModResources.BUSOSHOKU_HAKI_ARM, true);
-        } else if (stats.isAbilityActive("mineminenomi:busoshoku_haki_hardening") || 
-                   stats.isAbilityActive("mineminenomi:busoshoku_haki_internal_destruction") || 
-                   stats.isAbilityActive("mineminenomi:busoshoku_haki_emission")) {
-            renderCoating(poseStack, buffer, packedLight, ModResources.BUSOSHOKU_HAKI_ARM, false);
-        }
-
-        // Diamond (Kira Kira no Mi)
-        if (stats.isAbilityActive("mineminenomi:diamond_body")) {
-            renderCoating(poseStack, buffer, packedLight, ModResources.DIAMOND_BODY, true);
-        }
-
-        // Candy (Pero Pero no Mi)
-        if (stats.isAbilityActive("mineminenomi:candy_armor")) {
-            renderCoating(poseStack, buffer, packedLight, ModResources.CANDY_ARMOR, true);
-        }
-
-        // Soap (Awa Awa no Mi)
-        if (stats.isAbilityActive("mineminenomi:soap_coating")) {
-            renderCoating(poseStack, buffer, packedLight, ModResources.AWA_SOAP, true);
-        }
-
-        // Mucus (Beta Beta no Mi)
-        if (stats.isAbilityActive("mineminenomi:mucus_coating")) {
-            renderCoating(poseStack, buffer, packedLight, ModResources.BETA_COATING, true);
-        }
-
-        // Poison (Doku Doku no Mi)
-        if (stats.isAbilityActive("mineminenomi:poison_coating")) {
-            renderCoating(poseStack, buffer, packedLight, ModResources.DOKU_COATING, true);
-        }
-
-        // Daibutsu (Hito Hito no Mi, Model: Daibutsu)
-        if (stats.isAbilityActive("mineminenomi:daibutsu_form")) {
-            renderCoating(poseStack, buffer, packedLight, ModResources.BUDDHA_COATING, true);
-        }
-
-        // Frostbite (Hie Hie no Mi)
-        if (stats.isAbilityActive("mineminenomi:frostbite")) {
-            // Note: The original had multiple stages, here we just use the first one for simplicity or we could check a value
-            renderCoating(poseStack, buffer, packedLight, ModResources.FROSTBITE_1, true);
+        for (String abilityId : stats.getActiveAbilities()) {
+            Ability ability = xyz.pixelatedw.mineminenomi.init.ModAbilities.getAbility(abilityId);
+            if (ability instanceof IOverlayProvider provider) {
+                AbilityOverlay overlay = provider.getOverlay(entity);
+                if (overlay != null) {
+                    renderOverlay(poseStack, buffer, packedLight, overlay, stats);
+                }
+            }
         }
     }
 
-    private void renderCoating(PoseStack poseStack, MultiBufferSource buffer, int packedLight, ResourceLocation texture, boolean fullBody) {
-        VertexConsumer vertex = buffer.getBuffer(RenderType.entityTranslucent(texture));
+    private void renderOverlay(PoseStack poseStack, MultiBufferSource buffer, int packedLight, AbilityOverlay overlay, PlayerStats statsData) {
+        VertexConsumer vertex;
+        if (overlay.getTexture() != null) {
+            boolean isBody = overlay.getOverlayPart() == AbilityOverlay.OverlayPart.BODY;
+            RenderType renderType = isBody ? ModRenderTypes.getAbilityBody(overlay.getTexture()) : ModRenderTypes.getAbilityHand(overlay.getTexture());
+            vertex = buffer.getBuffer(renderType);
+        } else {
+            vertex = buffer.getBuffer(overlay.getRenderType() == AbilityOverlay.RenderType.ENERGY ? ModRenderTypes.ENERGY : ModRenderTypes.TRANSPARENT_COLOR);
+        }
+
+        float red = overlay.getColor().getRed() / 255.0F;
+        float green = overlay.getColor().getGreen() / 255.0F;
+        float blue = overlay.getColor().getBlue() / 255.0F;
+        float alpha = overlay.getColor().getAlpha() / 255.0F;
+
         M model = this.getParentModel();
         
-        if (fullBody) {
-            model.renderToBuffer(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY);
-        } else {
-            // Just arms and legs for standard hardening
-            model.leftArm.render(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY);
-            model.rightArm.render(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY);
-            model.leftLeg.render(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY);
-            model.rightLeg.render(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY);
+        switch (overlay.getOverlayPart()) {
+            case BODY:
+                model.renderToBuffer(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, ((int)(alpha * 255) << 24) | ((int)(red * 255) << 16) | ((int)(green * 255) << 8) | (int)(blue * 255));
+                break;
+            case LIMB:
+                model.leftArm.render(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, ((int)(alpha * 255) << 24) | ((int)(red * 255) << 16) | ((int)(green * 255) << 8) | (int)(blue * 255));
+                model.rightArm.render(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, ((int)(alpha * 255) << 24) | ((int)(red * 255) << 16) | ((int)(green * 255) << 8) | (int)(blue * 255));
+                model.leftLeg.render(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, ((int)(alpha * 255) << 24) | ((int)(red * 255) << 16) | ((int)(green * 255) << 8) | (int)(blue * 255));
+                model.rightLeg.render(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, ((int)(alpha * 255) << 24) | ((int)(red * 255) << 16) | ((int)(green * 255) << 8) | (int)(blue * 255));
+                break;
+            case ARM:
+                model.leftArm.render(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, ((int)(alpha * 255) << 24) | ((int)(red * 255) << 16) | ((int)(green * 255) << 8) | (int)(blue * 255));
+                model.rightArm.render(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, ((int)(alpha * 255) << 24) | ((int)(red * 255) << 16) | ((int)(green * 255) << 8) | (int)(blue * 255));
+                break;
+            case LEG:
+                model.leftLeg.render(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, ((int)(alpha * 255) << 24) | ((int)(red * 255) << 16) | ((int)(green * 255) << 8) | (int)(blue * 255));
+                model.rightLeg.render(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, ((int)(alpha * 255) << 24) | ((int)(red * 255) << 16) | ((int)(green * 255) << 8) | (int)(blue * 255));
+                break;
+            case HEAD:
+                model.head.render(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, ((int)(alpha * 255) << 24) | ((int)(red * 255) << 16) | ((int)(green * 255) << 8) | (int)(blue * 255));
+                break;
         }
     }
 }

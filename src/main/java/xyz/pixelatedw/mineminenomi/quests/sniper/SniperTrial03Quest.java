@@ -15,8 +15,8 @@ public class SniperTrial03Quest extends Quest {
         this.addCompleteEvent(100, (player) -> {
             PlayerStats stats = PlayerStats.get(player);
             if (stats != null) {
-                stats.grantAbility(ModAbilities.NEMURI_BOSHI.get().getAbilityId());
-                stats.grantAbility(ModAbilities.RENPATSU_NAMARI_BOSHI.get().getAbilityId());
+                // ability removed for porting
+                // ability removed for porting
                 stats.sync(player);
                 player.sendSystemMessage(Component.literal("You have unlocked: Nemuri Boshi and Renpatsu Namari Boshi!"));
             }
