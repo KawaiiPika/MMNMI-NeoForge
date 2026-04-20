@@ -1,0 +1,29 @@
+--- src/main/java/xyz/pixelatedw/mineminenomi/entities/ThrownSpearEntity.java
++++ src/main/java/xyz/pixelatedw/mineminenomi/entities/ThrownSpearEntity.java
+@@ -10,6 +10,7 @@
+ import net.minecraft.world.entity.LivingEntity;
+ import net.minecraft.world.entity.player.Player;
+ import net.minecraft.world.entity.projectile.AbstractArrow;
++import net.minecraft.world.entity.projectile.ItemSupplier;
+ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.item.Items;
+ import net.minecraft.world.item.enchantment.EnchantmentHelper;
+@@ -19,7 +20,7 @@
+
+ import javax.annotation.Nullable;
+
+-public class ThrownSpearEntity extends AbstractArrow {
++public class ThrownSpearEntity extends AbstractArrow implements ItemSupplier {
+     private static final EntityDataAccessor<Byte> ID_LOYALTY = SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.BYTE);
+     private static final EntityDataAccessor<Boolean> ID_FOIL = SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.BOOLEAN);
+
+@@ -124,4 +125,9 @@
+     protected boolean tryPickup(Player player) {
+         return super.tryPickup(player) || (this.isNoPhysics() && this.ownedBy(player) && player.getInventory().add(this.getPickupItem()));
+     }
++
++    @Override
++    public ItemStack getItem() {
++        return new ItemStack(xyz.pixelatedw.mineminenomi.init.ModItems.SPEAR.get());
++    }
+ }

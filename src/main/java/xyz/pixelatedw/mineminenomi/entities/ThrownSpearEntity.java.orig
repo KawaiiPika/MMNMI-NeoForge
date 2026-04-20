@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
 public class ThrownSpearEntity extends AbstractArrow implements ItemSupplier {
     private static final EntityDataAccessor<Byte> ID_LOYALTY = SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<Boolean> ID_FOIL = SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.BOOLEAN);
-    
+
     private ItemStack itemStack = new ItemStack(Items.AIR);
     private float attackDamage;
     private boolean dealtDamage;
@@ -185,6 +185,6 @@ public class ThrownSpearEntity extends AbstractArrow implements ItemSupplier {
 
     @Override
     public ItemStack getItem() {
-        return new ItemStack(net.minecraft.world.item.Items.AIR);
+        return new ItemStack(xyz.pixelatedw.mineminenomi.init.ModItems.SPEAR.get());
     }
 }
