@@ -40,7 +40,7 @@ public class CommonEvents {
         if (event.getEntity() instanceof LivingEntity entity) {
             PlayerStats stats = PlayerStats.get(entity);
             if (stats != null) {
-                for (String abilityId : new ArrayList<>(stats.getActiveAbilities())) {
+                for (String abilityId : stats.getActiveAbilities()) {
                     Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                     if (ability != null) {
                         ability.tick(entity);
@@ -63,7 +63,7 @@ public class CommonEvents {
             PlayerStats attackerStats = PlayerStats.get(livingAttacker);
             if (attackerStats != null) {
                 // Ability damage hooks
-                for (String abilityId : new ArrayList<>(attackerStats.getActiveAbilities())) {
+                for (String abilityId : attackerStats.getActiveAbilities()) {
                     Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                     if (ability != null) {
                         float modifiedAmount = ability.onAttack(livingAttacker, target, source, event.getAmount());
@@ -110,7 +110,7 @@ public class CommonEvents {
         // Target Logic
         if (targetStats != null) {
             // Active abilities onHurt hook
-            for (String abilityId : new ArrayList<>(targetStats.getActiveAbilities())) {
+            for (String abilityId : targetStats.getActiveAbilities()) {
                 Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                 if (ability != null) {
                     float newAmount = ability.onHurt(target, source, event.getAmount());
