@@ -989,6 +989,9 @@ public class WyHelper {
    }
 
    public static <T, E> @Nullable T getPrivateValue(Class<? super E> classToAccess, E instance, String fieldName) {
+      if (!"partEntities".equals(fieldName) && !"dragonParts".equals(fieldName)) {
+         throw new SecurityException("Access to field " + fieldName + " is not allowed for security reasons.");
+      }
       try {
          Field field = classToAccess.getDeclaredField(fieldName);
          field.setAccessible(true);
