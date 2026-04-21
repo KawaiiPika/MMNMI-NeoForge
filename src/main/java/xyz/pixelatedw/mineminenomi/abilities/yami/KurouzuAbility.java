@@ -48,7 +48,7 @@ public class KurouzuAbility extends Ability {
                 Vec3 dir = entity.position().subtract(target.position()).normalize().scale(0.8);
                 target.setDeltaMovement(target.getDeltaMovement().add(dir));
                 
-                if (target.distanceToSqr(entity) < 4.0) {
+                if (target.distanceTo(entity) < 2.0) {
                     target.hurt(entity.damageSources().mobAttack(entity), 15.0F);
                     // Disable Devil Fruit powers (simplified for now)
                     target.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.WEAKNESS, 100, 5));

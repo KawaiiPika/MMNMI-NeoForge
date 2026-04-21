@@ -9,8 +9,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.HitResult;
-import xyz.pixelatedw.mineminenomi.entities.vehicles.CannonEntity;
-
 
 public class CannonItem extends Item {
     public CannonItem() {
@@ -25,13 +23,14 @@ public class CannonItem extends Item {
         if (hitResult.getType() == HitResult.Type.MISS) {
             return InteractionResultHolder.fail(heldItem);
         } else if (hitResult.getType() == HitResult.Type.BLOCK) {
-            CannonEntity cannon = new CannonEntity(level);
-            cannon.setPos(hitResult.getLocation().x, hitResult.getLocation().y, hitResult.getLocation().z);
-            cannon.setYRot(player.getYRot());
-            if (!level.isClientSide()) {
-                level.addFreshEntity(cannon);
-                if (!player.getAbilities().instabuild) heldItem.shrink(1);
-            }
+            // TODO: Phase 3 - Spawn CannonEntity at hitResult position once entities are ported
+            // CannonEntity cannon = new CannonEntity(level);
+            // cannon.setPos(hitResult.getLocation().x, hitResult.getLocation().y, hitResult.getLocation().z);
+            // cannon.setYRot(player.getYRot());
+            // if (!level.isClientSide()) {
+            //     level.addFreshEntity(cannon);
+            //     if (!player.getAbilities().instabuild) heldItem.shrink(1);
+            // }
             player.awardStat(Stats.ITEM_USED.get(this));
             return InteractionResultHolder.sidedSuccess(heldItem, level.isClientSide());
         }

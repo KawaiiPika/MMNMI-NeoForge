@@ -17,8 +17,8 @@ public class BlackKnightAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         // Burst slash around the user
-        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(4.0))) {
-            if (living != entity) {
+        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(4.0))) {
+            if (target instanceof LivingEntity living) {
                 living.hurt(entity.damageSources().mobAttack(entity), 12.0F);
                 Vec3 push = living.position().subtract(entity.position()).normalize().scale(2.0);
                 living.setDeltaMovement(push);

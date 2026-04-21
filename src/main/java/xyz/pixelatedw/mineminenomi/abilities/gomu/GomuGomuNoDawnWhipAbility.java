@@ -14,8 +14,8 @@ public class GomuGomuNoDawnWhipAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         // 360 degree spin-whip
-        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(6.0))) {
-            if (living != entity) {
+        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(6.0))) {
+            if (target instanceof LivingEntity living) {
                 Vec3 dir = living.position().subtract(entity.position()).normalize();
                 living.hurt(entity.damageSources().mobAttack(entity), 10.0F);
                 living.setDeltaMovement(dir.scale(2.0).add(0, 0.4, 0));

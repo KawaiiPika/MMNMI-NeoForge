@@ -6,7 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.RegistryBuilder;
-import net.neoforged.neoforge.registries.NewRegistryEvent;
+import net.neoforged.neoforge.registries.RegisterEvent;
 import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.basic.PunchAbility;
@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 public class ModAbilities {
     public static final ResourceKey<Registry<Ability>> REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(ModMain.PROJECT_ID, "abilities"));
     public static final DeferredRegister<Ability> ABILITIES = DeferredRegister.create(REGISTRY_KEY, ModMain.PROJECT_ID);
-    public static Registry<Ability> REGISTRY;
+    public static final Registry<Ability> REGISTRY = new RegistryBuilder<>(REGISTRY_KEY).sync(true).create();
 
     public static final Supplier<Ability> PUNCH = ABILITIES.register("punch", xyz.pixelatedw.mineminenomi.api.abilities.basic.PunchAbility::new);
     public static final Supplier<Ability> SHISHI_SONSON = ABILITIES.register("shishi_sonson", xyz.pixelatedw.mineminenomi.abilities.ittoryu.ShiShishiSonsonAbility::new);
@@ -56,13 +56,11 @@ public class ModAbilities {
     public static final java.util.function.Supplier<Ability> HIGAN = ABILITIES.register("higan", xyz.pixelatedw.mineminenomi.abilities.mera.HiganAbility::new);
     public static final java.util.function.Supplier<Ability> HIKEN = ABILITIES.register("hiken", xyz.pixelatedw.mineminenomi.abilities.mera.HikenAbility::new);
     public static final java.util.function.Supplier<Ability> DAI_ENKA_ENTEI = ABILITIES.register("dai_enka_entei", xyz.pixelatedw.mineminenomi.abilities.mera.DaiEnkaEnteiAbility::new);
-    public static final java.util.function.Supplier<Ability> MAGU_LOGIA = ABILITIES.register("magu_logia", xyz.pixelatedw.mineminenomi.abilities.magu.MaguLogiaAbility::new);
     public static final java.util.function.Supplier<Ability> DAI_FUNKA = ABILITIES.register("dai_funka", xyz.pixelatedw.mineminenomi.abilities.magu.DaiFunkaAbility::new);
     public static final java.util.function.Supplier<Ability> MAGMA_COATING = ABILITIES.register("magma_coating", xyz.pixelatedw.mineminenomi.abilities.magu.MagmaCoatingAbility::new);
     public static final java.util.function.Supplier<Ability> LAVA_FLOW = ABILITIES.register("lava_flow", xyz.pixelatedw.mineminenomi.abilities.magu.LavaFlowAbility::new);
     public static final java.util.function.Supplier<Ability> MEIGO = ABILITIES.register("meigo", xyz.pixelatedw.mineminenomi.abilities.magu.MeigoAbility::new);
     public static final java.util.function.Supplier<Ability> RYUSEI_KAZAN = ABILITIES.register("ryusei_kazan", xyz.pixelatedw.mineminenomi.abilities.magu.RyuseiKazanAbility::new);
-    public static final java.util.function.Supplier<Ability> HIE_LOGIA = ABILITIES.register("hie_logia", xyz.pixelatedw.mineminenomi.abilities.hie.HieLogiaAbility::new);
     public static final java.util.function.Supplier<Ability> ICE_AGE = ABILITIES.register("ice_age", xyz.pixelatedw.mineminenomi.abilities.hie.IceAgeAbility::new);
 
     // Sniper
@@ -105,15 +103,12 @@ public class ModAbilities {
     public static final Supplier<Ability> WEATHER_KNOWLEDGE_PERK = ABILITIES.register("weather_knowledge", xyz.pixelatedw.mineminenomi.abilities.artofweather.WeatherKnowledgePerkAbility::new);
     public static final java.util.function.Supplier<Ability> ICE_SABER = ABILITIES.register("ice_saber", xyz.pixelatedw.mineminenomi.abilities.hie.IceSaberAbility::new);
     public static final java.util.function.Supplier<Ability> ICE_BLOCK_PARTISAN = ABILITIES.register("ice_block_partisan", xyz.pixelatedw.mineminenomi.abilities.hie.IceBlockPartisanAbility::new);
-    public static final java.util.function.Supplier<Ability> GORO_LOGIA = ABILITIES.register("goro_logia", xyz.pixelatedw.mineminenomi.abilities.goro.GoroLogiaAbility::new);
     public static final java.util.function.Supplier<Ability> EL_THOR = ABILITIES.register("el_thor", xyz.pixelatedw.mineminenomi.abilities.goro.ElThorAbility::new);
     public static final java.util.function.Supplier<Ability> SANGO = ABILITIES.register("sango", xyz.pixelatedw.mineminenomi.abilities.goro.SangoAbility::new);
     public static final java.util.function.Supplier<Ability> BLACK_HOLE = ABILITIES.register("black_hole", xyz.pixelatedw.mineminenomi.abilities.yami.BlackHoleAbility::new);
     public static final java.util.function.Supplier<Ability> KUROUZU = ABILITIES.register("kurouzu", xyz.pixelatedw.mineminenomi.abilities.yami.KurouzuAbility::new);
-    public static final java.util.function.Supplier<Ability> MOKU_LOGIA = ABILITIES.register("moku_logia", xyz.pixelatedw.mineminenomi.abilities.moku.MokuLogiaAbility::new);
     public static final java.util.function.Supplier<Ability> WHITE_BLOW = ABILITIES.register("white_blow", xyz.pixelatedw.mineminenomi.abilities.moku.WhiteBlowAbility::new);
     public static final java.util.function.Supplier<Ability> WHITE_OUT = ABILITIES.register("white_out", xyz.pixelatedw.mineminenomi.abilities.moku.WhiteOutAbility::new);
-    public static final java.util.function.Supplier<Ability> SUNA_LOGIA = ABILITIES.register("suna_logia", xyz.pixelatedw.mineminenomi.abilities.suna.SunaLogiaAbility::new);
     public static final java.util.function.Supplier<Ability> DESERT_SPADA = ABILITIES.register("desert_spada", xyz.pixelatedw.mineminenomi.abilities.suna.DesertSpadaAbility::new);
     public static final java.util.function.Supplier<Ability> SABLES = ABILITIES.register("sables", xyz.pixelatedw.mineminenomi.abilities.suna.SablesAbility::new);
     
@@ -135,7 +130,6 @@ public class ModAbilities {
     public static final java.util.function.Supplier<Ability> SHAMBLES = ABILITIES.register("shambles", xyz.pixelatedw.mineminenomi.abilities.ope.ShamblesAbility::new);
     public static final java.util.function.Supplier<Ability> MES = ABILITIES.register("mes", xyz.pixelatedw.mineminenomi.abilities.ope.MesAbility::new);
 
-    public static final java.util.function.Supplier<Ability> PIKA_LOGIA = ABILITIES.register("pika_logia", xyz.pixelatedw.mineminenomi.abilities.pika.PikaLogiaAbility::new);
     public static final java.util.function.Supplier<Ability> AMATERASU = ABILITIES.register("amaterasu", xyz.pixelatedw.mineminenomi.abilities.pika.AmaterasuAbility::new);
     public static final java.util.function.Supplier<Ability> YASAKANI_NO_MAGATAMA = ABILITIES.register("yasakani_no_magatama", xyz.pixelatedw.mineminenomi.abilities.pika.YasakaniNoMagatamaAbility::new);
     public static final java.util.function.Supplier<Ability> HAOSHOKU_HAKI = ABILITIES.register("haoshoku_haki", xyz.pixelatedw.mineminenomi.api.abilities.haki.HaoshokuHakiAbility::new);
@@ -289,8 +283,6 @@ public class ModAbilities {
     public static final java.util.function.Supplier<Ability> KAMISORI = ABILITIES.register("kamisori", xyz.pixelatedw.mineminenomi.api.abilities.rokushiki.KamisoriAbility::new);
 
     // Mera Mera no Mi — Logia
-    public static final java.util.function.Supplier<Ability> GASU_LOGIA = ABILITIES.register("gasu_logia", xyz.pixelatedw.mineminenomi.abilities.gasu.GasuLogiaAbility::new);
-    public static final java.util.function.Supplier<Ability> YUKI_LOGIA = ABILITIES.register("yuki_logia", xyz.pixelatedw.mineminenomi.abilities.yuki.YukiLogiaAbility::new);
     public static final java.util.function.Supplier<Ability> MERA_LOGIA = ABILITIES.register("mera_logia", xyz.pixelatedw.mineminenomi.abilities.mera.MeraLogiaAbility::new);
 
     // Zou Zou no Mi
@@ -414,12 +406,7 @@ public class ModAbilities {
         ABILITIES.register(bus);
     }
 
-    private static void onNewRegistry(net.neoforged.neoforge.registries.NewRegistryEvent event) {
-        REGISTRY = event.create(new RegistryBuilder<>(REGISTRY_KEY).sync(true));
-    }
-
-    public static Ability getAbility(String abilityId) {
-        if (!abilityId.contains(":")) abilityId = "mineminenomi:" + abilityId;
-        return REGISTRY.get(ResourceLocation.parse(abilityId));
+    private static void onNewRegistry(net.neoforged.neoforge.registries.RegisterEvent event) {
+        // Registration is handled by DeferredRegister
     }
 }

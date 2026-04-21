@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.Set;
 
 // AkumaNoMiBoxItem opens to give a random devil fruit from its loot table tier.
 // Loot table access and OneFruitWorldData deferred to Phase 3/5.

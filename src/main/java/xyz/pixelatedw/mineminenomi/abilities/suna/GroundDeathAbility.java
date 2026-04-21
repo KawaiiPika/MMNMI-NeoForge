@@ -14,8 +14,8 @@ public class GroundDeathAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         Vec3 look = entity.getLookAngle();
-        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(2.0).move(look.scale(3.0)))) {
-            if (living != entity) {
+        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(2.0).move(look.scale(3.0)))) {
+            if (target instanceof LivingEntity living) {
                 // Moisture drain — massive single-target damage
                 living.hurt(entity.damageSources().mobAttack(entity), 25.0F);
                 living.addEffect(new net.minecraft.world.effect.MobEffectInstance(

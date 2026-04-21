@@ -18,8 +18,8 @@ public class TamaitoAbility extends Ability {
     protected void startUsing(LivingEntity entity) {
         Vec3 look = entity.getLookAngle();
         // Piercing string bullet line
-        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(1.0).move(look.scale(15.0)))) {
-            if (living != entity) {
+        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(1.0).move(look.scale(15.0)))) {
+            if (target instanceof LivingEntity living) {
                 living.hurt(entity.damageSources().mobAttack(entity), 8.0F);
                 living.setDeltaMovement(look.scale(1.2));
                 living.hurtMarked = true;

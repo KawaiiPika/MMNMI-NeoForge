@@ -3,33 +3,25 @@ package xyz.pixelatedw.mineminenomi.api.enums;
 import net.minecraft.ChatFormatting;
 
 public enum FruitType {
-   PARAMECIA(ChatFormatting.RED, "Paramecia"),
-   LOGIA(ChatFormatting.YELLOW, "Logia"),
-   ZOAN(ChatFormatting.GREEN, "Zoan"),
-   MYTHICAL_ZOAN(ChatFormatting.AQUA, "Mythical Zoan"),
-   ANCIENT_ZOAN(ChatFormatting.DARK_GREEN, "Ancient Zoan"),
-   ARTIFICIAL_LOGIA(ChatFormatting.GOLD, "Artificial Logia"),
-   ARTIFICIAL_PARAMECIA(ChatFormatting.GOLD, "Artificial Paramecia"),
-   ARTIFICIAL_ZOAN(ChatFormatting.GOLD, "Artificial Zoan");
+    PARAMECIA("Paramecia", ChatFormatting.BLUE),
+    LOGIA("Logia", ChatFormatting.GOLD),
+    ZOAN("Zoan", ChatFormatting.GREEN),
+    ANCIENT_ZOAN("Ancient Zoan", ChatFormatting.DARK_GREEN),
+    MYTHICAL_ZOAN("Mythical Zoan", ChatFormatting.DARK_PURPLE);
 
-   private ChatFormatting color;
-   private String name;
+    private final String name;
+    private final ChatFormatting color;
 
-   private FruitType(ChatFormatting color, String name) {
-      this.color = color;
-      this.name = name;
-   }
+    FruitType(String name, ChatFormatting color) {
+        this.name = name;
+        this.color = color;
+    }
 
-   public ChatFormatting getColor() {
-      return this.color;
-   }
+    public String getName() {
+        return name;
+    }
 
-   public String getName() {
-      return this.name;
-   }
-
-   // $FF: synthetic method
-   private static FruitType[] $values() {
-      return new FruitType[]{PARAMECIA, LOGIA, ZOAN, MYTHICAL_ZOAN, ANCIENT_ZOAN, ARTIFICIAL_LOGIA, ARTIFICIAL_PARAMECIA, ARTIFICIAL_ZOAN};
-   }
+    public ChatFormatting getColor() {
+        return color;
+    }
 }

@@ -20,6 +20,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 import xyz.pixelatedw.mineminenomi.data.world.FactionsWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModAbilities;
 
+import java.util.ArrayList;
 
 @EventBusSubscriber(modid = ModMain.PROJECT_ID)
 public class CommonEvents {

@@ -3,6 +3,7 @@ package xyz.pixelatedw.mineminenomi.api.abilities.race;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.phys.Vec3;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 
 public class UchimizuAbility extends Ability {

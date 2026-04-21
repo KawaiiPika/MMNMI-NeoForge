@@ -31,8 +31,8 @@ public class GearThirdAbility extends Ability {
         } else if (duration == CHARGE_TICKS) {
             if (!entity.level().isClientSide) {
                 Vec3 look = entity.getLookAngle();
-                for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(6.0).move(look.scale(3.0)))) {
-                    if (living != entity) {
+                for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(6.0).move(look.scale(3.0)))) {
+                    if (target instanceof LivingEntity living) {
                         living.hurt(entity.damageSources().mobAttack(entity), 22.0F);
                         living.setDeltaMovement(look.scale(3.0).add(0, 0.4, 0));
                         living.hurtMarked = true;

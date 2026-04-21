@@ -166,16 +166,16 @@ public class ModWeapons {
             () -> new PopGreenBowItem(200));
 
     public static final DeferredItem<AbilitySwordItem> ICE_SABER = ModRegistry.ITEMS.register("ice_saber", 
-            () -> (AbilitySwordItem) new AbilitySwordItem(ModTiers.ICE_SABER, () -> xyz.pixelatedw.mineminenomi.init.ModAbilities.ICE_SABER.get(), 12, -1.8F).addEffect(ModEffects.FROSTBITE, 40, 1));
+            () -> (AbilitySwordItem) new AbilitySwordItem(ModTiers.ICE_SABER, ModAbilities.ICE_SABER, 12, -1.8F).addEffect(ModEffects.FROSTBITE, 40, 1));
 
     public static final DeferredItem<AbilitySwordItem> AMA_NO_MURAKUMO = ModRegistry.ITEMS.register("ama_no_murakumo", 
-            () -> new AbilitySwordItem(ModTiers.AMA_NO_MURAKUMO, null, 14, 0.0F));
+            () -> new AbilitySwordItem(ModTiers.AMA_NO_MURAKUMO, () -> null, 14, 0.0F));
 
     public static final DeferredItem<AbilitySwordItem> NORO_NORO_BEAM_SWORD = ModRegistry.ITEMS.register("noro_noro_beam_sword", 
-            () -> (AbilitySwordItem) new AbilitySwordItem(ModTiers.NORO_NORO_BEAM_SWORD, null, 7).addEffect(ModEffects.MOVEMENT_BLOCKED, 40, 1));
+            () -> (AbilitySwordItem) new AbilitySwordItem(ModTiers.NORO_NORO_BEAM_SWORD, () -> null, 7).addEffect(ModEffects.MOVEMENT_BLOCKED, 40, 1));
 
     public static final DeferredItem<AbilitySwordItem> DORU_DORU_ARTS_KEN = ModRegistry.ITEMS.register("doru_doru_arts_ken", 
-            () -> (AbilitySwordItem) new AbilitySwordItem(ModTiers.DORU_DORU_ARTS_KEN, null, 7).setDyeable());
+            () -> (AbilitySwordItem) new AbilitySwordItem(ModTiers.DORU_DORU_ARTS_KEN, () -> null, 7).setDyeable());
 
     public static final DeferredItem<DoruPickaxeItem> DORU_PICKAXE = ModRegistry.ITEMS.register("doru_doru_arts_pickaxe", 
             () -> new DoruPickaxeItem(ModTiers.DORU_DORU_ARTS_KEN, 1, -2.8F));
@@ -184,16 +184,16 @@ public class ModWeapons {
             BlueSwordItem::new);
 
     public static final DeferredItem<AbilitySwordItem> TABIRA_YUKI = ModRegistry.ITEMS.register("tabira_yuki", 
-            () -> (AbilitySwordItem) new AbilitySwordItem(ModTiers.TABIRA_YUKI, null, 9, -1.9F).addEffect(ModEffects.FROSTBITE, 20, 1));
+            () -> (AbilitySwordItem) new AbilitySwordItem(ModTiers.TABIRA_YUKI, () -> null, 9, -1.9F).addEffect(ModEffects.FROSTBITE, 20, 1));
 
     public static final DeferredItem<WarabideSwordItem> WARABIDE_SWORD = ModRegistry.ITEMS.register("warabide_sword", 
             WarabideSwordItem::new);
 
     public static final DeferredItem<AbilitySwordItem> BARRIERBILITY_BAT = ModRegistry.ITEMS.register("barrierbility_bat", 
-            () -> new AbilitySwordItem(ModTiers.BARRIERBILITY_BAT, () -> xyz.pixelatedw.mineminenomi.init.ModAbilities.BARRIERBILITY_BAT.get(), 7));
+            () -> new AbilitySwordItem(ModTiers.BARRIERBILITY_BAT, ModAbilities.BARRIERBILITY_BAT, 7));
 
     public static final DeferredItem<AbilitySwordItem> GAMMA_KNIFE = ModRegistry.ITEMS.register("gamma_knife", 
-            () -> new AbilitySwordItem(ModTiers.GAMMA_KNIFE, null, 1, 0.0F));
+            () -> new AbilitySwordItem(ModTiers.GAMMA_KNIFE, () -> null, 1, 0.0F));
 
     public static void init() {}
 }

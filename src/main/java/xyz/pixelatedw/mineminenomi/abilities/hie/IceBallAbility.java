@@ -23,8 +23,8 @@ public class IceBallAbility extends Ability {
                 double y = startPos.y + look.y * i;
                 double z = startPos.z + look.z * i;
                 
-                for (LivingEntity livingTarget : entity.level().getEntitiesOfClass(LivingEntity.class, new net.minecraft.world.phys.AABB(x - 0.5, y - 0.5, z - 0.5, x + 0.5, y + 0.5, z + 0.5))) {
-                    if (livingTarget != entity) {
+                for (net.minecraft.world.entity.Entity target : entity.level().getEntities(entity, new net.minecraft.world.phys.AABB(x - 0.5, y - 0.5, z - 0.5, x + 0.5, y + 0.5, z + 0.5))) {
+                    if (target instanceof LivingEntity livingTarget) {
                         livingTarget.hurt(entity.damageSources().indirectMagic(entity, entity), 10.0F);
                         livingTarget.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 100, 5));
                         

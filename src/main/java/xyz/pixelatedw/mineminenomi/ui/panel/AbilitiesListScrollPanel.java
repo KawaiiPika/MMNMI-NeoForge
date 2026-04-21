@@ -1,5 +1,6 @@
 package xyz.pixelatedw.mineminenomi.ui.panel;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -10,6 +11,7 @@ import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 import xyz.pixelatedw.mineminenomi.init.ModAbilities;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.ui.screens.AbilitiesListScreen;
 
 import java.util.ArrayList;
@@ -81,14 +83,8 @@ public class AbilitiesListScrollPanel extends AbstractWidget {
         String name = ability.getClass().getSimpleName().toLowerCase();
         
         if (category == 0) { // Devil Fruit
-            return !ability.isPassive() && requiredFruit != null && stats.getDevilFruit().isPresent() && stats.getDevilFruit().get().equals(requiredFruit);
+            return requiredFruit != null && stats.getDevilFruit().isPresent() && stats.getDevilFruit().get().equals(requiredFruit);
         } else if (category == 1) { // Passives
-            if (ability.isPassive()) {
-                if (requiredFruit != null) {
-                    return stats.getDevilFruit().isPresent() && stats.getDevilFruit().get().equals(requiredFruit);
-                }
-                return true;
-            }
             return requiredFruit == null && (name.contains("passive") || name.contains("punch") || name.contains("knockdown") || name.contains("emptyhands"));
         } else if (category == 2) { // Haki
             return name.contains("haki");

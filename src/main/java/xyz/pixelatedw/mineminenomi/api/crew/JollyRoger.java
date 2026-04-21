@@ -1,6 +1,7 @@
 package xyz.pixelatedw.mineminenomi.api.crew;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
@@ -13,10 +14,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
-import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.ui.TexturedRectUI;
+import org.slf4j.Logger;
+import com.mojang.logging.LogUtils;
 
 public class JollyRoger {
+   private static final Logger LOGGER = LogUtils.getLogger();
    private JollyRogerElement base;
    private JollyRogerElement[] backgrounds = new JollyRogerElement[3];
    private JollyRogerElement[] details = new JollyRogerElement[6];
@@ -75,7 +78,7 @@ public class JollyRoger {
 
          nbt.put("details", details);
       } catch (Exception ex) {
-         ModMain.LOGGER.error("Failed to write JollyRoger NBT", ex);
+         ex.printStackTrace();
       }
 
       return nbt;
@@ -144,7 +147,7 @@ public class JollyRoger {
             }
          }
       } catch (Exception ex) {
-         ModMain.LOGGER.error("Failed to read JollyRoger NBT", ex);
+         ex.printStackTrace();
       }
 
    }
@@ -304,7 +307,7 @@ public class JollyRoger {
 
          return Optional.of(jollyRogerImage);
       } catch (IOException e) {
-         ModMain.LOGGER.error(e.getMessage());
+         LOGGER.error(e.getMessage());
          return Optional.empty();
       }
    }

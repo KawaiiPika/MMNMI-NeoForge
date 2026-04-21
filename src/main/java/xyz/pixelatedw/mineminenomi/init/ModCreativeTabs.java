@@ -3,6 +3,7 @@ package xyz.pixelatedw.mineminenomi.init;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import java.util.function.Supplier;
 
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;

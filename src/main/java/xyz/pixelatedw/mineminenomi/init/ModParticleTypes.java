@@ -68,8 +68,6 @@ public class ModParticleTypes {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> HOLE = register("hole");
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> COMMAND_MARK = register("command_mark_particle");
 
-    public static void init() {}
-
     @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = net.neoforged.api.distmarker.Dist.CLIENT)
     public static class Client {
         @SubscribeEvent

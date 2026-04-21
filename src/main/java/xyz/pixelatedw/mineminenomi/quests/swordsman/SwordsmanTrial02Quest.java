@@ -5,6 +5,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantments;
 import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
 import xyz.pixelatedw.mineminenomi.api.quests.Quest;
 import xyz.pixelatedw.mineminenomi.api.quests.QuestId;
@@ -13,6 +14,7 @@ import xyz.pixelatedw.mineminenomi.quests.objectives.CollectItemObjective;
 import xyz.pixelatedw.mineminenomi.quests.objectives.KillEntityObjective;
 import xyz.pixelatedw.mineminenomi.quests.objectives.SharedKillChecks;
 import xyz.pixelatedw.mineminenomi.quests.objectives.TimedHitEntityObjective;
+import xyz.pixelatedw.mineminenomi.init.ModAbilities;
 
 public class SwordsmanTrial02Quest extends Quest {
     public static final String ID = "trial_yakkodori";
@@ -44,8 +46,8 @@ public class SwordsmanTrial02Quest extends Quest {
     public void giveReward(Player player) {
         PlayerStats stats = PlayerStats.get(player);
         if (stats != null) {
-            // ability removed for porting
-            // ability removed for porting
+            stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.YAKKODORI.get().getAbilityId());
+            stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.SWORDSMAN_DAMAGE_PERK.get().getAbilityId());
             stats.sync(player);
         }
     }

@@ -5,6 +5,8 @@ import java.util.Set;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 
 public class AbilityNode {
     private final Set<AbilityNode> prerequisites = new LinkedHashSet<>();
