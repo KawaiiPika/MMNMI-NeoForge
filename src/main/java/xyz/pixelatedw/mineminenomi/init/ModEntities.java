@@ -141,6 +141,13 @@ public class ModEntities {
                     .updateInterval(20)
                     .build("mero_mero_mellow"));
 
+
+    public static final java.util.function.Supplier<net.minecraft.world.entity.EntityType<xyz.pixelatedw.mineminenomi.entities.vehicles.CannonEntity>> CANNON = ModRegistry.ENTITY_TYPES.register("cannon",
+            () -> net.minecraft.world.entity.EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.vehicles.CannonEntity>of(xyz.pixelatedw.mineminenomi.entities.vehicles.CannonEntity::new, net.minecraft.world.entity.MobCategory.MISC)
+                    .sized(1.25F, 1.25F)
+                    .clientTrackingRange(10)
+                    .build("cannon"));
+
     public static final java.util.function.Supplier<net.minecraft.world.entity.EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.NoseFancyCannonEntity>> NOSE_FANCY_CANNON = ModRegistry.ENTITY_TYPES.register("nose_fancy_cannon",
             () -> net.minecraft.world.entity.EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.NoseFancyCannonEntity>of(xyz.pixelatedw.mineminenomi.entities.projectiles.NoseFancyCannonEntity::new, net.minecraft.world.entity.MobCategory.MISC)
                     .sized(0.3F, 0.3F)
