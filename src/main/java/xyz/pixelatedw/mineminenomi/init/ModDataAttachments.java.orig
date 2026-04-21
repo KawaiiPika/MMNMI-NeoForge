@@ -12,7 +12,7 @@ public class ModDataAttachments {
     );
 
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<AnimationData>> ANIMATION_DATA = ModRegistry.ATTACHMENT_TYPES.register(
-            "animation_data", () -> AttachmentType.builder(() -> new AnimationData()).copyOnDeath().build()
+            "animation_data", () -> AttachmentType.builder(() -> new AnimationData()).build()
     );
 
     public static void init() {
