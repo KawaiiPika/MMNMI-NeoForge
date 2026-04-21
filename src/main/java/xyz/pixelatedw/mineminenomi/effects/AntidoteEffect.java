@@ -5,7 +5,6 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import xyz.pixelatedw.mineminenomi.init.ModEffects;
 
 import java.util.ArrayList;
 import java.util.Collection;

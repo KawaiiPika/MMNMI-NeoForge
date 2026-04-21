@@ -11,6 +11,12 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.AgeableListModel;
+import net.minecraft.client.model.geom.ModelPart;
+import java.util.List;
+import java.util.ArrayList;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -105,5 +111,19 @@ public class RendererHelper {
     public static void drawSelectionHighlight(GuiGraphics graphics, int x, int y, int width, int height) {
         // The Vanilla-like selection highlight
         graphics.blitSprite(ResourceLocation.withDefaultNamespace("hud/hotbar_selection"), x - 1, y - 1, width + 2, height + 2);
+    }
+
+    public static <M extends EntityModel<?>> List<ModelPart> getModelParts(M model) {
+        List<ModelPart> result = new ArrayList<>();
+        if (model instanceof HierarchicalModel<?> model2) {
+            model2.root().getAllParts().forEach(result::add);
+        } else if (model instanceof AgeableListModel<?> model2) {
+            // IAgeableListModelExtension is gone or changed, maybe iterate manually or skip?
+        }
+        return result;
+    }
+
+    public static <E extends net.minecraft.world.entity.LivingEntity, M extends EntityModel<E>> void resetModelToDefaultPivots(M model) {
+        getModelParts(model).forEach(ModelPart::resetPose);
     }
 }

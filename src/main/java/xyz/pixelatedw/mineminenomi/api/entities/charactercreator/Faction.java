@@ -8,7 +8,6 @@ import java.util.function.Predicate;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
-import org.jetbrains.annotations.Nullable;
 import xyz.pixelatedw.mineminenomi.api.factions.IFactionRank;
 
 public class Faction implements ICharacterCreatorEntry {

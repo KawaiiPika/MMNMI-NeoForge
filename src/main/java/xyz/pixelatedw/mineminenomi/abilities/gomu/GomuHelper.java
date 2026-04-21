@@ -1,7 +1,5 @@
 package xyz.pixelatedw.mineminenomi.abilities.gomu;
 
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.LivingEntity;
 
 public class GomuHelper {
 

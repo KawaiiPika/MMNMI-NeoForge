@@ -15,6 +15,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -25,7 +26,7 @@ import xyz.pixelatedw.mineminenomi.init.ModEntities;
 
 import javax.annotation.Nullable;
 
-public class ThrownSpearEntity extends AbstractArrow {
+public class ThrownSpearEntity extends AbstractArrow implements ItemSupplier {
     private static final EntityDataAccessor<Byte> ID_LOYALTY = SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<Boolean> ID_FOIL = SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.BOOLEAN);
     
@@ -46,11 +47,11 @@ public class ThrownSpearEntity extends AbstractArrow {
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        super.defineSynchedData(builder);
-        builder.define(ID_LOYALTY, (byte) 0);
-        builder.define(ID_FOIL, false);
-    }
+    protected void defineSynchedData(SynchedEntityData.Builder p_325925_) {
+        super.defineSynchedData(p_325925_);
+        p_325925_.define(ID_LOYALTY, (byte)0);
+        p_325925_.define(ID_FOIL, false);
+     }
 
     @Override
     public void tick() {
@@ -180,5 +181,10 @@ public class ThrownSpearEntity extends AbstractArrow {
     @Override
     public boolean shouldRenderAtSqrDistance(double distance) {
         return true;
+    }
+
+    @Override
+    public ItemStack getItem() {
+        return new ItemStack(net.minecraft.world.item.Items.AIR);
     }
 }

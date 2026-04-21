@@ -14,8 +14,8 @@ public class WhiteSnakeAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         Vec3 look = entity.getLookAngle();
-        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(4.0).move(look.scale(8.0)))) {
-            if (target instanceof LivingEntity living) {
+        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(4.0).move(look.scale(8.0)))) {
+            if (living != entity) {
                 Vec3 pull = entity.position().subtract(living.position()).normalize().scale(2.5);
                 living.setDeltaMovement(pull.x, pull.y + 0.3, pull.z);
                 living.hurt(entity.damageSources().mobAttack(entity), 5.0F);

@@ -32,8 +32,8 @@ public class RokuoganAbility extends Ability {
         } else if (duration == CHARGE_TICKS) {
             if (!entity.level().isClientSide) {
                 Vec3 look = entity.getLookAngle();
-                for (Entity target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(3.5).move(look.scale(2.5)))) {
-                    if (target instanceof LivingEntity livingTarget) {
+                for (LivingEntity livingTarget : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(3.5).move(look.scale(2.5)))) {
+                    if (livingTarget != entity) {
                         livingTarget.hurt(entity.damageSources().mobAttack(entity), 25.0F);
                         livingTarget.setDeltaMovement(look.scale(3.5).add(0, 0.4, 0));
                         livingTarget.hurtMarked = true;

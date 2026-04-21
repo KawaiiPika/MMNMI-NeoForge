@@ -21,7 +21,7 @@ A thorough comparison between `old_source` and the current `src` has revealed th
 - **Data**: All legacy worldgen JSONs have been moved to the new `data/mineminenomi/worldgen` folder.
 - **Client**: Ability HUD overlay is created and icon rendering is implemented. Core UI screens (Abilities, Stats, Character Creator) are ported.
 - **Items**: Most utility items and iconic Devil Fruits are ported. Weapons/Armors registration is in progress.
-- **Abilities**: Approximately 45% of abilities (228 files) have been ported, including Haki, Rokushiki, and several core Devil Fruits.
+- **Abilities**: Approximately 41% of legacy ability code (245/593 files) has been ported. This includes Haki, Rokushiki, and several core Devil Fruits.
 
 ## Key Files
 - `xyz.pixelatedw.mineminenomi.init.ModFruits`: Devil Fruit registration.

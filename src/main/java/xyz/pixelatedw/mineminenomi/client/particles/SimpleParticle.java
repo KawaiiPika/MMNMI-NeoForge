@@ -139,7 +139,7 @@ public class SimpleParticle extends Particle {
         }
 
         public Factory(ResourceLocation texture, int maxFrames) {
-            this.type = new SimpleParticleRenderType(texture);
+            this.type = new xyz.pixelatedw.mineminenomi.client.particles.SimpleParticleRenderType(texture);
             this.maxFrames = maxFrames;
         }
 

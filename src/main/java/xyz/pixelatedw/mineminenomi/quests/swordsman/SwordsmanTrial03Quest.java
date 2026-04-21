@@ -1,10 +1,8 @@
 package xyz.pixelatedw.mineminenomi.quests.swordsman;
 
-import java.util.function.Predicate;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
-import net.minecraft.world.item.ItemStack;
 import xyz.pixelatedw.mineminenomi.api.quests.Quest;
 import xyz.pixelatedw.mineminenomi.api.quests.QuestId;
 import xyz.pixelatedw.mineminenomi.api.quests.objectives.Objective;
@@ -46,7 +44,7 @@ public class SwordsmanTrial03Quest extends Quest {
     public void giveReward(Player player) {
         PlayerStats stats = PlayerStats.get(player);
         if (stats != null) {
-            stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.SANBYAKUROKUJU_POUND_HO.get().getAbilityId());
+            // ability removed for porting
             stats.sync(player);
         }
     }

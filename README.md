@@ -14,7 +14,7 @@ The mod is currently being systematically migrated module by module, with a focu
 | **Core Registries** | ✅ 100% | Items, Blocks, Abilities, Creative Tabs, Dimensions, Features. |
 | **Data Persistence** | ✅ 100% | Migrated to NeoForge Data Attachments & Data Components. |
 | **Items** | 🔶 Partial | Utility items and 7 iconic fruits ported. Weapons/Armors in progress. |
-| **Abilities** | 🔶 ~45% | 228/500+ files. Haki, Rokushiki, and core Logia/Paramecia logic complete. |
+| **Abilities** | 🔶 ~41% | 245/593 files. Haki, Rokushiki, and core Logia/Paramecia logic complete. |
 | **UI / Client** | ✅ 90% | Ability HUD, Combat Mode, and core UI screens functional. |
 | **World Generation** | ✅ 100% | Legacy structures and features reconnected via modern JSON data. |
 | **Mobs** | 🔶 Partial | Base `OPEntity` and `GruntEntity` functional. Specialized AI pending. |

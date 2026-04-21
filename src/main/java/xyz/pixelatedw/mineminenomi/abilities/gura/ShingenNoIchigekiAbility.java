@@ -17,8 +17,8 @@ public class ShingenNoIchigekiAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         Vec3 look = entity.getLookAngle();
-        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(1.5).move(look.scale(1.5)))) {
-            if (target instanceof LivingEntity living) {
+        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(1.5).move(look.scale(1.5)))) {
+            if (living != entity) {
                 living.hurt(entity.damageSources().mobAttack(entity), 20.0F);
                 Vec3 push = look.scale(3.0).add(0, 0.4, 0);
                 living.setDeltaMovement(push);

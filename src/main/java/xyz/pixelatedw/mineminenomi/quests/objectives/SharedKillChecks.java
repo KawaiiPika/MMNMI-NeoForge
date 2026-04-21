@@ -1,8 +1,5 @@
 package xyz.pixelatedw.mineminenomi.quests.objectives;
 
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
 
 public class SharedKillChecks {

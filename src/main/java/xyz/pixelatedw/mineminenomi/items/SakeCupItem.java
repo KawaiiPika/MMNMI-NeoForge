@@ -1,24 +1,25 @@
 package xyz.pixelatedw.mineminenomi.items;
 
 import com.google.common.base.Strings;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
+import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.init.ModDataComponents;
+import xyz.pixelatedw.mineminenomi.init.ModFoods;
+import xyz.pixelatedw.mineminenomi.init.ModItems;
 
 import java.util.UUID;
 
 public class SakeCupItem extends Item {
     public SakeCupItem() {
-        // TODO: Port ModFoods.ALCOHOL
-        super(new Item.Properties().stacksTo(1));
+        super(new Item.Properties().stacksTo(1).food(ModFoods.ALCOHOL));
     }
 
     @Override
@@ -28,10 +29,15 @@ public class SakeCupItem extends Item {
             player.startUsingItem(hand);
             return InteractionResultHolder.consume(itemstack);
         } else {
-            // Find Sake Bottle
-            // Since we haven't ported SakeBottleItem yet, we'll just check by registry name or class later.
-            // For now we'll pass until SakeBottle is ported
-            // TODO: Implement filling logic
+            int slot = WyHelper.getIndexOfItemStack(ModItems.SAKE_BOTTLE.get(), player.getInventory());
+            if (slot >= 0) {
+                ItemStack bottleStack = player.getInventory().getItem(slot);
+                if (!player.getAbilities().instabuild) {
+                    bottleStack.shrink(1);
+                }
+                this.setLeader(itemstack, player);
+                return InteractionResultHolder.success(itemstack);
+            }
         }
 
         return InteractionResultHolder.pass(itemstack);
@@ -39,18 +45,16 @@ public class SakeCupItem extends Item {
 
     @Override
     public ItemStack finishUsingItem(ItemStack itemStack, Level world, LivingEntity entity) {
-        if (!world.isClientSide() && entity instanceof Player player) {
-            Player leader = this.getLeader(itemStack, player.level());
-            if (leader != null) {
+        if (entity instanceof Player player) {
+            Player leader = this.getLeader(itemStack, world);
+            if (leader != null && !world.isClientSide()) {
                 // TODO: Phase 3 - Faction & Crew logic
             }
-            
-            // Give back a Sake Cup
-            // player.getInventory().add(new ItemStack(ModItems.SAKE_CUP.get()));
-            itemStack.shrink(1);
         }
 
-        return itemStack;
+        ItemStack resultStack = super.finishUsingItem(itemStack, world, entity);
+
+        return entity instanceof Player player ? ItemUtils.createFilledResult(resultStack, player, new ItemStack(ModItems.SAKE_CUP.get())) : resultStack;
     }
 
     public void setLeader(ItemStack itemStack, Player leader) {

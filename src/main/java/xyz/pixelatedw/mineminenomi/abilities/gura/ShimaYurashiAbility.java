@@ -4,7 +4,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.phys.Vec3;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 
 /** Shima Yurashi — Island Shaking. */
@@ -40,8 +39,8 @@ public class ShimaYurashiAbility extends Ability {
             }
         } else if (duration == CHARGE_TICKS) {
             if (!entity.level().isClientSide) {
-                for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(35.0))) {
-                    if (target instanceof LivingEntity living) {
+                for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(35.0))) {
+                    if (living != entity) {
                         living.hurt(entity.damageSources().explosion(entity, entity), 40.0F);
                         living.setDeltaMovement(0, 3.5, 0);
                         living.hurtMarked = true;

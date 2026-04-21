@@ -2,7 +2,6 @@ package xyz.pixelatedw.mineminenomi.api.quests.objectives;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
-import xyz.pixelatedw.mineminenomi.api.quests.Quest;
 
 public class HealObjective extends Objective {
 

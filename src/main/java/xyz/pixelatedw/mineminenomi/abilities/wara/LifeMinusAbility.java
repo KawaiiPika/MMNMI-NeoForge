@@ -16,8 +16,8 @@ public class LifeMinusAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         var look = entity.getLookAngle();
-        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(2.0).move(look.scale(3.0)))) {
-            if (target instanceof LivingEntity living) {
+        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(2.0).move(look.scale(3.0)))) {
+            if (living != entity) {
                 float drain = living.getMaxHealth() * 0.3f;
                 living.hurt(entity.damageSources().mobAttack(entity), drain);
                 entity.heal(drain * 0.5f);

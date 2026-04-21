@@ -5,7 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.gui.LayeredDraw;
-import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 
 public class HaoshokuOverlay implements LayeredDraw.Layer {
     public static final HaoshokuOverlay INSTANCE = new HaoshokuOverlay();

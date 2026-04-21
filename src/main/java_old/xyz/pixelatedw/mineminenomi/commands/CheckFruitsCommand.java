@@ -122,7 +122,15 @@ public class CheckFruitsCommand {
                   exportFolder.mkdir();
                }
 
-               File exportFile = new File(exportFolder, String.valueOf(fruit) + ".txt");
+               String fruitName = String.valueOf(fruit).replaceAll("[^a-zA-Z0-9_\\-]", "_");
+               java.nio.file.Path exportFolderPath = exportFolder.toPath().normalize().toAbsolutePath();
+               java.nio.file.Path exportFilePath = exportFolderPath.resolve(fruitName + ".txt").normalize().toAbsolutePath();
+
+               if (!exportFilePath.startsWith(exportFolderPath)) {
+                  throw new SecurityException("Invalid fruit name preventing path traversal: " + fruitName);
+               }
+
+               File exportFile = exportFilePath.toFile();
                if (exportFile.exists()) {
                   exportFile.delete();
                }

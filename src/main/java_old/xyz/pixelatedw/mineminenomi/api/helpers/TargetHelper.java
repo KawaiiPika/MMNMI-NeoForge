@@ -91,9 +91,11 @@ public class TargetHelper {
       }
 
       List<T> targets = new ArrayList();
-      Stream var10000 = level.m_45976_(clz, aabb).stream().filter((target) -> !targets.contains(target) && targetPredicate.test(entity, target));
-      Objects.requireNonNull(targets);
-      var10000.forEach(targets::add);
+      for (T target : level.m_45976_(clz, aabb)) {
+         if (!targets.contains(target) && targetPredicate.test(entity, target)) {
+            targets.add(target);
+         }
+      }
       return targets;
    }
 
@@ -126,9 +128,11 @@ public class TargetHelper {
          double yOffset = (double)sizeY / (double)2.0F;
          double zOffset = (double)sizeZ / (double)2.0F;
          AABB aabb = new AABB(pos.f_82479_ - xOffset, pos.f_82480_ - yOffset, pos.f_82481_ - zOffset, pos.f_82479_ + xOffset, pos.f_82480_ + yOffset, pos.f_82481_ + zOffset);
-         Stream var10000 = entity.m_9236_().m_45976_(clz, aabb).stream().filter((target) -> !targets.contains(target) && targetPredicate.test(entity, target));
-         Objects.requireNonNull(targets);
-         var10000.forEach(targets::add);
+         for (T target : entity.m_9236_().m_45976_(clz, aabb)) {
+            if (!targets.contains(target) && targetPredicate.test(entity, target)) {
+               targets.add(target);
+            }
+         }
       }
 
       targets.sort(closestComparator(entity.m_20182_().m_82520_((double)0.0F, (double)entity.m_20192_(), (double)0.0F)));

@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -16,6 +15,9 @@ import net.minecraft.world.entity.player.Player;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
+import xyz.pixelatedw.mineminenomi.client.render.ModRenderTypes;
+import xyz.pixelatedw.mineminenomi.client.render.ModRenderTypeBuffers;
+import xyz.pixelatedw.mineminenomi.client.render.buffers.HakiAuraBuffer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,7 +50,7 @@ public class AuraLayer<T extends LivingEntity, M extends EntityModel<T>> extends
                 float hakiPower = kenExp / 2.0f;
                 double finalPower = (dorikiPower + hakiPower) * 1.06 * (hasGoro ? 4.0 : 1.0);
 
-                if (entity.distanceTo(player) <= finalPower) {
+                if (entity.distanceToSqr(player) <= finalPower * finalPower) {
                     matrixStack.pushPose();
                     
                     int rgb = 0x5555FF; // Default blue-ish
@@ -60,15 +62,17 @@ public class AuraLayer<T extends LivingEntity, M extends EntityModel<T>> extends
                         rgb = 0x00FFFF; // Cyan for players
                     }
 
-                    float red = (float)(rgb >> 16 & 255) / 255.0F;
-                    float green = (float)(rgb >> 8 & 255) / 255.0F;
-                    float blue = (float)(rgb & 255) / 255.0F;
+                    int red = (rgb >> 16 & 255);
+                    int green = (rgb >> 8 & 255);
+                    int blue = (rgb & 255);
 
-                    VertexConsumer vertex = buffer.getBuffer(RenderType.entityTranslucent(this.getTextureLocation(entity)));
-                    
-                    matrixStack.scale(1.02f, 1.02f, 1.02f);
-                    int color = ((int)(0.4f * 255) << 24) | ((int)(red * 255) << 16) | ((int)(green * 255) << 8) | (int)(blue * 255);
-                    this.getParentModel().renderToBuffer(matrixStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, color);
+                    HakiAuraBuffer layerBuffer = ModRenderTypeBuffers.getInstance().getHakiAuraBuffer();
+                    if (layerBuffer != null) {
+                        layerBuffer.setColor(red, green, blue, (int)(0.4f * 255));
+                        VertexConsumer vertex = layerBuffer.getBuffer(ModRenderTypes.getAuraRenderType());
+                        matrixStack.scale(1.02f, 1.02f, 1.02f);
+                        this.getParentModel().renderToBuffer(matrixStack, vertex, packedLight, OverlayTexture.NO_OVERLAY);
+                    }
                     
                     matrixStack.popPose();
                 }

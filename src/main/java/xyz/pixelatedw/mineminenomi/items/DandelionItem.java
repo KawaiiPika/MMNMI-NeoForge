@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import xyz.pixelatedw.mineminenomi.init.ModDataComponents;
+import xyz.pixelatedw.mineminenomi.config.ServerConfig;
 
 public class DandelionItem extends Item {
     public DandelionItem() {
@@ -47,9 +48,7 @@ public class DandelionItem extends Item {
     }
 
     public static void setHealAmount(ItemStack itemStack, float amount) {
-        // TODO: Port ServerConfig for maxHealth limit
-        // float maxHealth = (float)(ServerConfig.getDorikiLimit() / ServerConfig.getHealthGainFrequency());
-        float maxHealth = 100f; // Temporary
+        float maxHealth = (float)(ServerConfig.getDorikiLimit() / ServerConfig.getHealthGainFrequency());
         itemStack.set(ModDataComponents.AMOUNT.get(), Mth.clamp(amount, 0.0F, maxHealth));
     }
 }

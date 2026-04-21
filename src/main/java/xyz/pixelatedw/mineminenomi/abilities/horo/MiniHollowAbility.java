@@ -14,8 +14,8 @@ public class MiniHollowAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         Vec3 look = entity.getLookAngle();
-        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(1.5).move(look.scale(8.0)))) {
-            if (target instanceof LivingEntity living) {
+        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(1.5).move(look.scale(8.0)))) {
+            if (living != entity) {
                 living.hurt(entity.damageSources().explosion(null), 8.0F);
                 Vec3 dir = living.position().subtract(entity.position()).normalize();
                 living.setDeltaMovement(dir.scale(2.0).add(0, 0.5, 0));

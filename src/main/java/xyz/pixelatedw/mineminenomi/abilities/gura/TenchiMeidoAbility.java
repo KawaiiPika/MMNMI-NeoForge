@@ -17,8 +17,8 @@ public class TenchiMeidoAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         // Massive AoE burst
-        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(15.0))) {
-            if (target instanceof LivingEntity living) {
+        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(15.0))) {
+            if (living != entity) {
                 living.hurt(entity.damageSources().mobAttack(entity), 30.0F);
                 Vec3 push = living.position().subtract(entity.position()).normalize().scale(5.0).add(0, 1.0, 0);
                 living.setDeltaMovement(push);

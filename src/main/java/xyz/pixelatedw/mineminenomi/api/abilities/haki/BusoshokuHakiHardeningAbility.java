@@ -3,9 +3,20 @@ package xyz.pixelatedw.mineminenomi.api.abilities.haki;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
+import xyz.pixelatedw.mineminenomi.api.abilities.AbilityOverlay;
+import xyz.pixelatedw.mineminenomi.api.abilities.IOverlayProvider;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 
-public class BusoshokuHakiHardeningAbility extends Ability {
+import java.awt.Color;
+
+public class BusoshokuHakiHardeningAbility extends Ability implements IOverlayProvider {
+
+    private static final AbilityOverlay OVERLAY = new AbilityOverlay.Builder()
+            .setTexture(ModResources.BUSOSHOKU_HAKI_ARM)
+            .setOverlayPart(AbilityOverlay.OverlayPart.LIMB)
+            .setColor(new Color(255, 255, 255, 191))
+            .build();
 
     @Override
     protected void startUsing(LivingEntity entity) {
@@ -46,9 +57,13 @@ public class BusoshokuHakiHardeningAbility extends Ability {
         }
     }
 
-
     @Override
     public Component getDisplayName() {
         return Component.translatable("ability.mineminenomi.busoshoku_haki_hardening");
+    }
+
+    @Override
+    public AbilityOverlay getOverlay(LivingEntity entity) {
+        return OVERLAY;
     }
 }

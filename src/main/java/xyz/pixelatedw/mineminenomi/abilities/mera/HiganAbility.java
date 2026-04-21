@@ -1,10 +1,7 @@
 package xyz.pixelatedw.mineminenomi.abilities.mera;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 
 public class HiganAbility extends Ability {

@@ -14,7 +14,6 @@ import xyz.pixelatedw.mineminenomi.api.quests.objectives.Objective;
 import xyz.pixelatedw.mineminenomi.quests.objectives.CollectItemObjective;
 import xyz.pixelatedw.mineminenomi.quests.objectives.KillEntityObjective;
 import xyz.pixelatedw.mineminenomi.quests.objectives.SharedKillChecks;
-import xyz.pixelatedw.mineminenomi.init.ModAbilities;
 
 public class SwordsmanTrial01Quest extends Quest {
     public static final String ID = "trial_shi_shishi_sonson";
@@ -45,7 +44,7 @@ public class SwordsmanTrial01Quest extends Quest {
         if (QuestHelper.removeQuestItem(player, Items.BONE, 30)) {
             PlayerStats stats = PlayerStats.get(player);
             if (stats != null) {
-                stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.SHISHI_SONSON.get().getAbilityId());
+                // ability removed for porting
                 stats.sync(player);
             }
         }

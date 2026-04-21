@@ -4,13 +4,12 @@ import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;
+import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.ui.TexturedRectUI;
 
@@ -250,7 +249,7 @@ public class JollyRogerElement {
       try {
          return (JollyRogerElement)this.getClass().getConstructor().newInstance();
       } catch (Exception ex) {
-         ex.printStackTrace();
+         ModMain.LOGGER.error("Failed to create JollyRogerElement instance", ex);
          return null;
       }
    }
