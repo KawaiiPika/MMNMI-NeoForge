@@ -10,9 +10,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.material.MapColor;
 
-public class OpeBlock extends Block {
-   public OpeBlock() {
-      super(BlockBehaviour.Properties.of().mapColor(net.minecraft.world.level.material.MapColor.NONE).strength(Float.MAX_VALUE).ignitedByLava().noCollission().noOcclusion());
+public class BarrierBlock extends Block {
+   public BarrierBlock() {
+      super(BlockBehaviour.Properties.of().mapColor(net.minecraft.world.level.material.MapColor.NONE).strength(-1.0F, 10000.0F).ignitedByLava().noOcclusion());
    }
 
    public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
