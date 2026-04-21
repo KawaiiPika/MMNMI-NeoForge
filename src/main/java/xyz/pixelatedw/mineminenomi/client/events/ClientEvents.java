@@ -121,6 +121,25 @@ public class ClientEvents {
     public static void onRegisterLayerDefinitions(net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.ZouHeavyModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.ZouHeavyModel::createBodyLayer);
         event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.ZouGuardModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.ZouGuardModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.AllosaurusWalkModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.AllosaurusWalkModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.KameGuardModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.KameGuardModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.PhoenixFlyModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.PhoenixFlyModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.PteranodonFlyModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.PteranodonFlyModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.LeopardWalkModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.LeopardWalkModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.MammothGuardModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.MammothGuardModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.SaiHeavyModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.SaiHeavyModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.BisonWalkModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.BisonWalkModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.BrachiosaurusGuardModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.BrachiosaurusGuardModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.SaiWalkModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.SaiWalkModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.AxolotlHeavyModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.AxolotlHeavyModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.BrachiosaurusHeavyModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.BrachiosaurusHeavyModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.MoguHeavyModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.MoguHeavyModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.AxolotlWalkModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.AxolotlWalkModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.Phoenix2Model.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.Phoenix2Model::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.LeopardHeavyModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.LeopardHeavyModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.GiraffeWalkModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.GiraffeWalkModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.GiraffeHeavyModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.GiraffeHeavyModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.BisonHeavyModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.BisonHeavyModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -157,6 +176,64 @@ public class ClientEvents {
         xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
             net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "zou_heavy"), 
             new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.ZouHeavyModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.ZouHeavyModel.LAYER_LOCATION)), 0.8f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/zou_heavy.png")));
+
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "allosaurus_walk"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.AllosaurusWalkModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.AllosaurusWalkModel.LAYER_LOCATION)), 1.0f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/allosaurus_walk.png")));
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "kame_guard"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.KameGuardModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.KameGuardModel.LAYER_LOCATION)), 1.0f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/kame_guard.png")));
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "phoenix_fly"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.PhoenixFlyModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.PhoenixFlyModel.LAYER_LOCATION)), 1.0f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/phoenix_fly.png")));
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "pteranodon_fly"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.PteranodonFlyModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.PteranodonFlyModel.LAYER_LOCATION)), 1.0f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/pteranodon_fly.png")));
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "leopard_walk"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.LeopardWalkModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.LeopardWalkModel.LAYER_LOCATION)), 1.0f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/leopard_walk.png")));
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "mammoth_guard"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.MammothGuardModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.MammothGuardModel.LAYER_LOCATION)), 1.0f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/mammoth_guard.png")));
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "sai_heavy"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.SaiHeavyModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.SaiHeavyModel.LAYER_LOCATION)), 1.0f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/sai_heavy.png")));
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "bison_walk"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.BisonWalkModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.BisonWalkModel.LAYER_LOCATION)), 1.0f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/bison_walk.png")));
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "brachiosaurus_guard"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.BrachiosaurusGuardModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.BrachiosaurusGuardModel.LAYER_LOCATION)), 1.0f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/brachiosaurus_guard.png")));
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "sai_walk"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.SaiWalkModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.SaiWalkModel.LAYER_LOCATION)), 1.0f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/sai_walk.png")));
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "axolotl_heavy"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.AxolotlHeavyModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.AxolotlHeavyModel.LAYER_LOCATION)), 1.0f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/axolotl_heavy.png")));
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "brachiosaurus_heavy"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.BrachiosaurusHeavyModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.BrachiosaurusHeavyModel.LAYER_LOCATION)), 1.0f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/brachiosaurus_heavy.png")));
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "mogu_heavy"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.MoguHeavyModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.MoguHeavyModel.LAYER_LOCATION)), 1.0f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/mogu_heavy.png")));
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "axolotl_walk"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.AxolotlWalkModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.AxolotlWalkModel.LAYER_LOCATION)), 1.0f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/axolotl_walk.png")));
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "phoenix_2"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.Phoenix2Model<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.Phoenix2Model.LAYER_LOCATION)), 1.0f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/phoenix2.png")));
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "leopard_heavy"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.LeopardHeavyModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.LeopardHeavyModel.LAYER_LOCATION)), 1.0f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/leopard_heavy.png")));
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "giraffe_walk"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.GiraffeWalkModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.GiraffeWalkModel.LAYER_LOCATION)), 1.0f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/giraffe_walk.png")));
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "giraffe_heavy"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.GiraffeHeavyModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.GiraffeHeavyModel.LAYER_LOCATION)), 1.0f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/giraffe_heavy.png")));
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "bison_heavy"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.BisonHeavyModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.BisonHeavyModel.LAYER_LOCATION)), 1.0f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/bison_heavy.png")));
 
         for (net.minecraft.client.resources.PlayerSkin.Model skin : event.getSkins()) {
             net.minecraft.client.renderer.entity.LivingEntityRenderer<net.minecraft.client.player.AbstractClientPlayer, net.minecraft.client.model.PlayerModel<net.minecraft.client.player.AbstractClientPlayer>> renderer = event.getSkin(skin);
