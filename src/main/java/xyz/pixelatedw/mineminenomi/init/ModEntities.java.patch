@@ -1,0 +1,21 @@
+<<<<<<< SEARCH
+    public static final Supplier<EntityType<xyz.pixelatedw.mineminenomi.entities.VivreCardEntity>> VIVRE_CARD = ModRegistry.ENTITY_TYPES.register("vivre_card",
+            () -> EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.VivreCardEntity>of(xyz.pixelatedw.mineminenomi.entities.VivreCardEntity::new, net.minecraft.world.entity.MobCategory.MISC)
+                    .sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("vivre_card"));
+=======
+    public static final Supplier<EntityType<xyz.pixelatedw.mineminenomi.entities.VivreCardEntity>> VIVRE_CARD = ModRegistry.ENTITY_TYPES.register("vivre_card",
+            () -> EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.VivreCardEntity>of(xyz.pixelatedw.mineminenomi.entities.VivreCardEntity::new, net.minecraft.world.entity.MobCategory.MISC)
+                    .sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("vivre_card"));
+
+    public static final Supplier<EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.yami.LiberationProjectile>> LIBERATION = ModRegistry.ENTITY_TYPES.register("liberation",
+            () -> EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.yami.LiberationProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.yami.LiberationProjectile::new, net.minecraft.world.entity.MobCategory.MISC)
+                    .sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("liberation"));
+
+    public static final Supplier<EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.yami.BlackRoadProjectile>> BLACK_ROAD = ModRegistry.ENTITY_TYPES.register("black_road",
+            () -> EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.yami.BlackRoadProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.yami.BlackRoadProjectile::new, net.minecraft.world.entity.MobCategory.MISC)
+                    .sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("black_road"));
+
+    public static final Supplier<EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.yuki.YukiRabiProjectile>> YUKI_RABI = ModRegistry.ENTITY_TYPES.register("yuki_rabi",
+            () -> EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.yuki.YukiRabiProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.yuki.YukiRabiProjectile::new, net.minecraft.world.entity.MobCategory.MISC)
+                    .sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("yuki_rabi"));
+>>>>>>> REPLACE
