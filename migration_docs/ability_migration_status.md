@@ -95,10 +95,10 @@ Abilities are organized into the following UI categories:
 
 | Status | Count |
 |--------|-------|
-| ✅ Ability files ported | ~228 files |
+| ✅ Ability files ported | ~245 files |
 | 🔶 Partially ported fruits | 21 |
 | ❌ Fruits not started | ~25 |
-| Approximate % complete | ~45% |
+| Approximate % complete | ~41% |
 
 ---
 
