@@ -7,6 +7,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import xyz.pixelatedw.mineminenomi.networking.packets.SUpdatePlayerStatsPacket;
 import xyz.pixelatedw.mineminenomi.networking.packets.SOpenCharacterCreatorScreenPacket;
+import xyz.pixelatedw.mineminenomi.networking.packets.SOpenWantedPosterScreenPacket;
 
 @EventBusSubscriber(modid = "mineminenomi", bus = EventBusSubscriber.Bus.MOD)
 public class ModNetworking {
@@ -79,6 +80,12 @@ public class ModNetworking {
                 SOpenCharacterCreatorScreenPacket.TYPE,
                 SOpenCharacterCreatorScreenPacket.STREAM_CODEC,
                 SOpenCharacterCreatorScreenPacket::handle
+        );
+
+        registrar.playToClient(
+                SOpenWantedPosterScreenPacket.TYPE,
+                SOpenWantedPosterScreenPacket.STREAM_CODEC,
+                SOpenWantedPosterScreenPacket::handle
         );
     }
 
