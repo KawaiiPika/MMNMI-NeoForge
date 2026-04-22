@@ -44,8 +44,8 @@ public class TargetHelper {
       double dx = target.m_20185_() - entity.m_20185_();
 
       double dz;
-      for(dz = target.m_20189_() - entity.m_20189_(); dx * dx + dz * dz < 1.0E-4; dz = (Math.random() - Math.random()) * 0.01) {
-         dx = (Math.random() - Math.random()) * 0.01;
+      for(dz = target.m_20189_() - entity.m_20189_(); dx * dx + dz * dz < 1.0E-4; dz = (xyz.pixelatedw.mineminenomi.api.WyHelper.random() - xyz.pixelatedw.mineminenomi.api.WyHelper.random()) * 0.01) {
+         dx = (xyz.pixelatedw.mineminenomi.api.WyHelper.random() - xyz.pixelatedw.mineminenomi.api.WyHelper.random()) * 0.01;
       }
 
       float yaw;

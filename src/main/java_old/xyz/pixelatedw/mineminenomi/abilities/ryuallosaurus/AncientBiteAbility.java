@@ -47,7 +47,7 @@ public class AncientBiteAbility extends PunchAbility {
       target.m_7292_(new MobEffectInstance((MobEffect)ModEffects.BLEEDING.get(), 20, 0));
 
       for(int i = 0; i < 50; ++i) {
-         Vec3 vec3d = new Vec3(((double)entity.m_217043_().m_188501_() - (double)0.5F) * 0.1, Math.random() * 0.1 + 0.1, (double)0.0F);
+         Vec3 vec3d = new Vec3(((double)entity.m_217043_().m_188501_() - (double)0.5F) * 0.1, xyz.pixelatedw.mineminenomi.api.WyHelper.random() * 0.1 + 0.1, (double)0.0F);
          vec3d = vec3d.m_82496_(-entity.m_146909_() * ((float)Math.PI / 180F));
          vec3d = vec3d.m_82524_(-entity.m_146908_() * ((float)Math.PI / 180F));
          ((ServerLevel)entity.m_9236_()).m_8767_(ParticleTypes.f_123797_, target.m_20185_(), target.m_20186_() + (double)1.5F, target.m_20189_(), 1, vec3d.f_82479_, vec3d.f_82480_, vec3d.f_82481_, 0.8);

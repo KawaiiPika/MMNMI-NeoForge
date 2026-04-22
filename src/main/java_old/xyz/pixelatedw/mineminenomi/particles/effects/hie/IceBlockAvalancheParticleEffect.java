@@ -29,7 +29,7 @@ public class IceBlockAvalancheParticleEffect extends ParticleEffect<ParticleEffe
             part.setRotationSpeed(theta % (double)2.0F == (double)0.0F ? 0.07F : -0.07F);
             part.setSize(10.0F);
             part.setMotion(-motionX, motionY, -motionZ);
-            if (Math.random() > 0.7) {
+            if (xyz.pixelatedw.mineminenomi.api.WyHelper.random() > 0.7) {
                world.m_6493_(part, true, posX + x + WyHelper.randomDouble(), y, posZ + z + WyHelper.randomDouble(), (double)0.0F, (double)0.0F, (double)0.0F);
             }
          }

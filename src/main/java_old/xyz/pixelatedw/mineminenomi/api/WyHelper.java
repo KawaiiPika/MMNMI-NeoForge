@@ -89,6 +89,11 @@ import xyz.pixelatedw.mineminenomi.packets.server.SSpawnParticleEffectPacket;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
 public class WyHelper {
+   private static final java.security.SecureRandom SECURE_RANDOM = new java.security.SecureRandom();
+
+   public static double random() {
+      return SECURE_RANDOM.nextDouble();
+   }
    private static final Random RANDOM = new Random();
    private static final Collector<?, ?, ?> SHUFFLER = Collectors.collectingAndThen(Collectors.toCollection(ArrayList::new), (list) -> {
       Collections.shuffle(list);
