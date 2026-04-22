@@ -67,9 +67,9 @@ public class CharacterCreatorScreen extends Screen {
         this.hasRandomizedRace = hasRandomizedRace;
         this.allowSubRaceSelect = allowMinkRaceSelect;
         
-        this.factions = ModRegistries.FACTIONS.stream().filter(ICharacterCreatorEntry::isInBook).toArray(Faction[]::new);
-        this.races = ModRegistries.RACES.stream().filter(Race::isMainRace).filter(ICharacterCreatorEntry::isInBook).toArray(Race[]::new);
-        this.styles = ModRegistries.FIGHTING_STYLES.stream().filter(ICharacterCreatorEntry::isInBook).toArray(FightingStyle[]::new);
+        this.factions = xyz.pixelatedw.mineminenomi.init.ModRegistries.FACTIONS_REGISTRY.getEntries().stream().map(net.neoforged.neoforge.registries.DeferredHolder::get).filter(ICharacterCreatorEntry::isInBook).toArray(Faction[]::new);
+        this.races = xyz.pixelatedw.mineminenomi.init.ModRegistries.RACES_REGISTRY.getEntries().stream().map(net.neoforged.neoforge.registries.DeferredHolder::get).filter(Race::isMainRace).filter(ICharacterCreatorEntry::isInBook).toArray(Race[]::new);
+        this.styles = xyz.pixelatedw.mineminenomi.init.ModRegistries.FIGHTING_STYLES_REGISTRY.getEntries().stream().map(net.neoforged.neoforge.registries.DeferredHolder::get).filter(ICharacterCreatorEntry::isInBook).toArray(FightingStyle[]::new);
     }
 
     @Override
