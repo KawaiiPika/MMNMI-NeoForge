@@ -14,7 +14,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class HakiHelperTest extends AbstractMinecraftTest {
+class HakiHelperTest extends xyz.pixelatedw.mineminenomi.effects.AbstractMinecraftTest {
 
     @Test
     void testCalculateHakiDamage_NoStats() {
