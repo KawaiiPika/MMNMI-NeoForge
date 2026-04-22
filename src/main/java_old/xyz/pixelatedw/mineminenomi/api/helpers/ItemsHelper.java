@@ -63,7 +63,7 @@ public class ItemsHelper {
 
    public static void itemBreakParticles(Level level, Vec3 pos, int count, ItemStack stack) {
       for(int i = 0; i < count; ++i) {
-         Vector3d vec3d = new Vector3d(((double)level.m_213780_().m_188501_() - (double)0.5F) * 0.1, xyz.pixelatedw.mineminenomi.api.WyHelper.random() * 0.1 + 0.1, (double)0.0F);
+         Vector3d vec3d = new Vector3d(((double)level.m_213780_().m_188501_() - (double)0.5F) * 0.1, Math.random() * 0.1 + 0.1, (double)0.0F);
          double d0 = (double)(-level.m_213780_().m_188501_()) * 0.6 - 0.3;
          Vector3d vec3d1 = new Vector3d(((double)level.m_213780_().m_188501_() - (double)0.5F) * 0.3, d0, 0.6);
          if (level instanceof ServerLevel serverLevel) {
@@ -77,7 +77,7 @@ public class ItemsHelper {
 
    public static void itemBreakParticles(LivingEntity entity, int count, ItemStack stack) {
       for(int i = 0; i < count; ++i) {
-         Vec3 vec3d = new Vec3(((double)entity.m_217043_().m_188501_() - (double)0.5F) * 0.1, xyz.pixelatedw.mineminenomi.api.WyHelper.random() * 0.1 + 0.1, (double)0.0F);
+         Vec3 vec3d = new Vec3(((double)entity.m_217043_().m_188501_() - (double)0.5F) * 0.1, Math.random() * 0.1 + 0.1, (double)0.0F);
          vec3d = vec3d.m_82496_(-entity.m_146909_() * ((float)Math.PI / 180F));
          vec3d = vec3d.m_82524_(-entity.m_146908_() * ((float)Math.PI / 180F));
          double d0 = (double)(-entity.m_217043_().m_188501_()) * 0.6 - 0.3;

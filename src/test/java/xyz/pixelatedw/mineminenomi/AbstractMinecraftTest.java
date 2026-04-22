@@ -6,12 +6,12 @@ import org.junit.jupiter.api.BeforeAll;
 
 public abstract class AbstractMinecraftTest {
     @BeforeAll
-    public static void setupMinecraft() {
+    public static void setup() {
         try {
             SharedConstants.tryDetectVersion();
             Bootstrap.bootStrap();
-        } catch (Throwable t) {
-            System.err.println("Failed to bootstrap Minecraft: " + t.getMessage());
+        } catch (Throwable e) {
+            // Ignore bootstrap issues if already bootstrapped or missing some parts
         }
     }
 }

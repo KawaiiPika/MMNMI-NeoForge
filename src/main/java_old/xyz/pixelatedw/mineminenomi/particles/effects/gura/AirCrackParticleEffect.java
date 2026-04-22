@@ -13,6 +13,6 @@ public class AirCrackParticleEffect extends ParticleEffect<ParticleEffect.NoDeta
       data.setLife(20);
       data.setSize(16.0F);
       data.setColor(1.0F, 1.0F, 1.0F, 0.7F);
-      world.m_6493_(data, true, posX + xyz.pixelatedw.mineminenomi.api.WyHelper.random() / (double)2.0F, posY + xyz.pixelatedw.mineminenomi.api.WyHelper.random() / (double)2.0F, posZ + xyz.pixelatedw.mineminenomi.api.WyHelper.random() / (double)2.0F, (double)0.0F, (double)0.0F, (double)0.0F);
+      world.m_6493_(data, true, posX + Math.random() / (double)2.0F, posY + Math.random() / (double)2.0F, posZ + Math.random() / (double)2.0F, (double)0.0F, (double)0.0F, (double)0.0F);
    }
 }

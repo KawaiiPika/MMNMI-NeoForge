@@ -75,27 +75,57 @@ public class ModNetworking {
         );
 
         registrar.playToClient(
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenCharacterCreatorScreenPacket.TYPE,
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenCharacterCreatorScreenPacket.STREAM_CODEC,
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenCharacterCreatorScreenPacket::handle
+                xyz.pixelatedw.mineminenomi.networking.packets.SOpenCrewScreenPacket.TYPE,
+                xyz.pixelatedw.mineminenomi.networking.packets.SOpenCrewScreenPacket.STREAM_CODEC,
+                xyz.pixelatedw.mineminenomi.networking.packets.SOpenCrewScreenPacket::handle
         );
 
         registrar.playToClient(
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenTrainerDialogueScreenPacket.TYPE,
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenTrainerDialogueScreenPacket.STREAM_CODEC,
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenTrainerDialogueScreenPacket::handle
+                xyz.pixelatedw.mineminenomi.networking.packets.SOpenJollyRogerEditorScreenPacket.TYPE,
+                xyz.pixelatedw.mineminenomi.networking.packets.SOpenJollyRogerEditorScreenPacket.STREAM_CODEC,
+                xyz.pixelatedw.mineminenomi.networking.packets.SOpenJollyRogerEditorScreenPacket::handle
         );
 
         registrar.playToClient(
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenEncyclopediaScreenPacket.TYPE,
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenEncyclopediaScreenPacket.STREAM_CODEC,
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenEncyclopediaScreenPacket::handle
+                xyz.pixelatedw.mineminenomi.networking.packets.SSyncStrikerCrewPacket.TYPE,
+                xyz.pixelatedw.mineminenomi.networking.packets.SSyncStrikerCrewPacket.STREAM_CODEC,
+                xyz.pixelatedw.mineminenomi.networking.packets.SSyncStrikerCrewPacket::handle
+        );
+
+        registrar.playToServer(
+                xyz.pixelatedw.mineminenomi.networking.packets.CKickFromCrewPacket.TYPE,
+                xyz.pixelatedw.mineminenomi.networking.packets.CKickFromCrewPacket.STREAM_CODEC,
+                xyz.pixelatedw.mineminenomi.networking.packets.CKickFromCrewPacket::handle
+        );
+
+        registrar.playToServer(
+                xyz.pixelatedw.mineminenomi.networking.packets.CLeaveCrewPacket.TYPE,
+                xyz.pixelatedw.mineminenomi.networking.packets.CLeaveCrewPacket.STREAM_CODEC,
+                xyz.pixelatedw.mineminenomi.networking.packets.CLeaveCrewPacket::handle
+        );
+
+        registrar.playToServer(
+                xyz.pixelatedw.mineminenomi.networking.packets.CUpdateJollyRogerPacket.TYPE,
+                xyz.pixelatedw.mineminenomi.networking.packets.CUpdateJollyRogerPacket.STREAM_CODEC,
+                xyz.pixelatedw.mineminenomi.networking.packets.CUpdateJollyRogerPacket::handle
+        );
+
+        registrar.playToServer(
+                xyz.pixelatedw.mineminenomi.networking.packets.COpenCrewScreenPacket.TYPE,
+                xyz.pixelatedw.mineminenomi.networking.packets.COpenCrewScreenPacket.STREAM_CODEC,
+                xyz.pixelatedw.mineminenomi.networking.packets.COpenCrewScreenPacket::handle
+        );
+
+        registrar.playToServer(
+                xyz.pixelatedw.mineminenomi.networking.packets.COpenJollyRogerEditorScreenPacket.TYPE,
+                xyz.pixelatedw.mineminenomi.networking.packets.COpenJollyRogerEditorScreenPacket.STREAM_CODEC,
+                xyz.pixelatedw.mineminenomi.networking.packets.COpenJollyRogerEditorScreenPacket::handle
         );
 
         registrar.playToClient(
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenWantedPosterScreenPacket.TYPE,
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenWantedPosterScreenPacket.STREAM_CODEC,
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenWantedPosterScreenPacket::handle
+                xyz.pixelatedw.mineminenomi.networking.packets.SSimpleMessageScreenEventPacket.TYPE,
+                xyz.pixelatedw.mineminenomi.networking.packets.SSimpleMessageScreenEventPacket.STREAM_CODEC,
+                xyz.pixelatedw.mineminenomi.networking.packets.SSimpleMessageScreenEventPacket::handle
         );
     }
 

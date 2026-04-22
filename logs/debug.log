@@ -17,3 +17,6 @@
 [22Apr2026 21:33:42.218] [Test worker/DEBUG] [io.netty.util.internal.PlatformDependent/]: -Dio.netty.uninitializedArrayAllocationThreshold: -1
 [22Apr2026 21:33:42.221] [Test worker/DEBUG] [io.netty.util.internal.CleanerJava9/]: java.nio.ByteBuffer.cleaner(): available
 [22Apr2026 21:33:42.221] [Test worker/DEBUG] [io.netty.util.internal.PlatformDependent/]: -Dio.netty.noPreferDirect: false
+[22Apr2026 22:14:18.745] [Test worker/DEBUG] [io.netty.util.internal.logging.InternalLoggerFactory/]: Using SLF4J as the default logging framework
+[22Apr2026 22:14:18.769] [Test worker/DEBUG] [io.netty.util.ResourceLeakDetector/]: -Dio.netty.leakDetection.level: simple
+[22Apr2026 22:14:18.769] [Test worker/DEBUG] [io.netty.util.ResourceLeakDetector/]: -Dio.netty.leakDetection.targetRecords: 4
