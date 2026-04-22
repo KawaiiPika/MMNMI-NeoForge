@@ -16,8 +16,10 @@ public class CharacterCreatorItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide) {
-            // TODO: Send packet to open Character Creator UI
-            // ModNetworking.sendTo(new SOpenCharacterCreatorScreenPacket(...), (ServerPlayer)player);
+            xyz.pixelatedw.mineminenomi.networking.ModNetworking.sendTo(
+                    new xyz.pixelatedw.mineminenomi.networking.packets.SOpenCharacterCreatorScreenPacket(true, true),
+                    (net.minecraft.server.level.ServerPlayer) player
+            );
         }
         return InteractionResultHolder.success(player.getItemInHand(hand));
     }
