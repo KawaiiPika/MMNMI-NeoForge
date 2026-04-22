@@ -19,8 +19,8 @@ public class KumoNoSugakiAbility extends Ability {
     protected void startUsing(LivingEntity entity) {
         // High resistance + area slow
         entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 100, 3));
-        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(6.0))) {
-            if (living != entity) {
+        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(6.0))) {
+            if (target instanceof LivingEntity living) {
                 living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 2));
             }
         }

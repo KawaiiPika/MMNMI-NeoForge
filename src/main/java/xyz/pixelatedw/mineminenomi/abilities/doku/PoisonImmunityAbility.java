@@ -15,15 +15,12 @@ public class PoisonImmunityAbility extends Ability {
         // Active: removes poison from self and nearby allies
         entity.removeEffect(net.minecraft.world.effect.MobEffects.POISON);
         entity.removeEffect(net.minecraft.world.effect.MobEffects.WITHER);
-        for (LivingEntity ally : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(5.0))) {
-            if (ally != entity) {
+        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(5.0))) {
+            if (target instanceof LivingEntity ally) {
                 ally.removeEffect(net.minecraft.world.effect.MobEffects.POISON);
             }
         }
     }
-
-    @Override
-    public boolean isPassive() { return true; }
 
     @Override
     public Component getDisplayName() { return Component.translatable("ability.mineminenomi.poison_immunity"); }

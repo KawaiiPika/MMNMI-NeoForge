@@ -8,6 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import xyz.pixelatedw.mineminenomi.init.ModDataComponents;
 
+import java.util.UUID;
 
 // Flag item stores crew affiliation and canvas size.
 // Canvas size ported to Data Component. Crew data deferred to Phase 3.

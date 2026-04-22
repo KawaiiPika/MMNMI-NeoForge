@@ -15,8 +15,8 @@ public class BarjanAbility extends Ability {
     protected void startUsing(LivingEntity entity) {
         Vec3 look = entity.getLookAngle();
         // Forward slam + shockwave
-        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(4.0).move(look.scale(4.0)))) {
-            if (living != entity) {
+        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(4.0).move(look.scale(4.0)))) {
+            if (target instanceof LivingEntity living) {
                 living.hurt(entity.damageSources().mobAttack(entity), 12.0F);
                 living.setDeltaMovement(look.scale(2.5).add(0, 0.5, 0));
                 living.hurtMarked = true;

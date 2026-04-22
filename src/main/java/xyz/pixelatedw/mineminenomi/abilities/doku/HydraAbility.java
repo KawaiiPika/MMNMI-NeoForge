@@ -24,8 +24,8 @@ public class HydraAbility extends Ability {
         };
         for (double[] off : offsets) {
             var dir = new net.minecraft.world.phys.Vec3(off[0], off[1], off[2]).normalize().scale(8.0);
-            for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(3.0).move(dir))) {
-                if (living != entity) {
+            for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(3.0).move(dir))) {
+                if (target instanceof LivingEntity living) {
                     living.addEffect(new net.minecraft.world.effect.MobEffectInstance(
                         net.minecraft.world.effect.MobEffects.POISON, 400, 3));
                     living.hurt(entity.damageSources().mobAttack(entity), 10.0F);

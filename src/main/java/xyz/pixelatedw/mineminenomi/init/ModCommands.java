@@ -16,7 +16,6 @@ public class ModCommands {
         DorikiCommand.register(event.getDispatcher(), event.getBuildContext());
         ExtolCommand.register(event.getDispatcher(), event.getBuildContext());
         HakiExpCommand.register(event.getDispatcher(), event.getBuildContext());
-        HaoshokuCommand.register(event.getDispatcher(), event.getBuildContext());
         RemoveDFCommand.register(event.getDispatcher(), event.getBuildContext());
         PointsCommand.register(event.getDispatcher(), event.getBuildContext());
     }

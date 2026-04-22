@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import xyz.pixelatedw.mineminenomi.api.enums.FruitType;
+import xyz.pixelatedw.mineminenomi.init.ModDataComponents;
 
 import java.util.ArrayList;
 import java.util.List;

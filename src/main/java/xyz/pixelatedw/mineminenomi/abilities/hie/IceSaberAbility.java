@@ -13,8 +13,8 @@ public class IceSaberAbility extends Ability {
     protected void startUsing(LivingEntity entity) {
         // Simple ice blade strike in front
         var look = entity.getLookAngle();
-        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(1.5).move(look.scale(3.0)))) {
-            if (living != entity) {
+        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(1.5).move(look.scale(3.0)))) {
+            if (target instanceof LivingEntity living) {
                 living.hurt(entity.damageSources().mobAttack(entity), 10.0F);
                 living.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 60, 3));
             }

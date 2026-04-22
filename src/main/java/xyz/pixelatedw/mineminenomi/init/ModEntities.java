@@ -141,13 +141,6 @@ public class ModEntities {
                     .updateInterval(20)
                     .build("mero_mero_mellow"));
 
-
-    public static final java.util.function.Supplier<net.minecraft.world.entity.EntityType<xyz.pixelatedw.mineminenomi.entities.vehicles.CannonEntity>> CANNON = ModRegistry.ENTITY_TYPES.register("cannon",
-            () -> net.minecraft.world.entity.EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.vehicles.CannonEntity>of(xyz.pixelatedw.mineminenomi.entities.vehicles.CannonEntity::new, net.minecraft.world.entity.MobCategory.MISC)
-                    .sized(1.25F, 1.25F)
-                    .clientTrackingRange(10)
-                    .build("cannon"));
-
     public static final java.util.function.Supplier<net.minecraft.world.entity.EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.NoseFancyCannonEntity>> NOSE_FANCY_CANNON = ModRegistry.ENTITY_TYPES.register("nose_fancy_cannon",
             () -> net.minecraft.world.entity.EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.NoseFancyCannonEntity>of(xyz.pixelatedw.mineminenomi.entities.projectiles.NoseFancyCannonEntity::new, net.minecraft.world.entity.MobCategory.MISC)
                     .sized(0.3F, 0.3F)
@@ -311,31 +304,6 @@ public class ModEntities {
                     .build("pack_of_sharks"));
 
     public static final java.util.function.Supplier<net.minecraft.world.entity.EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.awa.RelaxHourProjectile>> RELAX_HOUR_PROJECTILE = ModRegistry.ENTITY_TYPES.register("relax_hour_projectile", () -> net.minecraft.world.entity.EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.awa.RelaxHourProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.awa.RelaxHourProjectile::new, net.minecraft.world.entity.MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("relax_hour_projectile"));
-
-    public static final java.util.function.Supplier<net.minecraft.world.entity.EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.toriphoenix.PhoenixGoenProjectile>> PHOENIX_GOEN = ModRegistry.ENTITY_TYPES.register("phoenix_goen",
-            () -> net.minecraft.world.entity.EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.toriphoenix.PhoenixGoenProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.toriphoenix.PhoenixGoenProjectile::new, net.minecraft.world.entity.MobCategory.MISC)
-                    .sized(1.5F, 1.5F)
-                    .clientTrackingRange(10)
-                    .updateInterval(20)
-                    .build("phoenix_goen"));
-    public static final Supplier<EntityType<xyz.pixelatedw.mineminenomi.entities.VivreCardEntity>> VIVRE_CARD = ModRegistry.ENTITY_TYPES.register("vivre_card",
-            () -> EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.VivreCardEntity>of(xyz.pixelatedw.mineminenomi.entities.VivreCardEntity::new, net.minecraft.world.entity.MobCategory.MISC)
-                    .sized(0.4F, 0.4F)
-                    .clientTrackingRange(10)
-                    .updateInterval(20)
-                    .build("vivre_card"));
-
-    public static final java.util.function.Supplier<net.minecraft.world.entity.EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.yami.LiberationProjectile>> LIBERATION = ModRegistry.ENTITY_TYPES.register("liberation",
-            () -> net.minecraft.world.entity.EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.yami.LiberationProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.yami.LiberationProjectile::new, net.minecraft.world.entity.MobCategory.MISC)
-                    .sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("liberation"));
-
-    public static final java.util.function.Supplier<net.minecraft.world.entity.EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.yami.BlackRoadProjectile>> BLACK_ROAD = ModRegistry.ENTITY_TYPES.register("black_road",
-            () -> net.minecraft.world.entity.EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.yami.BlackRoadProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.yami.BlackRoadProjectile::new, net.minecraft.world.entity.MobCategory.MISC)
-                    .sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("black_road"));
-
-    public static final java.util.function.Supplier<net.minecraft.world.entity.EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.yuki.YukiRabiProjectile>> YUKI_RABI = ModRegistry.ENTITY_TYPES.register("yuki_rabi",
-            () -> net.minecraft.world.entity.EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.yuki.YukiRabiProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.yuki.YukiRabiProjectile::new, net.minecraft.world.entity.MobCategory.MISC)
-                    .sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("yuki_rabi"));
 
     public static void init() {}
 }

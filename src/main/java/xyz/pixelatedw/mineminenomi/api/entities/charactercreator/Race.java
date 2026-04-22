@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Supplier;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
 
 public class Race implements ICharacterCreatorEntry {
     private ResourceLocation key;

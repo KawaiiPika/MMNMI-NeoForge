@@ -14,8 +14,8 @@ public class ParasiteAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         Vec3 look = entity.getLookAngle();
-        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(2.0).move(look.scale(12.0)))) {
-            if (living != entity) {
+        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(2.0).move(look.scale(12.0)))) {
+            if (target instanceof LivingEntity living) {
                 living.addEffect(new net.minecraft.world.effect.MobEffectInstance(
                     net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 200, 5));
                 living.addEffect(new net.minecraft.world.effect.MobEffectInstance(

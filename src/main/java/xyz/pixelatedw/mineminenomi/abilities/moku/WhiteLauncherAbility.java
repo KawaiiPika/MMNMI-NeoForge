@@ -14,8 +14,8 @@ public class WhiteLauncherAbility extends Ability {
     protected void startUsing(LivingEntity entity) {
         Vec3 look = entity.getLookAngle();
         // Smoker launches a blast of smoke that pushes targets away
-        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(3.0).move(look.scale(5.0)))) {
-            if (living != entity) {
+        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(3.0).move(look.scale(5.0)))) {
+            if (target instanceof LivingEntity living) {
                 living.hurt(entity.damageSources().mobAttack(entity), 7.0F);
                 living.setDeltaMovement(look.scale(3.0).add(0, 0.5, 0));
                 living.hurtMarked = true;

@@ -21,8 +21,5 @@ public class GuraImmunityAbility extends Ability {
     }
 
     @Override
-    public boolean isPassive() { return true; }
-
-    @Override
     public Component getDisplayName() { return Component.translatable("ability.mineminenomi.gura_immunity"); }
 }

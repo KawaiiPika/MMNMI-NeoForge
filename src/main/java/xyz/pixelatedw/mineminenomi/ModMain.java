@@ -9,8 +9,6 @@ import net.neoforged.fml.common.Mod;
 
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.ModContainer;
 import org.slf4j.Logger;
 
 @Mod(ModMain.PROJECT_ID)
@@ -18,12 +16,10 @@ public class ModMain {
     public static final String PROJECT_ID = "mineminenomi";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public ModMain(IEventBus modEventBus, ModContainer modContainer) {
+    public ModMain(IEventBus modEventBus) {
         // Register the setup methods
         modEventBus.addListener(this::commonSetup);
         
-        modContainer.registerConfig(ModConfig.Type.SERVER, xyz.pixelatedw.mineminenomi.config.ServerConfig.SPEC);
-
         xyz.pixelatedw.mineminenomi.init.ModRegistries.init(modEventBus);
         xyz.pixelatedw.mineminenomi.init.ModRegistry.init(modEventBus);
         xyz.pixelatedw.mineminenomi.init.ModDataComponents.init(modEventBus);
@@ -47,7 +43,6 @@ public class ModMain {
         xyz.pixelatedw.mineminenomi.init.ModFeatures.register(modEventBus);
         xyz.pixelatedw.mineminenomi.init.ModStructures.register(modEventBus);
         xyz.pixelatedw.mineminenomi.init.ModDimensions.register(modEventBus);
-        xyz.pixelatedw.mineminenomi.init.ModParticleTypes.init();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

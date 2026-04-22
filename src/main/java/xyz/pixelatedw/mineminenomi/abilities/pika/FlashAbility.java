@@ -12,8 +12,8 @@ public class FlashAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         // Blinds everyone nearby
-        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(10.0))) {
-            if (living != entity) {
+        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(10.0))) {
+            if (target instanceof LivingEntity living) {
                 living.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.BLINDNESS, 100, 0));
             }
         }

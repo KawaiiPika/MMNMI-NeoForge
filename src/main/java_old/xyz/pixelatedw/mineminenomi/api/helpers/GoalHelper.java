@@ -69,14 +69,7 @@ public class GoalHelper {
 
    public static List<LivingEntity> getNearbyVisibleEntities(LivingEntity entity, double distance, @Nullable Predicate<Entity> predicate) {
       TargetPredicate targetPredicate = (new TargetPredicate()).selector(predicate);
-      List<LivingEntity> areaEntities = TargetHelper.getEntitiesInArea(entity.m_9236_(), entity, entity.m_20183_(), distance, targetPredicate, LivingEntity.class);
-      List<LivingEntity> targets = new java.util.ArrayList<>();
-      for (LivingEntity target : areaEntities) {
-         if (target != entity && VISIBLE_TARGET_IN_RANGE.m_26885_(entity, target)) {
-            targets.add(target);
-         }
-      }
-      return targets;
+      return (List)TargetHelper.getEntitiesInArea(entity.m_9236_(), entity, entity.m_20183_(), distance, targetPredicate, LivingEntity.class).stream().filter((target) -> target != entity && VISIBLE_TARGET_IN_RANGE.m_26885_(entity, target)).collect(Collectors.toList());
    }
 
    public static boolean hasAliveOwner(TamableAnimal entity) {

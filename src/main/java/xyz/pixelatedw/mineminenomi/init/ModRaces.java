@@ -17,27 +17,27 @@ public class ModRaces {
 
     public static final DeferredHolder<Race, Race> HUMAN = ModRegistries.RACES_REGISTRY.register("human", () -> {
         CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(ModResources.HUMAN, HUMAN_ORDER);
-        info.addTopAbilities();
+        info.addTopAbilities(ModAbilities.SORU, ModAbilities.TEKKAI, ModAbilities.GEPPO, ModAbilities.KAMIE, ModAbilities.RANKYAKU);
         return new Race().setBookDetails(info);
     });
     public static final DeferredHolder<Race, Race> FISHMAN_SAWSHARK = ModRegistries.RACES_REGISTRY.register("fishman_sawshark", () -> {
         CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(ModResources.FISHMAN, 1);
-        info.addBottomAbilities();
+        info.addBottomAbilities(ModAbilities.FISHMAN_SWIM_SPEED_PERK, ModAbilities.FISHMAN_DAMAGE_PERK);
         return Race.subRace().setBookDetails(info);
     });
     public static final DeferredHolder<Race, Race> FISHMAN_RAY = ModRegistries.RACES_REGISTRY.register("fishman_ray", () -> {
         CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(ModResources.FISHMAN, 2);
-        info.addBottomAbilities();
+        info.addBottomAbilities(ModAbilities.FISHMAN_SWIM_SPEED_PERK, ModAbilities.FISHMAN_DAMAGE_PERK);
         return Race.subRace().setBookDetails(info);
     });
     public static final DeferredHolder<Race, Race> FISHMAN_GARFISH = ModRegistries.RACES_REGISTRY.register("fishman_garfish", () -> {
         CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(ModResources.FISHMAN, 3);
-        info.addBottomAbilities();
+        info.addBottomAbilities(ModAbilities.FISHMAN_SWIM_SPEED_PERK, ModAbilities.FISHMAN_DAMAGE_PERK);
         return Race.subRace().setBookDetails(info);
     });
     public static final DeferredHolder<Race, Race> FISHMAN = ModRegistries.RACES_REGISTRY.register("fishman", () -> {
         CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(ModResources.FISHMAN, FISHMAN_ORDER);
-        info.addBottomAbilities();
+        info.addBottomAbilities(ModAbilities.FISHMAN_SWIM_SPEED_PERK, ModAbilities.FISHMAN_DAMAGE_PERK);
         List<Supplier<Race>> subRaces = new ArrayList<>();
         subRaces.add(FISHMAN_SAWSHARK);
         subRaces.add(FISHMAN_RAY);
@@ -46,31 +46,31 @@ public class ModRaces {
     });
     public static final DeferredHolder<Race, Race> CYBORG = ModRegistries.RACES_REGISTRY.register("cyborg", () -> {
         CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(ModResources.CYBORG, CYBORG_ORDER);
-        info.addBottomAbilities();
+        info.addBottomAbilities(ModAbilities.CYBORG_ARMOR_PERK);
         return new Race().setBookDetails(info);
     });
     public static final DeferredHolder<Race, Race> MINK_DOG = ModRegistries.RACES_REGISTRY.register("mink_dog", () -> {
         CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(ModResources.MINK1, 1);
-        info.addTopAbilities();
-        info.addBottomAbilities();
+        info.addTopAbilities(ModAbilities.ELECTRO);
+        info.addBottomAbilities(ModAbilities.MINK_SPEED_PERK, ModAbilities.MINK_JUMP_PERK);
         return Race.subRace().setBookDetails(info);
     });
     public static final DeferredHolder<Race, Race> MINK_LION = ModRegistries.RACES_REGISTRY.register("mink_lion", () -> {
         CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(ModResources.MINK2, 2);
-        info.addTopAbilities();
-        info.addBottomAbilities();
+        info.addTopAbilities(ModAbilities.ELECTRO);
+        info.addBottomAbilities(ModAbilities.MINK_SPEED_PERK, ModAbilities.MINK_JUMP_PERK);
         return Race.subRace().setBookDetails(info);
     });
     public static final DeferredHolder<Race, Race> MINK_BUNNY = ModRegistries.RACES_REGISTRY.register("mink_bunny", () -> {
         CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(ModResources.MINK3, 3);
-        info.addTopAbilities();
-        info.addBottomAbilities();
+        info.addTopAbilities(ModAbilities.ELECTRO);
+        info.addBottomAbilities(ModAbilities.MINK_SPEED_PERK, ModAbilities.MINK_JUMP_PERK);
         return Race.subRace().setBookDetails(info);
     });
     public static final DeferredHolder<Race, Race> MINK = ModRegistries.RACES_REGISTRY.register("mink", () -> {
         CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(ModResources.MINK1, MINK_ORDER);
-        info.addTopAbilities();
-        info.addBottomAbilities();
+        info.addTopAbilities(ModAbilities.ELECTRO);
+        info.addBottomAbilities(ModAbilities.MINK_SPEED_PERK, ModAbilities.MINK_JUMP_PERK);
         List<Supplier<Race>> subRaces = new ArrayList<>();
         subRaces.add(MINK_DOG);
         subRaces.add(MINK_LION);
@@ -79,7 +79,7 @@ public class ModRaces {
     });
     public static final DeferredHolder<Race, Race> SKYPIEAN = ModRegistries.RACES_REGISTRY.register("skypiean", () -> {
         CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(ModResources.SKYPIEAN, SKYPIEAN_ORDER);
-        info.addTopAbilities();
+        info.addTopAbilities(ModAbilities.MANTRA);
         return new Race().setBookDetails(info).setRenderFeatures();
     });
 
