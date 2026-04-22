@@ -12,7 +12,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import xyz.pixelatedw.mineminenomi.api.enums.TrainingPointType;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
-import xyz.pixelatedw.mineminenomi.ModMain;
 
 import java.util.Collection;
 
@@ -49,7 +48,7 @@ public class PointsCommand {
             }
             context.getSource().sendSuccess(() -> Component.literal("Altered " + type.name() + " points for " + targets.size() + " players"), true);
         } catch (Exception e) {
-            ModMain.LOGGER.error("An error occurred", e);
+            e.printStackTrace();
         }
         return 1;
     }
@@ -64,7 +63,7 @@ public class PointsCommand {
             }
             context.getSource().sendSuccess(() -> Component.literal("Set " + type.name() + " points to " + amount + " for " + targets.size() + " players"), true);
         } catch (Exception e) {
-            ModMain.LOGGER.error("An error occurred", e);
+            e.printStackTrace();
         }
         return 1;
     }

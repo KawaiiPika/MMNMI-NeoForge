@@ -400,7 +400,7 @@ public class EffectsHandler {
       if (entity.m_21023_((MobEffect)ModEffects.BUBBLY_CORAL.get())) {
          float max = 4500.0F;
          float val = (float)((MobEffectInstance)Objects.requireNonNull(entity.m_21124_((MobEffect)ModEffects.BUBBLY_CORAL.get()))).m_19557_() / max;
-         if (xyz.pixelatedw.mineminenomi.api.WyHelper.random() > (double)val) {
+         if (Math.random() > (double)val) {
             entity.m_21195_((MobEffect)ModEffects.BUBBLY_CORAL.get());
          }
       }

@@ -45,8 +45,7 @@ public class LavaFlowAbility extends Ability {
             for (int x = -2; x <= 2; x++) {
                 for (int z = -2; z <= 2; z++) {
                     BlockPos targetPos = pos.offset(x, 0, z);
-                    net.minecraft.world.level.block.state.BlockState blockState = entity.level().getBlockState(targetPos);
-                    if (blockState.isSolidRender(entity.level(), targetPos) && !blockState.is(Blocks.MAGMA_BLOCK)) {
+                    if (entity.level().getBlockState(targetPos).isSolidRender(entity.level(), targetPos)) {
                         entity.level().setBlockAndUpdate(targetPos, Blocks.MAGMA_BLOCK.defaultBlockState());
                     }
                 }

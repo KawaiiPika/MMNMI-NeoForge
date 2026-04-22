@@ -74,28 +74,10 @@ public class ModNetworking {
                 xyz.pixelatedw.mineminenomi.networking.packets.CCreateCrewPacket::handle
         );
 
-        registrar.playToClient(
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenCharacterCreatorScreenPacket.TYPE,
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenCharacterCreatorScreenPacket.STREAM_CODEC,
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenCharacterCreatorScreenPacket::handle
-        );
-
-        registrar.playToClient(
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenTrainerDialogueScreenPacket.TYPE,
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenTrainerDialogueScreenPacket.STREAM_CODEC,
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenTrainerDialogueScreenPacket::handle
-        );
-
-        registrar.playToClient(
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenEncyclopediaScreenPacket.TYPE,
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenEncyclopediaScreenPacket.STREAM_CODEC,
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenEncyclopediaScreenPacket::handle
-        );
-
-        registrar.playToClient(
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenWantedPosterScreenPacket.TYPE,
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenWantedPosterScreenPacket.STREAM_CODEC,
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenWantedPosterScreenPacket::handle
+        registrar.playToServer(
+                xyz.pixelatedw.mineminenomi.networking.packets.CUnlockAbilityPacket.TYPE,
+                xyz.pixelatedw.mineminenomi.networking.packets.CUnlockAbilityPacket.CODEC,
+                xyz.pixelatedw.mineminenomi.networking.packets.CUnlockAbilityPacket::handle
         );
     }
 
