@@ -9,18 +9,15 @@ import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import java.util.concurrent.CompletableFuture;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.registries.IForgeRegistry;
+import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.entities.charactercreator.Faction;
-import xyz.pixelatedw.mineminenomi.init.ModRegistries;
 
 public class FactionArgument implements ArgumentType<Faction> {
-   @Override
    public Faction parse(StringReader reader) throws CommandSyntaxException {
-      ResourceLocation resourcelocation = ResourceLocation.read(reader);
-      return ModRegistries.FACTIONS_REGISTRY.getEntries().stream()
-              .filter(e -> e.getId().equals(resourcelocation))
-              .map(net.neoforged.neoforge.registries.DeferredHolder::get)
-              .findFirst()
-              .orElse(null);
+      ResourceLocation resourcelocation = ResourceLocation.m_135818_(reader);
+      Faction faction = (Faction)((IForgeRegistry)WyRegistry.FACTIONS.get()).getValue(resourcelocation);
+      return faction;
    }
 
    public static FactionArgument faction() {
@@ -28,10 +25,9 @@ public class FactionArgument implements ArgumentType<Faction> {
    }
 
    public static <S> Faction getFaction(CommandContext<S> context, String name) {
-      return context.getArgument(name, Faction.class);
+      return (Faction)context.getArgument(name, Faction.class);
    }
 
-   @Override
    public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
       StringReader stringreader = new StringReader(builder.getInput());
       stringreader.setCursor(builder.getStart());
@@ -39,6 +35,6 @@ public class FactionArgument implements ArgumentType<Faction> {
    }
 
    private CompletableFuture<Suggestions> suggestAbility(SuggestionsBuilder builder) {
-      return SharedSuggestionProvider.suggestResource(ModRegistries.FACTIONS_REGISTRY.getEntries().stream().map(e -> e.getId()), builder);
+      return SharedSuggestionProvider.m_82926_(((IForgeRegistry)WyRegistry.FACTIONS.get()).getKeys(), builder);
    }
 }

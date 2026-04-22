@@ -4,8 +4,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.AABB;
-import java.util.List;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 
 public class IceBlockPheasantAbility extends Ability {
@@ -20,18 +18,14 @@ public class IceBlockPheasantAbility extends Ability {
             Vec3 look = entity.getLookAngle();
             Vec3 startPos = entity.getEyePosition();
             
-            AABB totalAABB = new AABB(startPos, startPos.add(look.scale(20.0))).inflate(4.0);
-            List<LivingEntity> targets = entity.level().getEntitiesOfClass(LivingEntity.class, totalAABB, (t) -> t != entity && t.isAlive());
-
-            for (LivingEntity livingTarget : targets) {
-                for (double i = 0; i < 20.0; i += 1.0) {
-                    Vec3 waveCenter = startPos.add(look.scale(i));
-                    if (livingTarget.distanceToSqr(waveCenter) < 12.0) {
+            for (double i = 0; i < 20.0; i += 1.0) {
+                Vec3 waveCenter = startPos.add(look.scale(i));
+                for (net.minecraft.world.entity.Entity target : entity.level().getEntities(entity, new net.minecraft.world.phys.AABB(waveCenter.x - 2, waveCenter.y - 2, waveCenter.z - 2, waveCenter.x + 2, waveCenter.y + 2, waveCenter.z + 2))) {
+                    if (target instanceof LivingEntity livingTarget) {
                         livingTarget.hurt(entity.damageSources().indirectMagic(entity, entity), 18.0F);
                         livingTarget.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 120, 3));
                         livingTarget.setDeltaMovement(look.scale(1.5).add(0, 0.2, 0));
                         livingTarget.hurtMarked = true;
-                        break;
                     }
                 }
             }

@@ -86,11 +86,6 @@ public abstract class Ability {
     }
 
     public xyz.pixelatedw.mineminenomi.api.util.Result canUse(LivingEntity entity) {
-        if (entity.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI)) {
-            if (this.requiredFruit != null) {
-                return xyz.pixelatedw.mineminenomi.api.util.Result.fail(Component.translatable("ability.error.handcuffed"));
-            }
-        }
         xyz.pixelatedw.mineminenomi.data.entity.PlayerStats stats = xyz.pixelatedw.mineminenomi.data.entity.PlayerStats.get(entity);
         if (stats != null) {
             if (this.requiredFruit != null) {
