@@ -25,6 +25,6 @@ public class SimpleMessageScreenDTO {
     }
 
     public void sendEvent(ServerPlayer player) {
-        player.displayClientMessage(this.message != null ? this.message : Component.empty(), false);
+        xyz.pixelatedw.mineminenomi.networking.ModNetworking.sendTo(new xyz.pixelatedw.mineminenomi.networking.packets.SSimpleMessageScreenEventPacket(this), player);
     }
 }

@@ -10,17 +10,11 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
 import java.util.function.Predicate;
-import net.minecraft.tags.TagKey;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 
 public class ModGunItem extends ProjectileWeaponItem {
 
-    public static final TagKey<Item> GUN_AMMO_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("mineminenomi", "gun_ammo"));
-    public static final TagKey<Item> BAZOOKA_AMMO_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("mineminenomi", "bazooka_ammo"));
-
-    public static final Predicate<ItemStack> GUN_AMMO = (stack) -> stack.is(GUN_AMMO_TAG);
-    public static final Predicate<ItemStack> BAZOOKA_AMMO = (stack) -> stack.is(BAZOOKA_AMMO_TAG);
+    public static final Predicate<ItemStack> GUN_AMMO = (stack) -> false; // TODO: Implement ammo check
+    public static final Predicate<ItemStack> BAZOOKA_AMMO = (stack) -> false;
 
     private int maxGunpowder = 3;
     private float bulletSpeed = 2.0F;

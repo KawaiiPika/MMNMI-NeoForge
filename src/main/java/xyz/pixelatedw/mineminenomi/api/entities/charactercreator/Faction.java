@@ -10,7 +10,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import org.jetbrains.annotations.Nullable;
 import xyz.pixelatedw.mineminenomi.api.factions.IFactionRank;
-import xyz.pixelatedw.mineminenomi.init.ModRegistries;
 
 public class Faction implements ICharacterCreatorEntry {
     private ResourceLocation key;
@@ -25,11 +24,10 @@ public class Faction implements ICharacterCreatorEntry {
 
     public Faction() {}
 
-    @Override
     public Component getLabel() {
         if (this.label == null) {
-            if (this.key == null && ModRegistries.FACTIONS != null) {
-                this.key = ModRegistries.FACTIONS.getKey(this);
+            if (this.key == null && xyz.pixelatedw.mineminenomi.init.ModRegistries.FACTIONS != null) {
+                this.key = xyz.pixelatedw.mineminenomi.init.ModRegistries.FACTIONS.getKey(this);
             }
             if (this.key != null) {
                 this.label = Component.translatable("faction.mineminenomi." + this.key.getPath());
@@ -90,17 +88,14 @@ public class Faction implements ICharacterCreatorEntry {
         }
     }
 
-    @Override
     public CharacterCreatorSelectionInfo getSelectionInfo() {
         return this.bookInfo;
     }
 
-    @Override
     public boolean isInBook() {
         return this.inBook;
     }
 
-    @Override
     public int getBookOrder() {
         return this.bookInfo == null ? -1 : this.bookInfo.getOrder();
     }
@@ -120,9 +115,6 @@ public class Faction implements ICharacterCreatorEntry {
 
     @Override
     public ResourceLocation getRegistryName() {
-        if (this.key == null && ModRegistries.FACTIONS != null) {
-            this.key = ModRegistries.FACTIONS.getKey(this);
-        }
         return this.key;
     }
 

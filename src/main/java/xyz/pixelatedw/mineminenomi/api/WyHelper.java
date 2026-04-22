@@ -25,6 +25,10 @@ public class WyHelper {
         return Character.toUpperCase(text.charAt(0)) + text.substring(1).toLowerCase();
     }
 
+    public static String getResourceName(String text) {
+        return text.replaceAll("[ \\t]+$", "").replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("\\s+", "_").replaceAll("[\\'\\:\\-\\,\\#]", "").replaceAll("\\&", "and").toLowerCase();
+    }
+
     public static double randomDouble() {
         return SECURE_RANDOM.nextDouble() * 2.0D - 1.0D;
     }

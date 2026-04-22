@@ -13,9 +13,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.world.level.saveddata.SavedData;
+import net.minecraftforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.Nullable;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
@@ -28,28 +26,27 @@ public class FactionsWorldData extends SavedData {
    private HashMap<String, Crew> pirateCrews = new HashMap();
    private HashMap<UUID, Long> issuedBounties = new HashMap();
 
-   private static final SavedData.Factory<FactionsWorldData> FACTORY = new SavedData.Factory<>(FactionsWorldData::new, FactionsWorldData::load, null);
-
    public static FactionsWorldData get() {
       MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
       if (server == null) {
          return null;
       } else {
-         ServerLevel serverWorld = server.overworld();
-         return serverWorld.getDataStorage().computeIfAbsent(FACTORY, IDENTIFIER);
+         ServerLevel serverWorld = server.m_129783_();
+         FactionsWorldData worldData = (FactionsWorldData)serverWorld.m_8895_().m_164861_(FactionsWorldData::load, FactionsWorldData::new, "mineminenomi-factions");
+         return worldData;
       }
    }
 
-   public static FactionsWorldData load(CompoundTag nbt, HolderLookup.Provider provider) {
+   public static FactionsWorldData load(CompoundTag nbt) {
       FactionsWorldData data = new FactionsWorldData();
-      CompoundTag bounties = nbt.getCompound("issuedBounties");
+      CompoundTag bounties = nbt.m_128469_("issuedBounties");
       data.issuedBounties.clear();
-      bounties.getAllKeys().forEach((x) -> data.issuedBounties.put(UUID.fromString(x), bounties.getLong(x)));
-      ListTag crews = nbt.getList("crews", 10);
+      bounties.m_128431_().stream().forEach((x) -> data.issuedBounties.put(UUID.fromString(x), bounties.m_128454_(x)));
+      ListTag crews = nbt.m_128437_("crews", 10);
       data.pirateCrews.clear();
 
       for(int i = 0; i < crews.size(); ++i) {
-         CompoundTag crewNBT = crews.getCompound(i);
+         CompoundTag crewNBT = crews.m_128728_(i);
          Crew crew = Crew.from(crewNBT);
          data.pirateCrews.put(WyHelper.getResourceName(crew.getName()), crew);
       }
@@ -57,26 +54,25 @@ public class FactionsWorldData extends SavedData {
       return data;
    }
 
-   @Override
-   public CompoundTag save(CompoundTag nbt, HolderLookup.Provider provider) {
+   public CompoundTag m_7176_(CompoundTag nbt) {
       CompoundTag bounties = new CompoundTag();
       if (this.issuedBounties.size() > 0) {
-         this.issuedBounties.forEach((key, value) -> bounties.putLong(key.toString(), value));
+         this.issuedBounties.entrySet().stream().forEach((x) -> bounties.m_128356_(((UUID)x.getKey()).toString(), (Long)x.getValue()));
       }
 
-      nbt.put("issuedBounties", bounties);
+      nbt.m_128365_("issuedBounties", bounties);
       ListTag crews = new ListTag();
 
       for(Crew crew : this.pirateCrews.values()) {
          crews.add(crew.write());
       }
 
-      nbt.put("crews", crews);
+      nbt.m_128365_("crews", crews);
       return nbt;
    }
 
    public void tick(Level level) {
-      level.getProfiler().push("crews");
+      level.m_46473_().m_6180_("crews");
       this.getCrews().forEach((crew) -> {
          crew.tick();
          if (crew.isEmpty()) {
@@ -84,7 +80,7 @@ public class FactionsWorldData extends SavedData {
          }
 
       });
-      level.getProfiler().pop();
+      level.m_46473_().m_7238_();
    }
 
    public List<Crew> getCrews() {
@@ -114,7 +110,7 @@ public class FactionsWorldData extends SavedData {
    }
 
    public @Nullable Crew getCrewWithCaptain(UUID capId) {
-      return this.pirateCrews.values().stream().filter((crew) -> crew.getCaptain() != null && crew.getCaptain().getUUID().equals(capId)).findFirst().orElse(null);
+      return (Crew)this.pirateCrews.values().stream().filter((crew) -> crew.getCaptain() != null && crew.getCaptain().getUUID().equals(capId)).findFirst().orElse((Object)null);
    }
 
    public void removeCrew(Crew crew) {
@@ -123,7 +119,7 @@ public class FactionsWorldData extends SavedData {
          this.pirateCrews.remove(key);
       }
 
-      this.setDirty();
+      this.m_77762_();
    }
 
    public void addCrew(Crew crew) {
@@ -132,12 +128,12 @@ public class FactionsWorldData extends SavedData {
          this.pirateCrews.put(key, crew);
       }
 
-      this.setDirty();
+      this.m_77762_();
    }
 
    public void removeCrewMember(Level level, Crew crew, UUID uuid) {
       crew.removeMember(level, uuid);
-      this.setDirty();
+      this.m_77762_();
    }
 
    public void addCrewMember(Crew crew, LivingEntity entity) {
@@ -157,12 +153,12 @@ public class FactionsWorldData extends SavedData {
       }
 
       crew.addMember(entity, saveMember);
-      this.setDirty();
+      this.m_77762_();
    }
 
    public void updateCrewJollyRoger(ServerPlayer player, Crew crew, JollyRoger jollyRoger) {
       if (jollyRoger.getBase() != null && !jollyRoger.getBase().canUse(player, crew)) {
-         jollyRoger.setBase(ModJollyRogers.BASE_SKULL.get());
+         jollyRoger.setBase((JollyRogerElement)ModJollyRogers.BASE_SKULL.get());
       }
 
       for(int i = 0; i < jollyRoger.getBackgrounds().length; ++i) {
@@ -180,7 +176,7 @@ public class FactionsWorldData extends SavedData {
       }
 
       crew.setJollyRoger(jollyRoger);
-      this.setDirty();
+      this.m_77762_();
    }
 
    public HashMap<UUID, Long> getAllBounties() {
@@ -204,7 +200,7 @@ public class FactionsWorldData extends SavedData {
    }
 
    public boolean hasIssuedBounty(LivingEntity entity) {
-      return this.issuedBounties.containsKey(entity.getUUID());
+      return this.issuedBounties.containsKey(entity.m_20148_());
    }
 
    public void removeBounty(UUID uuid) {
@@ -222,6 +218,6 @@ public class FactionsWorldData extends SavedData {
          this.issuedBounties.put(uuid, bounty);
       }
 
-      this.setDirty();
+      this.m_77762_();
    }
 }
