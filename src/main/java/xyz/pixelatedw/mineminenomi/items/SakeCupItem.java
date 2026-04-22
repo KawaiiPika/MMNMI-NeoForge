@@ -11,14 +11,16 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
+import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.init.ModDataComponents;
+import xyz.pixelatedw.mineminenomi.init.ModFoods;
+import xyz.pixelatedw.mineminenomi.init.ModItems;
 
 import java.util.UUID;
 
 public class SakeCupItem extends Item {
     public SakeCupItem() {
-        // TODO: Port ModFoods.ALCOHOL
-        super(new Item.Properties().stacksTo(1));
+        super(new Item.Properties().stacksTo(1).food(ModFoods.ALCOHOL));
     }
 
     @Override
@@ -28,10 +30,15 @@ public class SakeCupItem extends Item {
             player.startUsingItem(hand);
             return InteractionResultHolder.consume(itemstack);
         } else {
-            // Find Sake Bottle
-            // Since we haven't ported SakeBottleItem yet, we'll just check by registry name or class later.
-            // For now we'll pass until SakeBottle is ported
-            // TODO: Implement filling logic
+            int slot = WyHelper.getIndexOfItemStack(ModItems.SAKE_BOTTLE.get(), player.getInventory());
+            if (slot >= 0) {
+                ItemStack bottleStack = player.getInventory().getItem(slot);
+                if (!player.getAbilities().instabuild) {
+                    bottleStack.shrink(1);
+                }
+                this.setLeader(itemstack, player);
+                return InteractionResultHolder.consume(itemstack);
+            }
         }
 
         return InteractionResultHolder.pass(itemstack);
@@ -44,13 +51,19 @@ public class SakeCupItem extends Item {
             if (leader != null) {
                 // TODO: Phase 3 - Faction & Crew logic
             }
-            
+
             // Give back a Sake Cup
             // player.getInventory().add(new ItemStack(ModItems.SAKE_CUP.get()));
             itemStack.shrink(1);
         }
 
-        return itemStack;
+        ItemStack result = super.finishUsingItem(itemStack, world, entity);
+
+        if (entity instanceof Player player && player.getAbilities().instabuild) {
+            return result;
+        }
+
+        return new ItemStack(ModItems.SAKE_CUP.get());
     }
 
     public void setLeader(ItemStack itemStack, Player leader) {

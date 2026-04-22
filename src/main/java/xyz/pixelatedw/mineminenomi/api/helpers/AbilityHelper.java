@@ -2,6 +2,8 @@ package xyz.pixelatedw.mineminenomi.api.helpers;
 
 import net.minecraft.world.entity.LivingEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityCore;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.entity.Entity;
 
 public class AbilityHelper {
     public static boolean verifyIfAbilityIsBanned(AbilityCore<?> core) {
@@ -40,5 +42,16 @@ public class AbilityHelper {
 
     public static void checkAndUnlockAbility(LivingEntity entity, AbilityCore<?> core) {
         // Stub
+    }
+
+    public static double getDifferenceToFloor(Entity entity) {
+        return entity.position().y - getFloorLevel(entity).y;
+    }
+
+    public static Vec3 getFloorLevel(Entity entity) {
+        Vec3 startVec = entity.position();
+        Vec3 endVec = startVec.add(0.0, -256.0, 0.0);
+        net.minecraft.world.phys.BlockHitResult blockResult = entity.level().clip(new net.minecraft.world.level.ClipContext(startVec, endVec, net.minecraft.world.level.ClipContext.Block.OUTLINE, net.minecraft.world.level.ClipContext.Fluid.ANY, entity));
+        return blockResult.getLocation();
     }
 }

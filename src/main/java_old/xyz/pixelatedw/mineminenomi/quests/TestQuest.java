@@ -12,6 +12,7 @@ import xyz.pixelatedw.mineminenomi.api.quests.QuestId;
 import xyz.pixelatedw.mineminenomi.api.quests.objectives.Objective;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
 import xyz.pixelatedw.mineminenomi.init.ModRegistry;
+import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.quests.objectives.CollectItemObjective;
 import xyz.pixelatedw.mineminenomi.quests.objectives.EquippedItemObjective;
 import xyz.pixelatedw.mineminenomi.quests.objectives.KillEntityObjective;
@@ -50,7 +51,7 @@ public class TestQuest extends Quest {
    }
 
    public void giveReward(Player player) {
-      System.out.println("quest ended");
+      ModMain.LOGGER.info("quest ended");
    }
 
    static {

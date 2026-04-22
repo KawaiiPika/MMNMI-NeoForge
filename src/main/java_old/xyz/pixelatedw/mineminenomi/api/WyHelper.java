@@ -87,8 +87,11 @@ import xyz.pixelatedw.mineminenomi.init.ModRegistry;
 import xyz.pixelatedw.mineminenomi.init.i18n.ModI18n;
 import xyz.pixelatedw.mineminenomi.packets.server.SSpawnParticleEffectPacket;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import org.slf4j.Logger;
+import com.mojang.logging.LogUtils;
 
 public class WyHelper {
+   private static final Logger LOGGER = LogUtils.getLogger();
    private static final Random RANDOM = new Random();
    private static final Collector<?, ?, ?> SHUFFLER = Collectors.collectingAndThen(Collectors.toCollection(ArrayList::new), (list) -> {
       Collections.shuffle(list);
@@ -843,7 +846,7 @@ public class WyHelper {
 
             writer.close();
          } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Exception occurred", e);
          }
       }
 
@@ -998,7 +1001,7 @@ public class WyHelper {
          field.setAccessible(true);
          return (T)field.get(instance);
       } catch (Exception e) {
-         e.printStackTrace();
+         LOGGER.error("Exception occurred", e);
          return null;
       }
    }

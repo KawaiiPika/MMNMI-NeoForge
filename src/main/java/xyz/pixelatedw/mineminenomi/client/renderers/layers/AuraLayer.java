@@ -65,7 +65,7 @@ public class AuraLayer<T extends LivingEntity, M extends EntityModel<T>> extends
                     float blue = (float)(rgb & 255) / 255.0F;
 
                     VertexConsumer vertex = buffer.getBuffer(RenderType.entityTranslucent(this.getTextureLocation(entity)));
-                    
+
                     matrixStack.scale(1.02f, 1.02f, 1.02f);
                     int color = ((int)(0.4f * 255) << 24) | ((int)(red * 255) << 16) | ((int)(green * 255) << 8) | (int)(blue * 255);
                     this.getParentModel().renderToBuffer(matrixStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, color);

@@ -30,7 +30,4 @@ public class ChiyuHormoneEffect extends MobEffect {
     @Override
     public void onEffectStarted(LivingEntity entity, int amplifier) {
     }
-
-    // In 1.21.1 we don't have stopEffect directly in MobEffect usually, but we can use AttributeModifier or a custom system.
-    // However, I'll just skip the hunger penalty for now or handle it elsewhere.
 }

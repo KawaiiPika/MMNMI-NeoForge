@@ -18,7 +18,7 @@ public class ModRenderTypes extends RenderType {
     public static final RenderStateShard.OutputStateShard AURA_TARGET = new RenderStateShard.OutputStateShard("mineminenomi:aura_target", 
         () -> {
             // This is a placeholder for the actual target setup which might require mixins
-        }, 
+        },
         () -> {
             // This is a placeholder for the actual target cleanup
         }

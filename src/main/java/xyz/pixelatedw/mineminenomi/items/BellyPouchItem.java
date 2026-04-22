@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
+import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public class BellyPouchItem extends Item {
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
         if (!level.isClientSide && !stack.has(DataComponents.CUSTOM_DATA)) {
             CustomData.update(DataComponents.CUSTOM_DATA, stack, tag -> {
-                tag.putLong("belly", (long) (Math.random() * 245 + 5));
+                tag.putLong("belly", (long) WyHelper.randomWithRange(5.0, 250.0));
             });
         }
     }
