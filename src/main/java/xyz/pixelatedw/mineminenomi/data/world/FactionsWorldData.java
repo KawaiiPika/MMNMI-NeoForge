@@ -3,7 +3,6 @@ package xyz.pixelatedw.mineminenomi.data.world;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -196,7 +195,7 @@ public class FactionsWorldData extends SavedData {
          return null;
       } else {
          Object[] keys = this.getAllBounties().keySet().toArray();
-         Object key = keys[(new Random()).nextInt(count)];
+         Object key = keys[(int) WyHelper.randomWithRange(0, count - 1)];
          long bounty = this.getAllBounties().get(key);
          return new Object[]{key, bounty};
       }
