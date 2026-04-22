@@ -82,7 +82,7 @@ public abstract class LivingEntityMixin implements IForgeEntity, ILivingEntityEx
       LivingEntity entity = (LivingEntity)this;
       Stream var10000 = entity.m_21220_().stream().map(MobEffectInstance::m_19544_);
       Objects.requireNonNull(IBindBodyEffect.class);
-      boolean hasBindMovement = var10000.filter(IBindBodyEffect.class::isInstance).filter((eff) -> ((IBindBodyEffect)eff).isBlockingRotation()).count() > 0L;
+      boolean hasBindMovement = var10000.filter(IBindBodyEffect.class::isInstance).anyMatch((eff) -> ((IBindBodyEffect)eff).isBlockingRotation());
       if (hasBindMovement) {
          cir.setReturnValue(true);
       }
@@ -98,7 +98,7 @@ public abstract class LivingEntityMixin implements IForgeEntity, ILivingEntityEx
       if (entity instanceof Mob mob) {
          Stream var10000 = mob.m_21220_().stream().map(MobEffectInstance::m_19544_);
          Objects.requireNonNull(IBindHandsEffect.class);
-         boolean hasArmsBindEffect = var10000.filter(IBindHandsEffect.class::isInstance).filter((eff) -> eff != ModEffects.NO_HANDS.get()).filter((eff) -> ((IBindHandsEffect)eff).isBlockingSwings()).count() > 0L;
+         boolean hasArmsBindEffect = var10000.filter(IBindHandsEffect.class::isInstance).filter((eff) -> eff != ModEffects.NO_HANDS.get()).anyMatch((eff) -> ((IBindHandsEffect)eff).isBlockingSwings());
          if (hasArmsBindEffect) {
             mob.m_21566_().m_6849_(mob.m_20185_(), mob.m_20186_(), mob.m_20189_(), (double)0.0F);
             mob.f_20902_ = 0.0F;
