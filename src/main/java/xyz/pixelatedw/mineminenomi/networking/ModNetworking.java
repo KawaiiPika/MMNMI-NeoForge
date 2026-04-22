@@ -73,6 +73,12 @@ public class ModNetworking {
                 xyz.pixelatedw.mineminenomi.networking.packets.CCreateCrewPacket.STREAM_CODEC,
                 xyz.pixelatedw.mineminenomi.networking.packets.CCreateCrewPacket::handle
         );
+
+        registrar.playToServer(
+                xyz.pixelatedw.mineminenomi.networking.packets.CUnlockAbilityPacket.TYPE,
+                xyz.pixelatedw.mineminenomi.networking.packets.CUnlockAbilityPacket.CODEC,
+                xyz.pixelatedw.mineminenomi.networking.packets.CUnlockAbilityPacket::handle
+        );
     }
 
     public static void sendTo(CustomPacketPayload payload, net.minecraft.server.level.ServerPlayer player) {
