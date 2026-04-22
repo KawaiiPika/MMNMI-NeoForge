@@ -31,28 +31,21 @@ public class ScissorsItem extends ModSwordItem {
     public ScissorsItem() {
         super(ModTiers.SCISSORS, 5, -2.8F);
     }
-    
+
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (attacker instanceof Player attackerPlayer) {
             PlayerStats attackerStats = attackerPlayer.getData(ModDataAttachments.PLAYER_STATS);
             boolean hasPassive = attackerStats.getActiveAbilities().contains(ModAbilities.REGISTRY.getKey(ModAbilities.KAGE_GIRI.get()).toString());
 
-            if (hasPassive) {
-                if (target instanceof Player targetPlayer) {
-                    PlayerStats targetStats = targetPlayer.getData(ModDataAttachments.PLAYER_STATS);
-                    if (targetStats.hasShadow()) {
-                        targetStats.setHasShadow(false);
-                        if (targetPlayer instanceof ServerPlayer serverPlayer) {
-                            ModNetworking.sendTo(new SUpdatePlayerStatsPacket(targetStats), serverPlayer);
-                        }
-                        attackerPlayer.getInventory().placeItemBackInInventory(new ItemStack(ModItems.SHADOW.get()));
+            if (hasPassive && target instanceof Player targetPlayer) {
+                PlayerStats targetStats = targetPlayer.getData(ModDataAttachments.PLAYER_STATS);
+                if (targetStats.hasShadow()) {
+                    targetStats.setHasShadow(false);
+                    if (targetPlayer instanceof ServerPlayer serverPlayer) {
+                        ModNetworking.sendTo(new SUpdatePlayerStatsPacket(targetStats), serverPlayer);
                     }
-                } else {
-                    if (!target.getPersistentData().getBoolean("mineminenomi.ShadowStolen")) {
-                        target.getPersistentData().putBoolean("mineminenomi.ShadowStolen", true);
-                        attackerPlayer.getInventory().placeItemBackInInventory(new ItemStack(ModItems.SHADOW.get()));
-                    }
+                    attackerPlayer.getInventory().placeItemBackInInventory(new ItemStack(ModItems.SHADOW.get()));
                 }
             }
         }
