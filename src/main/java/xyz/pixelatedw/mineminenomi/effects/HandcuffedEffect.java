@@ -8,6 +8,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import xyz.pixelatedw.mineminenomi.api.effects.IBindHandsEffect;
 import xyz.pixelatedw.mineminenomi.api.enums.HandcuffType;
+import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
+import xyz.pixelatedw.mineminenomi.init.ModAbilities;
 
 public class HandcuffedEffect extends MobEffect implements IBindHandsEffect {
     private final HandcuffType type;
@@ -26,7 +29,17 @@ public class HandcuffedEffect extends MobEffect implements IBindHandsEffect {
     @Override
     public boolean applyEffectTick(LivingEntity entity, int amplifier) {
         if (this.type == HandcuffType.KAIROSEKI) {
-            // TODO: Disable Devil Fruit abilities
+            PlayerStats stats = PlayerStats.get(entity);
+            if (stats != null && stats.getDevilFruit().isPresent()) {
+                ResourceLocation devilFruit = stats.getDevilFruit().get();
+                for (String abilityIdStr : new java.util.ArrayList<>(stats.getActiveAbilities())) {
+                    ResourceLocation abilityId = ResourceLocation.parse(abilityIdStr);
+                    Ability ability = ModAbilities.REGISTRY.get(abilityId);
+                    if (ability != null && !ability.isPassive() && devilFruit.equals(ability.getRequiredFruit())) {
+                        ability.stop(entity);
+                    }
+                }
+            }
         }
         return true;
     }

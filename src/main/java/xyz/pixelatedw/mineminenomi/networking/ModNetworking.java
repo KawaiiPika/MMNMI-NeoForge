@@ -126,6 +126,10 @@ public class ModNetworking {
                 xyz.pixelatedw.mineminenomi.networking.packets.SSimpleMessageScreenEventPacket.TYPE,
                 xyz.pixelatedw.mineminenomi.networking.packets.SSimpleMessageScreenEventPacket.STREAM_CODEC,
                 xyz.pixelatedw.mineminenomi.networking.packets.SSimpleMessageScreenEventPacket::handle
+        registrar.playToServer(
+                xyz.pixelatedw.mineminenomi.networking.packets.CUnlockAbilityPacket.TYPE,
+                xyz.pixelatedw.mineminenomi.networking.packets.CUnlockAbilityPacket.CODEC,
+                xyz.pixelatedw.mineminenomi.networking.packets.CUnlockAbilityPacket::handle
         );
     }
 
