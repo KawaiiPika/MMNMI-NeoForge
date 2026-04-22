@@ -18,7 +18,9 @@ import xyz.pixelatedw.mineminenomi.init.ModItems;
 
 import java.util.UUID;
 
-public class StrawDollItem extends Item {
+import xyz.pixelatedw.mineminenomi.api.items.IMultiChannelColorItem;
+
+public class StrawDollItem extends Item implements IMultiChannelColorItem {
 
     public StrawDollItem() {
         super(new Item.Properties().stacksTo(1));
@@ -82,7 +84,23 @@ public class StrawDollItem extends Item {
     public static ItemStack createDollStack(LivingEntity target) {
         ItemStack stack = new ItemStack(ModItems.STRAW_DOLL.get());
         SoulboundItemHelper.setOwner(stack, target);
+        // Phase 3 - Custom color component assignment
         stack.set(DataComponents.CUSTOM_NAME, Component.translatable("item.mineminenomi.straw_doll.named", target.getDisplayName()));
         return stack;
+    }
+
+    @Override
+    public int getDefaultLayerColor(int layer) {
+        return -1;
+    }
+
+    @Override
+    public boolean canBeDyed() {
+        return true;
+    }
+
+    @Override
+    public int getMaxLayers() {
+        return 1;
     }
 }

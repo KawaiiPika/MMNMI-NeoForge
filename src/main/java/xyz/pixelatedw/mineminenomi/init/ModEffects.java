@@ -7,6 +7,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.effects.*;
+import xyz.pixelatedw.mineminenomi.effects.BubblyCoralEffect;
 
 import java.util.function.Supplier;
 
@@ -42,6 +43,8 @@ public class ModEffects {
     public static final net.neoforged.neoforge.registries.DeferredHolder<MobEffect, MobEffect> HANDCUFFED = EFFECTS.register("handcuffed", () -> new HandcuffedEffect(xyz.pixelatedw.mineminenomi.api.enums.HandcuffType.NORMAL));
     public static final net.neoforged.neoforge.registries.DeferredHolder<MobEffect, MobEffect> HANDCUFFED_KAIROSEKI = EFFECTS.register("handcuffed_kairoseki", () -> new HandcuffedEffect(xyz.pixelatedw.mineminenomi.api.enums.HandcuffType.KAIROSEKI));
     public static final net.neoforged.neoforge.registries.DeferredHolder<MobEffect, MobEffect> HANDCUFFED_EXPLOSIVE = EFFECTS.register("handcuffed_explosive", () -> new HandcuffedEffect(xyz.pixelatedw.mineminenomi.api.enums.HandcuffType.EXPLOSIVE));
+    public static final net.neoforged.neoforge.registries.DeferredHolder<MobEffect, MobEffect> WASHED = EFFECTS.register("washed", WashedEffect::new);
+    public static final net.neoforged.neoforge.registries.DeferredHolder<MobEffect, MobEffect> BUBBLY_CORAL = EFFECTS.register("bubbly_coral", BubblyCoralEffect::new);
 
     public static void register(IEventBus bus) {
         EFFECTS.register(bus);

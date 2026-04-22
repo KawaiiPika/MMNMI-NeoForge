@@ -51,6 +51,10 @@ public class SakeCupItem extends Item {
             if (leader != null) {
                 // TODO: Phase 3 - Faction & Crew logic
             }
+
+            // Give back a Sake Cup
+            // player.getInventory().add(new ItemStack(ModItems.SAKE_CUP.get()));
+            itemStack.shrink(1);
         }
 
         ItemStack result = super.finishUsingItem(itemStack, world, entity);

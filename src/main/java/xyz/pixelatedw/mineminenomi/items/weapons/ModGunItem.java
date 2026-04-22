@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 import java.util.function.Predicate;
 
 public class ModGunItem extends ProjectileWeaponItem {
-    
+
     public static final Predicate<ItemStack> GUN_AMMO = (stack) -> false; // TODO: Implement ammo check
     public static final Predicate<ItemStack> BAZOOKA_AMMO = (stack) -> false;
 

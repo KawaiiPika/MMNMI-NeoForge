@@ -39,6 +39,7 @@ public class ModRegistry {
 
     public static final DeferredRegister<net.neoforged.neoforge.attachment.AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(net.neoforged.neoforge.registries.NeoForgeRegistries.ATTACHMENT_TYPES, "mineminenomi");
     public static final DeferredRegister<net.minecraft.core.particles.ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, "mineminenomi");
+    public static final DeferredRegister<net.minecraft.world.level.storage.loot.functions.LootItemFunctionType<?>> LOOT_FUNCTION_TYPES = DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, "mineminenomi");
 
     // Other custom registries will be ported in later steps
 
@@ -47,6 +48,7 @@ public class ModRegistry {
     }
 
     public static void init(IEventBus eventBus) {
+        ModLootFunctions.init();
         ITEMS.register(eventBus);
         BLOCKS.register(eventBus);
         CONTAINER_TYPES.register(eventBus);
@@ -59,5 +61,6 @@ public class ModRegistry {
         ARMOR_MATERIALS.register(eventBus);
         ATTACHMENT_TYPES.register(eventBus);
         PARTICLE_TYPES.register(eventBus);
+        LOOT_FUNCTION_TYPES.register(eventBus);
     }
 }

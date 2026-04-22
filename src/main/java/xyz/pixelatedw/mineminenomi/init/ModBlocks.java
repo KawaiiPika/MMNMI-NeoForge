@@ -9,7 +9,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import java.util.function.Supplier;
 
 public class ModBlocks {
-    
+
     public static final DeferredHolder<Block, Block> OPE = registerSimpleBlockItem("ope", xyz.pixelatedw.mineminenomi.blocks.OpeBlock::new);
     public static final DeferredHolder<Block, Block> SUNA_SAND = registerSimpleBlockItem("suna_sand", () -> new Block(BlockBehaviour.Properties.of()));
     public static final DeferredHolder<Block, Block> WAX = registerSimpleBlockItem("wax_block", () -> new Block(BlockBehaviour.Properties.of()));

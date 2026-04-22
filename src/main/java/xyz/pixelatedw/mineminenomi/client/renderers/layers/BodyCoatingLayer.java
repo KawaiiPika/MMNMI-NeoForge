@@ -26,8 +26,8 @@ public class BodyCoatingLayer<T extends LivingEntity, M extends HumanoidModel<T>
         // Busoshoku Haki
         if (stats.isAbilityActive("mineminenomi:busoshoku_haki_full_body_hardening")) {
             renderCoating(poseStack, buffer, packedLight, ModResources.BUSOSHOKU_HAKI_ARM, true);
-        } else if (stats.isAbilityActive("mineminenomi:busoshoku_haki_hardening") || 
-                   stats.isAbilityActive("mineminenomi:busoshoku_haki_internal_destruction") || 
+        } else if (stats.isAbilityActive("mineminenomi:busoshoku_haki_hardening") ||
+                   stats.isAbilityActive("mineminenomi:busoshoku_haki_internal_destruction") ||
                    stats.isAbilityActive("mineminenomi:busoshoku_haki_emission")) {
             renderCoating(poseStack, buffer, packedLight, ModResources.BUSOSHOKU_HAKI_ARM, false);
         }

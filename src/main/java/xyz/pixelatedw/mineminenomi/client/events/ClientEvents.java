@@ -64,6 +64,28 @@ public class ClientEvents {
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.DESERT_SPADA.get(),
             ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.5F, true));
 
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.STRONG_RIGHT.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.RADICAL_BEAM.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.FRESH_FIRE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.COUP_DE_VENT.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.ELECTRICAL_LUNA.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.ELECTRICAL_SHOWER.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.ELECTRO_VISUAL.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.STRONG_RIGHT.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.RADICAL_BEAM.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.FRESH_FIRE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.COUP_DE_VENT.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.ELECTRICAL_LUNA.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.ELECTRICAL_SHOWER.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.ELECTRO_VISUAL.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.UCHIMIZU.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.YARINAMI.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.MIZU_TAIHO.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.MIZU_SHURYUDAN.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.PACK_OF_SHARKS.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.SPHERE.get(),
             xyz.pixelatedw.mineminenomi.client.renderers.entities.SphereRenderer::new);
     }

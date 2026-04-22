@@ -20,4 +20,8 @@ public class AbilityUseConditions {
             return Result.fail(Component.literal("You need a sword to use this ability!"));
         }
     }
+
+    public static Result requiresInAir(LivingEntity entity) {
+        return !entity.onGround() ? Result.success() : Result.fail(Component.translatable("ability.error.only_in_air"));
+    }
 }
