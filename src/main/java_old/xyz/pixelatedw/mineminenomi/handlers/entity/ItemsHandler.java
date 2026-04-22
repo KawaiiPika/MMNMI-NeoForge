@@ -183,7 +183,7 @@ public class ItemsHandler {
          Item secondaryShield = entity.m_21206_().m_41720_();
          if (entity instanceof Player) {
             Player player = (Player)entity;
-            if (Math.random() > (double)0.5F && (mainShield.equals(Items.f_42740_) || secondaryShield.equals(Items.f_42740_))) {
+            if (xyz.pixelatedw.mineminenomi.api.WyHelper.random() > (double)0.5F && (mainShield.equals(Items.f_42740_) || secondaryShield.equals(Items.f_42740_))) {
                player.m_36335_().m_41524_(Items.f_42740_, 100);
                entity.m_5810_();
                entity.m_9236_().m_7605_(attacker, (byte)30);
