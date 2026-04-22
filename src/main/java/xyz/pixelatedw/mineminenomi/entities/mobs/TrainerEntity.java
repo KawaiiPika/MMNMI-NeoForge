@@ -35,8 +35,10 @@ public abstract class TrainerEntity extends OPEntity implements ITrainer {
         }
 
         if (!player.level().isClientSide) {
-            // TODO: Port SOpenTrainerDialogueScreenPacket and send it here
-            // ModNetwork.sendTo(new SOpenTrainerDialogueScreenPacket(player, this), player);
+            xyz.pixelatedw.mineminenomi.networking.ModNetworking.sendTo(
+                    new xyz.pixelatedw.mineminenomi.networking.packets.SOpenTrainerDialogueScreenPacket(this.getId()),
+                    (net.minecraft.server.level.ServerPlayer) player
+            );
             return InteractionResult.SUCCESS;
         }
 

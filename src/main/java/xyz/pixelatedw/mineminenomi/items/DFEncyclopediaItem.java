@@ -28,8 +28,10 @@ public class DFEncyclopediaItem extends Item {
         if (world.isClientSide()) {
             return InteractionResultHolder.consume(itemStack);
         } else {
-            // TODO: Phase 3/5 - SOpenEncyclopediaScreenPacket
-            player.displayClientMessage(Component.literal("(TODO) Opening Encyclopedia Screen"), false);
+            xyz.pixelatedw.mineminenomi.networking.ModNetworking.sendTo(
+                    new xyz.pixelatedw.mineminenomi.networking.packets.SOpenEncyclopediaScreenPacket(itemStack),
+                    (net.minecraft.server.level.ServerPlayer) player
+            );
             return InteractionResultHolder.consume(itemStack);
         }
     }

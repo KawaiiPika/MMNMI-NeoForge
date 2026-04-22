@@ -30,7 +30,10 @@ public class WantedPosterItem extends Item {
             if (customData != null && customData.contains("WPData")) {
                 WantedPosterData wantedPosterData = WantedPosterData.from(customData.copyTag().getCompound("WPData"));
                 wantedPosterData.checkIfExpired();
-                // TODO: SOpenWantedPosterScreenPacket
+                xyz.pixelatedw.mineminenomi.networking.ModNetworking.sendTo(
+                        new xyz.pixelatedw.mineminenomi.networking.packets.SOpenWantedPosterScreenPacket(customData.copyTag().getCompound("WPData")),
+                        (net.minecraft.server.level.ServerPlayer) player
+                );
             }
         }
         return InteractionResultHolder.consume(itemstack);
