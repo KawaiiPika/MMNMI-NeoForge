@@ -144,7 +144,7 @@ public class CommonEvents {
             }
 
             // Logia Intangibility
-            if (targetStats.isLogia()) {
+            if (targetStats.isLogia() && !target.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI)) {
                 boolean bypass = false;
                 if (attacker instanceof LivingEntity livingAttacker) {
                     PlayerStats attackerStats = PlayerStats.get(livingAttacker);
