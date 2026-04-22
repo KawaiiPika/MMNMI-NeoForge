@@ -1,2 +1,0 @@
-sed -i 's/ModRegistries.RACES.stream()/xyz.pixelatedw.mineminenomi.init.ModRegistries.RACES_REGISTRY.getEntries().stream().map(net.neoforged.neoforge.registries.DeferredHolder::get)/g' src/main/java/xyz/pixelatedw/mineminenomi/ui/screens/CharacterCreatorScreen.java
-sed -i 's/ModRegistries.FIGHTING_STYLES.stream()/xyz.pixelatedw.mineminenomi.init.ModRegistries.FIGHTING_STYLES_REGISTRY.getEntries().stream().map(net.neoforged.neoforge.registries.DeferredHolder::get)/g' src/main/java/xyz/pixelatedw/mineminenomi/ui/screens/CharacterCreatorScreen.java
