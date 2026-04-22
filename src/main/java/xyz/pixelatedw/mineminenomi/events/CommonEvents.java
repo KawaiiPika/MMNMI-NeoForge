@@ -18,8 +18,6 @@ import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 import xyz.pixelatedw.mineminenomi.init.ModAbilities;
 
-import java.util.ArrayList;
-
 @EventBusSubscriber(modid = ModMain.PROJECT_ID)
 public class CommonEvents {
 
@@ -28,7 +26,10 @@ public class CommonEvents {
         if (event.getEntity() instanceof LivingEntity entity) {
             PlayerStats stats = PlayerStats.get(entity);
             if (stats != null) {
-                for (String abilityId : new ArrayList<>(stats.getActiveAbilities())) {
+                // Iterating directly over getActiveAbilities() is safe here because PlayerStats uses a
+                // copy-on-write pattern for its lists. Any modification (like toggling an ability)
+                // will replace the list reference in PlayerStats rather than modifying the list being iterated.
+                for (String abilityId : stats.getActiveAbilities()) {
                     Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                     if (ability != null) {
                         ability.tick(entity);
@@ -51,7 +52,9 @@ public class CommonEvents {
             PlayerStats attackerStats = PlayerStats.get(livingAttacker);
             if (attackerStats != null) {
                 // Ability damage hooks
-                for (String abilityId : new ArrayList<>(attackerStats.getActiveAbilities())) {
+                // Iterating directly over getActiveAbilities() is safe here because PlayerStats uses a
+                // copy-on-write pattern for its lists.
+                for (String abilityId : attackerStats.getActiveAbilities()) {
                     Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                     if (ability != null) {
                         float modifiedAmount = ability.onAttack(livingAttacker, target, source, event.getAmount());
@@ -98,7 +101,9 @@ public class CommonEvents {
         // Target Logic
         if (targetStats != null) {
             // Active abilities onHurt hook
-            for (String abilityId : new ArrayList<>(targetStats.getActiveAbilities())) {
+            // Iterating directly over getActiveAbilities() is safe here because PlayerStats uses a
+            // copy-on-write pattern for its lists.
+            for (String abilityId : targetStats.getActiveAbilities()) {
                 Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                 if (ability != null) {
                     float newAmount = ability.onHurt(target, source, event.getAmount());
