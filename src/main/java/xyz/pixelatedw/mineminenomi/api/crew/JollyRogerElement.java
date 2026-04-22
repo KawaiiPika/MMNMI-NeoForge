@@ -13,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.ui.TexturedRectUI;
+import xyz.pixelatedw.mineminenomi.ModMain;
 
 public class JollyRogerElement {
    private ResourceLocation key;
@@ -250,7 +251,7 @@ public class JollyRogerElement {
       try {
          return (JollyRogerElement)this.getClass().getConstructor().newInstance();
       } catch (Exception ex) {
-         ex.printStackTrace();
+         ModMain.LOGGER.error("An error occurred", ex);
          return null;
       }
    }

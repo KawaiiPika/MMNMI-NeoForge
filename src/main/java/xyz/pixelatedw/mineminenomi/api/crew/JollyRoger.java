@@ -78,7 +78,7 @@ public class JollyRoger {
 
          nbt.put("details", details);
       } catch (Exception ex) {
-         ex.printStackTrace();
+         LOGGER.error("An error occurred", ex);
       }
 
       return nbt;
@@ -147,7 +147,7 @@ public class JollyRoger {
             }
          }
       } catch (Exception ex) {
-         ex.printStackTrace();
+         LOGGER.error("An error occurred", ex);
       }
 
    }
