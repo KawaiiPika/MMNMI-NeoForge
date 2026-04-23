@@ -3,6 +3,7 @@ package xyz.pixelatedw.mineminenomi.data.world;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -14,16 +15,20 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.world.level.saveddata.SavedData;
 import org.jetbrains.annotations.Nullable;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
 import xyz.pixelatedw.mineminenomi.api.crew.JollyRoger;
 import xyz.pixelatedw.mineminenomi.api.crew.JollyRogerElement;
+import xyz.pixelatedw.mineminenomi.init.ModJollyRogers;
 
 public class FactionsWorldData extends SavedData {
    private static final String IDENTIFIER = "mineminenomi-factions";
-   private HashMap<String, Crew> pirateCrews = new HashMap<>();
-   private HashMap<UUID, Long> issuedBounties = new HashMap<>();
+   private HashMap<String, Crew> pirateCrews = new HashMap();
+   private HashMap<UUID, Long> issuedBounties = new HashMap();
+
+   private static final SavedData.Factory<FactionsWorldData> FACTORY = new SavedData.Factory<>(FactionsWorldData::new, FactionsWorldData::load, null);
 
    public static FactionsWorldData get() {
       MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
@@ -31,8 +36,7 @@ public class FactionsWorldData extends SavedData {
          return null;
       } else {
          ServerLevel serverWorld = server.overworld();
-         SavedData.Factory<FactionsWorldData> factory = new SavedData.Factory<>(FactionsWorldData::new, FactionsWorldData::load, null);
-         return serverWorld.getDataStorage().computeIfAbsent(factory, IDENTIFIER);
+         return serverWorld.getDataStorage().computeIfAbsent(FACTORY, IDENTIFIER);
       }
    }
 
@@ -47,10 +51,7 @@ public class FactionsWorldData extends SavedData {
       for(int i = 0; i < crews.size(); ++i) {
          CompoundTag crewNBT = crews.getCompound(i);
          Crew crew = Crew.from(crewNBT);
-         // Dummy since WyHelper.getResourceName isn't strictly necessary or might be missing
-         // using the string directly
-         String key = crew.getName().toLowerCase().replaceAll("[^a-z0-9/._-]", "");
-         data.pirateCrews.put(key, crew);
+         data.pirateCrews.put(WyHelper.getResourceName(crew.getName()), crew);
       }
 
       return data;
@@ -60,7 +61,7 @@ public class FactionsWorldData extends SavedData {
    public CompoundTag save(CompoundTag nbt, HolderLookup.Provider provider) {
       CompoundTag bounties = new CompoundTag();
       if (this.issuedBounties.size() > 0) {
-         this.issuedBounties.entrySet().forEach((x) -> bounties.putLong(x.getKey().toString(), x.getValue()));
+         this.issuedBounties.forEach((key, value) -> bounties.putLong(key.toString(), value));
       }
 
       nbt.put("issuedBounties", bounties);
@@ -76,21 +77,18 @@ public class FactionsWorldData extends SavedData {
 
    public void tick(Level level) {
       level.getProfiler().push("crews");
-      List<Crew> toRemove = new ArrayList<>();
-      for (Crew crew : this.getCrews()) {
+      this.getCrews().forEach((crew) -> {
          crew.tick();
          if (crew.isEmpty()) {
-            toRemove.add(crew);
+            this.removeCrew(crew);
          }
-      }
-      for (Crew crew : toRemove) {
-          this.removeCrew(crew);
-      }
+
+      });
       level.getProfiler().pop();
    }
 
    public List<Crew> getCrews() {
-      return new ArrayList<>(this.pirateCrews.values());
+      return new ArrayList(this.pirateCrews.values());
    }
 
    public @Nullable Crew getCrewWithMember(UUID memId) {
@@ -116,11 +114,11 @@ public class FactionsWorldData extends SavedData {
    }
 
    public @Nullable Crew getCrewWithCaptain(UUID capId) {
-      return this.pirateCrews.values().stream().filter((crew) -> crew.getCaptain() != null && crew.getCaptain().getUUID().equals(capId)).findFirst().orElse((Crew)null);
+      return this.pirateCrews.values().stream().filter((crew) -> crew.getCaptain() != null && crew.getCaptain().getUUID().equals(capId)).findFirst().orElse(null);
    }
 
    public void removeCrew(Crew crew) {
-      String key = crew.getName().toLowerCase().replaceAll("[^a-z0-9/._-]", "");
+      String key = WyHelper.getResourceName(crew.getName());
       if (this.pirateCrews.containsKey(key)) {
          this.pirateCrews.remove(key);
       }
@@ -129,7 +127,7 @@ public class FactionsWorldData extends SavedData {
    }
 
    public void addCrew(Crew crew) {
-      String key = crew.getName().toLowerCase().replaceAll("[^a-z0-9/._-]", "");
+      String key = WyHelper.getResourceName(crew.getName());
       if (!this.pirateCrews.containsKey(key)) {
          this.pirateCrews.put(key, crew);
       }
@@ -151,11 +149,11 @@ public class FactionsWorldData extends SavedData {
    }
 
    public void addCrewMember(Crew crew, LivingEntity entity, boolean saveMember) {
-      String key = crew.getName().toLowerCase().replaceAll("[^a-z0-9/._-]", "");
+      String key = WyHelper.getResourceName(crew.getName());
       if (!this.pirateCrews.containsKey(key)) {
          this.pirateCrews.put(key, crew);
       } else {
-         crew = this.pirateCrews.get(key);
+         crew = (Crew)this.pirateCrews.get(key);
       }
 
       crew.addMember(entity, saveMember);
@@ -164,7 +162,7 @@ public class FactionsWorldData extends SavedData {
 
    public void updateCrewJollyRoger(ServerPlayer player, Crew crew, JollyRoger jollyRoger) {
       if (jollyRoger.getBase() != null && !jollyRoger.getBase().canUse(player, crew)) {
-         jollyRoger.setBase(null); // ModJollyRogers isn't ported
+         jollyRoger.setBase(ModJollyRogers.BASE_SKULL.get());
       }
 
       for(int i = 0; i < jollyRoger.getBackgrounds().length; ++i) {
@@ -195,14 +193,14 @@ public class FactionsWorldData extends SavedData {
          return null;
       } else {
          Object[] keys = this.getAllBounties().keySet().toArray();
-         Object key = keys[(int) WyHelper.randomWithRange(0, count - 1)];
-         long bounty = this.getAllBounties().get(key);
+         Object key = keys[(new Random()).nextInt(count)];
+         long bounty = (Long)this.getAllBounties().get(key);
          return new Object[]{key, bounty};
       }
    }
 
    public long getBounty(UUID uuid) {
-      return this.issuedBounties.containsKey(uuid) ? this.issuedBounties.get(uuid) : 0L;
+      return this.issuedBounties.containsKey(uuid) ? (Long)this.issuedBounties.get(uuid) : 0L;
    }
 
    public boolean hasIssuedBounty(LivingEntity entity) {

@@ -60,7 +60,7 @@ Abilities are organized into the following UI categories:
 
 - **Paramecia**: Horu Horu, Doru Doru, Awa Awa, Bane Bane, Doa Doa, Deka Deka, Kilo Kilo, Ori Ori, Jiki Jiki, Sabi Sabi, Beta Beta, Kachi Kachi, Mini Mini, Nagi Nagi, Kobu Kobu, Karu Karu, Kuku Kuku, Baku Baku, Kira Kira, Zushi Zushi.
 - **Logia**: Yuki Yuki, Yomi Yomi, Gasu Gasu.
-- **Zoan**: All Zoan transformations (Zou, Neko, Tori, Ryu, Sara, Ushi, Sai, Hito, Mogu).
+- **Zoan**: Core logic for several Ryu Ryu no Mi models (Allosaurus, Brachiosaurus, Pteranodon), Zou Zou no Mi models, Tori Tori no Mi (Phoenix), and Neko Neko no Mi (Leopard) have been started but remain unverified due to build environment issues.
 
 ---
 

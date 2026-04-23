@@ -28,4 +28,22 @@ public class CrewEvent extends Event {
             super(player, crew);
         }
     }
+
+    public static class Join extends CrewEvent implements ICancellableEvent {
+        public Join(Player player, Crew crew) {
+            super(player, crew);
+        }
+    }
+
+    public static class Leave extends CrewEvent implements ICancellableEvent {
+        public Leave(Player player, Crew crew) {
+            super(player, crew);
+        }
+    }
+
+    public static class Kick extends CrewEvent implements ICancellableEvent {
+        public Kick(Player player, Crew crew) {
+            super(player, crew);
+        }
+    }
 }
