@@ -57,6 +57,75 @@ public class CommonEvents {
     }
 
     @SubscribeEvent
+    public static void onEntityInvulnerabilityCheck(net.neoforged.neoforge.event.entity.EntityInvulnerabilityCheckEvent event) {
+        if (!(event.getEntity() instanceof LivingEntity target)) return;
+        PlayerStats targetStats = PlayerStats.get(target);
+        if (targetStats == null) return;
+        boolean targetHasKairoseki = target.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI);
+
+        var source = event.getSource();
+        var attacker = source.getEntity();
+
+        for (String abilityId : targetStats.getActiveAbilities()) {
+            Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
+            if (ability != null) {
+                if (targetHasKairoseki && ability.getRequiredFruit() != null) {
+                    continue;
+                }
+                if (ability.checkInvulnerability(target, source)) {
+                    event.setInvulnerable(true);
+                }
+            }
+        }
+
+        if (targetStats.isLogia() && !targetHasKairoseki) {
+            boolean bypass = false;
+            if (attacker instanceof LivingEntity livingAttacker) {
+                PlayerStats attackerStats = PlayerStats.get(livingAttacker);
+                if (attackerStats != null && attackerStats.isBusoshokuActive()) {
+                    bypass = true;
+                }
+            }
+
+            if (!bypass) {
+                event.setInvulnerable(true);
+                if (target.level() instanceof ServerLevel serverLevel) {
+                    serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, target.getX(), target.getY() + 1, target.getZ(), 10, 0.2, 0.5, 0.2, 0.05);
+                    serverLevel.playSound(null, target.getX(), target.getY(), target.getZ(),
+                        SoundEvents.FIRE_EXTINGUISH, SoundSource.NEUTRAL, 0.5F, 1.2F);
+                }
+
+                if (attacker instanceof LivingEntity livingAttacker) {
+                    for (String abilityId : targetStats.getActiveAbilities()) {
+                        Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
+                        if (ability != null) {
+                            ability.onLogiaDodge(target, livingAttacker);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingDamagePost(net.neoforged.neoforge.event.entity.living.LivingDamageEvent.Post event) {
+        LivingEntity target = event.getEntity();
+        PlayerStats targetStats = PlayerStats.get(target);
+        if (targetStats != null) {
+            boolean targetHasKairoseki = target.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI);
+            for (String abilityId : targetStats.getActiveAbilities()) {
+                Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
+                if (ability != null) {
+                    if (targetHasKairoseki && ability.getRequiredFruit() != null) {
+                        continue;
+                    }
+                    ability.onDamageTake(target, event.getSource(), event.getNewDamage());
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
     public static void onLivingIncomingDamage(LivingIncomingDamageEvent event) {
         LivingEntity target = event.getEntity();
         PlayerStats targetStats = PlayerStats.get(target);
@@ -160,26 +229,6 @@ public class CommonEvents {
                 }
             }
 
-            // Logia Intangibility
-            if (targetStats.isLogia() && !targetHasKairoseki) {
-                boolean bypass = false;
-                if (attacker instanceof LivingEntity livingAttacker) {
-                    PlayerStats attackerStats = PlayerStats.get(livingAttacker);
-                    if (attackerStats != null && attackerStats.isBusoshokuActive()) {
-                        bypass = true;
-                    }
-                }
-
-                if (!bypass) {
-                    event.setCanceled(true);
-                    if (target.level() instanceof ServerLevel serverLevel) {
-                        serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, target.getX(), target.getY() + 1, target.getZ(), 10, 0.2, 0.5, 0.2, 0.05);
-                        serverLevel.playSound(null, target.getX(), target.getY(), target.getZ(), 
-                            SoundEvents.FIRE_EXTINGUISH, SoundSource.NEUTRAL, 0.5F, 1.2F);
-                    }
-                    return;
-                }
-            }
         }
     }
 }

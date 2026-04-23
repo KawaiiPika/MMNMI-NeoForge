@@ -31,11 +31,13 @@ public class FruitAbilityHelper {
         );
         // Logias
         register(ResourceLocation.fromNamespaceAndPath("mineminenomi", "hie_hie_no_mi"),
+                ResourceLocation.fromNamespaceAndPath("mineminenomi", "hie_logia"),
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "ice_age"),
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "ice_saber"),
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "ice_block_partisan")
         );
         register(ResourceLocation.fromNamespaceAndPath("mineminenomi", "goro_goro_no_mi"),
+                ResourceLocation.fromNamespaceAndPath("mineminenomi", "goro_logia"),
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "el_thor"),
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "sango")
         );
@@ -44,19 +46,23 @@ public class FruitAbilityHelper {
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "kurouzu")
         );
         register(ResourceLocation.fromNamespaceAndPath("mineminenomi", "moku_moku_no_mi"),
+                ResourceLocation.fromNamespaceAndPath("mineminenomi", "moku_logia"),
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "white_blow"),
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "white_out")
         );
         register(ResourceLocation.fromNamespaceAndPath("mineminenomi", "suna_suna_no_mi"),
+                ResourceLocation.fromNamespaceAndPath("mineminenomi", "suna_logia"),
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "desert_spada"),
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "sables")
         );
         register(ResourceLocation.fromNamespaceAndPath("mineminenomi", "mera_mera_no_mi"),
+                ResourceLocation.fromNamespaceAndPath("mineminenomi", "mera_logia"),
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "higan"),
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "hiken"),
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "dai_enka_entei")
         );
         register(ResourceLocation.fromNamespaceAndPath("mineminenomi", "magu_magu_no_mi"),
+                ResourceLocation.fromNamespaceAndPath("mineminenomi", "magu_logia"),
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "dai_funka"),
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "magma_coating"),
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "lava_flow"),
@@ -64,8 +70,15 @@ public class FruitAbilityHelper {
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "ryusei_kazan")
         );
         register(ResourceLocation.fromNamespaceAndPath("mineminenomi", "pika_pika_no_mi"),
+                ResourceLocation.fromNamespaceAndPath("mineminenomi", "pika_logia"),
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "yasakani_no_magatama"),
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "amaterasu")
+        );
+        register(ResourceLocation.fromNamespaceAndPath("mineminenomi", "yuki_yuki_no_mi"),
+                ResourceLocation.fromNamespaceAndPath("mineminenomi", "yuki_logia")
+        );
+        register(ResourceLocation.fromNamespaceAndPath("mineminenomi", "gasu_gasu_no_mi"),
+                ResourceLocation.fromNamespaceAndPath("mineminenomi", "gasu_logia")
         );
         register(ResourceLocation.fromNamespaceAndPath("mineminenomi", "zou_zou_no_mi"),
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "zou_guard_point"),
@@ -84,7 +97,13 @@ public class FruitAbilityHelper {
         List<ResourceLocation> abilities = FRUIT_ABILITIES.get(fruitId);
         if (abilities != null) {
             for (int i = 0; i < abilities.size() && i < 24; i++) {
-                stats.setEquippedAbility(i, abilities.get(i));
+                ResourceLocation abilityLoc = abilities.get(i);
+                xyz.pixelatedw.mineminenomi.api.abilities.Ability ability = ModAbilities.REGISTRY.get(abilityLoc);
+                if (ability != null && ability.isPassive()) {
+                    stats.grantAbility(abilityLoc);
+                } else {
+                    stats.setEquippedAbility(i, abilityLoc);
+                }
             }
             stats.sync(entity);
         }
