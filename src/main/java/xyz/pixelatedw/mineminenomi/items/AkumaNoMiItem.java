@@ -60,7 +60,11 @@ public class AkumaNoMiItem extends Item implements xyz.pixelatedw.mineminenomi.a
                     if (ability != null) {
                         for (java.util.Map.Entry<net.minecraft.resources.ResourceKey<xyz.pixelatedw.mineminenomi.api.abilities.Ability>, xyz.pixelatedw.mineminenomi.api.abilities.Ability> entry : xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.entrySet()) {
                             if (entry.getValue() == ability) {
-                                stats.setEquippedAbility(i, entry.getKey().location());
+                                if (ability.isPassive()) {
+                                    stats.grantAbility(entry.getKey().location());
+                                } else {
+                                    stats.setEquippedAbility(i, entry.getKey().location());
+                                }
                                 break;
                             }
                         }

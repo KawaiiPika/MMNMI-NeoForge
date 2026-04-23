@@ -1,18 +1,18 @@
-package xyz.pixelatedw.mineminenomi.abilities.mera;
+package xyz.pixelatedw.mineminenomi.abilities.hie;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.LivingEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
-
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.effect.MobEffectInstance;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
+import xyz.pixelatedw.mineminenomi.init.ModEffects;
 
-public class MeraLogiaAbility extends Ability {
-    private static final ResourceLocation FRUIT = ResourceLocation.fromNamespaceAndPath("mineminenomi", "mera_mera_no_mi");
+public class HieLogiaAbility extends Ability {
+    private static final ResourceLocation FRUIT = ResourceLocation.fromNamespaceAndPath("mineminenomi", "hie_hie_no_mi");
 
-    public MeraLogiaAbility() { super(FRUIT); }
+    public HieLogiaAbility() { super(FRUIT); }
 
     @Override
     public void tick(LivingEntity entity) {
@@ -34,19 +34,18 @@ public class MeraLogiaAbility extends Ability {
 
 @Override
     public boolean checkInvulnerability(LivingEntity entity, DamageSource source) {
-        if (source.is(DamageTypeTags.IS_FIRE)) {
-            entity.clearFire();
-            return true; // Immune to fire
+        if (source.is(DamageTypeTags.IS_FREEZING)) {
+            return true; // Immune to freezing
         }
         return false;
     }
 
 @Override
     public void onLogiaDodge(LivingEntity entity, LivingEntity attacker) {
-        // Side effect: Ignites attacker when dodged
-        attacker.setRemainingFireTicks(60);
+        // Side effect: Freezes attacker when dodged
+        attacker.addEffect(new MobEffectInstance(ModEffects.FROZEN, 40, 0));
     }
 
 @Override
-    public Component getDisplayName() { return Component.translatable("ability.mineminenomi.mera_logia"); }
+    public Component getDisplayName() { return Component.translatable("ability.mineminenomi.logia_invulnerability_hie"); }
 }

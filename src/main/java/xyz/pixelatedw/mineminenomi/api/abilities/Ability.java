@@ -126,6 +126,16 @@ public abstract class Ability {
 
     protected void onTick(LivingEntity entity, long duration) {}
 
+    public boolean checkInvulnerability(LivingEntity entity, net.minecraft.world.damagesource.DamageSource source) {
+        return false;
+    }
+
+    public void onLogiaDodge(LivingEntity entity, LivingEntity attacker) {
+    }
+
+    public void onDamageTake(LivingEntity entity, net.minecraft.world.damagesource.DamageSource source, float amount) {
+    }
+
     public float onHurt(LivingEntity entity, net.minecraft.world.damagesource.DamageSource source, float amount) {
         return amount;
     }
