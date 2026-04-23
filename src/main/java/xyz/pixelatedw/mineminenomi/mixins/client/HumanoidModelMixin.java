@@ -41,7 +41,7 @@ public class HumanoidModelMixin<T extends LivingEntity> {
                     this.mmnm$wrapper = new PlayerAnimationWrapper(model);
                 }
 
-                // Calculate smooth animation time
+                // Calculate smooth animation time based on the Data Attachment states
                 long timePassedTicks = entity.level().getGameTime() - animData.startTimeTicks();
                 // extract partial ticks from ageInTicks which is (tickCount + partialTicks)
                 float partialTicks = ageInTicks - entity.tickCount;

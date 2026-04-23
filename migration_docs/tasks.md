@@ -74,7 +74,7 @@
 - [ ] Complete implementation and verification of TankyudonAbility (Ryu Ryu no Mi: Model Pteranodon).
 
 ## Expert Recommendations & Technical Guidelines
-- [ ] **Animations System**: Refactor legacy animations to use Vanilla `HierarchicalModel` and `AnimationDefinition`.
+- [x] **Animations System**: Refactor legacy animations to use Vanilla `HierarchicalModel` and `AnimationDefinition`.
 - [ ] **Weapons & Tools**: Migrate legacy `ToolActions` to `ItemAbilities` and implement built-in Data Maps (`neoforge:strippables`, `neoforge:waxables`, `neoforge:furnace_fuels`).
 - [ ] **Networking Thread Safety**: Ensure all `CustomPacketPayload` ability/UI handlers that modify game state are wrapped in `context.enqueueWork`.
 - [ ] **Mob AI & Abilities**: Replace nested loops with AABB spatial queries (`level.getEntitiesOfClass`) and in-memory filtering for targeting.
