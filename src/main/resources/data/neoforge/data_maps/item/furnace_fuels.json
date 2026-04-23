@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": {
+    "mineminenomi:flame_dial": {
+      "burn_time": 10000
+    },
+    "mineminenomi:wanted_poster_package": {
+      "burn_time": 300
+    },
+    "mineminenomi:vivre_card": {
+      "burn_time": 50
+    }
+  }
+}
