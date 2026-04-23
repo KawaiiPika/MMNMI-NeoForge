@@ -26,7 +26,6 @@
 - [x] **Update Plant and Crop Logic to SpecialPlantable**: Finished via the `TangerineCropsBlock` migration.
 - [x] **Implement NeoForge Data Maps for Block/Item Properties**: Citing the new `furnace_fuels.json` and `strippables.json` data maps.
 - [x] **Compliance Audits Passed**: Clean Up Event Listener Architecture and Rework Client-to-Server Ability Networking are fully aligned with NeoForge 1.21.1 architecture.
-- [x] **Migrate to JSON-based Extensible Enums**: Architectural need bypassed, as legacy enum extensions were either equipment-related (now data-driven or registries) or mod-specific (not applicable to `enumExtensions`).
 
 ## Immediate Priority
 - [ ] **Network Synching**: Ensure `selectedAbilitySlot` and other stats are synced correctly to the client.

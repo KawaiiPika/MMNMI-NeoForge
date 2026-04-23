@@ -19,10 +19,6 @@ public class GoalHelper {
         return entity.distanceToSqr(target) <= distance * distance;
     }
 
-    public static boolean canMove(LivingEntity entity) {
-        return !entity.isPassenger() && entity.isAlive() && !entity.hasEffect(net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN);
-    }
-
     public static void lookAtEntity(Mob entity, @Nullable Entity target) {
         if (target != null) {
             entity.lookAt(Anchor.EYES, target.position().add(0.0D, target.getEyeHeight(), 0.0D));

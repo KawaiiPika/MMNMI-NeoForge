@@ -49,10 +49,11 @@ public class WyHelper {
 
     public static <T extends Entity> List<T> getNearbyEntities(Vec3 pos, Level world, double xRange, double yRange, double zRange, Predicate<T> filter, Class<T> entityType) {
         AABB area = new AABB(pos.x - xRange, pos.y - yRange, pos.z - zRange, pos.x + xRange, pos.y + yRange, pos.z + zRange);
+        List<T> entities = world.getEntitiesOfClass(entityType, area);
         if (filter != null) {
-            return world.getEntitiesOfClass(entityType, area, filter);
+            return entities.stream().filter(filter).collect(Collectors.toList());
         }
-        return world.getEntitiesOfClass(entityType, area);
+        return entities;
     }
 
     public static void spawnParticles(ParticleOptions particle, ServerLevel level, double x, double y, double z) {
