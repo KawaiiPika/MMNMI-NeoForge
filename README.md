@@ -13,8 +13,9 @@ The mod is currently being systematically migrated module by module, with a focu
 |--------|--------|---------|
 | **Core Registries** | ✅ 100% | Items, Blocks, Abilities, Creative Tabs, Dimensions, Features. |
 | **Data Persistence** | ✅ 100% | Migrated to NeoForge Data Attachments & Data Components. |
-| **Items** | 🔶 Partial | Utility items and 7 iconic fruits ported. Weapons/Armors in progress. |
-| **Abilities** | 🔶 ~45% | 228/500+ files. Haki, Rokushiki, and core Logia/Paramecia logic complete. |
+| **Items** | ✅ 100% | Utility items and iconic fruits ported. Weapons/Armors finished and utilize modern Vanilla Data Components. |
+| **Crew System** | ✅ 100% | Recent successful port. |
+| **Abilities** | 🔶 ~45% | Port Active Devil Fruit Abilities (Batch 1) fully complete. Port Passive Devil Fruit Abilities in progress alongside unit tests. |
 | **UI / Client** | ✅ 90% | Ability HUD, Combat Mode, and core UI screens functional. |
 | **World Generation** | ✅ 100% | Legacy structures and features reconnected via modern JSON data. |
 | **Mobs** | 🔶 Partial | Base `OPEntity` and `GruntEntity` functional. Specialized AI pending. |
@@ -59,7 +60,8 @@ The mod is currently being systematically migrated module by module, with a focu
 2. **Weapons, Armors, and Tools**: Use `ItemAbilities` over `ToolActions` since NeoForge renamed the old `ToolActions` system. Utilize Built-In Data Maps like `neoforge:strippables` and `neoforge:waxables` instead of hardcoding interactions. Use the `neoforge:furnace_fuels` data map instead of overriding methods, unless burn time depends strictly on dynamic Data Components.
 3. **Networking for Abilities and UI**: Ensure you are using the new 1.21.1 `CustomPacketPayload` and `StreamCodec` system registered via `PayloadRegistrar`. Since NeoForge payload handlers execute on the network thread by default, you **must** wrap logic that modifies the world, damages an entity, or alters player stats in `context.enqueueWork(() -> { ... })` to push it to the main server thread, preventing `ConcurrentModificationException` crashes.
 4. **Mobs and AI**: When implementing AI that searches for targets or abilities that affect an area, continue using efficient AABB (Axis-Aligned Bounding Box) queries (`level.getEntitiesOfClass(...)`) and in-memory filtering rather than nested loops to maintain server TPS.
-5. **Testing**: Since abilities require complex setup (Entity mocks, Level mocks, PlayerStats), consider implementing an Object Mother or Test Data Builder pattern for your test suite (e.g., `TestEntityBuilder` class) to automate player mocking with pre-configured Data Attachments.
+5. **Testing**: Since abilities require complex setup (Entity mocks, Level mocks, PlayerStats), consider implementing an Object Mother or Test Data Builder pattern for your test suite (e.g., `TestEntityBuilder` class) to automate player mocking with pre-configured Data Attachments. The Expand Lightweight Bootstrap Test Suite Task is actively being worked on, referencing the recently committed unit tests for Sube Sube abilities and Haki damage calculations.
+6. **Implement Automated Recipe & Model Datagen**: This is a critical upcoming goal since automated asset generation for recipes and models via GatherDataEvent is essential and currently at 0.00%.
 
 ---
 
@@ -76,11 +78,11 @@ The mod is currently being systematically migrated module by module, with a focu
 
 ## 🚀 Immediate Priorities
 
-1. **Port all missing Weapons & Armors**: Registering remaining swords, guns, and special equipment from `old_source`.
-2. **Fruit-Specific Ability Logic**: Migrating the 300+ remaining ability class files systematically via planned batches (Logias/Simple Paramecias, Gravity/Weight Paramecias, Creation/Manipulation Paramecias, Body/Misc Paramecias, Remaining Zoans, and Partially Ported Cleanup).
+1. **Optimize AI Spatial Queries**: Replace nested loops with efficient AABB (Axis-Aligned Bounding Box) queries and in-memory filtering for targeting in AI and abilities.
+2. **Fruit-Specific Ability Logic**: Migrating the 300+ remaining ability class files systematically via planned batches. Batch 1 is done and Batch 2 is the current active focus.
 3. **Specialized Mob AI**: Porting complex goals like `HandleCannonGoal` and custom entity models systematically via planned batches (Base/Ambient Mobs, Marines Hierarchy, Pirates Hierarchy, Bosses/Special Entities).
 4. **Animations System**: Re-implementing the legacy `animations` package to restore visual fidelity systematically via planned batches (Combat/Movement Basics, Weapon-Specific, Devil Fruit, Fighting Style).
-5. **Zoan Transformations**: Implementation of the `morphs` system for Zoan-type fruits.
+5. **Zoan Morphs & Animations**: Implementation of the `morphs` system for Zoan-type fruits.
 
 ---
 
