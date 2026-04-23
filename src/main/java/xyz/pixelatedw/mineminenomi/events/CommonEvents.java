@@ -10,6 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import xyz.pixelatedw.mineminenomi.ModMain;
@@ -89,7 +90,6 @@ public class CommonEvents {
                 // Magma Coating boost
                 if (attackerStats.isAbilityActive("mineminenomi:magma_coating")) {
                     event.setAmount(event.getAmount() + 10.0F);
-                    target.setRemainingFireTicks(100);
                 }
 
                 // Swordsman Damage Perk
@@ -178,6 +178,58 @@ public class CommonEvents {
                             SoundEvents.FIRE_EXTINGUISH, SoundSource.NEUTRAL, 0.5F, 1.2F);
                     }
                     return;
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingDamagePost(LivingDamageEvent.Post event) {
+        LivingEntity target = event.getEntity();
+        PlayerStats targetStats = PlayerStats.get(target);
+        var source = event.getSource();
+        var attacker = source.getEntity();
+
+        // Attacker Logic
+        if (attacker instanceof LivingEntity livingAttacker) {
+            PlayerStats attackerStats = PlayerStats.get(livingAttacker);
+            if (attackerStats != null) {
+                boolean attackerHasKairoseki = livingAttacker.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI);
+
+                // Iterate abilities
+                for (String abilityId : attackerStats.getActiveAbilities()) {
+                    Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
+                    if (ability != null) {
+                        if (attackerHasKairoseki && ability.getRequiredFruit() != null) {
+                            continue;
+                        }
+                        ability.onDamageTakenByTarget(livingAttacker, target, source);
+                    }
+                }
+
+                // Magma Coating
+                if (attackerStats.isAbilityActive("mineminenomi:magma_coating")) {
+                    boolean skip = attackerHasKairoseki;
+                    if (!skip) {
+                        target.setRemainingFireTicks(100);
+                    }
+                }
+
+                // Haki EXP
+                HakiHelper.onHakiDamageTaken(livingAttacker);
+            }
+        }
+
+        // Target Logic
+        if (targetStats != null) {
+            boolean targetHasKairoseki = target.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI);
+            for (String abilityId : targetStats.getActiveAbilities()) {
+                Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
+                if (ability != null) {
+                    if (targetHasKairoseki && ability.getRequiredFruit() != null) {
+                        continue;
+                    }
+                    ability.onDamageTaken(target, source);
                 }
             }
         }

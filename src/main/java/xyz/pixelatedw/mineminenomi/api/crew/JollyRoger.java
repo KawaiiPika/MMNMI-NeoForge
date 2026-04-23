@@ -7,9 +7,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
 import javax.imageio.ImageIO;
-import xyz.pixelatedw.mineminenomi.api.util.ModExecutors;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
@@ -284,36 +282,34 @@ public class JollyRoger {
       return missingBase && missingBackgrounds && missingDetails;
    }
 
-   public CompletableFuture<Optional<BufferedImage>> getAsBufferedImage() {
-      return CompletableFuture.supplyAsync(() -> {
-         try {
-            BufferedImage jollyRogerImage = new BufferedImage(128, 128, 2);
+   public Optional<BufferedImage> getAsBufferedImage() {
+      try {
+         BufferedImage jollyRogerImage = new BufferedImage(128, 128, 2);
 
-            for(JollyRogerElement backgroundElement : this.backgrounds) {
-               if (backgroundElement != null) {
-                  BufferedImage backgroundElementImage = this.elementToImage(backgroundElement);
-                  jollyRogerImage.getGraphics().drawImage(backgroundElementImage, 0, 0, (ImageObserver)null);
-               }
+         for(JollyRogerElement backgroundElement : this.backgrounds) {
+            if (backgroundElement != null) {
+               BufferedImage backgroundElementImage = this.elementToImage(backgroundElement);
+               jollyRogerImage.getGraphics().drawImage(backgroundElementImage, 0, 0, (ImageObserver)null);
             }
-
-            if(this.getBase() != null) {
-                BufferedImage jollyRogerBase = this.elementToImage(this.getBase());
-                jollyRogerImage.getGraphics().drawImage(jollyRogerBase, 0, 0, (ImageObserver)null);
-            }
-
-            for(JollyRogerElement detailElement : this.details) {
-               if (detailElement != null) {
-                  BufferedImage detailElementImage = this.elementToImage(detailElement);
-                  jollyRogerImage.getGraphics().drawImage(detailElementImage, 0, 0, (ImageObserver)null);
-               }
-            }
-
-            return Optional.of(jollyRogerImage);
-         } catch (IOException e) {
-            LOGGER.error(e.getMessage());
-            return Optional.empty();
          }
-      }, ModExecutors.VIRTUAL_THREAD_EXECUTOR);
+
+         if(this.getBase() != null) {
+             BufferedImage jollyRogerBase = this.elementToImage(this.getBase());
+             jollyRogerImage.getGraphics().drawImage(jollyRogerBase, 0, 0, (ImageObserver)null);
+         }
+
+         for(JollyRogerElement detailElement : this.details) {
+            if (detailElement != null) {
+               BufferedImage detailElementImage = this.elementToImage(detailElement);
+               jollyRogerImage.getGraphics().drawImage(detailElementImage, 0, 0, (ImageObserver)null);
+            }
+         }
+
+         return Optional.of(jollyRogerImage);
+      } catch (IOException e) {
+         LOGGER.error(e.getMessage());
+         return Optional.empty();
+      }
    }
 
    private BufferedImage elementToImage(JollyRogerElement element) throws IOException {

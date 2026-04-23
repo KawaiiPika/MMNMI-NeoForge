@@ -39,6 +39,11 @@ public class BusoshokuHakiEmissionAbility extends Ability {
 
     @Override
     public float onAttack(LivingEntity entity, LivingEntity target, net.minecraft.world.damagesource.DamageSource source, float amount) {
+        return amount * 1.2F; // Small flat damage bonus for emission
+    }
+
+    @Override
+    public void onDamageTakenByTarget(LivingEntity entity, LivingEntity target, net.minecraft.world.damagesource.DamageSource source) {
         // Emission adds extra knockback and particle burst
         if (entity.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
             serverLevel.sendParticles(net.minecraft.core.particles.ParticleTypes.SONIC_BOOM, 
@@ -46,7 +51,6 @@ public class BusoshokuHakiEmissionAbility extends Ability {
                 1, 0, 0, 0, 0);
         }
         target.push(entity.getX() - target.getX() > 0 ? -1.0 : 1.0, 0.5, entity.getZ() - target.getZ() > 0 ? -1.0 : 1.0);
-        return amount * 1.2F; // Small flat damage bonus for emission
     }
 
     @Override

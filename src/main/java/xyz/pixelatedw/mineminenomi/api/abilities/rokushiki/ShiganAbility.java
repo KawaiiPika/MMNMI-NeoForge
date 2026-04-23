@@ -21,6 +21,11 @@ public class ShiganAbility extends Ability {
 
     @Override
     public float onAttack(LivingEntity entity, LivingEntity target, net.minecraft.world.damagesource.DamageSource source, float amount) {
+        return amount + 12.0F;
+    }
+
+    @Override
+    public void onDamageTakenByTarget(LivingEntity entity, LivingEntity target, net.minecraft.world.damagesource.DamageSource source) {
         if (!entity.level().isClientSide) {
             target.level().addParticle(net.minecraft.core.particles.ParticleTypes.CRIT, 
                 target.getX(), target.getY() + 1.0, target.getZ(), 0, 0, 0);
@@ -28,7 +33,6 @@ public class ShiganAbility extends Ability {
             target.setDeltaMovement(entity.getLookAngle().scale(1.2).add(0, 0.2, 0));
             target.hurtMarked = true;
         }
-        return amount + 12.0F;
     }
 
     @Override
