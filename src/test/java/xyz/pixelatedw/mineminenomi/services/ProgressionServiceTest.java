@@ -3,7 +3,6 @@ package xyz.pixelatedw.mineminenomi.services;
 import net.minecraft.SharedConstants;
 import net.minecraft.server.Bootstrap;
 import net.minecraft.world.entity.player.Player;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +17,6 @@ class ProgressionServiceTest {
 
     private Player player;
     private PlayerStats stats;
-    private MockedStatic<PlayerStats> playerStatsMockedStatic;
 
     @BeforeAll
     static void setupAll() {
@@ -34,13 +32,6 @@ class ProgressionServiceTest {
     void setup() {
         player = mock(Player.class);
         stats = mock(PlayerStats.class);
-        playerStatsMockedStatic = Mockito.mockStatic(PlayerStats.class);
-        playerStatsMockedStatic.when(() -> PlayerStats.get(player)).thenReturn(stats);
-    }
-
-    @AfterEach
-    void tearDown() {
-        playerStatsMockedStatic.close();
     }
 
     @Test
@@ -48,9 +39,13 @@ class ProgressionServiceTest {
         TrainingPointType type = TrainingPointType.MARTIAL_ARTS;
         int amount = 5;
 
-        ProgressionService.grantTrainingPoints(player, type, amount);
+        try (MockedStatic<PlayerStats> playerStatsMockedStatic = Mockito.mockStatic(PlayerStats.class)) {
+            playerStatsMockedStatic.when(() -> PlayerStats.get(player)).thenReturn(stats);
 
-        verify(stats).alterTrainingPoints(type, amount);
-        verify(stats).sync(player);
+            ProgressionService.grantTrainingPoints(player, type, amount);
+
+            verify(stats).alterTrainingPoints(type, amount);
+            verify(stats).sync(player);
+        }
     }
 }
