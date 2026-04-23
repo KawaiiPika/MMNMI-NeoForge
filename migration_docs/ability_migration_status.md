@@ -108,3 +108,21 @@ Abilities are organized into the following UI categories:
 - **Integrations**: Curios integration is listed in `old_source` but not yet implemented in `src`.
 - **Animations**: The legacy mod has a dedicated `animations` package with 45+ classes. The current port needs to implement these to maintain visual fidelity.
 - **Morphs**: Zoan morphs and other transformations are missing.
+
+
+## Migration Batches (Action Plan)
+
+To systematically port the remaining abilities, they have been grouped into logical batches:
+
+### Devil Fruits
+- **Batch 1: Logias & Simple Paramecias**: Yuki, Yomi, Gasu, Sube, Bari.
+- **Batch 2: Gravity & Weight Paramecias**: Zushi, Kilo, Ton, Fuwa (if applicable).
+- **Batch 3: Creation & Manipulation Paramecias**: Doru, Awa, Doa, Ori, Beta, Kuku, Baku, Kira.
+- **Batch 4: Body & Misc Paramecias**: Horu, Bane, Deka, Jiki, Sabi, Kachi, Mini, Nagi, Kobu, Karu.
+- **Batch 5: Remaining Zoans**: Ryu Ryu models, Zou Zou, Tori Tori (Phoenix), Neko Neko (Leopard).
+- **Batch 6: Partially Ported Cleanup**: Finish remaining core abilities for all partially ported fruits.
+
+### Fighting Styles & Races
+- **Batch 7: Swordsman**: Santoryu, Ittoryu, Nitoryu.
+- **Batch 8: Martial Arts & Tech**: Brawler, Fishman Karate, Cyborg, Mink/Electro, Hasshoken, Ryusoken.
+- **Batch 9: Misc**: Sniper, Doctor, Art of Weather.
