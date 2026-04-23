@@ -77,9 +77,9 @@ The mod is currently being systematically migrated module by module, with a focu
 ## 🚀 Immediate Priorities
 
 1. **Port all missing Weapons & Armors**: Registering remaining swords, guns, and special equipment from `old_source`.
-2. **Fruit-Specific Ability Logic**: Migrating the 300+ remaining ability class files.
-3. **Specialized Mob AI**: Porting complex goals like `HandleCannonGoal` and custom entity models.
-4. **Animations System**: Re-implementing the legacy `animations` package to restore visual fidelity.
+2. **Fruit-Specific Ability Logic**: Migrating the 300+ remaining ability class files systematically via planned batches (Logias/Simple Paramecias, Gravity/Weight Paramecias, Creation/Manipulation Paramecias, Body/Misc Paramecias, Remaining Zoans, and Partially Ported Cleanup).
+3. **Specialized Mob AI**: Porting complex goals like `HandleCannonGoal` and custom entity models systematically via planned batches (Base/Ambient Mobs, Marines Hierarchy, Pirates Hierarchy, Bosses/Special Entities).
+4. **Animations System**: Re-implementing the legacy `animations` package to restore visual fidelity systematically via planned batches (Combat/Movement Basics, Weapon-Specific, Devil Fruit, Fighting Style).
 5. **Zoan Transformations**: Implementation of the `morphs` system for Zoan-type fruits.
 
 ---

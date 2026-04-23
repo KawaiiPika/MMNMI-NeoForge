@@ -25,11 +25,28 @@
 - [/] **Port all missing Weapons**: Registering remaining swords, guns, bows and special weapons from `old_source`.
 - [ ] **Network Synching**: Ensure `selectedAbilitySlot` and other stats are synced correctly to the client.
 - [/] **Port remaining Ability logic**: Fruit abilities and Fighting Styles.
+  - [ ] **Batch 1: Logias & Simple Paramecias**: Yuki, Yomi, Gasu, Sube, Bari.
+  - [ ] **Batch 2: Gravity & Weight Paramecias**: Zushi, Kilo, Ton (if exists), Fuwa (if exists).
+  - [ ] **Batch 3: Creation & Manipulation Paramecias**: Doru, Awa, Doa, Ori, Beta, Kuku, Baku, Kira.
+  - [ ] **Batch 4: Body & Misc Paramecias**: Horu, Bane, Deka, Jiki, Sabi, Kachi, Mini, Nagi, Kobu, Karu.
+  - [ ] **Batch 5: Remaining Zoans (Models)**: Ryu Ryu (Allosaurus, Brachiosaurus, Pteranodon), Zou Zou, Tori Tori (Phoenix), Neko Neko (Leopard).
+  - [ ] **Batch 6: Partially Ported Cleanup**: Finish missing abilities for Magu, Goro, Pika, Moku, Ope, Kage, Ito, Doku, Hana, Horo, Wara, Mero, Pero, Bara, Bomu, Suke, Noro, Yami, Suna.
+  - [ ] **Batch 7: Fighting Styles - Swordsman**: Santoryu, Ittoryu.
+  - [ ] **Batch 8: Fighting Styles - Martial Arts & Tech**: Brawler, Fishman Karate, Cyborg, Mink/Electro, Hasshoken, Ryusoken.
+  - [ ] **Batch 9: Fighting Styles - Misc**: Missing parts of Art of Weather, Snipper, Doctor, etc.
 - [ ] **Haki Progression Logic**: Implement the logic for earning and spending Haki/Doriki points.
 - [ ] **Mob AI**: Migrate specialized AI goals from legacy code.
+  - [ ] **Batch 1: Base & Ambient Mobs**: Civilians, Animals, Traders, Barkeepers.
+  - [ ] **Batch 2: Marines Hierarchy**: Grunts, Captains, Trainers, Brutes, Snipers, Pacifistas.
+  - [ ] **Batch 3: Pirates Hierarchy**: Pirates, Bandits, Notorious, Captains.
+  - [ ] **Batch 4: Bosses & Special Entities**: OPBossEntity, OPEntity, WorldGov.
 
 ## Missing Systems (Gap Analysis)
 - [ ] **Animations**: 45+ legacy animations (Backflip, BattoStrike, etc.) and specialized ones for Fruits/Styles.
+  - [ ] **Batch 1: Combat & Movement Basics**: Backflip, BattoStrike, Dash, Leap, Block, Dodges.
+  - [ ] **Batch 2: Weapon-Specific Animations**: Sword swings, gun aiming, sniper poses.
+  - [ ] **Batch 3: Devil Fruit Animations**: Transformations, logia morphs, specific attack poses.
+  - [ ] **Batch 4: Fighting Style Animations**: Rokushiki moves, Fishman Karate, Black Leg kicks.
 - [ ] **Morphs**: 30+ legacy morphs for Zoan transformations and specific fruit powers (Bane, Deka, etc.).
 - [ ] **Challenges System**: Arenas and faction-specific challenges (Arlong, Buggy, Krieg, etc.).
 - [ ] **Audio System**: Legacy audio handling and custom sound events.
@@ -39,6 +56,8 @@
 
 ## Pending Commands
 - [ ] `AbilityCommand`, `QuestCommand`, `ChallengeCommand`, `CheckFruitsCommand`, `FGCommand`, `LoyaltyCommand`, etc.
+  - [ ] **Batch 1: Player & Stats Commands**: AbilityCommand, QuestCommand, ChallengeCommand, CheckFruitsCommand.
+  - [ ] **Batch 2: Admin & World Commands**: FGCommand, LoyaltyCommand, Crew commands.
 
 ## Future Milestones
 - [ ] **Zoan Transformation System**: Requires a robust model-swapping and attribute modifier system.
