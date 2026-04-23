@@ -22,6 +22,37 @@ The mod is currently being systematically migrated module by module, with a focu
 
 ---
 
+## 📊 Porting Progress Summary (Deep Dive)
+
+| System | Old Source Files | New Source Files | Progress |
+|--------|------------------|------------------|----------|
+| **Abilities** | 593 | 231 | 38.95% |
+| **Animations** | 81 | 0 | 0.00% |
+| **Api** | 372 | 94 | 25.27% |
+| **Audio** | 1 | 0 | 0.00% |
+| **Blocks** | 35 | 1 | 2.86% |
+| **Challenges** | 45 | 0 | 0.00% |
+| **Commands** | 23 | 7 | 30.43% |
+| **Config** | 11 | 0 | 0.00% |
+| **Containers** | 1 | 0 | 0.00% |
+| **Data** | 95 | 2 | 2.11% |
+| **Datagen** | 105 | 0 | 0.00% |
+| **Effects** | 61 | 28 | 45.90% |
+| **Entities** | 319 | 52 | 16.30% |
+| **Handlers** | 49 | 0 | 0.00% |
+| **Init** | 73 | 33 | 45.21% |
+| **Integrations** | 6 | 0 | 0.00% |
+| **Items** | 66 | 46 | 69.70% |
+| **Mixins** | 49 | 0 | 0.00% |
+| **Models** | 133 | 0 | 0.00% |
+| **Morphs** | 51 | 0 | 0.00% |
+| **Packets** | 129 | 0 | 0.00% |
+| **Particles** | 144 | 2 | 1.39% |
+| **Quests** | 23 | 36 | 156.52% |
+| **Renderers** | 98 | 0 | 0.00% |
+| **Ui** | 42 | 8 | 19.05% |
+| **World** | 14 | 8 | 57.14% |
+
 ## 💡 Expert Recommendations & Guidelines
 
 1. **Animations & Morphs**: Do not attempt to port the old `AnimationCapability.java` generic boilerplate. Since `ModDataAttachments.ANIMATION_DATA` is successfully implemented, simply store plain Java animation state objects directly on the entities. For 1.21.1, strongly consider dropping heavy manual rendering math in favor of Vanilla's modern data-driven keyframe animations using `HierarchicalModel` and `AnimationDefinition` which natively supports keyframes and interpolation.
