@@ -42,6 +42,13 @@ public abstract class ZoanAbility extends Ability {
             }
         }
 
+        if (entity.hasData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.MORPH_DATA)) {
+            xyz.pixelatedw.mineminenomi.data.entity.MorphData morphData = entity.getData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.MORPH_DATA);
+            java.util.List<ResourceLocation> activeMorphs = new java.util.ArrayList<>(morphData.activeMorphs());
+            if (!activeMorphs.contains(getMorphModelId())) activeMorphs.add(getMorphModelId());
+            entity.setData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.MORPH_DATA, new xyz.pixelatedw.mineminenomi.data.entity.MorphData(java.util.Optional.of(getMorphModelId()), activeMorphs));
+        }
+
         float healthPercentage = entity.getHealth() / entity.getMaxHealth();
 
         applyModifier(entity, Attributes.SCALE, getScaleModifier(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
@@ -58,6 +65,14 @@ public abstract class ZoanAbility extends Ability {
 
     @Override
     protected void stopUsing(LivingEntity entity) {
+        if (entity.hasData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.MORPH_DATA)) {
+            xyz.pixelatedw.mineminenomi.data.entity.MorphData morphData = entity.getData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.MORPH_DATA);
+            java.util.List<ResourceLocation> activeMorphs = new java.util.ArrayList<>(morphData.activeMorphs());
+            activeMorphs.remove(getMorphModelId());
+            java.util.Optional<ResourceLocation> current = activeMorphs.isEmpty() ? java.util.Optional.empty() : java.util.Optional.of(activeMorphs.get(0));
+            entity.setData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.MORPH_DATA, new xyz.pixelatedw.mineminenomi.data.entity.MorphData(current, activeMorphs));
+        }
+
         float healthPercentage = entity.getHealth() / entity.getMaxHealth();
 
         removeModifier(entity, Attributes.SCALE);
