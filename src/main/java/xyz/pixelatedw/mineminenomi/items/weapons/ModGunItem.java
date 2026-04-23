@@ -8,13 +8,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
+import xyz.pixelatedw.mineminenomi.init.ModTags;
 
 import java.util.function.Predicate;
 
 public class ModGunItem extends ProjectileWeaponItem {
 
-    public static final Predicate<ItemStack> GUN_AMMO = (stack) -> false; // TODO: Implement ammo check
-    public static final Predicate<ItemStack> BAZOOKA_AMMO = (stack) -> false;
+    public static final Predicate<ItemStack> GUN_AMMO = (stack) -> stack.is(ModTags.Items.GUN_AMMO);
+    public static final Predicate<ItemStack> BAZOOKA_AMMO = (stack) -> stack.is(ModTags.Items.BAZOOKA_AMMO);
 
     private int maxGunpowder = 3;
     private float bulletSpeed = 2.0F;
@@ -53,6 +54,98 @@ public class ModGunItem extends ProjectileWeaponItem {
         return 72000;
     }
 
+    private void setLoadedGunPowder(ItemStack stack, int powder) {
+        stack.set(xyz.pixelatedw.mineminenomi.init.ModDataComponents.GUNPOWDER.get(), powder);
+    }
+
+    private int getLoadedGunPowder(ItemStack stack) {
+        return stack.getOrDefault(xyz.pixelatedw.mineminenomi.init.ModDataComponents.GUNPOWDER.get(), 0);
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack itemStack = player.getItemInHand(hand);
+        boolean flag = !player.getProjectile(itemStack).isEmpty();
+        boolean hasGunPowder = this.getLoadedGunPowder(itemStack) > 0;
+
+        if (!hasGunPowder) {
+            for (int i = 0; i < player.getInventory().getContainerSize(); ++i) {
+                ItemStack stack = player.getInventory().getItem(i);
+                if (stack.getItem() == net.minecraft.world.item.Items.GUNPOWDER) {
+                    int count = this.maxGunpowder;
+                    if (stack.getCount() < count) {
+                        count = stack.getCount();
+                    }
+
+                    this.setLoadedGunPowder(itemStack, count * 5);
+                    if (!player.getAbilities().instabuild) {
+                        stack.shrink(count);
+                    }
+                    hasGunPowder = true;
+                    player.getCooldowns().addCooldown(this.asItem(), this.reloadCooldown);
+                    break;
+                }
+            }
+        }
+
+        if (!hasGunPowder) {
+            return InteractionResultHolder.fail(itemStack);
+        } else if (!player.getAbilities().instabuild && !flag) {
+            return InteractionResultHolder.fail(itemStack);
+        } else {
+            player.startUsingItem(hand);
+            return InteractionResultHolder.consume(itemStack);
+        }
+    }
+
+    @Override
+    public void releaseUsing(ItemStack itemStack, Level level, net.minecraft.world.entity.LivingEntity living, int timeLeft) {
+        if (living instanceof Player player) {
+            ItemStack ammoStack = player.getProjectile(itemStack);
+
+            Item powder = ammoStack.getItem();
+
+            int loadedGunpowder = this.getLoadedGunPowder(itemStack);
+            if (!level.isClientSide()) {
+                boolean flag = player.getAbilities().instabuild;
+                int i = this.getUseDuration(itemStack, player) - timeLeft;
+                i = net.neoforged.neoforge.event.EventHooks.onArrowLoose(itemStack, level, player, i, !ammoStack.isEmpty() || flag);
+                if (i < 0) {
+                    return;
+                }
+
+                if (powder instanceof xyz.pixelatedw.mineminenomi.items.BulletItem bulletItem) {
+                    Object projObj = bulletItem.createProjectile(level, player);
+                    if (projObj instanceof net.minecraft.world.entity.projectile.Projectile proj) {
+                        this.shootProjectile(player, proj, 0, this.bulletSpeed, this.inaccuracy, 0.0F, null);
+                        level.addFreshEntity(proj);
+                    }
+                } else if (itemStack.is(xyz.pixelatedw.mineminenomi.init.ModWeapons.BAZOOKA.get())) {
+                    // TODO: Create Cannonball entity once ported, for now do nothing
+                } else if (flag && ammoStack.isEmpty()) {
+                    // Creative mode dummy shoot if no ammo
+                    // TODO: Generic projectile creation
+                }
+
+                itemStack.hurtAndBreak(1, player, net.minecraft.world.entity.LivingEntity.getSlotForHand(player.getUsedItemHand()));
+            }
+
+            player.getCooldowns().addCooldown(this.asItem(), this.shotCooldown);
+            boolean hasInfinite = player.getAbilities().instabuild;
+
+            if (hasInfinite) {
+                return;
+            }
+
+            --loadedGunpowder;
+            this.setLoadedGunPowder(itemStack, Math.max(0, loadedGunpowder));
+            ammoStack.shrink(1);
+            if (ammoStack.isEmpty()) {
+                player.getInventory().removeItem(ammoStack);
+            }
+        }
+    }
+
     // Builder-like setters
     public ModGunItem setGunpowderLimit(int limit) { this.maxGunpowder = limit; return this; }
     public ModGunItem setDamageMultiplier(float damage) { this.damageMultiplier = damage; return this; }
@@ -65,6 +158,4 @@ public class ModGunItem extends ProjectileWeaponItem {
     protected void shootProjectile(net.minecraft.world.entity.LivingEntity shooter, net.minecraft.world.entity.projectile.Projectile projectile, int index, float velocity, float inaccuracy, float angle, @javax.annotation.Nullable net.minecraft.world.entity.LivingEntity target) {
         projectile.shootFromRotation(shooter, shooter.getXRot(), shooter.getYRot(), angle, velocity, inaccuracy);
     }
-
-    // TODO: Implement shooting and reloading logic
 }

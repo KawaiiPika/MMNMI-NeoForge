@@ -45,3 +45,10 @@
 - [ ] **Ship Generation**: Reconnecting complex structure generation for ships in worldgen.
 - [ ] **Data-Driven Armor**: Transition to 1.21.1's new armor trim and asset systems if desired.
 - [ ] Complete implementation and verification of TankyudonAbility (Ryu Ryu no Mi: Model Pteranodon).
+
+## Expert Recommendations & Technical Guidelines
+- [ ] **Animations System**: Refactor legacy animations to use Vanilla `HierarchicalModel` and `AnimationDefinition`.
+- [ ] **Weapons & Tools**: Migrate legacy `ToolActions` to `ItemAbilities` and implement built-in Data Maps (`neoforge:strippables`, `neoforge:waxables`, `neoforge:furnace_fuels`).
+- [ ] **Networking Thread Safety**: Ensure all `CustomPacketPayload` ability/UI handlers that modify game state are wrapped in `context.enqueueWork`.
+- [ ] **Mob AI & Abilities**: Replace nested loops with AABB spatial queries (`level.getEntitiesOfClass`) and in-memory filtering for targeting.
+- [ ] **Testing Strategy**: Implement a Test Data Builder / Object Mother pattern (e.g., `TestEntityBuilder`) to streamline the setup of complex mock entities and `PlayerStats` in the test suite.

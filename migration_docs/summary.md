@@ -36,3 +36,10 @@ A thorough comparison between `old_source` and the current `src` has revealed th
 - **Morphs package**: Logic for Zoan and specific Paramecia transformations.
 - **Challenges System**: Faction-specific arena challenges.
 - **Remaining Fruits**: ~25 fruits still not started.
+
+## Expert Recommendations
+- **Animations & Morphs**: Avoid porting legacy `AnimationCapability.java`. Use `ModDataAttachments.ANIMATION_DATA` and prefer Vanilla's modern data-driven keyframe animations (`HierarchicalModel` and `AnimationDefinition`).
+- **Weapons, Armors, and Tools**: Use NeoForge's `ItemAbilities` over the deprecated `ToolActions`. Rely on Built-In Data Maps (`neoforge:strippables`, `neoforge:waxables`, `neoforge:furnace_fuels`) for block interactions and fuel states.
+- **Networking**: For Ability and UI logic, use `CustomPacketPayload` and `StreamCodec`. Always wrap world, entity, or player stat modifications in `context.enqueueWork(() -> { ... })` to push execution to the main server thread.
+- **Mobs and AI**: Optimize area-of-effect abilities and target searches by using efficient AABB queries (`level.getEntitiesOfClass(...)`) paired with in-memory filtering.
+- **Testing Strategy**: For complex ability tests, adopt an Object Mother / Test Data Builder pattern (e.g., `TestEntityBuilder`) to handle the repetitive setup of mock entities, levels, and PlayerStats.

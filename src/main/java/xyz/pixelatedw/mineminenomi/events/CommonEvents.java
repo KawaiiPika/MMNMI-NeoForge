@@ -20,8 +20,6 @@ import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 import xyz.pixelatedw.mineminenomi.data.world.FactionsWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModAbilities;
 
-import java.util.ArrayList;
-
 @EventBusSubscriber(modid = ModMain.PROJECT_ID)
 public class CommonEvents {
 
@@ -40,6 +38,9 @@ public class CommonEvents {
         if (event.getEntity() instanceof LivingEntity entity) {
             PlayerStats stats = PlayerStats.get(entity);
             if (stats != null) {
+                // Iterating directly over getActiveAbilities() is safe here because PlayerStats uses a
+                // copy-on-write pattern for its lists. Any modification (like toggling an ability)
+                // will replace the list reference in PlayerStats rather than modifying the list being iterated.
                 for (String abilityId : stats.getActiveAbilities()) {
                     Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                     if (ability != null) {
@@ -63,6 +64,8 @@ public class CommonEvents {
             PlayerStats attackerStats = PlayerStats.get(livingAttacker);
             if (attackerStats != null) {
                 // Ability damage hooks
+                // Iterating directly over getActiveAbilities() is safe here because PlayerStats uses a
+                // copy-on-write pattern for its lists.
                 for (String abilityId : attackerStats.getActiveAbilities()) {
                     Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                     if (ability != null) {
@@ -110,6 +113,8 @@ public class CommonEvents {
         // Target Logic
         if (targetStats != null) {
             // Active abilities onHurt hook
+            // Iterating directly over getActiveAbilities() is safe here because PlayerStats uses a
+            // copy-on-write pattern for its lists.
             for (String abilityId : targetStats.getActiveAbilities()) {
                 Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                 if (ability != null) {
@@ -144,7 +149,7 @@ public class CommonEvents {
             }
 
             // Logia Intangibility
-            if (targetStats.isLogia() && !target.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI)) {
+            if (targetStats.isLogia()) {
                 boolean bypass = false;
                 if (attacker instanceof LivingEntity livingAttacker) {
                     PlayerStats attackerStats = PlayerStats.get(livingAttacker);

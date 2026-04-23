@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.ui.widget;
+package xyz.pixelatedw.mineminenomi.client.gui.widgets;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -19,20 +19,21 @@ public class PlankButton extends Button {
       super(posX, posY, width, height, string, onPress, narration);
    }
 
-   private int getTextureY() {
+   private int getYImage() {
       int i = 1;
       if (!this.active) {
          i = 0;
-      } else if (this.isHovered()) {
+      } else if (this.isFocused()) {
          i = 2;
       }
 
       return 0 + i * 30;
    }
 
-   @Override
    public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
       RenderSystem.enableDepthTest();
+      if (this.isHovered) {
+      }
 
       graphics.pose().pushPose();
       float red = 1.0F;
@@ -42,7 +43,7 @@ public class PlankButton extends Button {
          blue = 0.4F;
          green = 0.4F;
          red = 0.4F;
-      } else if (this.isHovered()) {
+      } else if (this.isHovered) {
          graphics.pose().translate((double)0.0F, (double)0.5F, (double)1.0F);
          blue = 0.6F;
          green = 0.6F;
@@ -55,7 +56,7 @@ public class PlankButton extends Button {
       RenderSystem.enableBlend();
       RenderSystem.defaultBlendFunc();
       RenderSystem.enableDepthTest();
-      graphics.blit(ModResources.WIDGETS, this.getX(), this.getY(), this.getWidth(), this.getHeight(), 20, 4, 132, 29, 256, 256);
+      graphics.blit(ModResources.WIDGETS, this.getX(), this.getY(), this.getWidth(), this.getHeight(), 20, 4, 132, 29, 123, this.getYImage());
       RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
       int color = this.getFGColor() | Mth.ceil(this.alpha * 255.0F) << 24;
       int texLen = fontrenderer.width(this.getMessage()) / 2;

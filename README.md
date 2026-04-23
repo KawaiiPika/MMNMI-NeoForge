@@ -22,6 +22,16 @@ The mod is currently being systematically migrated module by module, with a focu
 
 ---
 
+## 💡 Expert Recommendations & Guidelines
+
+1. **Animations & Morphs**: Do not attempt to port the old `AnimationCapability.java` generic boilerplate. Since `ModDataAttachments.ANIMATION_DATA` is successfully implemented, simply store plain Java animation state objects directly on the entities. For 1.21.1, strongly consider dropping heavy manual rendering math in favor of Vanilla's modern data-driven keyframe animations using `HierarchicalModel` and `AnimationDefinition` which natively supports keyframes and interpolation.
+2. **Weapons, Armors, and Tools**: Use `ItemAbilities` over `ToolActions` since NeoForge renamed the old `ToolActions` system. Utilize Built-In Data Maps like `neoforge:strippables` and `neoforge:waxables` instead of hardcoding interactions. Use the `neoforge:furnace_fuels` data map instead of overriding methods, unless burn time depends strictly on dynamic Data Components.
+3. **Networking for Abilities and UI**: Ensure you are using the new 1.21.1 `CustomPacketPayload` and `StreamCodec` system registered via `PayloadRegistrar`. Since NeoForge payload handlers execute on the network thread by default, you **must** wrap logic that modifies the world, damages an entity, or alters player stats in `context.enqueueWork(() -> { ... })` to push it to the main server thread, preventing `ConcurrentModificationException` crashes.
+4. **Mobs and AI**: When implementing AI that searches for targets or abilities that affect an area, continue using efficient AABB (Axis-Aligned Bounding Box) queries (`level.getEntitiesOfClass(...)`) and in-memory filtering rather than nested loops to maintain server TPS.
+5. **Testing**: Since abilities require complex setup (Entity mocks, Level mocks, PlayerStats), consider implementing an Object Mother or Test Data Builder pattern for your test suite (e.g., `TestEntityBuilder` class) to automate player mocking with pre-configured Data Attachments.
+
+---
+
 ## ✅ Recent Milestones
 
 - **Faithful Port Analysis**: Completed a deep comparison between `old_source` and the current project to identify and document all missing systems (Dials, Bullets, Challenges, etc.).
