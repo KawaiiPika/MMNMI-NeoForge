@@ -17,6 +17,11 @@ public class KachiageHaisokuAbility extends Ability {
 
     @Override
     public float onAttack(LivingEntity entity, LivingEntity target, DamageSource source, float amount) {
+        return amount;
+    }
+
+    @Override
+    public void onDamageTakenByTarget(LivingEntity entity, LivingEntity target, DamageSource source) {
         if (this.canUse(entity).isSuccess()) {
             float damage = 20.0F;
             if (entity.isInWater()) {
@@ -35,7 +40,6 @@ public class KachiageHaisokuAbility extends Ability {
 
             this.startCooldown(entity, 160);
         }
-        return amount;
     }
 
     @Override

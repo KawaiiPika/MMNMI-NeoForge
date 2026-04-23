@@ -134,6 +134,10 @@ public abstract class Ability {
         return amount;
     }
 
+    public void onDamageTakenByTarget(LivingEntity entity, LivingEntity target, net.minecraft.world.damagesource.DamageSource source) {}
+
+    public void onDamageTaken(LivingEntity entity, net.minecraft.world.damagesource.DamageSource source) {}
+
     public long getDuration(LivingEntity entity) {
         return startTick == -1 ? 0 : entity.level().getGameTime() - startTick;
     }

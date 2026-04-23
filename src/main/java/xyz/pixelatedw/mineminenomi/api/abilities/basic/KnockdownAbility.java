@@ -19,11 +19,15 @@ public class KnockdownAbility extends Ability {
 
     @Override
     public float onAttack(LivingEntity entity, LivingEntity target, net.minecraft.world.damagesource.DamageSource source, float amount) {
+        return amount + 6.0F;
+    }
+
+    @Override
+    public void onDamageTakenByTarget(LivingEntity entity, LivingEntity target, net.minecraft.world.damagesource.DamageSource source) {
         if (!entity.level().isClientSide) {
             target.setDeltaMovement(entity.getLookAngle().x * 1.5, 0.4, entity.getLookAngle().z * 1.5);
             target.hurtMarked = true;
         }
-        return amount + 6.0F;
     }
 
     @Override

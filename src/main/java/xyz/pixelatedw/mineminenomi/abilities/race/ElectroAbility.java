@@ -23,13 +23,17 @@ public class ElectroAbility extends Ability {
 
     @Override
     public float onAttack(LivingEntity entity, LivingEntity target, DamageSource source, float amount) {
+        return amount;
+    }
+
+    @Override
+    public void onDamageTakenByTarget(LivingEntity entity, LivingEntity target, DamageSource source) {
         if (this.isUsing(entity)) {
             target.hurt(entity.damageSources().lightningBolt(), 4.0F);
             if (!entity.level().isClientSide) {
                 // Future: add lightning particles or sound
             }
         }
-        return amount;
     }
 
     @Override

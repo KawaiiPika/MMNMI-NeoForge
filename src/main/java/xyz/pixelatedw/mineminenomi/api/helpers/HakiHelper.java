@@ -27,11 +27,15 @@ public class HakiHelper {
             }
         }
 
-        // Gain exp
-        stats.setBusoshokuHakiExp(stats.getBusoshokuHakiExp() + 0.1f);
-        stats.sync(attacker);
-
         return (float) (originalAmount * boost);
+    }
+
+    public static void onHakiDamageTaken(LivingEntity attacker) {
+        PlayerStats stats = PlayerStats.get(attacker);
+        if (stats != null && stats.isBusoshokuActive()) {
+            stats.setBusoshokuHakiExp(stats.getBusoshokuHakiExp() + 0.1f);
+            stats.sync(attacker);
+        }
     }
 
     public static boolean isWeakenedByHaoshoku(LivingEntity user, LivingEntity target) {

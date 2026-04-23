@@ -41,10 +41,16 @@ public class DiableJambeAbility extends Ability {
     @Override
     public float onAttack(LivingEntity entity, LivingEntity target, DamageSource source, float amount) {
         if (this.isUsing(entity)) {
-            target.setRemainingFireTicks(60); // 3 seconds of fire
             return amount * 1.5f; // 50% damage boost
         }
         return amount;
+    }
+
+    @Override
+    public void onDamageTakenByTarget(LivingEntity entity, LivingEntity target, DamageSource source) {
+        if (this.isUsing(entity)) {
+            target.setRemainingFireTicks(60); // 3 seconds of fire
+        }
     }
 
     @Override
