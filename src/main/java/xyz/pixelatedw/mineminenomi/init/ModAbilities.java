@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 public class ModAbilities {
     public static final ResourceKey<Registry<Ability>> REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(ModMain.PROJECT_ID, "abilities"));
     public static final DeferredRegister<Ability> ABILITIES = DeferredRegister.create(REGISTRY_KEY, ModMain.PROJECT_ID);
-    public static final Registry<Ability> REGISTRY = new RegistryBuilder<>(REGISTRY_KEY).sync(true).create();
+    public static Registry<Ability> REGISTRY;
 
     public static final Supplier<Ability> PUNCH = ABILITIES.register("punch", xyz.pixelatedw.mineminenomi.api.abilities.basic.PunchAbility::new);
     public static final Supplier<Ability> SHISHI_SONSON = ABILITIES.register("shishi_sonson", xyz.pixelatedw.mineminenomi.abilities.ittoryu.ShiShishiSonsonAbility::new);
@@ -402,11 +402,7 @@ public class ModAbilities {
     public static final Supplier<Ability> SOAP_DEFENSE = ABILITIES.register("soap_defense", xyz.pixelatedw.mineminenomi.abilities.awa.SoapDefenseAbility::new);
 
     public static void register(IEventBus bus) {
-        bus.addListener(ModAbilities::onNewRegistry);
         ABILITIES.register(bus);
     }
 
-    private static void onNewRegistry(net.neoforged.neoforge.registries.RegisterEvent event) {
-        // Registration is handled by DeferredRegister
-    }
 }
