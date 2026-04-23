@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 public class ModAbilities {
     public static final ResourceKey<Registry<Ability>> REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(ModMain.PROJECT_ID, "abilities"));
     public static final DeferredRegister<Ability> ABILITIES = DeferredRegister.create(REGISTRY_KEY, ModMain.PROJECT_ID);
-    public static final Registry<Ability> REGISTRY = new RegistryBuilder<>(REGISTRY_KEY).sync(true).create();
+    public static Registry<Ability> REGISTRY;
 
     public static final Supplier<Ability> PUNCH = ABILITIES.register("punch", xyz.pixelatedw.mineminenomi.api.abilities.basic.PunchAbility::new);
     public static final Supplier<Ability> SHISHI_SONSON = ABILITIES.register("shishi_sonson", xyz.pixelatedw.mineminenomi.abilities.ittoryu.ShiShishiSonsonAbility::new);
