@@ -22,10 +22,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
+import net.neoforged.neoforge.entity.IEntityWithComplexSpawn;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 
 import javax.annotation.Nullable;
 
-public class ThrownSpearEntity extends AbstractArrow {
+public class ThrownSpearEntity extends AbstractArrow implements IEntityWithComplexSpawn {
     private static final EntityDataAccessor<Byte> ID_LOYALTY = SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<Boolean> ID_FOIL = SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.BOOLEAN);
     
@@ -180,5 +182,23 @@ public class ThrownSpearEntity extends AbstractArrow {
     @Override
     public boolean shouldRenderAtSqrDistance(double distance) {
         return true;
+    }
+
+    @Override
+    public void writeSpawnData(RegistryFriendlyByteBuf buffer) {
+        ItemStack.STREAM_CODEC.encode(buffer, this.itemStack);
+        buffer.writeInt(this.getOwner() != null ? this.getOwner().getId() : -1);
+    }
+
+    @Override
+    public void readSpawnData(RegistryFriendlyByteBuf data) {
+        this.itemStack = ItemStack.STREAM_CODEC.decode(data);
+        int ownerId = data.readInt();
+        if (ownerId >= 0) {
+            Entity owner = this.level().getEntity(ownerId);
+            if (owner != null) {
+                this.setOwner(owner);
+            }
+        }
     }
 }

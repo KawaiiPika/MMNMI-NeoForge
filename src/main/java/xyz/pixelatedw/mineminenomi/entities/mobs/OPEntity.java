@@ -7,8 +7,13 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
+import net.neoforged.neoforge.entity.IEntityWithComplexSpawn;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 
-public abstract class OPEntity extends PathfinderMob {
+public abstract class OPEntity extends PathfinderMob implements IEntityWithComplexSpawn {
+
+    protected ResourceLocation currentTexture;
 
     protected OPEntity(EntityType<? extends PathfinderMob> type, Level level) {
         super(type, level);
@@ -25,7 +30,23 @@ public abstract class OPEntity extends PathfinderMob {
         return PlayerStats.get(this);
     }
 
-    public net.minecraft.resources.ResourceLocation getCurrentTexture() {
-        return ModResources.NULL_ENTITY_TEXTURE;
+    public ResourceLocation getCurrentTexture() {
+        return currentTexture != null ? currentTexture : ModResources.NULL_ENTITY_TEXTURE;
+    }
+
+    @Override
+    public void writeSpawnData(RegistryFriendlyByteBuf buffer) {
+        buffer.writeBoolean(this.currentTexture != null);
+        if (this.currentTexture != null) {
+            buffer.writeResourceLocation(this.currentTexture);
+        }
+    }
+
+    @Override
+    public void readSpawnData(RegistryFriendlyByteBuf buffer) {
+        boolean hasTexture = buffer.readBoolean();
+        if (hasTexture) {
+            this.currentTexture = buffer.readResourceLocation();
+        }
     }
 }

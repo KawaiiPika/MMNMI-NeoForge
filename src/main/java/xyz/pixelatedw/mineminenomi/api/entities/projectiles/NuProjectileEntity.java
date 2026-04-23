@@ -7,8 +7,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
+import net.neoforged.neoforge.entity.IEntityWithComplexSpawn;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.world.entity.Entity;
 
-public class NuProjectileEntity extends ThrowableProjectile {
+public class NuProjectileEntity extends ThrowableProjectile implements IEntityWithComplexSpawn {
 
     protected Ability parentAbility;
     protected float damage = 10.0F;
@@ -54,5 +57,28 @@ public class NuProjectileEntity extends ThrowableProjectile {
     @Override
     protected void defineSynchedData(net.minecraft.network.syncher.SynchedEntityData.Builder builder) {
         // Required method
+    }
+
+    @Override
+    public void writeSpawnData(RegistryFriendlyByteBuf buffer) {
+        boolean hasOwner = this.getOwner() != null;
+        buffer.writeBoolean(hasOwner);
+        if (hasOwner) {
+            buffer.writeInt(this.getOwner().getId());
+        }
+        buffer.writeFloat(this.damage);
+    }
+
+    @Override
+    public void readSpawnData(RegistryFriendlyByteBuf buffer) {
+        boolean hasOwner = buffer.readBoolean();
+        if (hasOwner) {
+            int ownerId = buffer.readInt();
+            Entity owner = this.level().getEntity(ownerId);
+            if (owner instanceof LivingEntity livingOwner) {
+                this.setOwner(livingOwner);
+            }
+        }
+        this.damage = buffer.readFloat();
     }
 }
