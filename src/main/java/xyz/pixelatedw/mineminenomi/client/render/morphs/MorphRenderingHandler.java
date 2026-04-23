@@ -13,11 +13,13 @@ import net.neoforged.neoforge.client.event.RenderPlayerEvent;
 import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.zoan.ZoanAbility;
-import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
+import xyz.pixelatedw.mineminenomi.data.entity.MorphData;
 import xyz.pixelatedw.mineminenomi.init.ModAbilities;
+import xyz.pixelatedw.mineminenomi.init.ModDataAttachments;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @EventBusSubscriber(modid = ModMain.PROJECT_ID, value = Dist.CLIENT)
 public class MorphRenderingHandler {
@@ -31,22 +33,13 @@ public class MorphRenderingHandler {
     @SubscribeEvent
     public static void onPlayerRenderPre(RenderPlayerEvent.Pre event) {
         Player player = event.getEntity();
-        PlayerStats stats = PlayerStats.get(player);
-        if (stats == null) return;
+        if (!player.hasData(ModDataAttachments.MORPH_DATA)) return;
 
-        ResourceLocation activeMorphModelId = null;
+        MorphData morphData = player.getData(ModDataAttachments.MORPH_DATA);
+        Optional<ResourceLocation> activeMorphModelId = morphData.currentMorph();
 
-        for (String activeAbilityStr : stats.getActiveAbilities()) {
-            ResourceLocation abilityId = ResourceLocation.parse(activeAbilityStr);
-            Ability ability = ModAbilities.REGISTRY.get(abilityId);
-            if (ability instanceof ZoanAbility zoanAbility) {
-                activeMorphModelId = zoanAbility.getMorphModelId();
-                break;
-            }
-        }
-
-        if (activeMorphModelId != null) {
-            MorphRenderer<?, ?> renderer = RENDERERS.get(activeMorphModelId);
+        if (activeMorphModelId.isPresent()) {
+            MorphRenderer<?, ?> renderer = RENDERERS.get(activeMorphModelId.get());
             if (renderer != null) {
                 event.setCanceled(true);
                 // Call our custom rendering logic here
@@ -54,9 +47,7 @@ public class MorphRenderingHandler {
                         .render((AbstractClientPlayer) event.getEntity(), event.getEntity().getYRot(), event.getPartialTick(), 
                                 event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight());
             } else {
-                // If the model is not ported yet, we can either cancel or let it be scaled.
-                // We'll let it render the normal player model (which will be scaled up natively!)
-                // if there's no custom renderer registered.
+                // If the model is not ported yet, we let it render the normal player model
             }
         }
     }
