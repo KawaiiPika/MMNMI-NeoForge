@@ -114,3 +114,10 @@ By default, the MDK is configured to use the official mapping names from Mojang.
 - **Detailed Migration Docs**: See `/migration_docs/` for task lists and gap analysis.
 - **Community Documentation**: [https://docs.neoforged.net/](https://docs.neoforged.net/)
 - **NeoForged Discord**: [https://discord.neoforged.net/](https://discord.neoforged.net/)
+
+## Post-Migration Tasks (Phase 3)
+- **Task:** Establish 1.20.1-legacy Backport Branch
+- **Priority:** Low / Post-Migration (Phase 3)
+- **Description:** Create a long-lived 1.20.1-legacy branch originating from the original pre-port codebase. Selectively cherry-pick version-agnostic system optimizations developed during the 1.21.1 port.
+- **Approved Backports:** AI Spatial Query optimizations, Object Mother testing patterns, and Mockito static mocking upgrades.
+- **Rejected Backports:** Do not attempt to backport Java 21 Virtual Threads, Vanilla Data Components, Data Attachments, or the new 1.21.1 Networking/Damage pipelines.
