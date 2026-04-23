@@ -39,6 +39,7 @@ public class ModRegistries {
         FIGHTING_STYLES = event.create(new RegistryBuilder<>(FIGHTING_STYLES_KEY));
         QUESTS = event.create(new RegistryBuilder<>(QUESTS_KEY));
         JOLLY_ROGER_ELEMENTS = event.create(new RegistryBuilder<>(JOLLY_ROGER_ELEMENTS_KEY));
+        ModAbilities.REGISTRY = event.create(new RegistryBuilder<>(ModAbilities.REGISTRY_KEY).sync(true));
     }
 
     public static void init(net.neoforged.bus.api.IEventBus eventBus) {
