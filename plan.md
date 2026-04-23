@@ -1,29 +1,8 @@
-1. Use `run_in_bash_session` to read `src/main/java_old/xyz/pixelatedw/mineminenomi/api/events/entity/CrewEvent.java`. Modify `src/main/java/xyz/pixelatedw/mineminenomi/api/events/entity/CrewEvent.java` using `replace_with_git_merge_diff` to add `Join`, `Leave`, and `Kick` inner classes that implement `ICancellableEvent`. Use `read_file` to verify the changes.
-2. Use `run_in_bash_session` with `cat << 'EOF'` to create `src/main/java/xyz/pixelatedw/mineminenomi/api/events/JollyRogerEvent.java` and port the old event into a NeoForge Event. Verify the file is created with `ls src/main/java/xyz/pixelatedw/mineminenomi/api/events/`.
-3. Use `run_in_bash_session` to copy `FactionsWorldData` from `src/main/java_old/xyz/pixelatedw/mineminenomi/data/world/FactionsWorldData.java` to `src/main/java/xyz/pixelatedw/mineminenomi/data/world/FactionsWorldData.java`. Modify it using `replace_with_git_merge_diff` to fix compilation issues (e.g., removing `WyHelper.getResourceName` if needed or porting it). Verify with `./gradlew compileJava`.
-4. Use `run_in_bash_session` with `cat << 'EOF'` to port `FactionHelper` by creating `src/main/java/xyz/pixelatedw/mineminenomi/api/helpers/FactionHelper.java`. Verify with `./gradlew compileJava`.
-5. Create packets: Use `run_in_bash_session` with `cat << 'EOF'` to create the following files in `src/main/java/xyz/pixelatedw/mineminenomi/networking/packets/`:
-  - `SOpenCrewScreenPacket.java`
-  - `SOpenJollyRogerEditorScreenPacket.java`
-  - `SSyncStrikerCrewPacket.java`
-  - `CKickFromCrewPacket.java`
-  - `CLeaveCrewPacket.java`
-  - `CUpdateJollyRogerPacket.java`
-  - `COpenCrewScreenPacket.java`
-  - `COpenJollyRogerEditorScreenPacket.java`
-  Verify the files are created with `ls src/main/java/xyz/pixelatedw/mineminenomi/networking/packets/`.
-6. Use `replace_with_git_merge_diff` to register the new packets in `src/main/java/xyz/pixelatedw/mineminenomi/networking/ModNetworking.java`. Verify by compiling with `./gradlew compileJava`.
-7. Use `run_in_bash_session` with `cat << 'EOF'` to port the `SSimpleMessageScreenEventPacket` logic by creating `src/main/java/xyz/pixelatedw/mineminenomi/networking/packets/SSimpleMessageScreenEventPacket.java` and port `IEventReceiverScreen` by creating `src/main/java/xyz/pixelatedw/mineminenomi/api/ui/IEventReceiverScreen.java`. Verify they are created using `ls`. Register it in `ModNetworking`.
-8. Use `run_in_bash_session` with `cat << 'EOF'` to port the following UI files to `src/main/java/xyz/pixelatedw/mineminenomi/client/gui/screens/`:
-  - `CrewDetailsScreen.java`
-  - `JollyRogerEditorScreen.java`
-  And to `src/main/java/xyz/pixelatedw/mineminenomi/client/gui/panels/`:
-  - `CrewMembersScrollPanel.java`
-  - `JollyRogerElementsScrollPanel.java`
-  And to `src/main/java/xyz/pixelatedw/mineminenomi/client/gui/components/`:
-  - `JollyRogerElementColorComponent.java`
-  Verify these files are created using `ls`.
-9. Use `./gradlew compileJava` to verify all the changes compile correctly and fix any remaining missing methods.
-10. Complete pre-commit steps to ensure proper testing, verification, review, and reflection are done.
-11. Run tests with `./gradlew test` to ensure the ported system functions correctly and introduces no regressions.
-12. Submit the changes.
+1. Modify `WhiteWalkieEntity.java` to use the modern `ItemContainerContents` for saving its inventory state, instead of manually serializing a `CompoundTag` with `ListTag`.
+   - Update `addAdditionalSaveData` (legacy `m_7380_` / `saveAdditional` depending on mappings).
+   - Update `readAdditionalSaveData` (legacy `m_7378_` / `readAdditional` depending on mappings).
+2. Since `WhiteWalkieEntity` uses `SimpleContainer`, the process of serialization can leverage `ItemContainerContents.fromItems` or iterating through items to build the component, or storing it manually as a component if the entity's items are represented as components. Wait, `WhiteWalkieEntity` is an Entity, not an Item. Entities save to NBT.
+   - However, the task says "Update WhiteWalkieStorageContainer to save its inventory state using the modern ItemContainerContents Data Component". `WhiteWalkieStorageContainer` is an `AbstractContainerMenu`.
+   - Wait, `ItemContainerContents` is an `Item` Data Component. Does `WhiteWalkieStorageContainer` represent an item's inventory (like a backpack)? No, `WhiteWalkieStorageContainer` opens the inventory of a `WhiteWalkieEntity`!
+   - Wait, let me check where `WhiteWalkieStorageContainer` saves to an Item. Does it save to an item in the player's inventory? Ah, maybe `WhiteWalkieStorageContainer` is used for an item?
+   - In `WhiteWalkieEntity.java`, the method `m_142075_` might be where it converts an item to an entity or vice-versa? No, `WhiteWalkieEntity` is a `TamableAnimal`.

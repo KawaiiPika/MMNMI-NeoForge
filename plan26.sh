@@ -1,3 +1,5 @@
+#!/bin/bash
+cat << 'JAVA_CODE' > src/main/java_old/xyz/pixelatedw/mineminenomi/entities/mobs/animals/WhiteWalkieEntity.java
 package xyz.pixelatedw.mineminenomi.entities.mobs.animals;
 
 import java.util.Arrays;
@@ -72,7 +74,10 @@ import xyz.pixelatedw.mineminenomi.init.ModItems;
 import xyz.pixelatedw.mineminenomi.init.ModMobs;
 import xyz.pixelatedw.mineminenomi.init.i18n.ModI18n;
 import net.minecraft.world.item.component.ItemContainerContents;
-import net.minecraft.core.component.DataComponents;
+import java.util.ArrayList;
+import java.util.List;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.NbtOps;
 
 public class WhiteWalkieEntity extends TamableAnimal implements ContainerListener, HasCustomInventoryScreen, IGoalMemoriesEntity {
    private static final EntityDataAccessor<Byte> FLAGS;
@@ -170,30 +175,12 @@ public class WhiteWalkieEntity extends TamableAnimal implements ContainerListene
       }
 
       if (this.hasChest()) {
-         java.util.List<ItemStack> list = new java.util.ArrayList<>();
-         for(int i = 1; i < this.inventory.m_6643_(); ++i) {
+         List<ItemStack> list = new ArrayList<>();
+         for (int i = 1; i < this.inventory.m_6643_(); ++i) {
              list.add(this.inventory.m_8020_(i));
          }
-
-         // In entity NBT, we still serialize the list of items since it's an entity.
-         // However, the instructions specify to save its inventory state using ItemContainerContents Data Component.
-         // Given it's an entity, I'll encode the component directly to NBT.
          ItemContainerContents contents = ItemContainerContents.fromItems(list);
-         // Wait, the entity NBT should just be the items. The task asked to update the *container* to use the data component.
-         // But the container is not saved directly.
-         // Let's just serialize it back using standard methods so we don't break entity format unless specifically requested.
-         // Actually, if we use ItemContainerContents here, we can store it as NBT.
-         net.minecraft.nbt.ListTag listnbt = new net.minecraft.nbt.ListTag();
-         for(int i = 1; i < this.inventory.m_6643_(); ++i) {
-            ItemStack itemstack = this.inventory.m_8020_(i);
-            if (!itemstack.m_41619_()) {
-               CompoundTag compoundnbt = new CompoundTag();
-               compoundnbt.m_128344_("Slot", (byte)i);
-               itemstack.m_41739_(compoundnbt);
-               listnbt.add(compoundnbt);
-            }
-         }
-         nbt.m_128365_("Items", listnbt);
+         ItemContainerContents.f_315335_.encodeStart(NbtOps.f_128958_, contents).ifSuccess(t -> nbt.m_128365_("ItemsData", t));
       }
 
    }
@@ -210,15 +197,25 @@ public class WhiteWalkieEntity extends TamableAnimal implements ContainerListene
       }
 
       if (this.hasChest()) {
-         net.minecraft.nbt.ListTag listnbt = nbt.m_128437_("Items", 10);
          this.createInventory();
 
-         for(int i = 0; i < listnbt.size(); ++i) {
-            CompoundTag compoundnbt = listnbt.m_128728_(i);
-            int j = compoundnbt.m_128445_("Slot") & 255;
-            if (j >= 1 && j < this.inventory.m_6643_()) {
-               this.inventory.m_6836_(j, ItemStack.m_41712_(compoundnbt));
-            }
+         if (nbt.m_128441_("ItemsData")) {
+             ItemContainerContents contents = ItemContainerContents.f_315335_.decode(NbtOps.f_128958_, nbt.m_128423_("ItemsData")).getOrThrow();
+             NonNullList<ItemStack> tempList = NonNullList.withSize(this.inventory.m_6643_(), ItemStack.f_41583_);
+             contents.copyInto(tempList);
+             for(int i = 1; i < this.inventory.m_6643_(); i++) {
+                 this.inventory.m_6836_(i, tempList.get(i - 1)); // -1 since 0 is saddle
+             }
+         } else if (nbt.m_128441_("Items")) {
+             // Legacy fallback
+             net.minecraft.nbt.ListTag listnbt = nbt.m_128437_("Items", 10);
+             for(int i = 0; i < listnbt.size(); ++i) {
+                CompoundTag compoundnbt = listnbt.m_128728_(i);
+                int j = compoundnbt.m_128445_("Slot") & 255;
+                if (j >= 1 && j < this.inventory.m_6643_()) {
+                   this.inventory.m_6836_(j, ItemStack.m_41712_(compoundnbt));
+                }
+             }
          }
       }
 
@@ -559,6 +556,8 @@ public class WhiteWalkieEntity extends TamableAnimal implements ContainerListene
       FLAGS = SynchedEntityData.m_135353_(WhiteWalkieEntity.class, EntityDataSerializers.f_135027_);
       CHESTS = SynchedEntityData.m_135353_(WhiteWalkieEntity.class, EntityDataSerializers.f_135028_);
       SADDLES = new Item[]{Items.f_42450_};
-      FOOD_ITEMS = Ingredient.m_43929_(new ItemLike[]{ModItems.COOKED_SEA_KING_MEAT.get()});
+      FOOD_ITEMS = Ingredient.m_43929_(new net.minecraft.world.level.ItemLike[]{ModItems.COOKED_SEA_KING_MEAT.get()});
    }
 }
+JAVA_CODE
+./gradlew compileJava

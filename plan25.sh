@@ -1,3 +1,5 @@
+#!/bin/bash
+cat << 'JAVA_CODE' > src/main/java_old/xyz/pixelatedw/mineminenomi/containers/WhiteWalkieStorageContainer.java
 package xyz.pixelatedw.mineminenomi.containers;
 
 import net.minecraft.nbt.CompoundTag;
@@ -184,3 +186,4 @@ public class WhiteWalkieStorageContainer extends AbstractContainerMenu {
        }
    }
 }
+JAVA_CODE
