@@ -38,12 +38,16 @@ public class CommonEvents {
         if (event.getEntity() instanceof LivingEntity entity) {
             PlayerStats stats = PlayerStats.get(entity);
             if (stats != null) {
+                boolean hasKairoseki = entity.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI);
                 // Iterating directly over getActiveAbilities() is safe here because PlayerStats uses a
                 // copy-on-write pattern for its lists. Any modification (like toggling an ability)
                 // will replace the list reference in PlayerStats rather than modifying the list being iterated.
                 for (String abilityId : stats.getActiveAbilities()) {
                     Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                     if (ability != null) {
+                        if (hasKairoseki && ability.getRequiredFruit() != null) {
+                            continue;
+                        }
                         ability.tick(entity);
                     }
                 }
@@ -63,12 +67,16 @@ public class CommonEvents {
         if (attacker instanceof LivingEntity livingAttacker) {
             PlayerStats attackerStats = PlayerStats.get(livingAttacker);
             if (attackerStats != null) {
+                boolean attackerHasKairoseki = livingAttacker.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI);
                 // Ability damage hooks
                 // Iterating directly over getActiveAbilities() is safe here because PlayerStats uses a
                 // copy-on-write pattern for its lists.
                 for (String abilityId : attackerStats.getActiveAbilities()) {
                     Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                     if (ability != null) {
+                        if (attackerHasKairoseki && ability.getRequiredFruit() != null) {
+                            continue;
+                        }
                         float modifiedAmount = ability.onAttack(livingAttacker, target, source, event.getAmount());
                         event.setAmount(modifiedAmount);
                         if (modifiedAmount <= 0) {
@@ -112,12 +120,16 @@ public class CommonEvents {
 
         // Target Logic
         if (targetStats != null) {
+            boolean targetHasKairoseki = target.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI);
             // Active abilities onHurt hook
             // Iterating directly over getActiveAbilities() is safe here because PlayerStats uses a
             // copy-on-write pattern for its lists.
             for (String abilityId : targetStats.getActiveAbilities()) {
                 Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                 if (ability != null) {
+                    if (targetHasKairoseki && ability.getRequiredFruit() != null) {
+                        continue;
+                    }
                     float newAmount = ability.onHurt(target, source, event.getAmount());
                     event.setAmount(newAmount);
                     if (newAmount <= 0) {
@@ -149,7 +161,7 @@ public class CommonEvents {
             }
 
             // Logia Intangibility
-            if (targetStats.isLogia()) {
+            if (targetStats.isLogia() && !targetHasKairoseki) {
                 boolean bypass = false;
                 if (attacker instanceof LivingEntity livingAttacker) {
                     PlayerStats attackerStats = PlayerStats.get(livingAttacker);
