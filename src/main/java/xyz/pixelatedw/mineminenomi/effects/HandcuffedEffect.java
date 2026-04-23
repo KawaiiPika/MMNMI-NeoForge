@@ -31,7 +31,15 @@ public class HandcuffedEffect extends MobEffect implements IBindHandsEffect {
     @Override
     public boolean applyEffectTick(LivingEntity entity, int amplifier) {
         if (this.type == HandcuffType.KAIROSEKI) {
-            // TODO: Disable Devil Fruit abilities
+            xyz.pixelatedw.mineminenomi.data.entity.PlayerStats stats = xyz.pixelatedw.mineminenomi.data.entity.PlayerStats.get(entity);
+            if (stats != null) {
+                for (String abilityId : stats.getActiveAbilities()) {
+                    xyz.pixelatedw.mineminenomi.api.abilities.Ability ability = xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.get(net.minecraft.resources.ResourceLocation.parse(abilityId));
+                    if (ability != null && ability.getRequiredFruit() != null) {
+                        ability.stop(entity);
+                    }
+                }
+            }
         }
         return true;
     }
