@@ -44,6 +44,7 @@
 - [ ] **Zoan Transformation System**: Requires a robust model-swapping and attribute modifier system.
 - [ ] **Ship Generation**: Reconnecting complex structure generation for ships in worldgen.
 - [ ] **Data-Driven Armor**: Transition to 1.21.1's new armor trim and asset systems if desired.
+- [ ] Complete implementation and verification of TankyudonAbility (Ryu Ryu no Mi: Model Pteranodon).
 
 ## Expert Recommendations & Technical Guidelines
 - [ ] **Animations System**: Refactor legacy animations to use Vanilla `HierarchicalModel` and `AnimationDefinition`.
