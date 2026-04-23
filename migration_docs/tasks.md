@@ -20,13 +20,18 @@
 - [x] **Haki System Core**: Implemented Stamina-based Haki system (Busoshoku/Kenbunshoku) with drain and overuse mechanics.
 - [x] **Ability API**: Base `Ability` class with result-driven validation and toggle support.
 - [x] **UI Framework**: Ported core widgets and screens (Abilities Menu, Player Stats, Character Creator).
+- [x] **Port all missing Weapons**: Registering remaining swords, guns, bows and special weapons from `old_source` completed.
+- [x] **Modernize Custom Entity Spawning Data**: Custom projectiles and complex mobs now correctly implement `IEntityWithComplexSpawn`.
+- [x] **Migrate Inventory and Energy Systems to ResourceHandler**: `WhiteWalkieStorageContainer` uses `ItemContainerContents` and Cyborg energy relies on Data Attachments.
+- [x] **Update Plant and Crop Logic to SpecialPlantable**: Finished via the `TangerineCropsBlock` migration.
+- [x] **Implement NeoForge Data Maps for Block/Item Properties**: Citing the new `furnace_fuels.json` and `strippables.json` data maps.
+- [x] **Compliance Audits Passed**: Clean Up Event Listener Architecture and Rework Client-to-Server Ability Networking are fully aligned with NeoForge 1.21.1 architecture.
 
 ## Immediate Priority
-- [/] **Port all missing Weapons**: Registering remaining swords, guns, bows and special weapons from `old_source`.
 - [ ] **Network Synching**: Ensure `selectedAbilitySlot` and other stats are synced correctly to the client.
 - [/] **Port remaining Ability logic**: Fruit abilities and Fighting Styles.
-  - [ ] **Batch 1: Logias & Simple Paramecias**: Yuki, Yomi, Gasu, Sube, Bari.
-  - [ ] **Batch 2: Gravity & Weight Paramecias**: Zushi, Kilo, Ton (if exists), Fuwa (if exists).
+  - [x] **Batch 1: Logias & Simple Paramecias**: Yuki, Yomi, Gasu, Sube, Bari.
+  - [/] **Batch 2: Gravity & Weight Paramecias**: Zushi, Kilo, Ton (if exists), Fuwa (if exists).
   - [ ] **Batch 3: Creation & Manipulation Paramecias**: Doru, Awa, Doa, Ori, Beta, Kuku, Baku, Kira.
   - [ ] **Batch 4: Body & Misc Paramecias**: Horu, Bane, Deka, Jiki, Sabi, Kachi, Mini, Nagi, Kobu, Karu.
   - [ ] **Batch 5: Remaining Zoans (Models)**: Ryu Ryu (Allosaurus, Brachiosaurus, Pteranodon), Zou Zou, Tori Tori (Phoenix), Neko Neko (Leopard).
