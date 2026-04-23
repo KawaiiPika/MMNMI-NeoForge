@@ -14,6 +14,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import xyz.pixelatedw.mineminenomi.entities.ai.goals.HandleCannonGoal;
 import xyz.pixelatedw.mineminenomi.init.ModFactions;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 
@@ -46,6 +47,7 @@ public class GruntEntity extends OPEntity {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2D, false));
+        this.goalSelector.addGoal(2, new HandleCannonGoal(this));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));

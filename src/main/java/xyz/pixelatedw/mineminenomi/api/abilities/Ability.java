@@ -92,6 +92,9 @@ public abstract class Ability {
                 if (!stats.getDevilFruit().map(id -> id.equals(this.requiredFruit)).orElse(false)) {
                     return xyz.pixelatedw.mineminenomi.api.util.Result.fail(Component.translatable("ability.error.wrong_fruit"));
                 }
+                if (entity.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI)) {
+                    return xyz.pixelatedw.mineminenomi.api.util.Result.fail(Component.translatable("ability.error.kairoseki"));
+                }
             }
             
             net.minecraft.resources.ResourceLocation id = getAbilityId();

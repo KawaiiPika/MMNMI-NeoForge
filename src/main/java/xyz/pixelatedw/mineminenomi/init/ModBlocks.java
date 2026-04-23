@@ -22,6 +22,8 @@ public class ModBlocks {
     public static final DeferredHolder<Block, Block> PONEGLYPH = registerSimpleBlockItem("poneglyph", () -> new Block(BlockBehaviour.Properties.of()));
     public static final DeferredHolder<Block, Block> DEN_DEN_MUSHI = registerSimpleBlockItem("den_den_mushi", () -> new Block(BlockBehaviour.Properties.of()));
 
+    public static final DeferredHolder<Block, Block> TANGERINE_CROP = ModRegistry.BLOCKS.register("tangerine_crop", () -> new xyz.pixelatedw.mineminenomi.blocks.TangerineCropsBlock());
+
     private static DeferredHolder<Block, Block> registerSimpleBlockItem(String name, Supplier<Block> block) {
         DeferredHolder<Block, Block> registeredBlock = ModRegistry.BLOCKS.register(name, block);
         ModRegistry.ITEMS.register(name, () -> new BlockItem(registeredBlock.get(), new Item.Properties()));

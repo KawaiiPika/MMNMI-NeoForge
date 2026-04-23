@@ -30,7 +30,7 @@ public class ModGunItem extends ProjectileWeaponItem {
     }
 
     public ModGunItem(int maxDamage, Predicate<ItemStack> bulletPredicate) {
-        super(new Item.Properties().stacksTo(1).durability(maxDamage));
+        super(new Item.Properties().stacksTo(1).durability(maxDamage).component(xyz.pixelatedw.mineminenomi.init.ModDataComponents.GUNPOWDER.get(), 0));
         this.bulletCheck = bulletPredicate;
     }
 
