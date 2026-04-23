@@ -99,6 +99,92 @@ class HakiHelperTest extends xyz.pixelatedw.mineminenomi.effects.AbstractMinecra
     }
 
     @Test
+    void testIsWeakenedByHaoshoku_UserStronger() {
+        LivingEntity user = mock(LivingEntity.class);
+        LivingEntity target = mock(LivingEntity.class);
+        PlayerStats userStats = mock(PlayerStats.class);
+        PlayerStats targetStats = mock(PlayerStats.class);
+
+        try (MockedStatic<PlayerStats> mockedStats = Mockito.mockStatic(PlayerStats.class)) {
+            mockedStats.when(() -> PlayerStats.get(user)).thenReturn(userStats);
+            mockedStats.when(() -> PlayerStats.get(target)).thenReturn(targetStats);
+
+            when(userStats.getDoriki()).thenReturn(10000.0);
+            when(targetStats.getDoriki()).thenReturn(1000.0);
+
+            boolean result = HakiHelper.isWeakenedByHaoshoku(user, target);
+
+            assertEquals(true, result, "Target should be weakened if user power > target power * 1.5");
+        }
+    }
+
+    @Test
+    void testIsWeakenedByHaoshoku_UserWeaker() {
+        LivingEntity user = mock(LivingEntity.class);
+        LivingEntity target = mock(LivingEntity.class);
+        PlayerStats userStats = mock(PlayerStats.class);
+        PlayerStats targetStats = mock(PlayerStats.class);
+
+        try (MockedStatic<PlayerStats> mockedStats = Mockito.mockStatic(PlayerStats.class)) {
+            mockedStats.when(() -> PlayerStats.get(user)).thenReturn(userStats);
+            mockedStats.when(() -> PlayerStats.get(target)).thenReturn(targetStats);
+
+            when(userStats.getDoriki()).thenReturn(1000.0);
+            when(targetStats.getDoriki()).thenReturn(10000.0);
+
+            boolean result = HakiHelper.isWeakenedByHaoshoku(user, target);
+
+            assertEquals(false, result, "Target should not be weakened if user power < target power * 1.5");
+        }
+    }
+
+    @Test
+    void testTickHaki_ActiveHakiDrainStamina() {
+        LivingEntity entity = mock(LivingEntity.class);
+        PlayerStats stats = mock(PlayerStats.class);
+        net.minecraft.world.level.Level level = mock(net.minecraft.world.level.Level.class);
+
+        when(entity.level()).thenReturn(level);
+        // Level is not client side
+        // Default isClientSide = false for mock
+
+        try (MockedStatic<PlayerStats> mockedStats = Mockito.mockStatic(PlayerStats.class)) {
+            mockedStats.when(() -> PlayerStats.get(entity)).thenReturn(stats);
+
+            when(stats.isBusoshokuActive()).thenReturn(true);
+            when(stats.getStamina()).thenReturn(10.0);
+
+            HakiHelper.tickHaki(entity);
+
+            verify(stats).setStamina(9.5); // 10.0 - 0.5
+            verify(stats).sync(entity);
+        }
+    }
+
+    @Test
+    void testTickHaki_InactiveHakiRecoverStamina() {
+        LivingEntity entity = mock(LivingEntity.class);
+        PlayerStats stats = mock(PlayerStats.class);
+        net.minecraft.world.level.Level level = mock(net.minecraft.world.level.Level.class);
+
+        when(entity.level()).thenReturn(level);
+
+        try (MockedStatic<PlayerStats> mockedStats = Mockito.mockStatic(PlayerStats.class)) {
+            mockedStats.when(() -> PlayerStats.get(entity)).thenReturn(stats);
+
+            when(stats.isBusoshokuActive()).thenReturn(false);
+            when(stats.isKenbunshokuActive()).thenReturn(false);
+            when(stats.getStamina()).thenReturn(5.0);
+            when(stats.getMaxStamina()).thenReturn(10.0);
+
+            HakiHelper.tickHaki(entity);
+
+            verify(stats).setStamina(5.2); // 5.0 + 0.2
+            verify(stats).sync(entity);
+        }
+    }
+
+    @Test
     void testCalculateHakiDamage_WithBothAbilities() {
         TestEntityBuilder builder = TestEntityBuilder.instance()
                 .withBusoshokuActive(true)

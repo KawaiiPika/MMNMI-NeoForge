@@ -12,6 +12,10 @@ import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ProgressionServiceTest extends xyz.pixelatedw.mineminenomi.AbstractMinecraftTest {
+class ProgressionServiceTest {
+
+    private Player player;
+    private PlayerStats stats;
 
     @BeforeAll
     static void setupAll() {
@@ -21,6 +25,12 @@ class ProgressionServiceTest extends xyz.pixelatedw.mineminenomi.AbstractMinecra
         } catch (Throwable e) {
             // Ignore bootstrap issues in headless environment
         }
+    }
+
+    @BeforeEach
+    void setup() {
+        player = mock(Player.class);
+        stats = mock(PlayerStats.class);
     }
 
     @Test
@@ -39,5 +49,13 @@ class ProgressionServiceTest extends xyz.pixelatedw.mineminenomi.AbstractMinecra
         int newPoints = stats.getTrainingPoints(type);
 
         assertEquals(initialPoints + amount, newPoints);
+        try (MockedStatic<PlayerStats> playerStatsMockedStatic = Mockito.mockStatic(PlayerStats.class)) {
+            playerStatsMockedStatic.when(() -> PlayerStats.get(player)).thenReturn(stats);
+
+            ProgressionService.grantTrainingPoints(player, type, amount);
+
+            verify(stats).alterTrainingPoints(type, amount);
+            verify(stats).sync(player);
+        }
     }
 }
