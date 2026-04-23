@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 public class TestEntityBuilder {
@@ -54,6 +55,11 @@ public class TestEntityBuilder {
 
     public TestEntityBuilder withKenbunshokuActive(boolean active) {
         stats.setKenbunshokuActive(active);
+        return this;
+    }
+
+    public TestEntityBuilder withActiveAbility(String abilityId) {
+        stats.setAbilityActive(abilityId, true);
         return this;
     }
 
@@ -117,8 +123,8 @@ public class TestEntityBuilder {
     }
 
     public Player build() {
-        when(player.getData(ModDataAttachments.PLAYER_STATS)).thenReturn(stats);
-        when(player.level()).thenReturn(mock(net.minecraft.world.level.Level.class));
+        lenient().when(player.getData(ModDataAttachments.PLAYER_STATS)).thenReturn(stats);
+        lenient().when(player.level()).thenReturn(mock(net.minecraft.world.level.Level.class));
         return player;
     }
 
