@@ -42,6 +42,7 @@ public class ModMain {
         xyz.pixelatedw.mineminenomi.init.ModEffects.register(modEventBus);
         xyz.pixelatedw.mineminenomi.init.ModFeatures.register(modEventBus);
         xyz.pixelatedw.mineminenomi.init.ModStructures.register(modEventBus);
+        xyz.pixelatedw.mineminenomi.init.ModParticleTypes.init();
         xyz.pixelatedw.mineminenomi.init.ModDimensions.register(modEventBus);
     }
 
