@@ -68,7 +68,7 @@ public class ModParticleTypes {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> HOLE = register("hole");
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> COMMAND_MARK = register("command_mark_particle");
 
-    @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = net.neoforged.api.distmarker.Dist.CLIENT)
+    @EventBusSubscriber(modid = ModMain.PROJECT_ID, bus = EventBusSubscriber.Bus.MOD, value = net.neoforged.api.distmarker.Dist.CLIENT)
     public static class Client {
         @SubscribeEvent
         public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
@@ -132,4 +132,6 @@ public class ModParticleTypes {
             event.registerSpecial(type.get(), new SimpleParticle.Factory(ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/particle/" + texture + ".png"), maxFrames));
         }
     }
+    
+    public static void init() {}
 }

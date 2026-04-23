@@ -108,23 +108,6 @@ public class CommonEvents {
         }
     }
 
-    @SubscribeEvent
-    public static void onLivingDamagePost(net.neoforged.neoforge.event.entity.living.LivingDamageEvent.Post event) {
-        LivingEntity target = event.getEntity();
-        PlayerStats targetStats = PlayerStats.get(target);
-        if (targetStats != null) {
-            boolean targetHasKairoseki = target.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI);
-            for (String abilityId : targetStats.getActiveAbilities()) {
-                Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
-                if (ability != null) {
-                    if (targetHasKairoseki && ability.getRequiredFruit() != null) {
-                        continue;
-                    }
-                    ability.onDamageTake(target, event.getSource(), event.getNewDamage());
-                }
-            }
-        }
-    }
 
     @SubscribeEvent
     public static void onLivingIncomingDamage(LivingIncomingDamageEvent event) {
@@ -258,8 +241,7 @@ public class CommonEvents {
 
                 // Magma Coating
                 if (attackerStats.isAbilityActive("mineminenomi:magma_coating")) {
-                    boolean skip = attackerHasKairoseki;
-                    if (!skip) {
+                    if (!attackerHasKairoseki) {
                         target.setRemainingFireTicks(100);
                     }
                 }
@@ -278,6 +260,7 @@ public class CommonEvents {
                     if (targetHasKairoseki && ability.getRequiredFruit() != null) {
                         continue;
                     }
+                    ability.onDamageTake(target, source, event.getNewDamage());
                     ability.onDamageTaken(target, source);
                 }
             }
