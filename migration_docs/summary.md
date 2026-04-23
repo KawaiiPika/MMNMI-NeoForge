@@ -43,3 +43,36 @@ A thorough comparison between `old_source` and the current `src` has revealed th
 - **Networking**: For Ability and UI logic, use `CustomPacketPayload` and `StreamCodec`. Always wrap world, entity, or player stat modifications in `context.enqueueWork(() -> { ... })` to push execution to the main server thread.
 - **Mobs and AI**: Optimize area-of-effect abilities and target searches by using efficient AABB queries (`level.getEntitiesOfClass(...)`) paired with in-memory filtering.
 - **Testing Strategy**: For complex ability tests, adopt an Object Mother / Test Data Builder pattern (e.g., `TestEntityBuilder`) to handle the repetitive setup of mock entities, levels, and PlayerStats.
+
+
+## Deep Dive Progress Analysis
+
+Comparing file counts between old and new source:
+------------------------------------------------
+Package              Old        New        Progress
+abilities            593        231        38.95%
+animations           81         0          0.00%
+api                  372        94         25.27%
+audio                1          0          0.00%
+blocks               35         1          2.86%
+challenges           45         0          0.00%
+commands             23         7          30.43%
+config               11         0          0.00%
+containers           1          0          0.00%
+data                 95         2          2.11%
+datagen              105        0          0.00%
+effects              61         28         45.90%
+entities             319        52         16.30%
+handlers             49         0          0.00%
+init                 73         33         45.21%
+integrations         6          0          0.00%
+items                66         46         69.70%
+mixins               49         0          0.00%
+models               133        0          0.00%
+morphs               51         0          0.00%
+packets              129        0          0.00%
+particles            144        2          1.39%
+quests               23         36         156.52%
+renderers            98         0          0.00%
+ui                   42         8          19.05%
+world                14         8          57.14%
