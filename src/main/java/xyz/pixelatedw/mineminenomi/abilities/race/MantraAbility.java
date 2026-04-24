@@ -22,19 +22,6 @@ public class MantraAbility extends Ability {
     }
 
     @Override
-    public float onHurt(LivingEntity entity, DamageSource source, float amount) {
-        if (this.isUsing(entity)) {
-            if (entity.getRandom().nextFloat() < 0.2F) { // 20% dodge chance
-                if (!entity.level().isClientSide) {
-                    xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper.sendAbilityMessage(entity, Component.translatable("ability.mineminenomi.mantra.dodge"));
-                }
-                return 0.0F;
-            }
-        }
-        return amount;
-    }
-
-    @Override
     public Component getDisplayName() {
         return Component.translatable("ability.mineminenomi.mantra");
     }

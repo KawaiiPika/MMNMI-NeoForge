@@ -136,10 +136,6 @@ public abstract class Ability {
     public void onDamageTake(LivingEntity entity, net.minecraft.world.damagesource.DamageSource source, float amount) {
     }
 
-    public float onHurt(LivingEntity entity, net.minecraft.world.damagesource.DamageSource source, float amount) {
-        return amount;
-    }
-
     public float onAttack(LivingEntity entity, LivingEntity target, net.minecraft.world.damagesource.DamageSource source, float amount) {
         return amount;
     }

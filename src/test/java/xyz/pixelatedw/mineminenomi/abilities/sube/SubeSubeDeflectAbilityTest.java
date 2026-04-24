@@ -56,10 +56,9 @@ class SubeSubeDeflectAbilityTest extends AbstractMinecraftTest {
             when(mockedSource.is(DamageTypes.IN_FIRE)).thenReturn(false);
             when(mockedSource.is(DamageTypes.ON_FIRE)).thenReturn(false);
 
-            float originalDamage = 10.0f;
-            float damageTaken = spiedAbility.onHurt(mockedEntity, mockedSource, originalDamage);
+            boolean isInvulnerable = spiedAbility.checkInvulnerability(mockedEntity, mockedSource);
 
-            assertEquals(0.0f, damageTaken, "Physical attack should be deflected");
+            org.junit.jupiter.api.Assertions.assertTrue(isInvulnerable, "Physical attack should be deflected");
 
             // Verify particles were spawned
             verify(mockedLevel).sendParticles(eq(ParticleTypes.END_ROD), eq(10.0), eq(21.0), eq(30.0), eq(5), eq(0.1), eq(0.1), eq(0.1), eq(0.02));
@@ -77,14 +76,14 @@ class SubeSubeDeflectAbilityTest extends AbstractMinecraftTest {
 
             // Test magic
             when(mockedSource.is(DamageTypes.MAGIC)).thenReturn(true);
-            float damageTakenMagic = spiedAbility.onHurt(mockedEntity, mockedSource, 15.0f);
-            assertEquals(15.0f, damageTakenMagic, "Magic attack should not be deflected");
+            boolean isInvulnerableMagic = spiedAbility.checkInvulnerability(mockedEntity, mockedSource);
+            org.junit.jupiter.api.Assertions.assertFalse(isInvulnerableMagic, "Magic attack should not be deflected");
 
             // Test Explosion
             when(mockedSource.is(DamageTypes.MAGIC)).thenReturn(false);
             when(mockedSource.is(DamageTypes.EXPLOSION)).thenReturn(true);
-            float damageTakenExplosion = spiedAbility.onHurt(mockedEntity, mockedSource, 20.0f);
-            assertEquals(20.0f, damageTakenExplosion, "Explosion attack should not be deflected");
+            boolean isInvulnerableExplosion = spiedAbility.checkInvulnerability(mockedEntity, mockedSource);
+            org.junit.jupiter.api.Assertions.assertFalse(isInvulnerableExplosion, "Explosion attack should not be deflected");
 
             // Verify particles were NOT spawned
             verify(mockedLevel, never()).sendParticles(any(), anyDouble(), anyDouble(), anyDouble(), anyInt(), anyDouble(), anyDouble(), anyDouble(), anyDouble());
@@ -102,8 +101,8 @@ class SubeSubeDeflectAbilityTest extends AbstractMinecraftTest {
 
             when(mockedSource.is(any(net.minecraft.resources.ResourceKey.class))).thenReturn(false);
 
-            float damageTaken = spiedAbility.onHurt(mockedEntity, mockedSource, 10.0f);
-            assertEquals(10.0f, damageTaken, "Attack should not be deflected if ability is not active");
+            boolean isInvulnerable = spiedAbility.checkInvulnerability(mockedEntity, mockedSource);
+            org.junit.jupiter.api.Assertions.assertFalse(isInvulnerable, "Attack should not be deflected if ability is not active");
             verify(mockedLevel, never()).sendParticles(any(), anyDouble(), anyDouble(), anyDouble(), anyInt(), anyDouble(), anyDouble(), anyDouble(), anyDouble());
         }
     }
