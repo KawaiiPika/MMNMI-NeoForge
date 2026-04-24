@@ -15,7 +15,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import xyz.pixelatedw.mineminenomi.init.ModStructures;
 
-import javax.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class BanditWoodTextureStructureProcessor extends StructureProcessor {
     public static final MapCodec<BanditWoodTextureStructureProcessor> MAP_CODEC = MapCodec.unit(BanditWoodTextureStructureProcessor::new);
@@ -25,9 +25,9 @@ public class BanditWoodTextureStructureProcessor extends StructureProcessor {
     private static final Block[] FENCE_BLOCKS = new Block[]{Blocks.OAK_FENCE, Blocks.SPRUCE_FENCE};
     private static final Block[] SLAB_BLOCKS = new Block[]{Blocks.OAK_SLAB, Blocks.SPRUCE_SLAB};
 
-    @Nullable
+
     @Override
-    public StructureTemplate.StructureBlockInfo process(LevelReader level, BlockPos pos1, BlockPos pos2, StructureTemplate.StructureBlockInfo info1, StructureTemplate.StructureBlockInfo info2, StructurePlaceSettings settings, @Nullable StructureTemplate template) {
+    public StructureTemplate.@Nullable StructureBlockInfo process(LevelReader level, BlockPos pos1, BlockPos pos2, StructureTemplate.StructureBlockInfo info1, StructureTemplate.StructureBlockInfo info2, StructurePlaceSettings settings, @Nullable StructureTemplate template) {
         BlockPos pos = info2.pos();
         RandomSource rng = RandomSource.create(Mth.getSeed(pos));
         Block block = info1.state().getBlock();

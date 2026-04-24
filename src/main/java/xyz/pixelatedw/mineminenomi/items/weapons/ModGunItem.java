@@ -8,10 +8,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.LivingEntity;
 import xyz.pixelatedw.mineminenomi.init.ModTags;
 
 import java.util.function.Predicate;
 
+import org.jspecify.annotations.Nullable;
 public class ModGunItem extends ProjectileWeaponItem {
 
     public static final Predicate<ItemStack> GUN_AMMO = (stack) -> stack.is(ModTags.Items.GUN_AMMO);
@@ -155,7 +157,7 @@ public class ModGunItem extends ProjectileWeaponItem {
     public ModGunItem setBulletSpeed(float speed) { this.bulletSpeed = speed; return this; }
 
     @Override
-    protected void shootProjectile(net.minecraft.world.entity.LivingEntity shooter, net.minecraft.world.entity.projectile.Projectile projectile, int index, float velocity, float inaccuracy, float angle, @javax.annotation.Nullable net.minecraft.world.entity.LivingEntity target) {
+    protected void shootProjectile(net.minecraft.world.entity.LivingEntity shooter, net.minecraft.world.entity.projectile.Projectile projectile, int index, float velocity, float inaccuracy, float angle, @Nullable LivingEntity target) {
         projectile.shootFromRotation(shooter, shooter.getXRot(), shooter.getYRot(), angle, velocity, inaccuracy);
     }
 }

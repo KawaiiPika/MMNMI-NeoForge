@@ -2,7 +2,7 @@ package xyz.pixelatedw.mineminenomi.client.gui.components;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import net.minecraft.client.gui.GuiGraphics;
 import net.neoforged.neoforge.client.gui.widget.ExtendedSlider;
 import net.minecraft.client.gui.components.Renderable;
