@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 import javax.imageio.ImageIO;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -23,6 +24,8 @@ public class JollyRoger {
    private JollyRogerElement base;
    private JollyRogerElement[] backgrounds = new JollyRogerElement[3];
    private JollyRogerElement[] details = new JollyRogerElement[6];
+   private volatile BufferedImage cachedImage = null;
+   private final AtomicBoolean loadingDispatched = new AtomicBoolean(false);
 
    public JollyRoger() {
    }
@@ -283,33 +286,43 @@ public class JollyRoger {
    }
 
    public Optional<BufferedImage> getAsBufferedImage() {
-      try {
-         BufferedImage jollyRogerImage = new BufferedImage(128, 128, 2);
-
-         for(JollyRogerElement backgroundElement : this.backgrounds) {
-            if (backgroundElement != null) {
-               BufferedImage backgroundElementImage = this.elementToImage(backgroundElement);
-               jollyRogerImage.getGraphics().drawImage(backgroundElementImage, 0, 0, (ImageObserver)null);
-            }
-         }
-
-         if(this.getBase() != null) {
-             BufferedImage jollyRogerBase = this.elementToImage(this.getBase());
-             jollyRogerImage.getGraphics().drawImage(jollyRogerBase, 0, 0, (ImageObserver)null);
-         }
-
-         for(JollyRogerElement detailElement : this.details) {
-            if (detailElement != null) {
-               BufferedImage detailElementImage = this.elementToImage(detailElement);
-               jollyRogerImage.getGraphics().drawImage(detailElementImage, 0, 0, (ImageObserver)null);
-            }
-         }
-
-         return Optional.of(jollyRogerImage);
-      } catch (IOException e) {
-         LOGGER.error(e.getMessage());
-         return Optional.empty();
+      if (this.cachedImage != null) {
+         return Optional.of(this.cachedImage);
       }
+
+      if (this.loadingDispatched.compareAndSet(false, true)) {
+         xyz.pixelatedw.mineminenomi.api.util.ModExecutors.VIRTUAL_THREAD_EXECUTOR.submit(() -> {
+            try {
+               BufferedImage jollyRogerImage = new BufferedImage(128, 128, 2);
+
+               for(JollyRogerElement backgroundElement : this.backgrounds) {
+                  if (backgroundElement != null) {
+                     BufferedImage backgroundElementImage = this.elementToImage(backgroundElement);
+                     jollyRogerImage.getGraphics().drawImage(backgroundElementImage, 0, 0, (ImageObserver)null);
+                  }
+               }
+
+               if(this.getBase() != null) {
+                   BufferedImage jollyRogerBase = this.elementToImage(this.getBase());
+                   jollyRogerImage.getGraphics().drawImage(jollyRogerBase, 0, 0, (ImageObserver)null);
+               }
+
+               for(JollyRogerElement detailElement : this.details) {
+                  if (detailElement != null) {
+                     BufferedImage detailElementImage = this.elementToImage(detailElement);
+                     jollyRogerImage.getGraphics().drawImage(detailElementImage, 0, 0, (ImageObserver)null);
+                  }
+               }
+
+               this.cachedImage = jollyRogerImage;
+            } catch (IOException e) {
+               LOGGER.error(e.getMessage());
+               this.loadingDispatched.set(false);
+            }
+         });
+      }
+
+      return Optional.empty();
    }
 
    private BufferedImage elementToImage(JollyRogerElement element) throws IOException {
