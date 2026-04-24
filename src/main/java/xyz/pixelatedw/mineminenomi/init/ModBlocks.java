@@ -1,4 +1,8 @@
 package xyz.pixelatedw.mineminenomi.init;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import xyz.pixelatedw.mineminenomi.blocks.DialBlock;
+import net.minecraft.world.level.block.Block;
+import xyz.pixelatedw.mineminenomi.blocks.DialBlock;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -29,6 +33,22 @@ public class ModBlocks {
         ModRegistry.ITEMS.register(name, () -> new BlockItem(registeredBlock.get(), new Item.Properties()));
         return registeredBlock;
     }
+
+
+
+
+    // Dials
+
+
+    // Dials
+    public static final DeferredHolder<Block, Block> BREATH_DIAL = ModRegistry.BLOCKS.register("breath_dial", () -> new xyz.pixelatedw.mineminenomi.blocks.DialBlock());
+    public static final DeferredHolder<Block, Block> EISEN_DIAL = ModRegistry.BLOCKS.register("eisen_dial", () -> new xyz.pixelatedw.mineminenomi.blocks.DialBlock());
+    public static final DeferredHolder<Block, Block> FLAME_DIAL = ModRegistry.BLOCKS.register("flame_dial", () -> new xyz.pixelatedw.mineminenomi.blocks.DialBlock());
+    public static final DeferredHolder<Block, Block> IMPACT_DIAL = ModRegistry.BLOCKS.register("impact_dial", () -> new xyz.pixelatedw.mineminenomi.blocks.DialBlock());
+    public static final DeferredHolder<Block, Block> REJECT_DIAL = ModRegistry.BLOCKS.register("reject_dial", () -> new xyz.pixelatedw.mineminenomi.blocks.DialBlock());
+    public static final DeferredHolder<Block, Block> AXE_DIAL = ModRegistry.BLOCKS.register("axe_dial", () -> new xyz.pixelatedw.mineminenomi.blocks.DialBlock());
+    public static final DeferredHolder<Block, Block> MILKY_DIAL = ModRegistry.BLOCKS.register("milky_dial", () -> new xyz.pixelatedw.mineminenomi.blocks.DialBlock());
+    public static final DeferredHolder<Block, Block> FLASH_DIAL = ModRegistry.BLOCKS.register("flash_dial", () -> new xyz.pixelatedw.mineminenomi.blocks.DialBlock());
 
     public static void init() {
         // Trigger class loading

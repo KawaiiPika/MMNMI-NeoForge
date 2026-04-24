@@ -1,4 +1,7 @@
-package xyz.pixelatedw.mineminenomi.events;
+with open("src/main/java/xyz/pixelatedw/mineminenomi/events/ModEvents.java", "r") as f:
+    content = f.read()
+
+content = """package xyz.pixelatedw.mineminenomi.events;
 
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -27,4 +30,7 @@ public class ModEvents {
     public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
         ModMobs.registerAttributes(event);
     }
-}
+}"""
+
+with open("src/main/java/xyz/pixelatedw/mineminenomi/events/ModEvents.java", "w") as f:
+    f.write(content)

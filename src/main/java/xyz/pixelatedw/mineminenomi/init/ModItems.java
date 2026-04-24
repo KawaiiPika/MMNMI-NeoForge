@@ -1,4 +1,8 @@
 package xyz.pixelatedw.mineminenomi.init;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import xyz.pixelatedw.mineminenomi.blocks.DialBlock;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import xyz.pixelatedw.mineminenomi.blocks.DialBlock;
 
 import net.minecraft.world.item.Item;
 import java.util.function.Supplier;
@@ -61,6 +65,23 @@ public class ModItems {
     public static final Supplier<Item> WOODEN_DEVIL_FRUIT_BOX   = ModRegistry.ITEMS.register("wooden_devil_fruit_box",   () -> new AkumaNoMiBoxItem(AkumaNoMiBoxItem.TIER_1_FRUITS));
     public static final Supplier<Item> IRON_DEVIL_FRUIT_BOX     = ModRegistry.ITEMS.register("iron_devil_fruit_box",     () -> new AkumaNoMiBoxItem(AkumaNoMiBoxItem.TIER_2_FRUITS));
     public static final Supplier<Item> GOLDEN_DEVIL_FRUIT_BOX   = ModRegistry.ITEMS.register("golden_devil_fruit_box",   () -> new AkumaNoMiBoxItem(AkumaNoMiBoxItem.TIER_3_FRUITS));
+
+
+    // Dials
+
+
+    // Dials
+
+
+    // Dials
+    public static final DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> BREATH_DIAL = ModRegistry.ITEMS.register("breath_dial", () -> new xyz.pixelatedw.mineminenomi.items.dials.BreathDialItem(ModBlocks.BREATH_DIAL.get()));
+    public static final DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> EISEN_DIAL = ModRegistry.ITEMS.register("eisen_dial", () -> new xyz.pixelatedw.mineminenomi.items.dials.EisenDialItem(ModBlocks.EISEN_DIAL.get()));
+    public static final DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> FLAME_DIAL = ModRegistry.ITEMS.register("flame_dial", () -> new xyz.pixelatedw.mineminenomi.items.dials.FlameDialItem(ModBlocks.FLAME_DIAL.get()));
+    public static final DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> IMPACT_DIAL = ModRegistry.ITEMS.register("impact_dial", () -> new xyz.pixelatedw.mineminenomi.items.dials.ImpactDialItem(ModBlocks.IMPACT_DIAL.get()));
+    public static final DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> REJECT_DIAL = ModRegistry.ITEMS.register("reject_dial", () -> new xyz.pixelatedw.mineminenomi.items.dials.RejectDialItem(ModBlocks.REJECT_DIAL.get()));
+    public static final DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> AXE_DIAL = ModRegistry.ITEMS.register("axe_dial", () -> new net.minecraft.world.item.Item(new net.minecraft.world.item.Item.Properties()));
+    public static final DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> MILKY_DIAL = ModRegistry.ITEMS.register("milky_dial", () -> new net.minecraft.world.item.Item(new net.minecraft.world.item.Item.Properties()));
+    public static final DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> FLASH_DIAL = ModRegistry.ITEMS.register("flash_dial", () -> new xyz.pixelatedw.mineminenomi.items.dials.FlashDialItem(ModBlocks.FLASH_DIAL.get()));
 
     public static void init() {
         // Triggers class loading / DeferredRegister entries
