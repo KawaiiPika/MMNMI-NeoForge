@@ -109,7 +109,7 @@ public class CommonEvents {
     }
 
     @SubscribeEvent
-    public static void onLivingDamagePost(net.neoforged.neoforge.event.entity.living.LivingDamageEvent.Post event) {
+    public static void onLivingDamagePostAttacker(net.neoforged.neoforge.event.entity.living.LivingDamageEvent.Post event) {
         LivingEntity target = event.getEntity();
         PlayerStats targetStats = PlayerStats.get(target);
         if (targetStats != null) {
