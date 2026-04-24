@@ -1,0 +1,15 @@
+{
+  "placement": {
+    "type": "mineminenomi:extended_random_spread",
+    "frequency": 0.8,
+    "salt": 984327123,
+    "separation": 16,
+    "spacing": 32
+  },
+  "structures": [
+    {
+      "structure": "mineminenomi:marine/large_base",
+      "weight": 1
+    }
+  ]
+}

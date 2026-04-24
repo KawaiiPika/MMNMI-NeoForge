@@ -1,0 +1,18 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 219582103,
+    "separation": 24,
+    "spacing": 48
+  },
+  "structures": [
+    {
+      "structure": "mineminenomi:pirate/medium_ship",
+      "weight": 1
+    },
+    {
+      "structure": "mineminenomi:unaligned/ghost_ship",
+      "weight": 1
+    }
+  ]
+}
