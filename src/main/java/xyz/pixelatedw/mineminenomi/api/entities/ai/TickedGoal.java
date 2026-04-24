@@ -21,6 +21,7 @@ public abstract class TickedGoal<E extends Mob> extends Goal {
 
     @Override
     public void tick() {
+        if (this.entity.level().isClientSide) return;
         super.tick();
         this.tickCount++;
     }

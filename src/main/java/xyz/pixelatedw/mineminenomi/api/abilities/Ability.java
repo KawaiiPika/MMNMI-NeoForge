@@ -20,6 +20,7 @@ public abstract class Ability {
     }
 
     public void use(LivingEntity entity) {
+        if (entity.level().isClientSide) return;
         if (this.isUsing(entity)) {
             this.stop(entity);
             return;
@@ -116,6 +117,7 @@ public abstract class Ability {
     protected long startTick = -1;
 
     public void tick(LivingEntity entity) {
+        if (entity.level().isClientSide) return;
         if (isUsing(entity)) {
             if (startTick == -1) startTick = entity.level().getGameTime();
             this.onTick(entity, getDuration(entity));
