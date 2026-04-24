@@ -34,9 +34,6 @@ public class LogiaSuppressionTest extends AbstractMinecraftTest {
             xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY =
                 new net.minecraft.core.MappedRegistry<>(xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY_KEY, com.mojang.serialization.Lifecycle.experimental(), false);
         }
-            xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY = new net.minecraft.core.MappedRegistry<>(xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY_KEY, com.mojang.serialization.Lifecycle.stable());
-        }
-
         if (xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.get(ResourceLocation.fromNamespaceAndPath("mineminenomi", "mera_logia")) == null) {
             net.minecraft.core.Registry.register(xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY,
                 ResourceLocation.fromNamespaceAndPath("mineminenomi", "mera_logia"),

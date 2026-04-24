@@ -25,17 +25,7 @@ public class ModItemModelProvider extends ItemModelProvider {
             Item item = itemEntry.get();
             String name = itemEntry.getId().getPath();
 
-            if (item instanceof net.minecraft.world.item.BlockItem) {
-                if (name.equals("tangerine")) {
-                    withExistingParent(name, "item/generated").texture("layer0", ResourceLocation.fromNamespaceAndPath(ModMain.PROJECT_ID, "items/" + name));
-                } else {
-                    try {
-                        withExistingParent(name, ModMain.PROJECT_ID + ":block/" + name);
-                    } catch(Exception e) {
-                        System.err.println("Block model missing for " + name);
-                    }
-                }
-            } else if (item instanceof ModSwordItem || item instanceof ModSpearItem || item instanceof ModGunItem) {
+            if (item instanceof ModSwordItem || item instanceof ModSpearItem || item instanceof ModGunItem) {
                 handheldItem(name);
             } else {
                 basicItem(name);
@@ -44,30 +34,12 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
 
     private void basicItem(String name) {
-        String textureName = name;
-        if (name.equals("belly_pouch")) textureName = "belly_pouch_0";
-        if (name.equals("extol_pouch")) textureName = "extol_pouch_0";
-        if (name.equals("gold_den_den_mushi")) textureName = "den_den_mushi";
-
-        java.io.File textureFile = new java.io.File("src/main/resources/assets/mineminenomi/textures/items/" + textureName + ".png");
-        if (!textureFile.exists()) {
-            return; // silently skip if missing
-        }
-
         withExistingParent(name, "item/generated")
-                .texture("layer0", ResourceLocation.fromNamespaceAndPath(ModMain.PROJECT_ID, "items/" + textureName));
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(ModMain.PROJECT_ID, "item/" + name));
     }
-
 
     private void handheldItem(String name) {
-        String textureName = name;
-        java.io.File textureFile = new java.io.File("src/main/resources/assets/mineminenomi/textures/items/" + textureName + ".png");
-        if (!textureFile.exists()) {
-            return; // silently skip if missing
-        }
         withExistingParent(name, "item/handheld")
-                .texture("layer0", ResourceLocation.fromNamespaceAndPath(ModMain.PROJECT_ID, "items/" + textureName));
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(ModMain.PROJECT_ID, "item/" + name));
     }
-
-
 }
