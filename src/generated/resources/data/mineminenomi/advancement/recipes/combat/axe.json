@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item": {
+    "has_iron_axe": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:air"
+            "items": "minecraft:iron_axe"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "mineminenomi:eisen_dial_smithing"
+        "recipe": "mineminenomi:axe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_item"
+      "has_iron_axe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "mineminenomi:eisen_dial_smithing"
+      "mineminenomi:axe"
     ]
   }
 }

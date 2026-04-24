@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item": {
+    "has_glass_bottle": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:air"
+            "items": "minecraft:glass_bottle"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "mineminenomi:milky_dial_smithing"
+        "recipe": "mineminenomi:empty_cola"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_item"
+      "has_glass_bottle"
     ]
   ],
   "rewards": {
     "recipes": [
-      "mineminenomi:milky_dial_smithing"
+      "mineminenomi:empty_cola"
     ]
   }
 }

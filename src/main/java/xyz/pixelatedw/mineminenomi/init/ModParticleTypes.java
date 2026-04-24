@@ -6,7 +6,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.client.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticleType;
 
@@ -69,7 +68,7 @@ public class ModParticleTypes {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> HOLE = register("hole");
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> COMMAND_MARK = register("command_mark_particle");
 
-    @EventBusSubscriber(modid = ModMain.PROJECT_ID, bus = EventBusSubscriber.Bus.MOD, value = net.neoforged.api.distmarker.Dist.CLIENT)
+    @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = net.neoforged.api.distmarker.Dist.CLIENT)
     public static class Client {
         @SubscribeEvent
         public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
@@ -133,6 +132,4 @@ public class ModParticleTypes {
             event.registerSpecial(type.get(), new SimpleParticle.Factory(ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/particle/" + texture + ".png"), maxFrames));
         }
     }
-    
-    public static void init() {}
 }

@@ -258,7 +258,8 @@ public class CommonEvents {
 
                 // Magma Coating
                 if (attackerStats.isAbilityActive("mineminenomi:magma_coating")) {
-                    if (!attackerHasKairoseki) {
+                    boolean skip = attackerHasKairoseki;
+                    if (!skip) {
                         target.setRemainingFireTicks(100);
                     }
                 }
@@ -277,7 +278,6 @@ public class CommonEvents {
                     if (targetHasKairoseki && ability.getRequiredFruit() != null) {
                         continue;
                     }
-                    ability.onDamageTake(target, source, event.getNewDamage());
                     ability.onDamageTaken(target, source);
                 }
             }

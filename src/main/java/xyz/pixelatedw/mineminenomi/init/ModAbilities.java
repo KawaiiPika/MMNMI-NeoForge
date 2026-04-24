@@ -410,11 +410,7 @@ public class ModAbilities {
     public static final Supplier<Ability> SOAP_DEFENSE = ABILITIES.register("soap_defense", xyz.pixelatedw.mineminenomi.abilities.awa.SoapDefenseAbility::new);
 
     public static void register(IEventBus bus) {
-        bus.addListener(ModAbilities::onNewRegistry);
         ABILITIES.register(bus);
     }
 
-    private static void onNewRegistry(net.neoforged.neoforge.registries.NewRegistryEvent event) {
-        REGISTRY = event.create(new RegistryBuilder<>(REGISTRY_KEY).sync(true));
-    }
 }
