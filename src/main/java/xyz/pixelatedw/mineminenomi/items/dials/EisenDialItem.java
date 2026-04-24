@@ -6,6 +6,6 @@ import net.minecraft.world.level.block.Block;
 
 public class EisenDialItem extends BlockItem {
    public EisenDialItem(Block block) {
-      super(block, (new Item.Properties()).stacksTo(16));
+      super(block, (new Item.Properties()).stacksTo(16).component(xyz.pixelatedw.mineminenomi.init.ModDataComponents.ENERGY.get(), 0));
    }
 }
