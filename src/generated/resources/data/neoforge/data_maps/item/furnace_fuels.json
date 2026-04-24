@@ -1,0 +1,25 @@
+{
+  "values": {
+    "mineminenomi:challenge_poster": {
+      "burn_time": 200
+    },
+    "mineminenomi:devil_fruit_encyclopedia": {
+      "burn_time": 200
+    },
+    "mineminenomi:flag": {
+      "burn_time": 200
+    },
+    "mineminenomi:flame_dial": {
+      "burn_time": 10000
+    },
+    "mineminenomi:vivre_card": {
+      "burn_time": 50
+    },
+    "mineminenomi:wanted_poster": {
+      "burn_time": 200
+    },
+    "mineminenomi:wanted_poster_package": {
+      "burn_time": 300
+    }
+  }
+}
