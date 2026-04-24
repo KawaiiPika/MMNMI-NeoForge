@@ -12,7 +12,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import xyz.pixelatedw.mineminenomi.init.ModStructures;
 
-import javax.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class IgnoreWaterloggingStructureProcessor extends StructureProcessor {
     public static final MapCodec<IgnoreWaterloggingStructureProcessor> MAP_CODEC = MapCodec.unit(IgnoreWaterloggingStructureProcessor::new);
@@ -20,9 +20,9 @@ public class IgnoreWaterloggingStructureProcessor extends StructureProcessor {
 
     public IgnoreWaterloggingStructureProcessor() {}
 
-    @Nullable
+
     @Override
-    public StructureTemplate.StructureBlockInfo process(LevelReader level, BlockPos pos1, BlockPos pos2, StructureTemplate.StructureBlockInfo info1, StructureTemplate.StructureBlockInfo info2, StructurePlaceSettings settings, @Nullable StructureTemplate template) {
+    public StructureTemplate.@Nullable StructureBlockInfo process(LevelReader level, BlockPos pos1, BlockPos pos2, StructureTemplate.StructureBlockInfo info1, StructureTemplate.StructureBlockInfo info2, StructurePlaceSettings settings, @Nullable StructureTemplate template) {
         BlockState state = info2.state();
         if (state.hasProperty(BlockStateProperties.WATERLOGGED)) {
             state = state.setValue(BlockStateProperties.WATERLOGGED, false);

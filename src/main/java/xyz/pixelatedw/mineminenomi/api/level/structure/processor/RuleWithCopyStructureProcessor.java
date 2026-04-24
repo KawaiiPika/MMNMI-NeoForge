@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.levelgen.structure.templatesystem.*;
 import xyz.pixelatedw.mineminenomi.init.ModStructures;
 
-import javax.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import java.util.List;
 import java.util.Map;
 
@@ -27,9 +27,9 @@ public class RuleWithCopyStructureProcessor extends StructureProcessor {
         this.rules = rules;
     }
 
-    @Nullable
+
     @Override
-    public StructureTemplate.StructureBlockInfo process(LevelReader level, BlockPos pos1, BlockPos pos2, StructureTemplate.StructureBlockInfo info1, StructureTemplate.StructureBlockInfo info2, StructurePlaceSettings settings, @Nullable StructureTemplate template) {
+    public StructureTemplate.@Nullable StructureBlockInfo process(LevelReader level, BlockPos pos1, BlockPos pos2, StructureTemplate.StructureBlockInfo info1, StructureTemplate.StructureBlockInfo info2, StructurePlaceSettings settings, @Nullable StructureTemplate template) {
         RandomSource rng = RandomSource.create(Mth.getSeed(info2.pos()));
         BlockState worldState = level.getBlockState(info2.pos());
 

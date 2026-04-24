@@ -2,7 +2,7 @@ package xyz.pixelatedw.mineminenomi.api.quests;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
@@ -21,8 +21,8 @@ public abstract class Quest {
         this.core = core;
     }
 
-    @Nullable
-    public static Quest from(CompoundTag tag) {
+
+    public static @Nullable Quest from(CompoundTag tag) {
         String coreId = tag.getString("id");
         QuestId<?> core = QuestId.get(ResourceLocation.parse(coreId));
         if (core == null) {

@@ -25,7 +25,7 @@ import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import net.neoforged.neoforge.entity.IEntityWithComplexSpawn;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 
-import javax.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class ThrownSpearEntity extends AbstractArrow implements IEntityWithComplexSpawn {
     private static final EntityDataAccessor<Byte> ID_LOYALTY = SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.BYTE);
@@ -107,9 +107,8 @@ public class ThrownSpearEntity extends AbstractArrow implements IEntityWithCompl
         this.attackDamage = damage;
     }
 
-    @Nullable
     @Override
-    protected EntityHitResult findHitEntity(Vec3 start, Vec3 end) {
+    protected @Nullable EntityHitResult findHitEntity(Vec3 start, Vec3 end) {
         return this.dealtDamage ? null : super.findHitEntity(start, end);
     }
 

@@ -13,15 +13,15 @@ import net.neoforged.neoforge.entity.IEntityWithComplexSpawn;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
-import javax.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import java.awt.Color;
 
 public class SphereEntity extends Entity implements IEntityWithComplexSpawn {
     private static final EntityDataAccessor<Float> RADIUS = SynchedEntityData.defineId(SphereEntity.class, EntityDataSerializers.FLOAT);
     private static final ResourceLocation DEFAULT_TEXTURE = ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/skyboxes/default.png");
     
-    @Nullable
-    private LivingEntity owner;
+
+    private @Nullable LivingEntity owner;
     private int lifeTicks = 0;
     private int maxLife = -1;
 
