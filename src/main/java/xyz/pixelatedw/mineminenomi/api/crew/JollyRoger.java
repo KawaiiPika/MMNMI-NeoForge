@@ -295,23 +295,42 @@ public class JollyRoger {
             try {
                BufferedImage jollyRogerImage = new BufferedImage(128, 128, 2);
 
-               for(JollyRogerElement backgroundElement : this.backgrounds) {
-                  if (backgroundElement != null) {
-                     BufferedImage backgroundElementImage = this.elementToImage(backgroundElement);
-                     jollyRogerImage.getGraphics().drawImage(backgroundElementImage, 0, 0, (ImageObserver)null);
-                  }
-               }
+               try (var scope = new java.util.concurrent.StructuredTaskScope.ShutdownOnFailure()) {
+                   java.util.List<java.util.concurrent.StructuredTaskScope.Subtask<BufferedImage>> backgroundTasks = new java.util.ArrayList<>();
+                   for (JollyRogerElement backgroundElement : this.backgrounds) {
+                       if (backgroundElement != null) {
+                           backgroundTasks.add(scope.fork(() -> this.elementToImage(backgroundElement)));
+                       }
+                   }
 
-               if(this.getBase() != null) {
-                   BufferedImage jollyRogerBase = this.elementToImage(this.getBase());
-                   jollyRogerImage.getGraphics().drawImage(jollyRogerBase, 0, 0, (ImageObserver)null);
-               }
+                   java.util.concurrent.StructuredTaskScope.Subtask<BufferedImage> baseTask = null;
+                   if (this.getBase() != null) {
+                       baseTask = scope.fork(() -> this.elementToImage(this.getBase()));
+                   }
 
-               for(JollyRogerElement detailElement : this.details) {
-                  if (detailElement != null) {
-                     BufferedImage detailElementImage = this.elementToImage(detailElement);
-                     jollyRogerImage.getGraphics().drawImage(detailElementImage, 0, 0, (ImageObserver)null);
-                  }
+                   java.util.List<java.util.concurrent.StructuredTaskScope.Subtask<BufferedImage>> detailTasks = new java.util.ArrayList<>();
+                   for (JollyRogerElement detailElement : this.details) {
+                       if (detailElement != null) {
+                           detailTasks.add(scope.fork(() -> this.elementToImage(detailElement)));
+                       }
+                   }
+
+                   scope.join();
+                   scope.throwIfFailed();
+
+                   for (var task : backgroundTasks) {
+                       jollyRogerImage.getGraphics().drawImage(task.get(), 0, 0, (ImageObserver)null);
+                   }
+
+                   if (baseTask != null) {
+                       jollyRogerImage.getGraphics().drawImage(baseTask.get(), 0, 0, (ImageObserver)null);
+                   }
+
+                   for (var task : detailTasks) {
+                       jollyRogerImage.getGraphics().drawImage(task.get(), 0, 0, (ImageObserver)null);
+                   }
+               } catch (InterruptedException | java.util.concurrent.ExecutionException e) {
+                   throw new IOException("Failed to load Jolly Roger elements", e);
                }
 
                this.cachedImage = jollyRogerImage;
