@@ -20,10 +20,8 @@ public class RejectDialItem extends BlockItem {
          if (playerAttacker.getCooldowns().getCooldownPercent(this, 0.0F) > 0.0F) {
             return false;
          } else {
-             net.neoforged.neoforge.energy.IEnergyStorage energy = itemStack.getCapability(net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage.ITEM);
-             if (energy != null) {
-                 energy.receiveEnergy(1000, false);
-             }
+             int energy = itemStack.getOrDefault(xyz.pixelatedw.mineminenomi.init.ModDataComponents.ENERGY.get(), 0);
+             itemStack.set(xyz.pixelatedw.mineminenomi.init.ModDataComponents.ENERGY.get(), Math.min(energy + 1000, 10000));
 
             playerAttacker.getCooldowns().addCooldown(this, 400);
             playerAttacker.getItemInHand(playerAttacker.getUsedItemHand()).shrink(1);

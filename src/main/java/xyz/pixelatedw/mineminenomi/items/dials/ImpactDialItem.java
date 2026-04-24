@@ -10,7 +10,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.energy.IEnergyStorage;
 
 public class ImpactDialItem extends BlockItem {
    public ImpactDialItem(Block block) {
@@ -21,13 +20,13 @@ public class ImpactDialItem extends BlockItem {
       ItemStack itemstack = player.getItemInHand(hand);
       if (!world.isClientSide) {
 
-         IEnergyStorage energy = itemstack.getCapability(net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage.ITEM);
-         if (energy != null && energy.getEnergyStored() > 0) {
+         int energy = itemstack.getOrDefault(xyz.pixelatedw.mineminenomi.init.ModDataComponents.ENERGY.get(), 0);
+         if (energy > 0) {
              player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 2, 4));
-             float explosionRadius = Math.max(1.0F, energy.getEnergyStored() / 2000.0F);
+             float explosionRadius = Math.max(1.0F, energy / 2000.0F);
              world.explode(player, player.getX(), player.getY(), player.getZ(), explosionRadius, Level.ExplosionInteraction.NONE);
 
-             energy.extractEnergy(energy.getEnergyStored(), false);
+             itemstack.set(xyz.pixelatedw.mineminenomi.init.ModDataComponents.ENERGY.get(), 0);
 
              player.getCooldowns().addCooldown(this, 10);
          }
@@ -39,10 +38,8 @@ public class ImpactDialItem extends BlockItem {
    @Override
    public boolean hurtEnemy(ItemStack itemStack, net.minecraft.world.entity.LivingEntity target, net.minecraft.world.entity.LivingEntity attacker) {
       if (!attacker.level().isClientSide) {
-          IEnergyStorage energy = itemStack.getCapability(net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage.ITEM);
-          if (energy != null) {
-              energy.receiveEnergy(1000, false);
-          }
+          int energy = itemStack.getOrDefault(xyz.pixelatedw.mineminenomi.init.ModDataComponents.ENERGY.get(), 0);
+          itemStack.set(xyz.pixelatedw.mineminenomi.init.ModDataComponents.ENERGY.get(), Math.min(energy + 1000, 10000));
       }
       return super.hurtEnemy(itemStack, target, attacker);
    }

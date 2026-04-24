@@ -13,7 +13,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class FlameDialItem extends BlockItem {
    public FlameDialItem(Block block) {
-      super(block, (new Item.Properties()).stacksTo(16));
+      super(block, (new Item.Properties()).stacksTo(16).component(xyz.pixelatedw.mineminenomi.init.ModDataComponents.ENERGY.get(), 0));
    }
 
    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
