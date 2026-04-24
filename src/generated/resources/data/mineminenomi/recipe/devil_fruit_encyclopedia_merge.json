@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "mineminenomi:devil_fruit_encyclopedia"
+    },
+    {
+      "item": "mineminenomi:devil_fruit_encyclopedia"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "mineminenomi:devil_fruit_encyclopedia"
+  }
+}

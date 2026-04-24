@@ -413,4 +413,7 @@ public class ModAbilities {
         ABILITIES.register(bus);
     }
 
+    private static void onNewRegistry(net.neoforged.neoforge.registries.NewRegistryEvent event) {
+        REGISTRY = event.create(new RegistryBuilder<>(REGISTRY_KEY).sync(true));
+    }
 }
