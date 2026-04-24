@@ -267,3 +267,4 @@ test {
     // Attempt to bypass classloading issues
     jvmArgs "-Djava.awt.headless=true", "--add-opens", "java.base/java.lang=ALL-UNNAMED"
 }
+tasks.named("processResources") { duplicatesStrategy = DuplicatesStrategy.EXCLUDE }

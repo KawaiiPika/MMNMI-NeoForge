@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "mineminenomi:items/jiki_jiki_no_mi"
-  }
-}

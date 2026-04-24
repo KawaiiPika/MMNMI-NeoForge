@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "mineminenomi:items/deka_deka_no_mi"
-  }
-}

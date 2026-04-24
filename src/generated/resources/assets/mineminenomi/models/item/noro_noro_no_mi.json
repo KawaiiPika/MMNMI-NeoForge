@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "mineminenomi:items/noro_noro_no_mi"
-  }
-}

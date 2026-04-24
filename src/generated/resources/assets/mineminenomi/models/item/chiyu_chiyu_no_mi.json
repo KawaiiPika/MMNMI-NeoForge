@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "mineminenomi:items/chiyu_chiyu_no_mi"
-  }
-}

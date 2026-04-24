@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "mineminenomi:items/mr_1s_shoes"
-  }
-}
