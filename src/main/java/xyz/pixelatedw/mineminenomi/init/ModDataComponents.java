@@ -58,6 +58,10 @@ public class ModDataComponents {
     public static final Supplier<DataComponentType<Integer>> GUNPOWDER = DATA_COMPONENT_TYPES.register("gunpowder", () ->
             DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT).build());
 
+
+    public static final Supplier<DataComponentType<Integer>> ENERGY = DATA_COMPONENT_TYPES.register("energy", () ->
+            DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT).build());
+
     public static void init(IEventBus eventBus) {
         DATA_COMPONENT_TYPES.register(eventBus);
     }
