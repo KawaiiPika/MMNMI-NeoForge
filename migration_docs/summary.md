@@ -12,15 +12,21 @@ A thorough comparison between `old_source` and the current `src` has revealed th
 - **System Modernization**: Architecture has been successfully updated to 1.21.1 standards (Data Components, Data Attachments).
 - **Gaps Identified**:
     - **Missing Systems**: Challenges, Animations, Morphs (Zoan), Audio, and Curios integration.
-    - **Missing Items**: Bullets, Skypiean Dials.
+    - **Missing Items**: Bullets.
     - **Missing Entities**: Specialized Mobs and their custom AI goals.
 - **Quest System**: The quest system in `src` appears to be more modular/expanded than the legacy `swordsman`-only structure.
 
 ## Current Status
 - **Registries**: Items, Blocks, Fruits, Abilities, Creative Tabs, and Worldgen features are registered.
 - **Data**: All legacy worldgen JSONs have been moved to the new `data/mineminenomi/worldgen` folder.
-- **Client**: Ability HUD overlay is created and icon rendering is implemented. Core UI screens (Abilities, Stats, Character Creator) are ported.
-- **Items**: Most utility items and iconic Devil Fruits are ported. Weapons/Armors registration is in progress.
+- **Data Generation**: Worldgen, language, sound, and particle providers implemented successfully (100%).
+- **Client**: UI/Client safely isolated to `client.*` packages with `Dist.CLIENT`. Ability HUD overlay is created and icon rendering is implemented. Core UI screens (Abilities, Stats, Character Creator) are ported (100%).
+- **GameTest Framework**: Successfully integrated for automated testing.
+- **Items**: Utility items, iconic Devil Fruits, and Weapons/Armors ported and utilize modern Vanilla Data Components.
+- **Dials**: Successfully migrated to Vanilla Data Components and `ItemAccessEnergyHandler`.
+- **Concurrency**: Implemented Java 21 Virtual Threads and `StructuredTaskScope` for non-blocking I/O (e.g., `JollyRoger.java`).
+- **Damage Logic**: Legacy damage logic successfully routed to `LivingDamageEvent.Post` and `ILivingEntityExtension`.
+- **System Audits**: Fully compliant network payload handling and `ToolActions` to `ItemAbilities` migration without need for changes.
 - **Abilities**: Approximately 45% of abilities (228 files) have been ported, including Haki, Rokushiki, and several core Devil Fruits.
 
 ## Key Files
