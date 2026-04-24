@@ -199,14 +199,17 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+    options.compilerArgs += ['--enable-preview']
 }
 
 test {
     useJUnitPlatform()
+    jvmArgs += ['--enable-preview']
 }
 
 tasks.named('test', Test) {
     useJUnitPlatform()
+    jvmArgs += ['--enable-preview']
 }
 
 // Add the mod main classes to the test classpath
