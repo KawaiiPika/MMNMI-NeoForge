@@ -109,24 +109,6 @@ public class CommonEvents {
     }
 
     @SubscribeEvent
-    public static void onLivingDamagePostAttacker(net.neoforged.neoforge.event.entity.living.LivingDamageEvent.Post event) {
-        LivingEntity target = event.getEntity();
-        PlayerStats targetStats = PlayerStats.get(target);
-        if (targetStats != null) {
-            boolean targetHasKairoseki = target.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI);
-            for (String abilityId : targetStats.getActiveAbilities()) {
-                Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
-                if (ability != null) {
-                    if (targetHasKairoseki && ability.getRequiredFruit() != null) {
-                        continue;
-                    }
-                    ability.onDamageTake(target, event.getSource(), event.getNewDamage());
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
     public static void onLivingIncomingDamage(LivingIncomingDamageEvent event) {
         LivingEntity target = event.getEntity();
         PlayerStats targetStats = PlayerStats.get(target);
@@ -190,18 +172,28 @@ public class CommonEvents {
         // Target Logic
         if (targetStats != null) {
             boolean targetHasKairoseki = target.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI);
-            // Active abilities onHurt hook
-            // Iterating directly over getActiveAbilities() is safe here because PlayerStats uses a
-            // copy-on-write pattern for its lists.
-            for (String abilityId : targetStats.getActiveAbilities()) {
-                Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
-                if (ability != null) {
-                    if (targetHasKairoseki && ability.getRequiredFruit() != null) {
-                        continue;
-                    }
-                    float newAmount = ability.onHurt(target, source, event.getAmount());
-                    event.setAmount(newAmount);
-                    if (newAmount <= 0) {
+
+            // Soap Defense
+            if (!targetHasKairoseki && targetStats.isAbilityActive("mineminenomi:soap_defense")) {
+                Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse("mineminenomi:soap_defense"));
+                if (ability != null && ability.isUsing(target)) {
+                    event.setAmount(event.getAmount() * 0.2F);
+                }
+            }
+
+            // Cyborg Body
+            if (targetStats.isAbilityActive("mineminenomi:cyborg_body")) {
+                event.setAmount(event.getAmount() * 0.9F);
+            }
+
+            // Mantra dodge chance
+            if (targetStats.isAbilityActive("mineminenomi:mantra")) {
+                Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse("mineminenomi:mantra"));
+                if (ability != null && ability.isUsing(target)) {
+                    if (target.getRandom().nextFloat() < 0.2F) { // 20% dodge chance
+                        if (!target.level().isClientSide) {
+                            xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper.sendAbilityMessage(target, Component.translatable("ability.mineminenomi.mantra.dodge"));
+                        }
                         event.setCanceled(true);
                         return;
                     }
@@ -239,6 +231,12 @@ public class CommonEvents {
         var source = event.getSource();
         var attacker = source.getEntity();
 
+        boolean targetHasKairoseki = target.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI);
+
+        if (target instanceof xyz.pixelatedw.mineminenomi.api.ILivingEntityExtension extension) {
+            extension.onDamageTake(source, event.getNewDamage());
+        }
+
         // Attacker Logic
         if (attacker instanceof LivingEntity livingAttacker) {
             PlayerStats attackerStats = PlayerStats.get(livingAttacker);
@@ -271,13 +269,13 @@ public class CommonEvents {
 
         // Target Logic
         if (targetStats != null) {
-            boolean targetHasKairoseki = target.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI);
             for (String abilityId : targetStats.getActiveAbilities()) {
                 Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                 if (ability != null) {
                     if (targetHasKairoseki && ability.getRequiredFruit() != null) {
                         continue;
                     }
+                    ability.onDamageTake(target, source, event.getNewDamage());
                     ability.onDamageTaken(target, source);
                 }
             }

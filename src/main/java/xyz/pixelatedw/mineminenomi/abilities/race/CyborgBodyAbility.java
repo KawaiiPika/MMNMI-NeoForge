@@ -27,11 +27,6 @@ public class CyborgBodyAbility extends Ability {
     }
 
     @Override
-    public float onHurt(LivingEntity entity, DamageSource source, float amount) {
-        return amount * 0.9F; // 10% damage reduction
-    }
-
-    @Override
     public boolean isPassive() {
         return true;
     }

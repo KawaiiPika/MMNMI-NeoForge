@@ -37,14 +37,6 @@ public class SoapDefenseAbility extends Ability {
    }
 
    @Override
-   public float onHurt(LivingEntity entity, DamageSource source, float amount) {
-       if (isUsing(entity)) {
-           return amount * 0.2F;
-       }
-       return amount;
-   }
-
-   @Override
    public Component getDisplayName() {
       return Component.translatable("ability.mineminenomi.soap_defense");
    }

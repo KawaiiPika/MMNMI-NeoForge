@@ -32,13 +32,13 @@ public class SkywalkAbility extends Ability {
     }
 
     @Override
-    public float onHurt(LivingEntity entity, net.minecraft.world.damagesource.DamageSource source, float amount) {
+    public boolean checkInvulnerability(LivingEntity entity, net.minecraft.world.damagesource.DamageSource source) {
         if (source.is(net.minecraft.world.damagesource.DamageTypes.FALL)) {
             if (lastJumpTime != -1 && entity.level().getGameTime() - lastJumpTime < 200) { // 10 seconds immunity
-                return 0;
+                return true;
             }
         }
-        return amount;
+        return false;
     }
 
     @Override
