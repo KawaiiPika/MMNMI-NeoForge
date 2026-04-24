@@ -68,8 +68,6 @@ class HakiHelperTest extends xyz.pixelatedw.mineminenomi.effects.AbstractMinecra
             float result = HakiHelper.calculateHakiDamage(attacker, target, originalAmount);
 
             assertEquals(expectedAmount, result, 0.01f, "Should calculate boost correctly based on Haki exp");
-            verify(stats).setBusoshokuHakiExp(2500.0f + 0.1f);
-            verify(stats).sync(attacker);
         }
     }
 
@@ -145,6 +143,23 @@ class HakiHelperTest extends xyz.pixelatedw.mineminenomi.effects.AbstractMinecra
             float result = HakiHelper.calculateHakiDamage(attacker, target, originalAmount);
 
             assertEquals(expectedAmount, result, 0.01f, "Should add all boosts together correctly");
+        }
+    }
+
+    @Test
+    void testOnHakiDamageTaken() {
+        LivingEntity attacker = mock(LivingEntity.class);
+        PlayerStats stats = mock(PlayerStats.class);
+
+        try (MockedStatic<PlayerStats> mockedStats = Mockito.mockStatic(PlayerStats.class)) {
+            mockedStats.when(() -> PlayerStats.get(attacker)).thenReturn(stats);
+            when(stats.isBusoshokuActive()).thenReturn(true);
+            when(stats.getBusoshokuHakiExp()).thenReturn(2500.0f);
+
+            HakiHelper.onHakiDamageTaken(attacker);
+
+            verify(stats).setBusoshokuHakiExp(2500.0f + 0.1f);
+            verify(stats).sync(attacker);
         }
     }
 }

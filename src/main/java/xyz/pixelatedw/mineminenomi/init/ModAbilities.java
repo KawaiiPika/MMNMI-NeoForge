@@ -282,8 +282,16 @@ public class ModAbilities {
     // Rokushiki — additional
     public static final java.util.function.Supplier<Ability> KAMISORI = ABILITIES.register("kamisori", xyz.pixelatedw.mineminenomi.api.abilities.rokushiki.KamisoriAbility::new);
 
-    // Mera Mera no Mi — Logia
+    // Logia Passive Abilities
     public static final java.util.function.Supplier<Ability> MERA_LOGIA = ABILITIES.register("mera_logia", xyz.pixelatedw.mineminenomi.abilities.mera.MeraLogiaAbility::new);
+    public static final java.util.function.Supplier<Ability> MAGU_LOGIA = ABILITIES.register("magu_logia", xyz.pixelatedw.mineminenomi.abilities.magu.MaguLogiaAbility::new);
+    public static final java.util.function.Supplier<Ability> HIE_LOGIA = ABILITIES.register("hie_logia", xyz.pixelatedw.mineminenomi.abilities.hie.HieLogiaAbility::new);
+    public static final java.util.function.Supplier<Ability> PIKA_LOGIA = ABILITIES.register("pika_logia", xyz.pixelatedw.mineminenomi.abilities.pika.PikaLogiaAbility::new);
+    public static final java.util.function.Supplier<Ability> MOKU_LOGIA = ABILITIES.register("moku_logia", xyz.pixelatedw.mineminenomi.abilities.moku.MokuLogiaAbility::new);
+    public static final java.util.function.Supplier<Ability> GORO_LOGIA = ABILITIES.register("goro_logia", xyz.pixelatedw.mineminenomi.abilities.goro.GoroLogiaAbility::new);
+    public static final java.util.function.Supplier<Ability> SUNA_LOGIA = ABILITIES.register("suna_logia", xyz.pixelatedw.mineminenomi.abilities.suna.SunaLogiaAbility::new);
+    public static final java.util.function.Supplier<Ability> YUKI_LOGIA = ABILITIES.register("yuki_logia", xyz.pixelatedw.mineminenomi.abilities.yuki.YukiLogiaAbility::new);
+    public static final java.util.function.Supplier<Ability> GASU_LOGIA = ABILITIES.register("gasu_logia", xyz.pixelatedw.mineminenomi.abilities.gasu.GasuLogiaAbility::new);
 
     // Zou Zou no Mi
     public static final java.util.function.Supplier<Ability> ZOU_GUARD_POINT = ABILITIES.register("zou_guard_point", xyz.pixelatedw.mineminenomi.abilities.zou.ZouGuardPointAbility::new);

@@ -27,6 +27,11 @@ public class KabutowariAbility extends Ability {
 
     @Override
     public float onAttack(LivingEntity entity, LivingEntity target, net.minecraft.world.damagesource.DamageSource source, float amount) {
+        return amount + 20.0F;
+    }
+
+    @Override
+    public void onDamageTakenByTarget(LivingEntity entity, LivingEntity target, net.minecraft.world.damagesource.DamageSource source) {
         if (!entity.level().isClientSide) {
             target.level().addParticle(net.minecraft.core.particles.ParticleTypes.EXPLOSION, 
                 target.getX(), target.getY() + 1.0, target.getZ(), 0, 0, 0);
@@ -35,7 +40,6 @@ public class KabutowariAbility extends Ability {
             target.setDeltaMovement(look.scale(3.0).add(0, 0.4, 0));
             target.hurtMarked = true;
         }
-        return amount + 20.0F;
     }
 
     @Override

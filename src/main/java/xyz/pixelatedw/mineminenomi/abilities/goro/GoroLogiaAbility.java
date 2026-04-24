@@ -1,18 +1,15 @@
-package xyz.pixelatedw.mineminenomi.abilities.mera;
+package xyz.pixelatedw.mineminenomi.abilities.goro;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.LivingEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
-
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
+public class GoroLogiaAbility extends Ability {
+    private static final ResourceLocation FRUIT = ResourceLocation.fromNamespaceAndPath("mineminenomi", "goro_goro_no_mi");
 
-public class MeraLogiaAbility extends Ability {
-    private static final ResourceLocation FRUIT = ResourceLocation.fromNamespaceAndPath("mineminenomi", "mera_mera_no_mi");
-
-    public MeraLogiaAbility() { super(FRUIT); }
+    public GoroLogiaAbility() { super(FRUIT); }
 
     @Override
     public void tick(LivingEntity entity) {
@@ -34,19 +31,18 @@ public class MeraLogiaAbility extends Ability {
 
 @Override
     public boolean checkInvulnerability(LivingEntity entity, DamageSource source) {
-        if (source.is(DamageTypeTags.IS_FIRE)) {
-            entity.clearFire();
-            return true; // Immune to fire
+        if (source.is(DamageTypeTags.IS_LIGHTNING)) {
+            return true; // Immune to lightning
         }
         return false;
     }
 
 @Override
     public void onLogiaDodge(LivingEntity entity, LivingEntity attacker) {
-        // Side effect: Ignites attacker when dodged
-        attacker.setRemainingFireTicks(60);
+        // Side effect: Shocks attacker when dodged
+        attacker.hurt(entity.damageSources().lightningBolt(), 4.0F);
     }
 
 @Override
-    public Component getDisplayName() { return Component.translatable("ability.mineminenomi.mera_logia"); }
+    public Component getDisplayName() { return Component.translatable("ability.mineminenomi.logia_invulnerability_goro"); }
 }

@@ -10,6 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import xyz.pixelatedw.mineminenomi.ModMain;
@@ -57,6 +58,58 @@ public class CommonEvents {
     }
 
     @SubscribeEvent
+    public static void onEntityInvulnerabilityCheck(net.neoforged.neoforge.event.entity.EntityInvulnerabilityCheckEvent event) {
+        if (!(event.getEntity() instanceof LivingEntity target)) return;
+        PlayerStats targetStats = PlayerStats.get(target);
+        if (targetStats == null) return;
+        boolean targetHasKairoseki = target.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI);
+
+        var source = event.getSource();
+        var attacker = source.getEntity();
+
+        for (String abilityId : targetStats.getActiveAbilities()) {
+            Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
+            if (ability != null) {
+                if (targetHasKairoseki && ability.getRequiredFruit() != null) {
+                    continue;
+                }
+                if (ability.checkInvulnerability(target, source)) {
+                    event.setInvulnerable(true);
+                }
+            }
+        }
+
+        if (targetStats.isLogia() && !targetHasKairoseki) {
+            boolean bypass = false;
+            if (attacker instanceof LivingEntity livingAttacker) {
+                PlayerStats attackerStats = PlayerStats.get(livingAttacker);
+                if (attackerStats != null && attackerStats.isBusoshokuActive()) {
+                    bypass = true;
+                }
+            }
+
+            if (!bypass) {
+                event.setInvulnerable(true);
+                if (target.level() instanceof ServerLevel serverLevel) {
+                    serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, target.getX(), target.getY() + 1, target.getZ(), 10, 0.2, 0.5, 0.2, 0.05);
+                    serverLevel.playSound(null, target.getX(), target.getY(), target.getZ(),
+                        SoundEvents.FIRE_EXTINGUISH, SoundSource.NEUTRAL, 0.5F, 1.2F);
+                }
+
+                if (attacker instanceof LivingEntity livingAttacker) {
+                    for (String abilityId : targetStats.getActiveAbilities()) {
+                        Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
+                        if (ability != null) {
+                            ability.onLogiaDodge(target, livingAttacker);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    @SubscribeEvent
     public static void onLivingIncomingDamage(LivingIncomingDamageEvent event) {
         LivingEntity target = event.getEntity();
         PlayerStats targetStats = PlayerStats.get(target);
@@ -89,7 +142,6 @@ public class CommonEvents {
                 // Magma Coating boost
                 if (attackerStats.isAbilityActive("mineminenomi:magma_coating")) {
                     event.setAmount(event.getAmount() + 10.0F);
-                    target.setRemainingFireTicks(100);
                 }
 
                 // Swordsman Damage Perk
@@ -160,24 +212,56 @@ public class CommonEvents {
                 }
             }
 
-            // Logia Intangibility
-            if (targetStats.isLogia() && !targetHasKairoseki) {
-                boolean bypass = false;
-                if (attacker instanceof LivingEntity livingAttacker) {
-                    PlayerStats attackerStats = PlayerStats.get(livingAttacker);
-                    if (attackerStats != null && attackerStats.isBusoshokuActive()) {
-                        bypass = true;
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingDamagePost(LivingDamageEvent.Post event) {
+        LivingEntity target = event.getEntity();
+        PlayerStats targetStats = PlayerStats.get(target);
+        var source = event.getSource();
+        var attacker = source.getEntity();
+
+        // Attacker Logic
+        if (attacker instanceof LivingEntity livingAttacker) {
+            PlayerStats attackerStats = PlayerStats.get(livingAttacker);
+            if (attackerStats != null) {
+                boolean attackerHasKairoseki = livingAttacker.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI);
+
+                // Iterate abilities
+                for (String abilityId : attackerStats.getActiveAbilities()) {
+                    Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
+                    if (ability != null) {
+                        if (attackerHasKairoseki && ability.getRequiredFruit() != null) {
+                            continue;
+                        }
+                        ability.onDamageTakenByTarget(livingAttacker, target, source);
                     }
                 }
 
-                if (!bypass) {
-                    event.setCanceled(true);
-                    if (target.level() instanceof ServerLevel serverLevel) {
-                        serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, target.getX(), target.getY() + 1, target.getZ(), 10, 0.2, 0.5, 0.2, 0.05);
-                        serverLevel.playSound(null, target.getX(), target.getY(), target.getZ(), 
-                            SoundEvents.FIRE_EXTINGUISH, SoundSource.NEUTRAL, 0.5F, 1.2F);
+                // Magma Coating
+                if (attackerStats.isAbilityActive("mineminenomi:magma_coating")) {
+                    boolean skip = attackerHasKairoseki;
+                    if (!skip) {
+                        target.setRemainingFireTicks(100);
                     }
-                    return;
+                }
+
+                // Haki EXP
+                HakiHelper.onHakiDamageTaken(livingAttacker);
+            }
+        }
+
+        // Target Logic
+        if (targetStats != null) {
+            boolean targetHasKairoseki = target.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI);
+            for (String abilityId : targetStats.getActiveAbilities()) {
+                Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
+                if (ability != null) {
+                    if (targetHasKairoseki && ability.getRequiredFruit() != null) {
+                        continue;
+                    }
+                    ability.onDamageTaken(target, source);
                 }
             }
         }
