@@ -79,3 +79,10 @@
 - [ ] **Networking Thread Safety**: Ensure all `CustomPacketPayload` ability/UI handlers that modify game state are wrapped in `context.enqueueWork`.
 - [ ] **Mob AI & Abilities**: Replace nested loops with AABB spatial queries (`level.getEntitiesOfClass`) and in-memory filtering for targeting.
 - [ ] **Testing Strategy**: Implement a Test Data Builder / Object Mother pattern (e.g., `TestEntityBuilder`) to streamline the setup of complex mock entities and `PlayerStats` in the test suite.
+
+## Post-Migration Tasks (Phase 3)
+- [ ] **Task:** Establish 1.20.1-legacy Backport Branch
+  - **Priority:** Low / Post-Migration (Phase 3)
+  - **Description:** Create a long-lived 1.20.1-legacy branch originating from the original pre-port codebase. Selectively cherry-pick version-agnostic system optimizations developed during the 1.21.1 port.
+  - **Approved Backports:** AI Spatial Query optimizations, Object Mother testing patterns, and Mockito static mocking upgrades.
+  - **Rejected Backports:** Do not attempt to backport Java 21 Virtual Threads, Vanilla Data Components, Data Attachments, or the new 1.21.1 Networking/Damage pipelines.
