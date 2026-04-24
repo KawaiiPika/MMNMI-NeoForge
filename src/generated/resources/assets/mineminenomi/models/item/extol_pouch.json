@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mineminenomi:items/extol_pouch_0"
+  }
+}

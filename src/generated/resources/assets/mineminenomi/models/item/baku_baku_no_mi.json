@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mineminenomi:items/baku_baku_no_mi"
+  }
+}

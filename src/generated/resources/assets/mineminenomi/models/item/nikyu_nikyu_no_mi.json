@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mineminenomi:items/nikyu_nikyu_no_mi"
+  }
+}

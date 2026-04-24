@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "mineminenomi:items/doru_doru_arts_ken"
+  }
+}

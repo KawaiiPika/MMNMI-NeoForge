@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mineminenomi:items/sorcery_clima_tact"
+  }
+}

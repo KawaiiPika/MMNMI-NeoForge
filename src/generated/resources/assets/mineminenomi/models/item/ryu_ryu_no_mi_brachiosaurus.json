@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mineminenomi:items/ryu_ryu_no_mi_model_brachiosaurus"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mineminenomi:items/ushi_ushi_no_mi_model_giraffe"
+  }
+}
