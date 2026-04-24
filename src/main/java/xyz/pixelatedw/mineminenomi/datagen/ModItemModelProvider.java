@@ -25,6 +25,11 @@ public class ModItemModelProvider extends ItemModelProvider {
             Item item = itemEntry.get();
             String name = itemEntry.getId().getPath();
 
+            // Check if the texture file actually exists in the assets directory
+            if (!existingFileHelper.exists(ResourceLocation.fromNamespaceAndPath(ModMain.PROJECT_ID, "item/" + name), net.minecraft.server.packs.PackType.CLIENT_RESOURCES, ".png", "textures")) {
+                continue;
+            }
+
             if (item instanceof ModSwordItem || item instanceof ModSpearItem || item instanceof ModGunItem) {
                 handheldItem(name);
             } else {

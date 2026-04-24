@@ -1,0 +1,25 @@
+{
+  "placement": {
+    "type": "mineminenomi:extended_random_spread",
+    "exclusion_zones": [
+      {
+        "chunk_count": 12,
+        "other_set": "mineminenomi:large_bases"
+      },
+      {
+        "chunk_count": 8,
+        "other_set": "mineminenomi:small_bases"
+      }
+    ],
+    "frequency": 0.9,
+    "salt": 510293123,
+    "separation": 8,
+    "spacing": 16
+  },
+  "structures": [
+    {
+      "structure": "mineminenomi:marine/watch_tower",
+      "weight": 1
+    }
+  ]
+}
