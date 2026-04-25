@@ -9,20 +9,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityExplosion;
-import xyz.pixelatedw.mineminenomi.api.abilities.IAbility;
-import xyz.pixelatedw.mineminenomi.api.entities.IThreatLevel;
-import xyz.pixelatedw.mineminenomi.api.helpers.MobsHelper;
-import xyz.pixelatedw.mineminenomi.config.ServerConfig;
-import xyz.pixelatedw.mineminenomi.entities.ai.goals.ImprovedMeleeAttackGoal;
 import xyz.pixelatedw.mineminenomi.entities.ai.goals.pacifista.PacifistaRadicalBeamGoal;
-import xyz.pixelatedw.mineminenomi.init.ModParticleEffects;
-import xyz.pixelatedw.mineminenomi.particles.effects.CommonExplosionParticleEffect;
-import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
-public class PacifistaEntity extends OPEntity implements IThreatLevel {
+public class PacifistaEntity extends OPEntity {
    public static final byte START_CHARGE_LASER_EVENT = 100;
    public static final byte END_CHARGE_LASER_EVENT = 101;
    private boolean isChargingLaser = false;
@@ -30,11 +19,6 @@ public class PacifistaEntity extends OPEntity implements IThreatLevel {
    public PacifistaEntity(EntityType<? extends PacifistaEntity> type, Level world) {
       super(type, world);
       if (world != null && !world.isClientSide) {
-         this.getStats().getIdentity().setRace("cyborg");
-         this.getStats().getIdentity().setFaction("marine");
-         this.getStats().getIdentity().setFightingStyle("brawler");
-         MobsHelper.addBasicNPCGoals(this);
-         this.goalSelector.addGoal(1, new ImprovedMeleeAttackGoal(this, 1.0D, true));
          this.goalSelector.addGoal(2, new PacifistaRadicalBeamGoal(this));
       }
    }
@@ -51,20 +35,8 @@ public class PacifistaEntity extends OPEntity implements IThreatLevel {
    }
 
    @Override
-   public float getThreatLevel() {
-      return 0.4F;
-   }
-
-   @Override
    public void die(DamageSource cause) {
       super.die(cause);
-      if (!this.level().isClientSide) {
-         AbilityExplosion explosion = new AbilityExplosion(this, null, this.getX(), this.getY(), this.getZ(), 5.0F);
-         explosion.setStaticDamage(25.0F);
-         explosion.setDestroyBlocks(false);
-         explosion.setSmokeParticles((ParticleEffect)ModParticleEffects.COMMON_EXPLOSION.get(), CommonExplosionParticleEffect.EXPLOSION5);
-         explosion.explode();
-      }
    }
 
    @Override
@@ -78,10 +50,5 @@ public class PacifistaEntity extends OPEntity implements IThreatLevel {
 
    public boolean isChargingLaser() {
       return this.isChargingLaser;
-   }
-
-   public static boolean checkSpawnRules(EntityType<? extends OPEntity> type, ServerLevelAccessor world, MobSpawnType reason, BlockPos pos, RandomSource random) {
-      double chance = random.nextFloat() * 100.0F;
-      return chance <= ServerConfig.getPacifistaSpawnChance() && OPEntity.checkSpawnRules(type, world, reason, pos, random);
    }
 }
