@@ -6,7 +6,6 @@ public class ModResources {
     public static final ResourceLocation NULL_ENTITY_TEXTURE = ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/null.png");
     
     // GUI Icons
-    public static final ResourceLocation PIRATE_ICON = ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/gui/icons/pirate.png");
     public static final ResourceLocation MARINE_ICON = ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/gui/icons/marine.png");
     public static final ResourceLocation BOUNTY_HUNTER_ICON = ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/gui/icons/bounty_hunter.png");
     public static final ResourceLocation REVOLUTIONARY_ARMY_ICON = ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/gui/icons/revolutionary.png");
@@ -66,4 +65,6 @@ public class ModResources {
     }
 
     public static void init() {}
+    public static final ResourceLocation PIRATE_ICON = ResourceLocation.fromNamespaceAndPath(xyz.pixelatedw.mineminenomi.ModMain.PROJECT_ID, "textures/gui/icons/pirate.png");
+    public static final ResourceLocation WARNING_ICON = ResourceLocation.fromNamespaceAndPath(xyz.pixelatedw.mineminenomi.ModMain.PROJECT_ID, "textures/gui/icons/warning.png");
 }

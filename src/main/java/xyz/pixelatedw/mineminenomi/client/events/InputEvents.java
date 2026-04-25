@@ -47,10 +47,15 @@ public class InputEvents {
                 }
 
                 if (ModKeybindings.NEXT_COMBAT_BAR.consumeClick()) {
-                    net.neoforged.neoforge.network.PacketDistributor.sendToServer(new xyz.pixelatedw.mineminenomi.networking.packets.CChangeCombatBarPacket(1));
+                    int next = (stats.getCombatBarSet() + 1) % xyz.pixelatedw.mineminenomi.config.ServerConfig.getAbilityBars();
+                    stats.setCombatBarSet(next);
+                    net.neoforged.neoforge.network.PacketDistributor.sendToServer(new xyz.pixelatedw.mineminenomi.networking.packets.CChangeCombatBarPacket(next));
                 }
                 if (ModKeybindings.PREV_COMBAT_BAR.consumeClick()) {
-                    net.neoforged.neoforge.network.PacketDistributor.sendToServer(new xyz.pixelatedw.mineminenomi.networking.packets.CChangeCombatBarPacket(-1));
+                    int prev = stats.getCombatBarSet() - 1;
+                    if (prev < 0) prev = xyz.pixelatedw.mineminenomi.config.ServerConfig.getAbilityBars() - 1;
+                    stats.setCombatBarSet(prev);
+                    net.neoforged.neoforge.network.PacketDistributor.sendToServer(new xyz.pixelatedw.mineminenomi.networking.packets.CChangeCombatBarPacket(prev));
                 }
             }
         }
@@ -68,6 +73,7 @@ public class InputEvents {
                     int newSlot = (currentSlot - (int) Math.signum(scrollDelta)) % 8;
                     if (newSlot < 0) newSlot = 7;
 
+                    stats.setSelectedAbilitySlot(newSlot);
                     net.neoforged.neoforge.network.PacketDistributor.sendToServer(new CSelectAbilitySlotPacket(newSlot));
                     event.setCanceled(true);
                 }
@@ -77,7 +83,8 @@ public class InputEvents {
 
     @SubscribeEvent
     public static void onRenderGuiLayer(RenderGuiLayerEvent.Pre event) {
-        if (event.getName().equals(net.minecraft.resources.ResourceLocation.withDefaultNamespace("hotbar"))) {
+        if (event.getName().equals(net.minecraft.resources.ResourceLocation.withDefaultNamespace("hotbar")) ||
+            event.getName().equals(net.minecraft.resources.ResourceLocation.withDefaultNamespace("experience_bar"))) {
             var player = net.minecraft.client.Minecraft.getInstance().player;
             if (player != null) {
                 var stats = PlayerStats.get(player);
