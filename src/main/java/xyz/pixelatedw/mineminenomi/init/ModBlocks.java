@@ -30,7 +30,6 @@ public class ModBlocks {
 
     private static DeferredHolder<Block, Block> registerSimpleBlockItem(String name, Supplier<Block> block) {
         DeferredHolder<Block, Block> registeredBlock = ModRegistry.BLOCKS.register(name, block);
-        ModRegistry.ITEMS.register(name, () -> new BlockItem(registeredBlock.get(), new Item.Properties()));
         return registeredBlock;
     }
 
@@ -51,6 +50,18 @@ public class ModBlocks {
     public static final DeferredHolder<Block, Block> FLASH_DIAL = ModRegistry.BLOCKS.register("flash_dial", () -> new xyz.pixelatedw.mineminenomi.blocks.DialBlock());
 
     public static void init() {
-        // Trigger class loading
+        for (DeferredHolder<Block, ? extends Block> blockEntry : ModRegistry.BLOCKS.getEntries()) {
+            String name = blockEntry.getId().getPath();
+            boolean hasItem = false;
+            for (DeferredHolder<Item, ? extends Item> itemEntry : ModRegistry.ITEMS.getEntries()) {
+                if (itemEntry.getId().getPath().equals(name)) {
+                    hasItem = true;
+                    break;
+                }
+            }
+            if (!hasItem && !name.equals("tangerine_crop")) {
+                ModRegistry.ITEMS.register(name, () -> new BlockItem(blockEntry.get(), new Item.Properties()));
+            }
+        }
     }
 }

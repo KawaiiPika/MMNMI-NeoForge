@@ -79,8 +79,8 @@ public class ModItems {
     public static final DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> FLAME_DIAL = ModRegistry.ITEMS.register("flame_dial", () -> new xyz.pixelatedw.mineminenomi.items.dials.FlameDialItem(ModBlocks.FLAME_DIAL.get()));
     public static final DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> IMPACT_DIAL = ModRegistry.ITEMS.register("impact_dial", () -> new xyz.pixelatedw.mineminenomi.items.dials.ImpactDialItem(ModBlocks.IMPACT_DIAL.get()));
     public static final DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> REJECT_DIAL = ModRegistry.ITEMS.register("reject_dial", () -> new xyz.pixelatedw.mineminenomi.items.dials.RejectDialItem(ModBlocks.REJECT_DIAL.get()));
-    public static final DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> AXE_DIAL = ModRegistry.ITEMS.register("axe_dial", () -> new net.minecraft.world.item.Item(new net.minecraft.world.item.Item.Properties()));
-    public static final DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> MILKY_DIAL = ModRegistry.ITEMS.register("milky_dial", () -> new net.minecraft.world.item.Item(new net.minecraft.world.item.Item.Properties()));
+    public static final DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> AXE_DIAL = ModRegistry.ITEMS.register("axe_dial", () -> new xyz.pixelatedw.mineminenomi.items.dials.AxeDialItem(ModBlocks.AXE_DIAL.get()));
+    public static final DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> MILKY_DIAL = ModRegistry.ITEMS.register("milky_dial", () -> new xyz.pixelatedw.mineminenomi.items.dials.MilkyDialItem(ModBlocks.MILKY_DIAL.get()));
     public static final DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> FLASH_DIAL = ModRegistry.ITEMS.register("flash_dial", () -> new xyz.pixelatedw.mineminenomi.items.dials.FlashDialItem(ModBlocks.FLASH_DIAL.get()));
 
     public static void init() {
