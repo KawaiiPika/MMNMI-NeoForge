@@ -2,31 +2,23 @@ package xyz.pixelatedw.mineminenomi.builder;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import xyz.pixelatedw.mineminenomi.data.entity.AnimationStateData;
-import xyz.pixelatedw.mineminenomi.data.entity.MorphData;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 import xyz.pixelatedw.mineminenomi.init.ModDataAttachments;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Optional;
-import java.util.ArrayList;
 
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.when;
 
 public class TestEntityBuilder {
 
     private final Player player;
     private final PlayerStats stats;
-    private MorphData morphData;
-    private AnimationStateData animationData;
 
     private TestEntityBuilder() {
         this.player = mock(Player.class);
         this.stats = new PlayerStats();
-        this.morphData = new MorphData();
-        this.animationData = new AnimationStateData();
     }
 
     public static TestEntityBuilder instance() {
@@ -124,36 +116,9 @@ public class TestEntityBuilder {
         return this;
     }
 
-    public TestEntityBuilder withEquippedAbility(int slot, ResourceLocation ability) {
-        stats.setEquippedAbility(slot, ability);
-        return this;
-    }
-
-    public TestEntityBuilder withActiveAbility(String abilityId) {
-        stats.setAbilityActive(abilityId, true);
-        return this;
-    }
-
-    public TestEntityBuilder withMorph(ResourceLocation morph) {
-        List<ResourceLocation> activeMorphs = new ArrayList<>(morphData.activeMorphs());
-        if (!activeMorphs.contains(morph)) {
-            activeMorphs.add(morph);
-        }
-        this.morphData = new MorphData(Optional.of(morph), activeMorphs);
-        return this;
-    }
-
     public Player build() {
-        lenient().when(player.hasData(ModDataAttachments.PLAYER_STATS)).thenReturn(true);
-        lenient().when(player.getData(ModDataAttachments.PLAYER_STATS)).thenReturn(stats);
-
-        lenient().when(player.hasData(ModDataAttachments.MORPH_DATA)).thenReturn(true);
-        lenient().when(player.getData(ModDataAttachments.MORPH_DATA)).thenReturn(morphData);
-
-        lenient().when(player.hasData(ModDataAttachments.ANIMATION_STATE)).thenReturn(true);
-        lenient().when(player.getData(ModDataAttachments.ANIMATION_STATE)).thenReturn(animationData);
-
-        lenient().when(player.level()).thenReturn(null);
+        when(player.getData(ModDataAttachments.PLAYER_STATS)).thenReturn(stats);
+        when(player.level()).thenReturn(mock(net.minecraft.world.level.Level.class));
         return player;
     }
 

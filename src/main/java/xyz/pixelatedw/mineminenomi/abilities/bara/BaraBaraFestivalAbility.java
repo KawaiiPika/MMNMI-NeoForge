@@ -24,7 +24,7 @@ public class BaraBaraFestivalAbility extends Ability {
     @Override
     protected void onTick(LivingEntity entity, long duration) {
         if (!entity.level().isClientSide && duration % 20 == 0) {
-            for (var target : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(5.0), e -> e != entity)) {
+            for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(5.0))) {
                 if (target instanceof LivingEntity living) {
                     living.hurt(entity.damageSources().mobAttack(entity), 4.0F);
                     living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 1));

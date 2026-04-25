@@ -21,7 +21,7 @@ public class ClutchAbility extends Ability {
     protected void startUsing(LivingEntity entity) {
         if (!entity.level().isClientSide) {
             Vec3 look = entity.getLookAngle();
-            for (var target : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(1.5).move(look.scale(10.0)), e -> e != entity)) {
+            for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(1.5).move(look.scale(10.0)))) {
                 if (target instanceof LivingEntity living) {
                     living.hurt(entity.damageSources().mobAttack(entity), 12.0F);
                     living.addEffect(new MobEffectInstance(ModEffects.MOVEMENT_BLOCKED, 40, 0));

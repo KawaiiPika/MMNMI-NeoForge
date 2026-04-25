@@ -14,7 +14,7 @@ public class JujikaAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         // Cross-pattern fire burst
-        for (var target : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(7.0), e -> e != entity)) {
+        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(7.0))) {
             if (target instanceof LivingEntity living) {
                 Vec3 dir = living.position().subtract(entity.position());
                 // Only hit entities in cardinal cross directions

@@ -42,7 +42,7 @@ public class RaigoAbility extends Ability {
                 entity.level().explode(entity, hitPos.x, hitPos.y, hitPos.z, 12.0F, true, net.minecraft.world.level.Level.ExplosionInteraction.BLOCK);
                 
                 net.minecraft.world.phys.AABB aabb = new net.minecraft.world.phys.AABB(hitPos, hitPos).inflate(20.0);
-                for (net.minecraft.world.entity.Entity target : entity.level().getEntitiesOfClass(LivingEntity.class, aabb, e -> e != entity)) {
+                for (net.minecraft.world.entity.Entity target : entity.level().getEntities(entity, aabb)) {
                     if (target instanceof LivingEntity livingTarget) {
                         livingTarget.hurt(entity.damageSources().lightningBolt(), 50.0F);
                         net.minecraft.world.entity.LightningBolt bolt = net.minecraft.world.entity.EntityType.LIGHTNING_BOLT.create(entity.level());

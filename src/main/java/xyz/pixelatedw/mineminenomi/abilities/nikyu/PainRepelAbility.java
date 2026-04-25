@@ -19,7 +19,7 @@ public class PainRepelAbility extends Ability {
         if (healAmount > 0) {
             entity.heal(healAmount);
             // Release the "pain" as a burst
-            for (var target : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(5.0), e -> e != entity)) {
+            for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(5.0))) {
                 if (target instanceof LivingEntity living) {
                     living.hurt(entity.damageSources().mobAttack(entity), healAmount);
                     living.hurtMarked = true;

@@ -13,34 +13,33 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class PteranodonFlyModel<T extends LivingEntity> extends EntityModel<T> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("mineminenomi", "pteranodon_fly"), "main");
+
     private final ModelPart root;
     private final ModelPart head;
+    private final ModelPart body;
     private final ModelPart neck;
     private final ModelPart rightWing;
+    private final ModelPart leftWing;
     private final ModelPart rightWingSegment2;
     private final ModelPart rightWingSegment3;
-    private final ModelPart leftWing;
     private final ModelPart leftWingSegment2;
     private final ModelPart leftWingSegment3;
     private final ModelPart rightLeg;
     private final ModelPart leftLeg;
-    private final ModelPart body;
-    private final ModelPart lowerBody;
 
     public PteranodonFlyModel(ModelPart root) {
         this.root = root;
         this.head = root.getChild("head");
+        this.body = root.getChild("body");
         this.neck = root.getChild("neck");
         this.rightWing = root.getChild("right_front_leg");
-        this.rightWingSegment2 = this.rightWing.getChild("rightWingSegment2");
-        this.rightWingSegment3 = this.rightWingSegment2.getChild("rightWingSegment3");
         this.leftWing = root.getChild("left_front_leg");
-        this.leftWingSegment2 = this.leftWing.getChild("leftWingSegment2");
-        this.leftWingSegment3 = this.leftWingSegment2.getChild("leftWingSegment3");
+        this.rightWingSegment2 = rightWing.getChild("rightWingSegment2");
+        this.rightWingSegment3 = rightWingSegment2.getChild("rightWingSegment3");
+        this.leftWingSegment2 = leftWing.getChild("leftWingSegment2");
+        this.leftWingSegment3 = leftWingSegment2.getChild("leftWingSegment3");
         this.rightLeg = root.getChild("right_hind_leg");
         this.leftLeg = root.getChild("left_hind_leg");
-        this.body = root.getChild("body");
-        this.lowerBody = root.getChild("lowerBody");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -110,6 +109,5 @@ public class PteranodonFlyModel<T extends LivingEntity> extends EntityModel<T> {
         rightLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
         leftLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
         body.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        lowerBody.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
     }
 }

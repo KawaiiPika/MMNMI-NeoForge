@@ -12,7 +12,7 @@ public class IceTimeAbility extends Ability {
 
     @Override
     protected void startUsing(LivingEntity entity) {
-        for (var target : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(8.0), e -> e != entity)) {
+        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(8.0))) {
             if (target instanceof LivingEntity living) {
                 living.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 200, 10));
                 living.hurt(entity.damageSources().freeze(), 10.0F);
