@@ -7,7 +7,7 @@ import xyz.pixelatedw.mineminenomi.api.abilities.zoan.ZoanAbility;
 public class MammothGuardPointAbility extends ZoanAbility {
 
     public MammothGuardPointAbility() {
-        super(ResourceLocation.fromNamespaceAndPath("mineminenomi", "zou_zou_no_mi_model_1"));
+        super(ResourceLocation.fromNamespaceAndPath("mineminenomi", "zou_zou_no_mi_model_mammoth"));
     }
 
     @Override
@@ -16,10 +16,10 @@ public class MammothGuardPointAbility extends ZoanAbility {
     }
 
     @Override
-    public double getScaleModifier() { return 1.8; }
+    public double getScaleModifier() { return 1.5; }
 
     @Override
-    public double getHealthModifier() { return 50; }
+    public double getHealthModifier() { return 25; }
 
     @Override
     public double getDamageModifier() { return 6; }
