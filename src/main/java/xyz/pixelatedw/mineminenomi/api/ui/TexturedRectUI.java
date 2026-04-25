@@ -94,4 +94,24 @@ public class TexturedRectUI {
         this.flipY = flag;
         return this;
     }
+
+    public ResourceLocation getTexture() {
+        return this.texture;
+    }
+
+    public void reset() {
+        this.setZLevel(0.0F);
+        this.setUV(0.0F, 0.0F);
+        this.setSize(256.0F, 256.0F);
+        this.setScale(1.0F);
+        this.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+        this.setFlipX(false);
+        this.setFlipY(false);
+    }
+
+    public TexturedRectUI setScale(float uScale, float vScale) {
+        this.uScale = uScale;
+        this.vScale = vScale;
+        return this;
+    }
 }
