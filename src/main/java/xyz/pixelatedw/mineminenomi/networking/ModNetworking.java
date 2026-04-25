@@ -65,7 +65,7 @@ public class ModNetworking {
         registrar.playToClient(
                 xyz.pixelatedw.mineminenomi.networking.packets.SOpenCreateCrewScreenPacket.TYPE,
                 xyz.pixelatedw.mineminenomi.networking.packets.SOpenCreateCrewScreenPacket.STREAM_CODEC,
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenCreateCrewScreenPacket::handle
+                (payload, context) -> xyz.pixelatedw.mineminenomi.client.networking.ClientPacketHandlers.handleOpenCreateCrewScreen(payload, context)
         );
 
         registrar.playToServer(
@@ -77,19 +77,19 @@ public class ModNetworking {
         registrar.playToClient(
                 xyz.pixelatedw.mineminenomi.networking.packets.SOpenCrewScreenPacket.TYPE,
                 xyz.pixelatedw.mineminenomi.networking.packets.SOpenCrewScreenPacket.STREAM_CODEC,
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenCrewScreenPacket::handle
+                (payload, context) -> xyz.pixelatedw.mineminenomi.client.networking.ClientPacketHandlers.handleOpenCrewScreen(payload, context)
         );
 
         registrar.playToClient(
                 xyz.pixelatedw.mineminenomi.networking.packets.SOpenJollyRogerEditorScreenPacket.TYPE,
                 xyz.pixelatedw.mineminenomi.networking.packets.SOpenJollyRogerEditorScreenPacket.STREAM_CODEC,
-                xyz.pixelatedw.mineminenomi.networking.packets.SOpenJollyRogerEditorScreenPacket::handle
+                (payload, context) -> xyz.pixelatedw.mineminenomi.client.networking.ClientPacketHandlers.handleOpenJollyRogerEditorScreen(payload, context)
         );
 
         registrar.playToClient(
                 xyz.pixelatedw.mineminenomi.networking.packets.SSyncStrikerCrewPacket.TYPE,
                 xyz.pixelatedw.mineminenomi.networking.packets.SSyncStrikerCrewPacket.STREAM_CODEC,
-                xyz.pixelatedw.mineminenomi.networking.packets.SSyncStrikerCrewPacket::handle
+                (payload, context) -> xyz.pixelatedw.mineminenomi.client.networking.ClientPacketHandlers.handleSyncStrikerCrew(payload, context)
         );
 
         registrar.playToServer(
@@ -125,7 +125,7 @@ public class ModNetworking {
         registrar.playToClient(
                 xyz.pixelatedw.mineminenomi.networking.packets.SSimpleMessageScreenEventPacket.TYPE,
                 xyz.pixelatedw.mineminenomi.networking.packets.SSimpleMessageScreenEventPacket.STREAM_CODEC,
-                xyz.pixelatedw.mineminenomi.networking.packets.SSimpleMessageScreenEventPacket::handle
+                (payload, context) -> xyz.pixelatedw.mineminenomi.client.networking.ClientPacketHandlers.handleSimpleMessageScreenEvent(payload, context)
         );
     }
 
