@@ -1,44 +1,35 @@
-## Plan for Porting the Crew System
+1. **Create `StatBonusAbility` (Done)**
+   - Extend `Ability` and add methods for `pushStaticAttribute` and `pushDynamicAttribute`.
+   - Override `tick` to continuously test `getCheck()` and apply/remove `AttributeModifier`s.
+   - Add new methods for early-phase damage pipeline handling (`onIncomingDamage`, `onIncomingDamageCheckInvulnerability`, `onAttackKnockdown`).
 
-The goal is to port the rest of the Crew system from the legacy 1.20.1 Forge codebase to the modern 1.21.1 NeoForge port.
+2. **Update `Ability` Base Class**
+   - Add default `onIncomingDamage` and `onIncomingDamageCheckInvulnerability` methods so they can be accessed from `Ability`.
 
-### 1. Events
-- Update `xyz.pixelatedw.mineminenomi.api.events.entity.CrewEvent` to include the missing inner classes: `Join`, `Leave`, and `Kick`. These should implement `ICancellableEvent` just like `Create`.
-- Port `xyz.pixelatedw.mineminenomi.api.events.JollyRogerEvent` to modern NeoForge format (`Event` base class, etc).
+3. **Update `CommonEvents`**
+   - Modify `onLivingIncomingDamage` to loop through the entity's active abilities (including passives now correctly granted via `PlayerStats.grantAbility`) and invoke their `onIncomingDamage` and `onIncomingDamageCheckInvulnerability` hooks.
+   - Remove hardcoded perk checks (like sniper accuracy, brawler damage, magma coating, knockdown) and replace them with calls to the generic ability methods.
+   - Refactor `onLivingDamagePost` slightly if needed to clean up any remaining damage/effect logic that should belong in the specific ability class.
+   - Refactor `Knockdown` implementation to use the new `onAttackKnockdown` or existing `onAttack` mechanism effectively. Ensure it applies the unconscious effect correctly.
 
-### 2. Networking Packets
-- **Server to Client**
-  - Port `SOpenCrewScreenPacket` to `xyz.pixelatedw.mineminenomi.networking.packets`. Use a `CustomPacketPayload` and `StreamCodec` (needs to serialize/deserialize `Crew` from/to `CompoundTag` using `ByteBufCodecs.COMPOUND_TAG` and `crew.write()`/`Crew.from(nbt)`).
-  - Port `SOpenJollyRogerEditorScreenPacket` (needs `isEditing`, `Crew`, and a list of `JollyRogerElement`s). Register it.
-  - Port `SSimpleMessageScreenEventPacket` (renaming it/re-purposing the logic to support the modernized `SimpleMessageScreenDTO`).
-  - Port `SSyncStrikerCrewPacket`.
+4. **Port `MaguPassives`**
+   - Migrate logic from `MaguPassivesHandler` to `LavaFlowAbility` or create dedicated passives like `MaguPassivesAbility` extending `StatBonusAbility`. This will involve `lavaMovementBoost`, `canSeeThroughFire`, and `canSeeInsideLava`. *(Note: sight/render logic may need to remain in client-side events, but data can be read from active abilities).*
 
-- **Client to Server**
-  - Port `CKickFromCrewPacket` (takes a UUID).
-  - Port `CLeaveCrewPacket` (no args, unit packet).
-  - Port `CUpdateJollyRogerPacket` (takes a `JollyRoger`).
-  - Port `COpenCrewScreenPacket` (no args, requests server to open the crew screen).
-  - Port `COpenJollyRogerEditorScreenPacket` (no args).
+5. **Port `YomiPassives`**
+   - Migrate logic from `YomiPassiveHandler` to `YomiPassiveAbility` extending `StatBonusAbility` or `Ability`. Handle `tick` for water running, and `triggerFirstDeath`.
 
-- **Registration**
-  - Register all the above new packets in `ModNetworking`.
+6. **Port `KagePassives`**
+   - Migrate `KagePassivesHandler.tryBurningInSun` to a `KagePassivesAbility` extending `Ability` that checks sun exposure and damages the entity in its `tick` method.
 
-### 3. Screen Event API
-- Port `SimpleMessageScreenEvent` logic (already partly existing as `SimpleMessageScreenDTO`) and ensure it integrates well with `CreateCrewScreen` which uses it for error messages.
-- Add `IEventReceiverScreen` interface if needed by screens to handle these events.
+7. **Migrate Generic Perks to `StatBonusAbility` or `Ability`**
+   - Update `KnockdownAbility`, `BrawlerDamagePerkAbility`, `EmptyHandsAbility` to utilize the standard methods (`onIncomingDamage` etc.) properly without global hardcoded checks.
 
-### 4. UI Elements
-- Port `CrewDetailsScreen` (displays crew details, members, and buttons for Leave / Edit Jolly Roger).
-- Port `CrewMembersScrollPanel` (list of members inside `CrewDetailsScreen` with kick buttons for captains).
-- Port `JollyRogerEditorScreen` and related classes:
-  - `JollyRogerElementsScrollPanel`
-  - `JollyRogerElementColorComponent`
-  - `TexturedRectUI` (port modern OpenGL logic). Note that `TexturedRectUI` already partially exists in `xyz.pixelatedw.mineminenomi.client.ui.TexturedRectUI`.
-- Port any remaining widget additions if needed (e.g. `SimpleButton` or `PlankButton`).
+8. **Unit Tests**
+   - Create unit tests for `StatBonusAbility` attributes application/removal.
+   - Create unit tests for `MaguPassives` and `YomiPassives` logic using Mockito to verify the correct modifiers and effects are applied.
 
-### 5. Utilities & Data
-- Update `FactionsWorldData` to ensure all methods referenced by the packets (like `removeCrewMember`, `updateCrewJollyRoger`, etc.) are fully ported. Ensure `FactionHelper` is ported or the relevant logic is added where needed.
-- Ensure `ModJollyRogers` (Jolly Roger elements registry) is ported or properly referenced.
+9. **Pre-commit Steps**
+   - Run `pre_commit_instructions` tool to make sure proper testing, verifications, reviews, and reflections are done before submit.
 
-### 6. Pre-Commit Verification
-- Run the required pre-commit checks using `pre_commit_instructions` tool to verify the changes compile and adhere to standards.
+10. **Submit Change**
+    - Commit and push to remote.

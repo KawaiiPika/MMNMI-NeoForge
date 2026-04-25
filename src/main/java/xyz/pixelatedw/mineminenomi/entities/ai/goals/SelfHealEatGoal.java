@@ -13,7 +13,7 @@ import xyz.pixelatedw.mineminenomi.api.helpers.GoalHelper;
 
 public class SelfHealEatGoal extends TickedGoal<Mob> {
    private static final int COOLDOWN = 1200;
-   private static final Item[] FOODS;
+   private static final Item[] FOODS = new Item[]{Items.APPLE, Items.GOLDEN_APPLE, Items.PORKCHOP, Items.COOKED_PORKCHOP, Items.BEEF, Items.COOKED_BEEF, Items.CHICKEN, Items.COOKED_CHICKEN};
    private ItemStack prevItem;
    private int eatTicks;
 
@@ -49,6 +49,9 @@ public class SelfHealEatGoal extends TickedGoal<Mob> {
       ItemStack foodItem = FOODS[this.entity.getRandom().nextInt(FOODS.length)].getDefaultInstance();
       this.entity.setItemSlot(EquipmentSlot.MAINHAND, foodItem);
       this.entity.startUsingItem(InteractionHand.MAIN_HAND);
+      ItemStack foodItem = new ItemStack(FOODS[this.entity.getRandom().nextInt(FOODS.length)]);
+      this.entity.setItemSlot(EquipmentSlot.MAINHAND, foodItem);
+      this.entity.swing(InteractionHand.MAIN_HAND);
       this.eatTicks = 0;
    }
 
@@ -68,5 +71,9 @@ public class SelfHealEatGoal extends TickedGoal<Mob> {
 
    static {
       FOODS = new Item[]{Items.APPLE, Items.MUSHROOM_STEW, Items.BREAD, Items.PORKCHOP, Items.COOKED_BEEF, Items.CARROT, Items.BAKED_POTATO, Items.COOKIE};
+   }
+      this.entity.clearFire();
+      this.entity.setItemSlot(EquipmentSlot.MAINHAND, this.prevItem);
+      this.entity.heal(10.0F);
    }
 }
