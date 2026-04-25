@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "c": {
+      "item": "mineminenomi:perfect_clima_tact"
+    },
+    "g": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "pattern": [
+    "ggg",
+    "gcg",
+    "ggg"
+  ],
+  "result": {
+    "count": 1,
+    "id": "mineminenomi:sorcery_clima_tact"
+  }
+}

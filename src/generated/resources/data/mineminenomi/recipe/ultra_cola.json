@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "item": "mineminenomi:cola"
+    },
+    "s": {
+      "item": "minecraft:sugar"
+    }
+  },
+  "pattern": [
+    "sss",
+    "sss",
+    "scs"
+  ],
+  "result": {
+    "count": 1,
+    "id": "mineminenomi:ultra_cola"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "k": {
+      "item": "mineminenomi:kairoseki"
+    }
+  },
+  "pattern": [
+    "kk ",
+    "kk ",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "mineminenomi:dense_kairoseki"
+  }
+}
