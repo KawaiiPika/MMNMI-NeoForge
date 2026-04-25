@@ -232,6 +232,13 @@ public class PlayerStats {
     public boolean hasDevilFruit() { return basic.identity().devilFruit().isPresent(); }
     public boolean isRogue() { return basic.isRogue(); }
     public boolean isLogia() { return combat.isLogia(); }
+
+    public boolean isPirate() { return basic.identity().faction().isPresent() && basic.identity().faction().get().getPath().equals("pirate"); }
+    public boolean isMarine() { return basic.identity().faction().isPresent() && basic.identity().faction().get().getPath().equals("marine"); }
+    public boolean isBountyHunter() { return basic.identity().faction().isPresent() && basic.identity().faction().get().getPath().equals("bounty_hunter"); }
+    public boolean isRevolutionary() { return basic.identity().faction().isPresent() && basic.identity().faction().get().getPath().equals("revolutionary"); }
+    public boolean isBandit() { return basic.identity().faction().isPresent() && basic.identity().faction().get().getPath().equals("bandit"); }
+
     public void setLogia(boolean logia) {
         this.combat = new CombatStats(logia, combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), combat.equippedAbilities(), combat.activeAbilities(), combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(), combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns());
     }
