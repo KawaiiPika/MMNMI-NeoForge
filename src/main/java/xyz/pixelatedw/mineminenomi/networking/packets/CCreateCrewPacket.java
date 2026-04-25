@@ -45,8 +45,7 @@ public record CCreateCrewPacket(String name) implements CustomPacketPayload {
                     SimpleMessageScreenDTO screenEvent = new SimpleMessageScreenDTO();
                     screenEvent.setTimeVisible(40);
 
-                    // Since props.getBasic().identity().isPirate() isn't ported, we just check faction text
-                    boolean isPirate = props.getBasic().identity().faction().isPresent() && props.getBasic().identity().faction().get().getPath().equals("pirate");
+                    boolean isPirate = props.isPirate();
 
                     if (hasSakeBottle && isPirate) {
                         if (isAlreadyInCrew) {
