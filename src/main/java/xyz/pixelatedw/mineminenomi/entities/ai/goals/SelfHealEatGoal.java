@@ -13,7 +13,7 @@ import xyz.pixelatedw.mineminenomi.api.helpers.GoalHelper;
 
 public class SelfHealEatGoal extends TickedGoal<Mob> {
    private static final int COOLDOWN = 1200;
-   private static final Item[] FOODS = new Item[]{Items.APPLE, Items.GOLDEN_APPLE, Items.PORKCHOP, Items.COOKED_PORKCHOP, Items.BEEF, Items.COOKED_BEEF, Items.CHICKEN, Items.COOKED_CHICKEN};
+   private static final Item[] FOODS;
    private ItemStack prevItem;
    private int eatTicks;
 
@@ -46,22 +46,27 @@ public class SelfHealEatGoal extends TickedGoal<Mob> {
    public void start() {
       super.start();
       this.prevItem = this.entity.getMainHandItem();
-      ItemStack foodItem = new ItemStack(FOODS[this.entity.getRandom().nextInt(FOODS.length)]);
+      ItemStack foodItem = FOODS[this.entity.getRandom().nextInt(FOODS.length)].getDefaultInstance();
       this.entity.setItemSlot(EquipmentSlot.MAINHAND, foodItem);
-      this.entity.swing(InteractionHand.MAIN_HAND);
+      this.entity.startUsingItem(InteractionHand.MAIN_HAND);
       this.eatTicks = 0;
    }
 
    @Override
    public void tick() {
+      super.tick();
       ++this.eatTicks;
    }
 
    @Override
    public void stop() {
       super.stop();
-      this.entity.clearFire();
+      this.entity.stopUsingItem();
       this.entity.setItemSlot(EquipmentSlot.MAINHAND, this.prevItem);
       this.entity.heal(10.0F);
+   }
+
+   static {
+      FOODS = new Item[]{Items.APPLE, Items.MUSHROOM_STEW, Items.BREAD, Items.PORKCHOP, Items.COOKED_BEEF, Items.CARROT, Items.BAKED_POTATO, Items.COOKIE};
    }
 }

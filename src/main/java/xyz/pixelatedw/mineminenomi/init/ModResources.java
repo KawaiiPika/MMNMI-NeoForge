@@ -64,6 +64,10 @@ public class ModResources {
         return ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/pirate" + index + ".png");
     }
 
+    public static ResourceLocation getPirateTraderTexture(int index) {
+        return ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/pirate_trader" + index + ".png");
+    }
+
     public static void init() {}
     public static final ResourceLocation PIRATE_ICON = ResourceLocation.fromNamespaceAndPath(xyz.pixelatedw.mineminenomi.ModMain.PROJECT_ID, "textures/gui/icons/pirate.png");
     public static final ResourceLocation WARNING_ICON = ResourceLocation.fromNamespaceAndPath(xyz.pixelatedw.mineminenomi.ModMain.PROJECT_ID, "textures/gui/icons/warning.png");
