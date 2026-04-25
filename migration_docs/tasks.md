@@ -33,6 +33,11 @@
 - [x] **System Audits**: Successfully audited Network Payload Handling and `ToolActions` to `ItemAbilities` migrations, confirming native compliance.
 - [x] **Automated Asset Datagen**: Implemented data generation for worldgen, language, sound, and particle providers.
 - [x] **UI/Client Isolation**: Safely isolated to `client.*` packages with `Dist.CLIENT`.
+- [x] **World Generation Refactoring**: Replaced manual worldgen structure JSON files with `DatapackBuiltinEntriesProvider`.
+- [x] **Logical Side Checks**: Enforced proper server/client logical side checks in base abilities and AI.
+- [x] **Datagen Enhancements**: Fixed duplicate datagen outputs in `processResources` and programmatically mapped item textures.
+- [x] **Networking Tests**: Implemented networking validation tests for `CustomPacketPayload`s.
+- [x] **JSpecify Refactoring**: Updated type-use `@Nullable` annotations codebase-wide.
 
 ## Immediate Priority
 - [ ] **Network Synching**: Ensure `selectedAbilitySlot` and other stats are synced correctly to the client.

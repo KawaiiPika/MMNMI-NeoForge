@@ -79,6 +79,11 @@ The mod is currently being systematically migrated module by module, with a focu
 - **Concurrency Implementation**: Implemented Java 21 Virtual Threads and `StructuredTaskScope` for non-blocking I/O (e.g., `JollyRoger.java`).
 - **Dials Migration**: Successfully migrated Dials to Vanilla Data Components and `ItemAccessEnergyHandler`.
 - **System Audits**: Successfully audited Network Payload Handling and `ToolActions` to `ItemAbilities` migration.
+- **World Generation Refactoring**: Replaced manual worldgen structure JSON files with `DatapackBuiltinEntriesProvider`.
+- **Logical Side Checks**: Enforced proper server/client logical side checks in base abilities and AI.
+- **Datagen Enhancements**: Fixed duplicate datagen outputs in `processResources` and programmatically mapped item textures.
+- **Networking Tests**: Implemented networking validation tests for `CustomPacketPayload`s.
+- **JSpecify Refactoring**: Updated type-use `@Nullable` annotations codebase-wide.
 
 ---
 
