@@ -7,7 +7,7 @@ import xyz.pixelatedw.mineminenomi.api.abilities.zoan.ZoanAbility;
 public class LeopardHeavyPointAbility extends ZoanAbility {
 
     public LeopardHeavyPointAbility() {
-        super(ResourceLocation.fromNamespaceAndPath("mineminenomi", "neko_neko_no_mi_model_leopard"));
+        super(ResourceLocation.fromNamespaceAndPath("mineminenomi", "neko_neko_no_mi_model_1"));
     }
 
     @Override
@@ -16,13 +16,13 @@ public class LeopardHeavyPointAbility extends ZoanAbility {
     }
 
     @Override
-    public double getScaleModifier() { return 0.5; }
+    public double getScaleModifier() { return 0.15; }
 
     @Override
     public double getHealthModifier() { return 10; }
 
     @Override
-    public double getDamageModifier() { return 10; }
+    public double getDamageModifier() { return 9; }
 
     @Override
     public Component getDisplayName() {

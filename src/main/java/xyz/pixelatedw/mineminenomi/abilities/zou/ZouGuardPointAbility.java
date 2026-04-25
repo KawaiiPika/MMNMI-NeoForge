@@ -17,17 +17,17 @@ public class ZouGuardPointAbility extends ZoanAbility {
 
     @Override
     public double getScaleModifier() {
-        return 1.0;
+        return 1.5; // Increases size by 150% (total 2.5x)
     }
 
     @Override
     public double getHealthModifier() {
-        return 15.0;
+        return 40.0; // Adds 20 hearts
     }
 
     @Override
     public double getDamageModifier() {
-        return 5.0;
+        return 4.0; // Adds 4 damage
     }
 
     @Override

@@ -12,10 +12,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.player.Player;
 import xyz.pixelatedw.mineminenomi.networking.packets.CCreateCrewPacket;
 
-import xyz.pixelatedw.mineminenomi.api.ui.IEventReceiverScreen;
-import xyz.pixelatedw.mineminenomi.api.ui.SimpleMessageScreenDTO;
-
-public class CreateCrewScreen extends Screen implements IEventReceiverScreen<SimpleMessageScreenDTO> {
+public class CreateCrewScreen extends Screen {
     private static final Style ERROR_STYLE = Style.EMPTY.withColor(ChatFormatting.RED);
     private Player player;
     private EditBox nameEdit;
@@ -76,15 +73,5 @@ public class CreateCrewScreen extends Screen implements IEventReceiverScreen<Sim
 
     private void createCrew(Button btn) {
         net.neoforged.neoforge.network.PacketDistributor.sendToServer(new CCreateCrewPacket(this.nameEdit.getValue()));
-    }
-
-    @Override
-    public void handleEvent(SimpleMessageScreenDTO event) {
-        if (event.getMessage() != null) {
-            this.errorMessage = event.getMessage().copy().withStyle(ERROR_STYLE);
-            this.errorMessageVisibleTicks = event.getTimeVisible();
-        } else {
-            this.onClose();
-        }
     }
 }

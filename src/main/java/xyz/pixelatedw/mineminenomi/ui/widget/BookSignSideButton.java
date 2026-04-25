@@ -52,7 +52,20 @@ public class BookSignSideButton extends Button {
         RenderSystem.defaultBlendFunc();
         RenderSystem.enableDepthTest();
         
-        graphics.blit(ModResources.BUTTON, this.getX(), this.getY(), this.width, this.height, this.isFlipped ? this.textureWidth : 0, 8.0F, this.textureWidth, 50, 120, 50);
+        // blit(ResourceLocation, x, y, u, v, width, height, textureWidth, textureHeight)
+        // The old one used: graphics.m_280163_(ModResources.BUTTON, this.m_252754_(), this.m_252907_(), (float)(this.isFlipped ? this.textureWidth : 0), 8.0F, this.textureWidth, 50, this.isFlipped ? -120 : 120, 50);
+        // Note the negative textureWidth for flipping. In 1.21.1 blit doesn't support negative width for flipping easily,
+        // we might need to use pose().scale(-1, 1, 1) or a different approach.
+        graphics.pose().pushPose();
+        graphics.pose().translate(0, 0, 50.0F);
+        if (this.isFlipped) {
+            // Using UV flipping: start at U=60, width=-60 to flip back to U=0 but mirrored
+            // This is a common way to flip textures in Minecraft GUI
+            graphics.blit(ModResources.BUTTON, this.getX(), this.getY(), this.width, this.height, 60.0F, 0.0F, -60, 50, 120, 50);
+        } else {
+            graphics.blit(ModResources.BUTTON, this.getX(), this.getY(), 0, 0, this.width, this.height, 120, 50);
+        }
+        graphics.pose().popPose();
         
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         

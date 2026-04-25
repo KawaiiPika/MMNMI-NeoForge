@@ -7,7 +7,7 @@ import xyz.pixelatedw.mineminenomi.api.abilities.zoan.ZoanAbility;
 public class LeopardWalkPointAbility extends ZoanAbility {
 
     public LeopardWalkPointAbility() {
-        super(ResourceLocation.fromNamespaceAndPath("mineminenomi", "neko_neko_no_mi_model_leopard"));
+        super(ResourceLocation.fromNamespaceAndPath("mineminenomi", "neko_neko_no_mi_model_1"));
     }
 
     @Override
@@ -16,10 +16,10 @@ public class LeopardWalkPointAbility extends ZoanAbility {
     }
 
     @Override
-    public double getScaleModifier() { return 0.0; }
+    public double getScaleModifier() { return 0.2; }
 
     @Override
-    public double getHealthModifier() { return 0; }
+    public double getHealthModifier() { return 12; }
 
     @Override
     public double getDamageModifier() { return 6; }
