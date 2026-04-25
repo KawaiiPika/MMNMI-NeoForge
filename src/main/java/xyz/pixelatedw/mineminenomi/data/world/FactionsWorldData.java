@@ -51,7 +51,7 @@ public class FactionsWorldData extends SavedData {
       for(int i = 0; i < crews.size(); ++i) {
          CompoundTag crewNBT = crews.getCompound(i);
          Crew crew = Crew.from(crewNBT);
-         data.pirateCrews.put(WyHelper.getResourceName(crew.getName()), crew);
+         data.pirateCrews.put(crew.getName().toLowerCase().replace(" ", "_"), crew);
       }
 
       return data;
@@ -118,7 +118,7 @@ public class FactionsWorldData extends SavedData {
    }
 
    public void removeCrew(Crew crew) {
-      String key = WyHelper.getResourceName(crew.getName());
+      String key = crew.getName().toLowerCase().replace(" ", "_");
       if (this.pirateCrews.containsKey(key)) {
          this.pirateCrews.remove(key);
       }
@@ -127,7 +127,7 @@ public class FactionsWorldData extends SavedData {
    }
 
    public void addCrew(Crew crew) {
-      String key = WyHelper.getResourceName(crew.getName());
+      String key = crew.getName().toLowerCase().replace(" ", "_");
       if (!this.pirateCrews.containsKey(key)) {
          this.pirateCrews.put(key, crew);
       }
@@ -149,7 +149,7 @@ public class FactionsWorldData extends SavedData {
    }
 
    public void addCrewMember(Crew crew, LivingEntity entity, boolean saveMember) {
-      String key = WyHelper.getResourceName(crew.getName());
+      String key = crew.getName().toLowerCase().replace(" ", "_");
       if (!this.pirateCrews.containsKey(key)) {
          this.pirateCrews.put(key, crew);
       } else {

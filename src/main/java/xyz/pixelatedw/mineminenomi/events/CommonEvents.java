@@ -237,6 +237,21 @@ public class CommonEvents {
             extension.onDamageTake(source, event.getNewDamage());
         }
 
+        if (targetStats != null && !targetHasKairoseki) {
+            for (String abilityId : targetStats.getActiveAbilities()) {
+                Ability ability = xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.get(net.minecraft.resources.ResourceLocation.parse(abilityId));
+                if (ability != null) {
+                    ability.onDamageTaken(target, source);
+                }
+            }
+            for (String abilityId : targetStats.getCombat().equippedAbilities()) {
+                Ability ability = xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.get(net.minecraft.resources.ResourceLocation.parse(abilityId));
+                if (ability != null) {
+                    ability.onDamageTaken(target, source);
+                }
+            }
+        }
+
         // Attacker Logic
         if (attacker instanceof LivingEntity livingAttacker) {
             PlayerStats attackerStats = PlayerStats.get(livingAttacker);

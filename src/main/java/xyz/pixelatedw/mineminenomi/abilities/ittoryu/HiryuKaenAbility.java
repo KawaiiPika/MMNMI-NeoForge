@@ -37,7 +37,7 @@ public class HiryuKaenAbility extends Ability {
                 target.hurt(entity.damageSources().mobAttack(entity), DAMAGE);
                 target.setRemainingFireTicks(80); // 4 seconds of fire
                 if (!entity.level().isClientSide) {
-                    WyHelper.spawnParticles(ParticleTypes.FLAME, (ServerLevel)entity.level(), target.getX(), target.getY() + target.getBbHeight()/2, target.getZ());
+                    ((net.minecraft.server.level.ServerLevel)entity.level()).sendParticles(net.minecraft.core.particles.ParticleTypes.FLAME, target.getX(), target.getY() + target.getBbHeight()/2, target.getZ(), 1, 0, 0, 0, 0);
                 }
                 hitAnything = true;
             }

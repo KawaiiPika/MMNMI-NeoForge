@@ -27,7 +27,7 @@ public class ExtolPouchItem extends Item {
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
         if (!level.isClientSide && !stack.has(DataComponents.CUSTOM_DATA)) {
             CustomData.update(DataComponents.CUSTOM_DATA, stack, tag -> {
-                tag.putLong("extol", (long) WyHelper.randomWithRange(5.0, 250.0));
+                tag.putLong("extol", (long) (5 + Math.random() * (250.0 - 5)));
             });
         }
     }

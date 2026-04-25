@@ -25,7 +25,7 @@ public class ShishiSonsonAbility extends Ability {
             entity.setDeltaMovement(look.scale(1.5));
             
             // Damage entities along the path
-            List<LivingEntity> targets = WyHelper.getNearbyEntities(entity.position(), entity.level(), RANGE, 2, RANGE, (e) -> e != entity, LivingEntity.class);
+            List<LivingEntity> targets = entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(RANGE, 2, RANGE), e -> e != entity);
             for (LivingEntity target : targets) {
                 target.hurt(entity.damageSources().mobAttack(entity), DAMAGE);
             }

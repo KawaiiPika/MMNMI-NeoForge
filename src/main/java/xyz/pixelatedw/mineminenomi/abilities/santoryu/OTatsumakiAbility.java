@@ -45,12 +45,12 @@ public class OTatsumakiAbility extends Ability {
                 for (LivingEntity target : targets) {
                     target.hurt(entity.damageSources().mobAttack(entity), DAMAGE / 3.0F); // Distributed damage
                     if (!entity.level().isClientSide) {
-                        WyHelper.spawnParticles(ParticleTypes.CLOUD, (ServerLevel)entity.level(), target.getX(), target.getY() + target.getBbHeight()/2, target.getZ());
+                        ((net.minecraft.server.level.ServerLevel)entity.level()).sendParticles(net.minecraft.core.particles.ParticleTypes.CLOUD, target.getX(), target.getY() + target.getBbHeight()/2, target.getZ(), 1, 0, 0, 0, 0);
                     }
                 }
                 
                 if (!entity.level().isClientSide) {
-                    WyHelper.spawnParticles(ParticleTypes.SWEEP_ATTACK, (ServerLevel)entity.level(), entity.getX(), entity.getY() + 1.0, entity.getZ());
+                    ((net.minecraft.server.level.ServerLevel)entity.level()).sendParticles(net.minecraft.core.particles.ParticleTypes.SWEEP_ATTACK, entity.getX(), entity.getY() + 1.0, entity.getZ(), 1, 0, 0, 0, 0);
                 }
             }
         }
