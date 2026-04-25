@@ -7,22 +7,22 @@ import xyz.pixelatedw.mineminenomi.api.abilities.zoan.ZoanAbility;
 public class MammothHeavyPointAbility extends ZoanAbility {
 
     public MammothHeavyPointAbility() {
-        super(ResourceLocation.fromNamespaceAndPath("mineminenomi", "zou_zou_no_mi_model_mammoth"));
+        super(ResourceLocation.fromNamespaceAndPath("mineminenomi", "zou_zou_no_mi_model_1"));
     }
 
     @Override
     public ResourceLocation getMorphModelId() {
-        return ResourceLocation.fromNamespaceAndPath("mineminenomi", "mammoth_heavy");
+        return ResourceLocation.fromNamespaceAndPath("mineminenomi", "mammoth_guard");
     }
 
     @Override
-    public double getScaleModifier() { return 0.8; }
+    public double getScaleModifier() { return 1.2; }
 
     @Override
-    public double getHealthModifier() { return 15; }
+    public double getHealthModifier() { return 30; }
 
     @Override
-    public double getDamageModifier() { return 7; }
+    public double getDamageModifier() { return 10; }
 
     @Override
     public Component getDisplayName() {

@@ -8,7 +8,7 @@ import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 public class FlamesOfRegenerationAbility extends Ability {
 
     public FlamesOfRegenerationAbility() {
-        super(ResourceLocation.fromNamespaceAndPath("mineminenomi", "tori_tori_no_mi_model_phoenix"));
+        super(ResourceLocation.fromNamespaceAndPath("mineminenomi", "tori_tori_no_mi_model_1"));
     }
 
     @Override
@@ -21,30 +21,17 @@ public class FlamesOfRegenerationAbility extends Ability {
     }
 
     @Override
-    public float onIncomingDamage(LivingEntity entity, net.minecraft.world.damagesource.DamageSource source, float amount) {
-        if (source.is(net.minecraft.world.damagesource.DamageTypes.IN_FIRE) || source.is(net.minecraft.world.damagesource.DamageTypes.ON_FIRE)) {
-            // Phoenix flames heal from fire
-            if (!entity.level().isClientSide) {
-                entity.heal(amount);
-
-                ((net.minecraft.server.level.ServerLevel) entity.level()).sendParticles(net.minecraft.core.particles.ParticleTypes.SOUL_FIRE_FLAME,
-                    entity.getX(), entity.getY() + 1.0, entity.getZ(),
-                    10, 0.5, 0.5, 0.5, 0.05);
+    protected void onTick(LivingEntity entity, long duration) {
+        if (!entity.level().isClientSide) {
+            if (duration % 20 == 0) { // Every 1 second
+                entity.heal(1.0F);
             }
-            return 0.0F; // Cancel damage
-        }
-
-        return amount;
-    }
-
-    @Override
-    public void onDamageTake(LivingEntity entity, net.minecraft.world.damagesource.DamageSource source, float amount) {
-        // Custom regeneration check happens AFTER damage is safely taken via LivingDamageEvent.Post
-        if (!entity.level().isClientSide && amount > 0) {
-            entity.heal(amount * 0.5F); // Heal back 50% of the damage taken
-            ((net.minecraft.server.level.ServerLevel) entity.level()).sendParticles(net.minecraft.core.particles.ParticleTypes.SOUL_FIRE_FLAME,
-                entity.getX(), entity.getY() + 1.0, entity.getZ(),
-                10, 0.5, 0.5, 0.5, 0.05);
+        } else if (duration % 5 == 0) {
+            entity.level().addParticle(net.minecraft.core.particles.ParticleTypes.SOUL_FIRE_FLAME,
+                entity.getX() + (entity.getRandom().nextDouble() - 0.5) * 1.2,
+                entity.getY() + (entity.getRandom().nextDouble() * 2),
+                entity.getZ() + (entity.getRandom().nextDouble() - 0.5) * 1.2,
+                0, 0.05, 0);
         }
     }
 

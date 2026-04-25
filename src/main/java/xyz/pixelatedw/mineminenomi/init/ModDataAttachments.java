@@ -9,7 +9,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.MorphData;
 public class ModDataAttachments {
 
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<PlayerStats>> PLAYER_STATS = ModRegistry.ATTACHMENT_TYPES.register(
-            "player_stats", () -> AttachmentType.builder(() -> new PlayerStats()).serialize(PlayerStats.CODEC).sync(PlayerStats.STREAM_CODEC).copyOnDeath().build()
+            "player_stats", () -> AttachmentType.builder(() -> new PlayerStats()).serialize(PlayerStats.CODEC).copyOnDeath().build()
     );
 
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> KARMA_VALUE = ModRegistry.ATTACHMENT_TYPES.register(

@@ -8,7 +8,6 @@ import xyz.pixelatedw.mineminenomi.client.gui.screens.JollyRogerEditorScreen;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.client.gui.screens.Screen;
 import xyz.pixelatedw.mineminenomi.api.ui.IEventReceiverScreen;
-import xyz.pixelatedw.mineminenomi.api.ui.SimpleMessageScreenDTO;
 
 public class ClientPacketHandlers {
 
@@ -47,8 +46,7 @@ public class ClientPacketHandlers {
         context.enqueueWork(() -> {
             Minecraft mc = Minecraft.getInstance();
             Screen screen = mc.screen;
-            if (screen instanceof IEventReceiverScreen) {
-                IEventReceiverScreen<SimpleMessageScreenDTO> eventReceiver = (IEventReceiverScreen<SimpleMessageScreenDTO>) screen;
+            if (screen instanceof IEventReceiverScreen eventReceiver) {
                 eventReceiver.handleEvent(payload.event());
             }
         });

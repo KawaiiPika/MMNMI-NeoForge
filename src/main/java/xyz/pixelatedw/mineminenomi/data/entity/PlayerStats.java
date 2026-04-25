@@ -301,27 +301,6 @@ public class PlayerStats {
         this.basic = updateBasicStats(basic.doriki(), basic.cola(), basic.ultraCola(), basic.loyalty(), bounty, basic.belly(), basic.extol(), basic.hasShadow(), basic.hasHeart(), basic.hasStrawDoll(), basic.isRogue(), basic.stamina(), basic.maxStamina());
     }
 
-    public int getMaxCola() {
-        int maxCola = 100;
-        maxCola += basic.ultraCola() * 20;
-        return maxCola;
-    }
-
-    public void setCola(int cola) {
-        this.basic = updateBasicStats(basic.doriki(), cola, basic.ultraCola(), basic.loyalty(), basic.bounty(), basic.belly(), basic.extol(), basic.hasShadow(), basic.hasHeart(), basic.hasStrawDoll(), basic.isRogue(), basic.stamina(), basic.maxStamina());
-    }
-
-    public void updateCola() {
-        int clampedCola = Math.clamp(basic.cola(), 0, getMaxCola());
-        if (clampedCola != basic.cola()) {
-            setCola(clampedCola);
-        }
-    }
-
-    public boolean isCyborg() {
-        return basic.identity().race().map(race -> race.equals(xyz.pixelatedw.mineminenomi.init.ModRegistries.RACES.getKey(xyz.pixelatedw.mineminenomi.init.ModRaces.CYBORG.get()))).orElse(false);
-    }
-
     public void setFaction(ResourceLocation faction) {
         Identity newIdentity = new Identity(Optional.ofNullable(faction), basic.identity().race(), basic.identity().subRace(), basic.identity().fightingStyle(), basic.identity().devilFruit());
         this.basic = updateBasicStats(newIdentity);

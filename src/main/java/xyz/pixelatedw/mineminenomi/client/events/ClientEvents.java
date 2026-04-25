@@ -5,37 +5,12 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
-import net.neoforged.neoforge.client.event.RegisterShadersEvent;
-
-import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
-import xyz.pixelatedw.mineminenomi.client.particles.effects.haki.HaoshokuHakiParticleEffect;
-import xyz.pixelatedw.mineminenomi.client.particles.effects.haki.EmissionBurstParticleEffect;
-import xyz.pixelatedw.mineminenomi.client.particles.effects.haki.InternalDestructionBurstParticleEffect;
 import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.client.gui.overlays.AbilityBarOverlay;
 import xyz.pixelatedw.mineminenomi.client.gui.overlays.HaoshokuOverlay;
 
 @EventBusSubscriber(modid = ModMain.PROJECT_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class ClientEvents {
-
-    @SubscribeEvent
-    public static void onRegisterParticleProviders(RegisterParticleProvidersEvent event) {
-        // Registering Haki Particle Providers
-        // Assuming we map them to some standard SimpleParticleTypes for now to satisfy the provider.
-        // In a full implementation, we'd add custom ModParticleTypes fields for HAKI_BURSTS.
-        event.registerSpriteSet(xyz.pixelatedw.mineminenomi.init.ModParticleTypes.CHIYU.get(), HaoshokuHakiParticleEffect.Provider::new);
-        event.registerSpriteSet(xyz.pixelatedw.mineminenomi.init.ModParticleTypes.DOUBLE_CIRCLE.get(), EmissionBurstParticleEffect.Provider::new);
-        event.registerSpriteSet(xyz.pixelatedw.mineminenomi.init.ModParticleTypes.SIMPLE_CIRCLE.get(), InternalDestructionBurstParticleEffect.Provider::new);
-    }
-
-    @SubscribeEvent
-    public static void onRegisterShaders(RegisterShadersEvent event) {
-        try {
-            event.registerShader(new net.minecraft.client.renderer.ShaderInstance(event.getResourceProvider(), net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "rendertype_entity_aura_haki"), com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_TEX_COLOR), (shaderInstance) -> xyz.pixelatedw.mineminenomi.client.render.ModRenderTypes.auraHakiShaderInstance = shaderInstance);
-        } catch (java.io.IOException e) {
-            xyz.pixelatedw.mineminenomi.ModMain.LOGGER.error("Failed to load custom shaders", e);
-        }
-    }
 
     @SubscribeEvent
     public static void onRegisterGuiLayers(RegisterGuiLayersEvent event) {
