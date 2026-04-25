@@ -22,7 +22,7 @@ public class ChiyuHormoneAbility extends Ability {
                 this.startCooldown(entity, 400);
             } else {
                 var trace = xyz.pixelatedw.mineminenomi.api.WyHelper.rayTraceEntities(entity, 3.0);
-            Entity target = trace != null ? trace.getEntity() : null;
+            Entity target = trace != null && !trace.isEmpty() ? trace.get(0) : null;
                 if (target instanceof LivingEntity livingTarget) {
                     livingTarget.addEffect(new MobEffectInstance(ModEffects.CHIYU_HORMONE, 300, 0));
                     this.startCooldown(entity, 400);

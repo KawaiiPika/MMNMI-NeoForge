@@ -42,7 +42,13 @@ public class ShiShishiSonsonAbility extends Ability {
     }
 
     private void performDash(LivingEntity entity) {
-        BlockPos targetPos = WyHelper.rayTraceBlockSafe(entity, RANGE).getBlockPos();
+        BlockPos targetPos = null;
+        net.minecraft.world.phys.HitResult hit = WyHelper.rayTraceBlockSafe(entity, RANGE);
+        if (hit instanceof net.minecraft.world.phys.BlockHitResult blockHit) {
+            targetPos = blockHit.getBlockPos();
+        } else {
+            targetPos = entity.blockPosition();
+        }
         Vec3 startPos = entity.position();
         
         // Damage entities in line
