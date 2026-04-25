@@ -309,6 +309,12 @@ public class ModEntities {
                     .updateInterval(20)
                     .build("pack_of_sharks"));
 
+    public static final Supplier<EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.ryupteranodon.BarizodonProjectile>> BARIZODON = ModRegistry.ENTITY_TYPES.register("barizodon",
+            () -> EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.ryupteranodon.BarizodonProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.ryupteranodon.BarizodonProjectile::new, MobCategory.MISC).sized(1.5F, 1.5F).clientTrackingRange(10).updateInterval(20).build("barizodon"));
+
+    public static final Supplier<EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.ryupteranodon.TempuraudonProjectile>> TEMPURAUDON = ModRegistry.ENTITY_TYPES.register("tempuraudon",
+            () -> EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.ryupteranodon.TempuraudonProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.ryupteranodon.TempuraudonProjectile::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(10).updateInterval(20).build("tempuraudon"));
+
     public static final java.util.function.Supplier<net.minecraft.world.entity.EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.awa.RelaxHourProjectile>> RELAX_HOUR_PROJECTILE = ModRegistry.ENTITY_TYPES.register("relax_hour_projectile", () -> net.minecraft.world.entity.EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.awa.RelaxHourProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.awa.RelaxHourProjectile::new, net.minecraft.world.entity.MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("relax_hour_projectile"));
 
     public static void init() {}

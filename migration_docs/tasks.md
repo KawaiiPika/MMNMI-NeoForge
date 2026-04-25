@@ -46,7 +46,7 @@
   - [/] **Batch 2: Gravity & Weight Paramecias**: Zushi, Kilo, Ton (if exists), Fuwa (if exists).
   - [ ] **Batch 3: Creation & Manipulation Paramecias**: Doru, Awa, Doa, Ori, Beta, Kuku, Baku, Kira.
   - [ ] **Batch 4: Body & Misc Paramecias**: Horu, Bane, Deka, Jiki, Sabi, Kachi, Mini, Nagi, Kobu, Karu.
-  - [ ] **Batch 5: Remaining Zoans (Models)**: Ryu Ryu (Allosaurus, Brachiosaurus, Pteranodon), Zou Zou, Tori Tori (Phoenix), Neko Neko (Leopard).
+  - [x] **Batch 5: Remaining Zoans (Models)**: Ryu Ryu (Allosaurus, Brachiosaurus, Pteranodon), Zou Zou, Tori Tori (Phoenix), Neko Neko (Leopard).
   - [ ] **Batch 6: Partially Ported Cleanup**: Finish missing abilities for Magu, Goro, Pika, Moku, Ope, Kage, Ito, Doku, Hana, Horo, Wara, Mero, Pero, Bara, Bomu, Suke, Noro, Yami, Suna.
   - [ ] **Batch 7: Fighting Styles - Swordsman**: Santoryu, Ittoryu.
   - [ ] **Batch 8: Fighting Styles - Martial Arts & Tech**: Brawler, Fishman Karate, Cyborg, Mink/Electro, Hasshoken, Ryusoken.

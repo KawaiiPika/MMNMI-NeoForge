@@ -8,6 +8,9 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat.Mode;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.client.Minecraft;
+import xyz.pixelatedw.mineminenomi.client.render.ModRenderTypeBuffers;
+import net.minecraft.client.renderer.PostChain;
+
 
 public class ModRenderTypes extends RenderType {
 
@@ -17,10 +20,15 @@ public class ModRenderTypes extends RenderType {
     // In 1.21.1, the output state shard might need adjustment depending on how we handle the target
     public static final RenderStateShard.OutputStateShard AURA_TARGET = new RenderStateShard.OutputStateShard("mineminenomi:aura_target", 
         () -> {
-            // This is a placeholder for the actual target setup which might require mixins
+            PostChain chain = ModRenderTypeBuffers.getInstance().getHakiAuraPostChain();
+            if (chain != null) {
+                chain.getTempTarget("final").bindWrite(false);
+            } else {
+                Minecraft.getInstance().getMainRenderTarget().bindWrite(false);
+            }
         },
         () -> {
-            // This is a placeholder for the actual target cleanup
+            Minecraft.getInstance().getMainRenderTarget().bindWrite(false);
         }
     );
 
@@ -39,6 +47,7 @@ public class ModRenderTypes extends RenderType {
                 .setShaderState(AURA_HAKI_SHADER)
                 .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
                 .setDepthTestState(LEQUAL_DEPTH_TEST)
+                .setOutputState(AURA_TARGET)
                 .setWriteMaskState(COLOR_WRITE)
                 .createCompositeState(true)
         );
