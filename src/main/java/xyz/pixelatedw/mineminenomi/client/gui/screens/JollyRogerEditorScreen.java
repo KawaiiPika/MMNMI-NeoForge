@@ -3,7 +3,7 @@ package xyz.pixelatedw.mineminenomi.client.gui.screens;
 import com.mojang.blaze3d.systems.RenderSystem;
 import java.util.ArrayList;
 import java.util.List;
-import org.jspecify.annotations.Nullable;
+import javax.annotation.Nullable;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
@@ -12,12 +12,12 @@ import net.minecraft.world.entity.player.Player;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
 import xyz.pixelatedw.mineminenomi.api.crew.JollyRoger;
 import xyz.pixelatedw.mineminenomi.api.crew.JollyRogerElement;
-import xyz.pixelatedw.mineminenomi.networking.ModNetworking;
+
 
 import xyz.pixelatedw.mineminenomi.networking.packets.CUpdateJollyRogerPacket;
 import xyz.pixelatedw.mineminenomi.client.gui.components.JollyRogerElementColorComponent;
 import xyz.pixelatedw.mineminenomi.client.gui.panels.JollyRogerElementsScrollPanel;
-import xyz.pixelatedw.mineminenomi.client.gui.widgets.PlankButton;
+
 
 public class JollyRogerEditorScreen extends Screen {
    private static final Component VERTICAL_MIRROR = Component.literal("|");
@@ -97,7 +97,7 @@ public class JollyRogerEditorScreen extends Screen {
       super.render(graphics, mouseX, mouseY, partialTicks);
    }
 
-   public void init() {
+   public void m_7856_() {
       this.player = this.minecraft.player;
       this.jollyRoger = this.crew.getJollyRoger();
       int posX = 0;
@@ -112,13 +112,13 @@ public class JollyRogerEditorScreen extends Screen {
       int listWidth = elementsPerRow * 72;
       this.elementsPanel = new JollyRogerElementsScrollPanel(this, listWidth, elementsPerRow);
       this.addRenderableWidget(this.elementsPanel);
-      this.elementsPanel.setFocused(true);
+
       this.elementColorComponent = new JollyRogerElementColorComponent(this, this.width - 200, this.height - 100);
       this.elementColorComponent.setVisible(true);
       this.addRenderableWidget(this.elementColorComponent);
       this.updateElementComponents(this.jollyRoger.getBase());
       int listPosY = posY - 85;
-      this.addLayerButton(new PlankButton(posX + 5, listPosY, 115, 16, Component.translatable("gui.base"), (btn) -> this.selectLayer(btn, 0, JollyRogerElement.LayerType.BASE)));
+      this.addLayerButton(net.minecraft.client.gui.components.Button.builder(Component.translatable("gui.base"), btn -> this.selectLayer(btn, 0, JollyRogerElement.LayerType.BASE)).bounds(posX + 5, listPosY, 115, 16).build());
       int bgLen = this.jollyRoger.getBackgrounds().length;
 
       for(int i = 0; i < bgLen; ++i) {
@@ -126,7 +126,7 @@ public class JollyRogerEditorScreen extends Screen {
          int var10002 = posX + 5;
          int var10003 = listPosY + 20 + i * 20;
          String var10006 = Component.translatable("gui.background").getString();
-         PlankButton bgButton = new PlankButton(var10002, var10003, 115, 16, Component.literal(var10006 + " " + (i + 1)), (btn) -> this.selectLayer(btn, id, JollyRogerElement.LayerType.BACKGROUND));
+         net.minecraft.client.gui.components.Button bgButton = net.minecraft.client.gui.components.Button.builder(Component.literal(var10006 + " " + (i + 1)), btn -> this.selectLayer(btn, id, JollyRogerElement.LayerType.BACKGROUND)).bounds(var10002, var10003, 115, 16).build();
          this.addLayerButton(bgButton);
       }
 
@@ -135,7 +135,7 @@ public class JollyRogerEditorScreen extends Screen {
          int var14 = posX + 5;
          int var15 = listPosY + 60 + i * 20;
          String var16 = Component.translatable("gui.detail").getString();
-         PlankButton detailButton = new PlankButton(var14, var15, 115, 16, Component.literal(var16 + " " + (i + 1)), (btn) -> this.selectLayer(btn, id, JollyRogerElement.LayerType.DETAIL));
+         net.minecraft.client.gui.components.Button detailButton = net.minecraft.client.gui.components.Button.builder(Component.literal(var16 + " " + (i + 1)), btn -> this.selectLayer(btn, id, JollyRogerElement.LayerType.DETAIL)).bounds(var14, var15, 115, 16).build();
          this.addLayerButton(detailButton);
       }
 
@@ -147,20 +147,20 @@ public class JollyRogerEditorScreen extends Screen {
       this.updateLayerMoveButtons();
    }
 
-   public void onClose() {
+   public void init() {
       net.neoforged.neoforge.network.PacketDistributor.sendToServer(new CUpdateJollyRogerPacket(this.jollyRoger));
-      super.onClose();
+      super.init();
    }
 
-   public boolean mouseReleased(double p_94699_, double p_94700_, int p_94701_, double p_94702_, double p_94703_) {
-      if (this.isFocused()) {
+   public boolean mouseScrolled(double p_94699_, double p_94700_, int p_94701_, double p_94702_, double p_94703_) {
+      if (this.isPauseScreen()) {
          JollyRogerElement currentElement = this.getLayerElement();
          if (currentElement != null && currentElement.canBeColored()) {
             currentElement.setColor(this.elementColorComponent.getRed(), this.elementColorComponent.getGreen(), this.elementColorComponent.getBlue());
          }
       }
 
-      return super.mouseReleased(p_94699_, p_94700_, p_94701_);
+      return super.mouseScrolled(p_94699_, p_94700_, p_94701_, p_94702_);
    }
 
    public void flipLayer(Button btn, boolean vertical, boolean horizontal) {
@@ -219,9 +219,9 @@ public class JollyRogerEditorScreen extends Screen {
             this.selectLayer(btn, nextLayer + 1, this.selectedLayerType);
             break;
          case DETAIL:
-            JollyRogerElement oldDetailElem = this.jollyRoger.getDetails()[this.selectedLayerIndex];
+            oldElem = this.jollyRoger.getDetails()[this.selectedLayerIndex];
             this.jollyRoger.getDetails()[this.selectedLayerIndex] = this.jollyRoger.getDetails()[nextLayer];
-            this.jollyRoger.getDetails()[nextLayer] = oldDetailElem;
+            this.jollyRoger.getDetails()[nextLayer] = oldElem;
             this.selectLayer(btn, nextLayer + 1 + bgLen, this.selectedLayerType);
       }
 
@@ -275,13 +275,13 @@ public class JollyRogerEditorScreen extends Screen {
       int posY = this.height / 2;
       int layerMoveY = posY - 85 + this.trueLayerIndex * 20;
       if (this.moveLayerUp != null) {
-         this.removeWidget(this.moveLayerUp);
-         this.removeWidget(this.moveLayerUp);
+         this.renderables.remove(this.moveLayerUp);
+         this.addRenderableOnly(this.moveLayerUp);
       }
 
       if (this.moveLayerDown != null) {
-         this.removeWidget(this.moveLayerDown);
-         this.removeWidget(this.moveLayerDown);
+         this.renderables.remove(this.moveLayerDown);
+         this.addRenderableOnly(this.moveLayerDown);
       }
 
       boolean isBase = this.getSelectedLayerType() == JollyRogerElement.LayerType.BASE;
@@ -289,12 +289,12 @@ public class JollyRogerEditorScreen extends Screen {
       boolean isBot = this.selectedLayerIndex == (this.getSelectedLayerType() == JollyRogerElement.LayerType.BACKGROUND ? 2 : 5) - 1;
       if (!isBase) {
          if (!isTop) {
-            this.moveLayerUp = new PlankButton(posX + 125, layerMoveY - 7, 16, 16, Component.literal("+"), (btn) -> this.moveLayer(btn, true));
+            this.moveLayerUp = net.minecraft.client.gui.components.Button.builder(Component.literal("+"), btn -> this.moveLayer(btn, true)).bounds(posX + 125, layerMoveY - 7, 16, 16).build();
             this.addRenderableWidget(this.moveLayerUp);
          }
 
          if (!isBot) {
-            this.moveLayerDown = new PlankButton(posX + 125, layerMoveY + 7, 16, 16, Component.literal("-"), (btn) -> this.moveLayer(btn, false));
+            this.moveLayerDown = net.minecraft.client.gui.components.Button.builder(Component.literal("-"), btn -> this.moveLayer(btn, false)).bounds(posX + 125, layerMoveY + 7, 16, 16).build();
             this.addRenderableWidget(this.moveLayerDown);
          }
 
@@ -305,22 +305,22 @@ public class JollyRogerEditorScreen extends Screen {
       if (element != null) {
          this.elementColorComponent.setVisible(element.canBeColored());
          if (this.flipVertical != null) {
-            this.removeWidget(this.flipVertical);
-            this.removeWidget(this.flipVertical);
+            this.renderables.remove(this.flipVertical);
+            this.addRenderableOnly(this.flipVertical);
          }
 
          if (this.flipHorizontal != null) {
-            this.removeWidget(this.flipHorizontal);
-            this.removeWidget(this.flipHorizontal);
+            this.renderables.remove(this.flipHorizontal);
+            this.addRenderableOnly(this.flipHorizontal);
          }
 
          if (element.canBeFlippedVertically()) {
-            this.flipVertical = new PlankButton(this.width - 270, this.height - 130, 16, 16, VERTICAL_MIRROR, (btn) -> this.flipLayer(btn, true, false));
+            this.flipVertical = net.minecraft.client.gui.components.Button.builder(VERTICAL_MIRROR, btn -> this.flipLayer(btn, true, false)).bounds(this.width - 270, this.height - 130, 16, 16).build();
             this.addRenderableWidget(this.flipVertical);
          }
 
          if (element.canBeFlippedHorizontally()) {
-            this.flipHorizontal = new PlankButton(this.width - 240, this.height - 130, 16, 16, HORIZONTAL_MIRROR, (btn) -> this.flipLayer(btn, false, true));
+            this.flipHorizontal = net.minecraft.client.gui.components.Button.builder(HORIZONTAL_MIRROR, btn -> this.flipLayer(btn, false, true)).bounds(this.width - 240, this.height - 130, 16, 16).build();
             this.addRenderableWidget(this.flipHorizontal);
          }
       }
@@ -375,8 +375,5 @@ public class JollyRogerEditorScreen extends Screen {
 
    public boolean isSmallScreen() {
       return this.isSmallScreen;
-   }
-   public <T extends net.minecraft.client.gui.components.events.GuiEventListener & net.minecraft.client.gui.components.Renderable & net.minecraft.client.gui.narration.NarratableEntry> void addRenderableWidgetPublic(T widget) {
-      this.addRenderableWidget(widget);
    }
 }
