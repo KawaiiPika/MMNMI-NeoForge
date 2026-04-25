@@ -12,6 +12,8 @@ public class PlayerAnimationWrapper extends HierarchicalModel<LivingEntity> {
     private final ModelPart root;
 
     public PlayerAnimationWrapper(HumanoidModel<?> humanoidModel) {
+        // HumanoidModel does not natively have a single "root" part that encompasses all other parts in vanilla,
+        // so we create a dummy root part that wraps the standard humanoid parts.
         this.root = new ModelPart(List.of(), Map.of(
                 "head", humanoidModel.head,
                 "hat", humanoidModel.hat,
@@ -30,6 +32,6 @@ public class PlayerAnimationWrapper extends HierarchicalModel<LivingEntity> {
 
     @Override
     public void setupAnim(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        // Handled via mixin instead
+        // SetupAnim is generally handled via mixins or vanilla code, so we leave it empty here
     }
 }
