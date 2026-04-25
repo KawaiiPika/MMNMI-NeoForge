@@ -24,26 +24,26 @@ public class HandleCannonGoal extends TickedGoal<Mob> {
 
     @Override
     public boolean canUse() {
-        if (this.entity.tickCount % 100 != 0) {
+        if (this.mob.tickCount % 100 != 0) {
             return false;
-        } else if (this.entity.isPassenger()) {
+        } else if (this.mob.isPassenger()) {
             return false;
-        } else if (!GoalHelper.hasAliveTarget(this.entity)) {
+        } else if (!GoalHelper.hasAliveTarget(this.mob)) {
             return false;
         } else {
-            this.target = this.entity.getTarget();
-            if (GoalHelper.isWithinDistance(this.entity, this.target, 5.0D)) {
+            this.target = this.mob.getTarget();
+            if (GoalHelper.isWithinDistance(this.mob, this.target, 5.0D)) {
                 return false;
             } else {
-                StructureStart entityStructure = StructuresHelper.getStructureAt((ServerLevel) this.entity.level(), this.entity.blockPosition());
-                StructureStart targetStructure = StructuresHelper.getStructureAt((ServerLevel) this.entity.level(), this.target.blockPosition());
+                StructureStart entityStructure = StructuresHelper.getStructureAt((ServerLevel) this.mob.level(), this.mob.blockPosition());
+                StructureStart targetStructure = StructuresHelper.getStructureAt((ServerLevel) this.mob.level(), this.target.blockPosition());
                 if (entityStructure != null && entityStructure == targetStructure) {
                     return false;
                 } else {
-                    AABB searchBox = this.entity.getBoundingBox().inflate(5.0D);
-                    List<CannonEntity> nearbyCannons = this.entity.level().getEntitiesOfClass(
+                    AABB searchBox = this.mob.getBoundingBox().inflate(5.0D);
+                    List<CannonEntity> nearbyCannons = this.mob.level().getEntitiesOfClass(
                             CannonEntity.class, searchBox,
-                            cannon -> !cannon.isRemoved() && cannon.distanceToSqr(this.entity) <= 25.0D
+                            cannon -> !cannon.isRemoved() && cannon.distanceToSqr(this.mob) <= 25.0D
                     );
                     Optional<CannonEntity> targetCannon = nearbyCannons.stream().findFirst();
                     if (!targetCannon.isPresent()) {
@@ -60,13 +60,13 @@ public class HandleCannonGoal extends TickedGoal<Mob> {
     @Override
     public boolean canContinueToUse() {
         if (this.cannon != null && this.cannon.isAlive()) {
-            if (!GoalHelper.hasAliveTarget(this.entity)) {
+            if (!GoalHelper.hasAliveTarget(this.mob)) {
                 return false;
-            } else if (GoalHelper.isWithinDistance(this.entity, this.target, 5.0D)) {
+            } else if (GoalHelper.isWithinDistance(this.mob, this.target, 5.0D)) {
                 return false;
             } else {
-                StructureStart entityStructure = StructuresHelper.getStructureAt((ServerLevel) this.entity.level(), this.entity.blockPosition());
-                StructureStart targetStructure = StructuresHelper.getStructureAt((ServerLevel) this.entity.level(), this.target.blockPosition());
+                StructureStart entityStructure = StructuresHelper.getStructureAt((ServerLevel) this.mob.level(), this.mob.blockPosition());
+                StructureStart targetStructure = StructuresHelper.getStructureAt((ServerLevel) this.mob.level(), this.target.blockPosition());
                 return entityStructure == null || entityStructure != targetStructure;
             }
         } else {
@@ -77,28 +77,28 @@ public class HandleCannonGoal extends TickedGoal<Mob> {
     @Override
     public void start() {
         super.start();
-        this.entity.startRiding(this.cannon, true);
+        this.mob.startRiding(this.cannon, true);
     }
 
     @Override
     public void tick() {
         super.tick();
-        GoalHelper.lookAtEntity(this.entity, this.target);
-        this.cannon.setXRot(this.entity.getXRot() - 8.0F);
-        this.cannon.setYRot(this.entity.getYRot());
+        GoalHelper.lookAtEntity(this.mob, this.target);
+        this.cannon.setXRot(this.mob.getXRot() - 8.0F);
+        this.cannon.setYRot(this.mob.getYRot());
         if (this.lastShot == 0L) {
-            this.lastShot = this.entity.level().getGameTime();
+            this.lastShot = this.mob.level().getGameTime();
         }
 
-        if (this.entity.level().getGameTime() >= this.lastShot + 100L) {
-            this.entity.swing(InteractionHand.MAIN_HAND);
-            this.lastShot = this.entity.level().getGameTime();
+        if (this.mob.level().getGameTime() >= this.lastShot + 100L) {
+            this.mob.swing(InteractionHand.MAIN_HAND);
+            this.lastShot = this.mob.level().getGameTime();
         }
     }
 
     @Override
     public void stop() {
         super.stop();
-        this.entity.stopRiding();
+        this.mob.stopRiding();
     }
 }
