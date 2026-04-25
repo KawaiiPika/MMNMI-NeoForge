@@ -28,6 +28,11 @@ A thorough comparison between `old_source` and the current `src` has revealed th
 - **Damage Logic**: Legacy damage logic successfully routed to `LivingDamageEvent.Post` and `ILivingEntityExtension`.
 - **System Audits**: Fully compliant network payload handling and `ToolActions` to `ItemAbilities` migration without need for changes.
 - **Abilities**: Approximately 45% of abilities (228 files) have been ported, including Haki, Rokushiki, and several core Devil Fruits.
+- **World Generation Refactoring**: Replaced manual worldgen structure JSON files with `DatapackBuiltinEntriesProvider`.
+- **Logical Side Checks**: Enforced proper server/client logical side checks in base abilities and AI.
+- **Datagen Enhancements**: Fixed duplicate datagen outputs in `processResources` and programmatically mapped item textures.
+- **Networking Tests**: Implemented networking validation tests for `CustomPacketPayload`s.
+- **JSpecify Refactoring**: Updated type-use `@Nullable` annotations codebase-wide.
 
 ## Key Files
 - `xyz.pixelatedw.mineminenomi.init.ModFruits`: Devil Fruit registration.
