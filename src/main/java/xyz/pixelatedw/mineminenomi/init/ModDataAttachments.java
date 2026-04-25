@@ -12,6 +12,9 @@ public class ModDataAttachments {
             "player_stats", () -> AttachmentType.builder(() -> new PlayerStats()).serialize(PlayerStats.CODEC).copyOnDeath().build()
     );
 
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> KARMA_VALUE = ModRegistry.ATTACHMENT_TYPES.register(
+            "karma_value", () -> AttachmentType.builder(() -> 0).serialize(com.mojang.serialization.Codec.INT).sync(net.minecraft.network.codec.ByteBufCodecs.INT).copyOnDeath().build()
+    );
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<AnimationStateData>> ANIMATION_STATE = ModRegistry.ATTACHMENT_TYPES.register(
             "animation_state", () -> AttachmentType.builder(() -> new AnimationStateData()).serialize(AnimationStateData.CODEC).sync(AnimationStateData.STREAM_CODEC).build()
     );

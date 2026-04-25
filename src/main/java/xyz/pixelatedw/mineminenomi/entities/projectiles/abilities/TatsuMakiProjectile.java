@@ -25,7 +25,7 @@ public class TatsuMakiProjectile extends AbilityProjectile {
     public void tick() {
         super.tick();
         if (!this.level().isClientSide && this.tickCount % 5 == 0) {
-            WyHelper.spawnParticles(ParticleTypes.CLOUD, (ServerLevel)this.level(), this.getX(), this.getY(), this.getZ());
+            ((net.minecraft.server.level.ServerLevel)this.level()).sendParticles(net.minecraft.core.particles.ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
         }
     }
 }

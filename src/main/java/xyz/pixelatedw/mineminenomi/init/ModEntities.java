@@ -56,6 +56,12 @@ public class ModEntities {
                     .clientTrackingRange(10)
                     .updateInterval(20)
                     .build("meigo"));
+    public static final java.util.function.Supplier<net.minecraft.world.entity.EntityType<xyz.pixelatedw.mineminenomi.api.entities.AbilityProjectile>> SPRING_DEATH_KNOCK_PROJECTILE = ModRegistry.ENTITY_TYPES.register("spring_death_knock",
+            () -> net.minecraft.world.entity.EntityType.Builder.<xyz.pixelatedw.mineminenomi.api.entities.AbilityProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.bane.SpringDeathKnockProjectile::new, net.minecraft.world.entity.MobCategory.MISC)
+                    .sized(1.0F, 1.0F)
+                    .clientTrackingRange(4)
+                    .updateInterval(10)
+                    .build("spring_death_knock"));
 
     public static final java.util.function.Supplier<net.minecraft.world.entity.EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.RyuseiKazanEntity>> RYUSEI_KAZAN = ModRegistry.ENTITY_TYPES.register("ryusei_kazan",
             () -> net.minecraft.world.entity.EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.RyuseiKazanEntity>of(xyz.pixelatedw.mineminenomi.entities.projectiles.RyuseiKazanEntity::new, net.minecraft.world.entity.MobCategory.MISC)
