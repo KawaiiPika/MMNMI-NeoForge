@@ -15,7 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
-import xyz.pixelatedw.mineminenomi.api.ui.TexturedRectUI;
+import xyz.pixelatedw.mineminenomi.client.ui.TexturedRectUI;
 import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
