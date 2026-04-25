@@ -12,7 +12,7 @@ public class PteranodonAssaultPointAbility extends ZoanAbility {
 
     @Override
     public ResourceLocation getMorphModelId() {
-        return ResourceLocation.fromNamespaceAndPath("mineminenomi", "pteranodon_fly");
+        return ResourceLocation.fromNamespaceAndPath("mineminenomi", "pteranodon_assault");
     }
 
     @Override
