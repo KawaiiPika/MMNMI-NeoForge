@@ -5,12 +5,14 @@ import net.minecraft.world.entity.ai.goal.Goal;
 
 public abstract class TickedGoal<E extends Mob> extends Goal {
     protected E entity;
+    protected E mob;
     private long startTick;
     private long lastEndTick;
     private long tickCount;
 
     public TickedGoal(E entity) {
         this.entity = entity;
+        this.mob = entity;
     }
 
     @Override

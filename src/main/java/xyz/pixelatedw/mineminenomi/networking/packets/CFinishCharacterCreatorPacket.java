@@ -37,34 +37,86 @@ public record CFinishCharacterCreatorPacket(
             var player = context.player();
             PlayerStats stats = PlayerStats.get(player);
             if (stats != null) {
-                payload.faction().ifPresent(stats::setFaction);
+                boolean hasCharBook = !player.getMainHandItem().isEmpty() && player.getMainHandItem().getItem() instanceof xyz.pixelatedw.mineminenomi.items.CharacterCreatorItem;
+                boolean hasEmptyStats = stats.getBasic().identity().faction().isEmpty() || stats.getBasic().identity().race().isEmpty() || stats.getBasic().identity().fightingStyle().isEmpty();
                 
-                payload.race().ifPresent(raceLoc -> {
-                    stats.setRace(raceLoc);
-                    xyz.pixelatedw.mineminenomi.api.entities.charactercreator.Race race = xyz.pixelatedw.mineminenomi.init.ModRegistries.RACES.get(raceLoc);
-                    if (race != null && race.getSelectionInfo() != null) {
-                        race.getSelectionInfo().getTopAbilities().forEach(s -> stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.getKey(s.get())));
-                        race.getSelectionInfo().getBottomAbilities().forEach(s -> stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.getKey(s.get())));
+                if (!hasCharBook && !hasEmptyStats) {
+                    return;
+                }
+
+                ResourceLocation finalFaction = payload.faction().orElseGet(() -> {
+                    java.util.List<xyz.pixelatedw.mineminenomi.api.entities.charactercreator.Faction> factions = xyz.pixelatedw.mineminenomi.init.ModRegistries.FACTIONS.stream().filter(xyz.pixelatedw.mineminenomi.api.entities.charactercreator.ICharacterCreatorEntry::isInBook).toList();
+                    if (!factions.isEmpty()) {
+                        return factions.get(player.getRandom().nextInt(factions.size())).getRegistryName();
                     }
+                    return null;
                 });
 
-                payload.subRace().ifPresent(subRaceLoc -> {
-                    stats.setSubRace(subRaceLoc);
-                    xyz.pixelatedw.mineminenomi.api.entities.charactercreator.Race subRace = xyz.pixelatedw.mineminenomi.init.ModRegistries.RACES.get(subRaceLoc);
-                    if (subRace != null && subRace.getSelectionInfo() != null) {
-                        subRace.getSelectionInfo().getTopAbilities().forEach(s -> stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.getKey(s.get())));
-                        subRace.getSelectionInfo().getBottomAbilities().forEach(s -> stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.getKey(s.get())));
+                if (finalFaction != null) {
+                    stats.setFaction(finalFaction);
+                }
+
+                ResourceLocation finalRace = payload.race().orElseGet(() -> {
+                    java.util.List<xyz.pixelatedw.mineminenomi.api.entities.charactercreator.Race> races = xyz.pixelatedw.mineminenomi.init.ModRegistries.RACES.stream().filter(r -> r.isMainRace() && r.isInBook()).toList();
+                    if (!races.isEmpty()) {
+                        return races.get(player.getRandom().nextInt(races.size())).getRegistryName();
                     }
+                    return null;
                 });
 
-                payload.fightingStyle().ifPresent(styleLoc -> {
-                    stats.setFightingStyle(styleLoc);
-                    xyz.pixelatedw.mineminenomi.api.entities.charactercreator.FightingStyle style = xyz.pixelatedw.mineminenomi.init.ModRegistries.FIGHTING_STYLES.get(styleLoc);
-                    if (style != null && style.getSelectionInfo() != null) {
-                        style.getSelectionInfo().getTopAbilities().forEach(s -> stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.getKey(s.get())));
-                        style.getSelectionInfo().getBottomAbilities().forEach(s -> stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.getKey(s.get())));
+                if (finalRace != null) {
+                    stats.setRace(finalRace);
+                    xyz.pixelatedw.mineminenomi.api.entities.charactercreator.Race raceObj = xyz.pixelatedw.mineminenomi.init.ModRegistries.RACES.get(finalRace);
+                    if (raceObj != null && raceObj.getSelectionInfo() != null) {
+                        raceObj.getSelectionInfo().getTopAbilities().forEach(s -> stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.getKey(s.get())));
+                        raceObj.getSelectionInfo().getBottomAbilities().forEach(s -> stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.getKey(s.get())));
                     }
+
+                    if (raceObj != null && raceObj.hasSubRaces()) {
+                        ResourceLocation finalSubRace = payload.subRace().orElseGet(() -> {
+                            java.util.List<xyz.pixelatedw.mineminenomi.api.entities.charactercreator.Race> subRaces = raceObj.getSubRaces().stream().map(java.util.function.Supplier::get).filter(xyz.pixelatedw.mineminenomi.api.entities.charactercreator.ICharacterCreatorEntry::isInBook).toList();
+                            if (!subRaces.isEmpty()) {
+                                return subRaces.get(player.getRandom().nextInt(subRaces.size())).getRegistryName();
+                            }
+                            return null;
+                        });
+                        if (finalSubRace != null) {
+                            stats.setSubRace(finalSubRace);
+                            xyz.pixelatedw.mineminenomi.api.entities.charactercreator.Race subRaceObj = xyz.pixelatedw.mineminenomi.init.ModRegistries.RACES.get(finalSubRace);
+                            if (subRaceObj != null && subRaceObj.getSelectionInfo() != null) {
+                                subRaceObj.getSelectionInfo().getTopAbilities().forEach(s -> stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.getKey(s.get())));
+                                subRaceObj.getSelectionInfo().getBottomAbilities().forEach(s -> stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.getKey(s.get())));
+                            }
+                        }
+                    }
+                }
+
+                ResourceLocation finalStyle = payload.fightingStyle().orElseGet(() -> {
+                    java.util.List<xyz.pixelatedw.mineminenomi.api.entities.charactercreator.FightingStyle> styles = xyz.pixelatedw.mineminenomi.init.ModRegistries.FIGHTING_STYLES.stream().filter(xyz.pixelatedw.mineminenomi.api.entities.charactercreator.ICharacterCreatorEntry::isInBook).toList();
+                    if (!styles.isEmpty()) {
+                        return styles.get(player.getRandom().nextInt(styles.size())).getRegistryName();
+                    }
+                    return null;
                 });
+
+                if (finalStyle != null) {
+                    stats.setFightingStyle(finalStyle);
+                    xyz.pixelatedw.mineminenomi.api.entities.charactercreator.FightingStyle styleObj = xyz.pixelatedw.mineminenomi.init.ModRegistries.FIGHTING_STYLES.get(finalStyle);
+                    if (styleObj != null && styleObj.getSelectionInfo() != null) {
+                        styleObj.getSelectionInfo().getTopAbilities().forEach(s -> stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.getKey(s.get())));
+                        styleObj.getSelectionInfo().getBottomAbilities().forEach(s -> stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.getKey(s.get())));
+                    }
+                }
+
+                if (stats.isCyborg()) {
+                    stats.setCola(stats.getMaxCola());
+                }
+
+                for (net.minecraft.world.item.ItemStack is : player.getInventory().items) {
+                    if (is != null && is.getItem() instanceof xyz.pixelatedw.mineminenomi.items.CharacterCreatorItem) {
+                        player.getInventory().removeItem(is);
+                    }
+                }
                 
                 stats.sync(player);
             }

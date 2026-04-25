@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "c": {
+      "item": "minecraft:iron_bars"
+    },
+    "k": {
+      "item": "mineminenomi:dense_kairoseki"
+    }
+  },
+  "pattern": [
+    "   ",
+    "kck",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "mineminenomi:kairoseki_handcuffs"
+  }
+}

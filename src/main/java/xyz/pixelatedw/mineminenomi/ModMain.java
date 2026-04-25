@@ -38,6 +38,7 @@ public class ModMain {
         xyz.pixelatedw.mineminenomi.init.ModWeapons.init();
         xyz.pixelatedw.mineminenomi.init.ModArmors.init();
         xyz.pixelatedw.mineminenomi.init.ModBlocks.init();
+        xyz.pixelatedw.mineminenomi.init.ModRecipes.init(modEventBus);
         xyz.pixelatedw.mineminenomi.init.ModMobs.init();
         xyz.pixelatedw.mineminenomi.init.ModEntities.init();
         xyz.pixelatedw.mineminenomi.init.ModAbilities.register(modEventBus);

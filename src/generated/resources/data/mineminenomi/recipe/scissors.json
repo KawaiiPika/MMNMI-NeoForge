@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "c": {
+      "item": "minecraft:shears"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    " ii",
+    "cii",
+    "cc "
+  ],
+  "result": {
+    "count": 1,
+    "id": "mineminenomi:scissors"
+  }
+}

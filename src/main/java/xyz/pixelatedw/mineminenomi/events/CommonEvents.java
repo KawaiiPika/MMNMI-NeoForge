@@ -67,7 +67,13 @@ public class CommonEvents {
         var source = event.getSource();
         var attacker = source.getEntity();
 
-        for (String abilityId : targetStats.getActiveAbilities()) {
+        // Check active and equipped abilities for invulnerabilities
+        java.util.Set<String> abilitiesToCheck = new java.util.HashSet<>();
+        abilitiesToCheck.addAll(targetStats.getActiveAbilities());
+        abilitiesToCheck.addAll(targetStats.getCombat().equippedAbilities());
+
+        for (String abilityId : abilitiesToCheck) {
+            if (abilityId == null || abilityId.isEmpty()) continue;
             Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
             if (ability != null) {
                 if (targetHasKairoseki && ability.getRequiredFruit() != null) {
@@ -97,7 +103,11 @@ public class CommonEvents {
                 }
 
                 if (attacker instanceof LivingEntity livingAttacker) {
-                    for (String abilityId : targetStats.getActiveAbilities()) {
+                    java.util.Set<String> dodgeAbilitiesToCheck = new java.util.HashSet<>();
+                    dodgeAbilitiesToCheck.addAll(targetStats.getActiveAbilities());
+                    dodgeAbilitiesToCheck.addAll(targetStats.getCombat().equippedAbilities());
+                    for (String abilityId : dodgeAbilitiesToCheck) {
+                        if (abilityId == null || abilityId.isEmpty()) continue;
                         Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                         if (ability != null) {
                             ability.onLogiaDodge(target, livingAttacker);
@@ -121,9 +131,12 @@ public class CommonEvents {
             if (attackerStats != null) {
                 boolean attackerHasKairoseki = livingAttacker.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI);
                 // Ability damage hooks
-                // Iterating directly over getActiveAbilities() is safe here because PlayerStats uses a
-                // copy-on-write pattern for its lists.
-                for (String abilityId : attackerStats.getActiveAbilities()) {
+                java.util.Set<String> attackerAbilitiesToCheck = new java.util.HashSet<>();
+                attackerAbilitiesToCheck.addAll(attackerStats.getActiveAbilities());
+                attackerAbilitiesToCheck.addAll(attackerStats.getCombat().equippedAbilities());
+
+                for (String abilityId : attackerAbilitiesToCheck) {
+                    if (abilityId == null || abilityId.isEmpty()) continue;
                     Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                     if (ability != null) {
                         if (attackerHasKairoseki && ability.getRequiredFruit() != null) {
@@ -221,6 +234,37 @@ public class CommonEvents {
                 }
             }
 
+            for (String abilityId : targetStats.getActiveAbilities()) {
+                Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
+                if (ability != null) {
+                    if (targetHasKairoseki && ability.getRequiredFruit() != null) {
+                        continue;
+                    }
+                    float newAmount = ability.onIncomingDamage(target, source, event.getAmount());
+                    event.setAmount(newAmount);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingFall(net.neoforged.neoforge.event.entity.living.LivingFallEvent event) {
+        LivingEntity entity = event.getEntity();
+        PlayerStats stats = PlayerStats.get(entity);
+        if (stats != null) {
+            // Check if either of the Phoenix flight abilities are currently active
+            // Because flight state stops when hitting the ground, we check if it's active or was recently active.
+            boolean hasPhoenixFlight = stats.isAbilityActive("mineminenomi:phoenix_fly_point") ||
+                                       stats.isAbilityActive("mineminenomi:phoenix_assault_point");
+
+            // Alternatively, check morph data for phoenix forms
+            xyz.pixelatedw.mineminenomi.data.entity.MorphData morphData = entity.getData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.MORPH_DATA);
+            boolean isPhoenixMorph = morphData.activeMorphs().contains(ResourceLocation.fromNamespaceAndPath("mineminenomi", "phoenix_fly")) ||
+                                     morphData.activeMorphs().contains(ResourceLocation.fromNamespaceAndPath("mineminenomi", "phoenix_assault"));
+
+            if (hasPhoenixFlight || isPhoenixMorph) {
+                event.setCanceled(true);
+            }
         }
     }
 
@@ -237,20 +281,7 @@ public class CommonEvents {
             extension.onDamageTake(source, event.getNewDamage());
         }
 
-        if (targetStats != null && !targetHasKairoseki) {
-            for (String abilityId : targetStats.getActiveAbilities()) {
-                Ability ability = xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.get(net.minecraft.resources.ResourceLocation.parse(abilityId));
-                if (ability != null) {
-                    ability.onDamageTaken(target, source);
-                }
-            }
-            for (String abilityId : targetStats.getCombat().equippedAbilities()) {
-                Ability ability = xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.get(net.minecraft.resources.ResourceLocation.parse(abilityId));
-                if (ability != null) {
-                    ability.onDamageTaken(target, source);
-                }
-            }
-        }
+
 
         // Attacker Logic
         if (attacker instanceof LivingEntity livingAttacker) {
@@ -259,7 +290,12 @@ public class CommonEvents {
                 boolean attackerHasKairoseki = livingAttacker.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI);
 
                 // Iterate abilities
-                for (String abilityId : attackerStats.getActiveAbilities()) {
+                java.util.Set<String> attackerAbilitiesToCheck = new java.util.HashSet<>();
+                attackerAbilitiesToCheck.addAll(attackerStats.getActiveAbilities());
+                attackerAbilitiesToCheck.addAll(attackerStats.getCombat().equippedAbilities());
+
+                for (String abilityId : attackerAbilitiesToCheck) {
+                    if (abilityId == null || abilityId.isEmpty()) continue;
                     Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                     if (ability != null) {
                         if (attackerHasKairoseki && ability.getRequiredFruit() != null) {
@@ -284,10 +320,16 @@ public class CommonEvents {
 
         // Target Logic
         if (targetStats != null) {
-            for (String abilityId : targetStats.getActiveAbilities()) {
+            boolean targetHasKairosekiCheck = target.hasEffect(xyz.pixelatedw.mineminenomi.init.ModEffects.HANDCUFFED_KAIROSEKI);
+            java.util.Set<String> targetAbilitiesToCheck = new java.util.HashSet<>();
+            targetAbilitiesToCheck.addAll(targetStats.getActiveAbilities());
+            targetAbilitiesToCheck.addAll(targetStats.getCombat().equippedAbilities());
+
+            for (String abilityId : targetAbilitiesToCheck) {
+                if (abilityId == null || abilityId.isEmpty()) continue;
                 Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
                 if (ability != null) {
-                    if (targetHasKairoseki && ability.getRequiredFruit() != null) {
+                    if (targetHasKairosekiCheck && ability.getRequiredFruit() != null) {
                         continue;
                     }
                     ability.onDamageTake(target, source, event.getNewDamage());

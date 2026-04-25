@@ -82,13 +82,13 @@ public class CharacterCreatorScreen extends Screen {
         graphics.fill(0, 0, this.width, this.height, 0x80000000); // Semi-transparent black background
         
         RenderSystem.setShaderTexture(0, ModResources.BOOK);
-        int centerX = this.width / 2;
-        int centerY = this.height / 2;
+        int centerX = graphics.guiWidth() / 2;
+        int centerY = graphics.guiHeight() / 2;
         
         graphics.pose().pushPose();
         graphics.pose().translate((float)(centerX - 150), (float)(centerY - 120), 0.0F);
         graphics.pose().scale(1.2F, 1.2F, 1.2F);
-        graphics.blit(ModResources.BOOK, 0, 0, 0, 0, 256, 256);
+        graphics.blit(ModResources.BOOK, 0, 0, 0, 0, 256, 256, 256, 256);
         graphics.pose().popPose();
         
         if (!this.allowSubRaceSelect && this.renderTick % 150 == 0) {
@@ -106,8 +106,8 @@ public class CharacterCreatorScreen extends Screen {
     @Override
     protected void init() {
         this.player = (AbstractClientPlayer) this.minecraft.player;
-        int centerX = this.width / 2;
-        int centerY = this.height / 2;
+        int centerX = this.minecraft.getWindow().getGuiScaledWidth() / 2;
+        int centerY = this.minecraft.getWindow().getGuiScaledHeight() / 2;
         
         int buttonX = centerX - 230;
         int buttonY = centerY - 100;
@@ -119,6 +119,7 @@ public class CharacterCreatorScreen extends Screen {
             this.tryToggleSubRaceButtons();
         });
         this.addRenderableWidget(this.factionButton);
+        this.setInitialFocus(this.factionButton);
         
         buttonY += 45;
         this.raceButton = new BookSignSideButton(buttonX, buttonY, 110, 35, Component.translatable("gui.mineminenomi.race"), (btn) -> {
@@ -250,8 +251,8 @@ public class CharacterCreatorScreen extends Screen {
         this.abilitySlots.forEach(this::removeWidget);
         this.abilitySlots.clear();
         
-        int centerX = this.width / 2;
-        int centerY = this.height / 2;
+        int centerX = this.minecraft.getWindow().getGuiScaledWidth() / 2;
+        int centerY = this.minecraft.getWindow().getGuiScaledHeight() / 2;
         
         int i = 0;
         int xOffset = 0;
@@ -294,7 +295,7 @@ public class CharacterCreatorScreen extends Screen {
         graphics.pose().pushPose();
         graphics.pose().translate((float)posX, (float)posY, 2.0F);
         graphics.pose().scale(scale, scale, 1.0F);
-        graphics.blit(this.icon, 0, 0, 0, 0, 256, 256);
+        graphics.blit(this.icon, 0, 0, 0, 0, 256, 256, 256, 256);
         graphics.pose().popPose();
     }
 

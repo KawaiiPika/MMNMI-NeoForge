@@ -135,6 +135,10 @@ public abstract class Ability {
     public void onLogiaDodge(LivingEntity entity, LivingEntity attacker) {
     }
 
+    public float onIncomingDamage(LivingEntity entity, net.minecraft.world.damagesource.DamageSource source, float amount) {
+        return amount;
+    }
+
     public void onDamageTake(LivingEntity entity, net.minecraft.world.damagesource.DamageSource source, float amount) {
     }
 

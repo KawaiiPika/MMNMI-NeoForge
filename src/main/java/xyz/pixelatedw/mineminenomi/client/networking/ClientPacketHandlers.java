@@ -6,6 +6,7 @@ import xyz.pixelatedw.mineminenomi.networking.packets.*;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.client.gui.screens.Screen;
 import xyz.pixelatedw.mineminenomi.api.ui.IEventReceiverScreen;
+import xyz.pixelatedw.mineminenomi.api.ui.SimpleMessageScreenDTO;
 
 public class ClientPacketHandlers {
 
@@ -44,7 +45,8 @@ public class ClientPacketHandlers {
         context.enqueueWork(() -> {
             Minecraft mc = Minecraft.getInstance();
             Screen screen = mc.screen;
-            if (screen instanceof IEventReceiverScreen eventReceiver) {
+            if (screen instanceof IEventReceiverScreen) {
+                IEventReceiverScreen<SimpleMessageScreenDTO> eventReceiver = (IEventReceiverScreen<SimpleMessageScreenDTO>) screen;
                 eventReceiver.handleEvent(payload.event());
             }
         });
