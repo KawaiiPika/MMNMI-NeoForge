@@ -440,6 +440,22 @@ public class ModAbilities {
     public static final Supplier<Ability> RELAX_HOUR = ABILITIES.register("relax_hour", xyz.pixelatedw.mineminenomi.abilities.awa.RelaxHourAbility::new);
     public static final Supplier<Ability> SOAP_DEFENSE = ABILITIES.register("soap_defense", xyz.pixelatedw.mineminenomi.abilities.awa.SoapDefenseAbility::new);
 
+
+    // Yuki Yuki no Mi
+    public static final java.util.function.Supplier<Ability> YUKI_RABI = ABILITIES.register("yuki_rabi", xyz.pixelatedw.mineminenomi.abilities.yuki.YukiRabiAbility::new);
+    public static final java.util.function.Supplier<Ability> YUKI_TRAVEL = ABILITIES.register("yuki_travel", xyz.pixelatedw.mineminenomi.abilities.yuki.YukiTravelAbility::new);
+    public static final java.util.function.Supplier<Ability> YUKI_IMMUNITY = ABILITIES.register("yuki_immunity", xyz.pixelatedw.mineminenomi.abilities.yuki.YukiImmunityAbility::new);
+    public static final java.util.function.Supplier<Ability> YUKI_GAKI = ABILITIES.register("yuki_gaki", xyz.pixelatedw.mineminenomi.abilities.yuki.YukiGakiAbility::new);
+    public static final java.util.function.Supplier<Ability> TABIRA_YUKI = ABILITIES.register("tabira_yuki", xyz.pixelatedw.mineminenomi.abilities.yuki.TabiraYukiAbility::new);
+
+    // Gasu Gasu no Mi
+    public static final java.util.function.Supplier<Ability> GASU_IMMUNITY = ABILITIES.register("gasu_immunity", xyz.pixelatedw.mineminenomi.abilities.gasu.GasuImmunityAbility::new);
+    public static final java.util.function.Supplier<Ability> GASU_FLY = ABILITIES.register("gasu_fly", xyz.pixelatedw.mineminenomi.abilities.gasu.GasuFlyAbility::new);
+
+    // Yomi Yomi no Mi
+    public static final java.util.function.Supplier<Ability> YOMI_NO_REIKI = ABILITIES.register("yomi_no_reiki", xyz.pixelatedw.mineminenomi.abilities.yomi.YomiNoReikiAbility::new);
+    public static final java.util.function.Supplier<Ability> YOMI_IMMUNITY = ABILITIES.register("yomi_immunity", xyz.pixelatedw.mineminenomi.abilities.yomi.YomiImmunityAbility::new);
+
     public static void register(IEventBus bus) {
         ABILITIES.register(bus);
     }
