@@ -44,10 +44,16 @@ tmp/
 .env
 
 # Local AI and Jules Bridge
+.gemini/
 jules_bridge.py
+jules_supervisor.py
+jules_backlog.txt
 activities_debug.json
 out.log
 list_prs.py
+create_pr.py
+debug_pr.py
+merge_pr.py
 GITHUB_TOKEN.env
 *.env
 *.sh
