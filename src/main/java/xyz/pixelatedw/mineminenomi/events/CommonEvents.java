@@ -221,6 +221,37 @@ public class CommonEvents {
                 }
             }
 
+            for (String abilityId : targetStats.getActiveAbilities()) {
+                Ability ability = ModAbilities.REGISTRY.get(ResourceLocation.parse(abilityId));
+                if (ability != null) {
+                    if (targetHasKairoseki && ability.getRequiredFruit() != null) {
+                        continue;
+                    }
+                    float newAmount = ability.onIncomingDamage(target, source, event.getAmount());
+                    event.setAmount(newAmount);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingFall(net.neoforged.neoforge.event.entity.living.LivingFallEvent event) {
+        LivingEntity entity = event.getEntity();
+        PlayerStats stats = PlayerStats.get(entity);
+        if (stats != null) {
+            // Check if either of the Phoenix flight abilities are currently active
+            // Because flight state stops when hitting the ground, we check if it's active or was recently active.
+            boolean hasPhoenixFlight = stats.isAbilityActive("mineminenomi:phoenix_fly_point") ||
+                                       stats.isAbilityActive("mineminenomi:phoenix_assault_point");
+
+            // Alternatively, check morph data for phoenix forms
+            xyz.pixelatedw.mineminenomi.data.entity.MorphData morphData = entity.getData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.MORPH_DATA);
+            boolean isPhoenixMorph = morphData.activeMorphs().contains(ResourceLocation.fromNamespaceAndPath("mineminenomi", "phoenix_fly")) ||
+                                     morphData.activeMorphs().contains(ResourceLocation.fromNamespaceAndPath("mineminenomi", "phoenix_assault"));
+
+            if (hasPhoenixFlight || isPhoenixMorph) {
+                event.setCanceled(true);
+            }
         }
     }
 
