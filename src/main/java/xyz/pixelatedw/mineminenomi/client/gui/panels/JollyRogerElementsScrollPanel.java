@@ -19,6 +19,14 @@ import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.client.gui.screens.JollyRogerEditorScreen;
 
 public class JollyRogerElementsScrollPanel extends ScrollPanel {
+    @Override
+    public NarrationPriority narrationPriority() {
+        return NarrationPriority.NONE;
+    }
+    @Override
+    public void updateNarration(net.minecraft.client.gui.narration.NarrationElementOutput narrationElementOutput) {}
+
+
    private static final int ENTRY_WIDTH = 64;
    private static final int ENTRY_HEIGHT = 64;
    private static final Entry REMOVE_ELEMENT = new Entry((JollyRogerElement)null);
@@ -44,7 +52,7 @@ public class JollyRogerElementsScrollPanel extends ScrollPanel {
       List<JollyRogerElement> entries = this.parent.getListFromType(layer);
       this.entries.addAll(entries.stream().filter((elem) -> elem.canUse(this.player, this.crew)).map(Entry::new).toList());
       this.rows = (int)Math.ceil((double)((float)this.entries.size() / (float)this.elementsPerRow));
-      this.scrollDistance = 0.0f;
+      this.scrollDistance = 0.0F;
    }
 
    protected void drawGradientRect(GuiGraphics graphics, int left, int top, int right, int bottom, int color1, int color2) {
@@ -87,15 +95,15 @@ public class JollyRogerElementsScrollPanel extends ScrollPanel {
                rect.draw(graphics.pose(), (float)(x - 1 - hoveredX), (float)(y - 4 - hoveredY));
                Component localizedName = elemEntry.element.getLocalizedName();
                int centerX = x - this.parent.getMinecraft().font.width(localizedName) / 2;
-               RendererHelper.drawStringWithBorder(this.parent.getMinecraft().font, graphics, localizedName, centerX + 25, y + 42, textColor);
+               graphics.drawString(this.parent.getMinecraft().font, localizedName, centerX + 25, y + 42, textColor, false);
             } else if (elemEntry.equals(REMOVE_ELEMENT)) {
                iconSize *= 0.8F;
-               TexturedRectUI rect = new TexturedRectUI(net.minecraft.resources.ResourceLocation.withDefaultNamespace("textures/item/barrier.png"));
+               TexturedRectUI rect = new TexturedRectUI(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/gui/expired.png"));
                rect.setScale(iconSize);
                rect.draw(graphics.pose(), (float)(x + 3 - hoveredX), (float)(y - hoveredY));
                Component localizedName = Component.translatable("gui.remove");
                int centerX = x - this.parent.getMinecraft().font.width(localizedName) / 2;
-               RendererHelper.drawStringWithBorder(this.parent.getMinecraft().font, graphics, localizedName, centerX + 24, y + 42, textColor);
+               graphics.drawString(this.parent.getMinecraft().font, localizedName, centerX + 24, y + 42, textColor, false);
             }
 
             x += 64;
@@ -141,25 +149,28 @@ public class JollyRogerElementsScrollPanel extends ScrollPanel {
 
          return true;
       } else {
-         return false;
+         return super.mouseClicked(mouseX, mouseY, button);
       }
    }
 
    public boolean mouseScrolled(double mouseX, double mouseY, double scroll) {
-      return false;
+      return this.getContentHeight() < this.height ? false : super.mouseScrolled(mouseX, mouseY, 0, scroll);
    }
 
-   @Override
    protected int getContentHeight() {
       return this.entries.size() / this.elementsPerRow * 64 + 64;
    }
 
-   @Override
-   public net.minecraft.client.gui.narration.NarratableEntry.NarrationPriority narrationPriority() {
-      return net.minecraft.client.gui.narration.NarratableEntry.NarrationPriority.NONE;
+   protected int getScrollAmount() {
+      return 64;
    }
-   @Override
-   public void updateNarration(net.minecraft.client.gui.narration.NarrationElementOutput output) {}
+
+   public NarratableEntry.NarrationPriority m_142684_() {
+      return NarrationPriority.NONE;
+   }
+
+   public void m_142291_(NarrationElementOutput p_169152_) {
+   }
 
    private static class Entry {
       public final JollyRogerElement element;
