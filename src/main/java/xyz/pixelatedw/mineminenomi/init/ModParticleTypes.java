@@ -75,7 +75,7 @@ public class ModParticleTypes {
             register(event, YUKI, "yuki");
             register(event, YUKI2, "yuki2");
             register(event, YUKI3, "yuki3");
-            register(event, PIKA, "pika");
+            event.registerSpriteSet(PIKA.get(), xyz.pixelatedw.mineminenomi.client.particles.CustomBeamParticle.Provider::new);
             register(event, MERA, "mera", 8);
             register(event, MERA2, "mera2");
             register(event, MOKU, "moku");

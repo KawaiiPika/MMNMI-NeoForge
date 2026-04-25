@@ -14,14 +14,8 @@ public class ModRenderTypes extends RenderType {
     public static ShaderInstance auraHakiShaderInstance;
     protected static final RenderStateShard.ShaderStateShard AURA_HAKI_SHADER = new RenderStateShard.ShaderStateShard(() -> auraHakiShaderInstance);
     
-    // In 1.21.1, the output state shard might need adjustment depending on how we handle the target
     public static final RenderStateShard.OutputStateShard AURA_TARGET = new RenderStateShard.OutputStateShard("mineminenomi:aura_target", 
-        () -> {
-            // This is a placeholder for the actual target setup which might require mixins
-        },
-        () -> {
-            // This is a placeholder for the actual target cleanup
-        }
+        () -> {}, () -> {}
     );
 
     public ModRenderTypes(String name, VertexFormat format, VertexFormat.Mode drawMode, int bufferSize, boolean useDelegate, boolean needsSorting, Runnable setupTask, Runnable clearTask) {
@@ -44,4 +38,42 @@ public class ModRenderTypes extends RenderType {
         );
     }
 
+    public static final RenderType LIGHTNING = RenderType.create("mineminenomi:lightning",
+        DefaultVertexFormat.POSITION_COLOR,
+        VertexFormat.Mode.QUADS,
+        256,
+        false,
+        true,
+        RenderType.CompositeState.builder()
+            .setShaderState(RENDERTYPE_LIGHTNING_SHADER)
+            .setTransparencyState(LIGHTNING_TRANSPARENCY)
+            .setOutputState(ITEM_ENTITY_TARGET)
+            .setWriteMaskState(COLOR_WRITE)
+            .createCompositeState(true)
+    );
+
+    public static final RenderType ENERGY = RenderType.create("mineminenomi:energy",
+        DefaultVertexFormat.POSITION_COLOR,
+        VertexFormat.Mode.QUADS,
+        256,
+        false,
+        true,
+        RenderType.CompositeState.builder()
+            .setShaderState(RENDERTYPE_ENERGY_SWIRL_SHADER)
+            .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+            .setOutputState(ITEM_ENTITY_TARGET)
+            .setWriteMaskState(COLOR_WRITE)
+            .createCompositeState(true)
+    );
+
+    public static RenderType getPosColorTexLightmap(ResourceLocation texture) {
+        RenderType.CompositeState state = RenderType.CompositeState.builder()
+            .setShaderState(POSITION_COLOR_TEX_LIGHTMAP_SHADER)
+            .setTextureState(new RenderStateShard.TextureStateShard(texture, false, false))
+            .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+            .setOutputState(ITEM_ENTITY_TARGET)
+            .createCompositeState(true);
+
+        return RenderType.create("mineminenomi:position_color_texture_lightmap", DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP, VertexFormat.Mode.QUADS, 256, true, true, state);
+    }
 }
