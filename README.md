@@ -16,8 +16,10 @@ The mod is currently being systematically migrated module by module, with a focu
 | **Items** | ✅ 100% | Utility items and iconic fruits ported. Weapons/Armors finished and utilize modern Vanilla Data Components. |
 | **Crew System** | ✅ 100% | Recent successful port. |
 | **Abilities** | 🔶 ~45% | Port Active Devil Fruit Abilities (Batch 1) fully complete. Port Passive Devil Fruit Abilities in progress alongside unit tests. |
-| **UI / Client** | ✅ 90% | Ability HUD, Combat Mode, and core UI screens functional. |
+| **UI / Client** | ✅ 100% | Safely isolated to client.* packages with Dist.CLIENT. Ability HUD, Combat Mode, and core UI screens functional. |
 | **World Generation** | ✅ 100% | Legacy structures and features reconnected via modern JSON data. |
+| **Data Generation** | ✅ 100% | Worldgen, language, sound, and particle providers implemented. |
+| **GameTest Framework**| ✅ 100% | Successfully integrated for automated testing. |
 | **Mobs** | 🔶 Partial | Base `OPEntity` and `GruntEntity` functional. Specialized AI pending. |
 | **Animations & Morphs**| ❌ 0% | Legacy `animations` and `morphs` packages pending migration. |
 
@@ -67,12 +69,16 @@ The mod is currently being systematically migrated module by module, with a focu
 
 ## ✅ Recent Milestones
 
-- **Faithful Port Analysis**: Completed a deep comparison between `old_source` and the current project to identify and document all missing systems (Dials, Bullets, Challenges, etc.).
+- **Faithful Port Analysis**: Completed a deep comparison between `old_source` and the current project to identify and document all missing systems (Bullets, Challenges, etc.).
 - **Modern Data Architecture**: Full implementation of NeoForge Data Attachments for player stats (Belly, Bounty, Doriki, Haki XP, etc.).
 - **Ability Framework**: Result-driven validation system with server-client synchronization and toggle support.
 - **Combat Mode**: Functional HUD with slot selection, cooldown rendering, and icon support.
 - **Haki & Rokushiki**: 100% logic port for Busoshoku, Kenbunshoku, Geppo, and Soru.
 - **Character Creator**: Restored the "Book" UI for selecting Factions, Races, and Fighting Styles.
+- **Damage Logic Modernization**: Completed the routing of legacy damage logic to `LivingDamageEvent.Post` and `ILivingEntityExtension`.
+- **Concurrency Implementation**: Implemented Java 21 Virtual Threads and `StructuredTaskScope` for non-blocking I/O (e.g., `JollyRoger.java`).
+- **Dials Migration**: Successfully migrated Dials to Vanilla Data Components and `ItemAccessEnergyHandler`.
+- **System Audits**: Successfully audited Network Payload Handling and `ToolActions` to `ItemAbilities` migration.
 
 ---
 

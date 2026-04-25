@@ -103,7 +103,6 @@ Abilities are organized into the following UI categories:
 ---
 
 ## Faithful Port Check (Gap Analysis)
-- **Dials**: Skypiean Dials (Impact, Flame, etc.) are currently missing from `src/items`.
 - **Bullets**: Special ammunition for guns is missing.
 - **Integrations**: Curios integration is listed in `old_source` but not yet implemented in `src`.
 - **Animations**: The legacy mod has a dedicated `animations` package with 45+ classes. The current port needs to implement these to maintain visual fidelity.

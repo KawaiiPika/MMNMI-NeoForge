@@ -26,6 +26,13 @@
 - [x] **Update Plant and Crop Logic to SpecialPlantable**: Finished via the `TangerineCropsBlock` migration.
 - [x] **Implement NeoForge Data Maps for Block/Item Properties**: Citing the new `furnace_fuels.json` and `strippables.json` data maps.
 - [x] **Compliance Audits Passed**: Clean Up Event Listener Architecture and Rework Client-to-Server Ability Networking are fully aligned with NeoForge 1.21.1 architecture.
+- [x] **GameTest Framework Integration**: Successfully integrated for automated testing.
+- [x] **Damage Logic Eradication**: Routed legacy damage logic to `LivingDamageEvent.Post` and `ILivingEntityExtension`.
+- [x] **Concurrency with Virtual Threads**: Implemented Java 21 Virtual Threads and `StructuredTaskScope` for non-blocking I/O (`JollyRoger.java`).
+- [x] **Dials Migration**: Migrated to Vanilla Data Components and `ItemAccessEnergyHandler`.
+- [x] **System Audits**: Successfully audited Network Payload Handling and `ToolActions` to `ItemAbilities` migrations, confirming native compliance.
+- [x] **Automated Asset Datagen**: Implemented data generation for worldgen, language, sound, and particle providers.
+- [x] **UI/Client Isolation**: Safely isolated to `client.*` packages with `Dist.CLIENT`.
 
 ## Immediate Priority
 - [ ] **Network Synching**: Ensure `selectedAbilitySlot` and other stats are synced correctly to the client.
@@ -55,7 +62,6 @@
 - [ ] **Morphs**: 30+ legacy morphs for Zoan transformations and specific fruit powers (Bane, Deka, etc.).
 - [ ] **Challenges System**: Arenas and faction-specific challenges (Arlong, Buggy, Krieg, etc.).
 - [ ] **Audio System**: Legacy audio handling and custom sound events.
-- [ ] **Dials**: Impact, Flame, Breath, and other Skypiean dials.
 - [ ] **Bullets**: Special ammo for guns.
 - [ ] **Integrations**: Curios integration (Priority for faithful port).
 
