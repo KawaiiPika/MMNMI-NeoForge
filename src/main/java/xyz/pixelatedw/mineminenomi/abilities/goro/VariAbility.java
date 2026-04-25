@@ -13,7 +13,7 @@ public class VariAbility extends Ability {
 
     @Override
     protected void startUsing(LivingEntity entity) {
-        for (var target : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(7.0), e -> e != entity)) {
+        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(7.0))) {
             if (target instanceof LivingEntity living) {
                 living.hurt(entity.damageSources().lightningBolt(), 10.0F);
                 Vec3 dir = living.position().subtract(entity.position()).normalize();

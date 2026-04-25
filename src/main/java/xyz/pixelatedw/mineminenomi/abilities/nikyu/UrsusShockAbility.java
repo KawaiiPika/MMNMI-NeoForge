@@ -16,7 +16,7 @@ public class UrsusShockAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         // Giant compressed-pain detonation — massive AoE
-        for (var target : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(10.0), e -> e != entity)) {
+        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(10.0))) {
             if (target instanceof LivingEntity living) {
                 living.hurt(entity.damageSources().mobAttack(entity), 20.0F);
                 var dir = living.position().subtract(entity.position()).normalize();

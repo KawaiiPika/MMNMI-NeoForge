@@ -19,7 +19,7 @@ public class BarrierWallAbility extends Ability {
     protected void startUsing(LivingEntity entity) {
         Vec3 look = entity.getLookAngle();
         // Wall deployed in front — push away all nearby frontal entities
-        for (var target : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(3.0).move(look.scale(2.0)), e -> e != entity)) {
+        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(3.0).move(look.scale(2.0)))) {
             if (target instanceof LivingEntity living) {
                 Vec3 push = look.scale(3.5).add(0, 0.5, 0);
                 living.setDeltaMovement(push);
