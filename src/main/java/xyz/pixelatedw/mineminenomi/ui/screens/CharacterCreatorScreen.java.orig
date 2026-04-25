@@ -66,7 +66,7 @@ public class CharacterCreatorScreen extends Screen {
         this.abilitySlots = Lists.newArrayList();
         this.hasRandomizedRace = hasRandomizedRace;
         this.allowSubRaceSelect = allowMinkRaceSelect;
-        
+
         this.factions = ModRegistries.FACTIONS.stream().filter(ICharacterCreatorEntry::isInBook).toArray(Faction[]::new);
         this.races = ModRegistries.RACES.stream().filter(Race::isMainRace).filter(ICharacterCreatorEntry::isInBook).toArray(Race[]::new);
         this.styles = ModRegistries.FIGHTING_STYLES.stream().filter(ICharacterCreatorEntry::isInBook).toArray(FightingStyle[]::new);
@@ -80,17 +80,17 @@ public class CharacterCreatorScreen extends Screen {
     @Override
     public void render(GuiGraphics graphics, int x, int y, float f) {
         graphics.fill(0, 0, this.width, this.height, 0x80000000); // Semi-transparent black background
-        
+
         RenderSystem.setShaderTexture(0, ModResources.BOOK);
         int centerX = graphics.guiWidth() / 2;
         int centerY = graphics.guiHeight() / 2;
-        
+
         graphics.pose().pushPose();
         graphics.pose().translate((float)(centerX - 150), (float)(centerY - 120), 0.0F);
         graphics.pose().scale(1.2F, 1.2F, 1.2F);
         graphics.blit(ModResources.BOOK, 0, 0, 0, 0, 256, 256, 256, 256);
         graphics.pose().popPose();
-        
+
         if (!this.allowSubRaceSelect && this.renderTick % 150 == 0) {
             this.increaseSubRace();
         }
@@ -108,10 +108,10 @@ public class CharacterCreatorScreen extends Screen {
         this.player = (AbstractClientPlayer) this.minecraft.player;
         int centerX = this.minecraft.getWindow().getGuiScaledWidth() / 2;
         int centerY = this.minecraft.getWindow().getGuiScaledHeight() / 2;
-        
+
         int buttonX = centerX - 230;
         int buttonY = centerY - 100;
-        
+
         this.factionButton = new BookSignSideButton(buttonX, buttonY, 110, 35, Component.translatable("gui.mineminenomi.faction"), (btn) -> {
             this.page = Page.FACTION;
             this.resetButtonState();
@@ -120,7 +120,7 @@ public class CharacterCreatorScreen extends Screen {
         });
         this.addRenderableWidget(this.factionButton);
         this.setInitialFocus(this.factionButton);
-        
+
         buttonY += 45;
         this.raceButton = new BookSignSideButton(buttonX, buttonY, 110, 35, Component.translatable("gui.mineminenomi.race"), (btn) -> {
             this.page = Page.RACE;
@@ -137,38 +137,39 @@ public class CharacterCreatorScreen extends Screen {
             this.page = Page.FIGHTING_STYLE;
             this.resetButtonState();
             this.styleButton.setIsPressed(true);
+            btn.playDownSound(this.minecraft.getSoundManager());
             this.tryToggleSubRaceButtons();
         });
         this.addRenderableWidget(this.styleButton);
-        
+
         int arrowY = centerY + 95;
         ArrowButton prevButton = new ArrowButton(centerX + 35, arrowY, 35, 15, (btn) -> {
             this.decreaseSelectedPage();
             this.tryToggleSubRaceButtons();
         });
         this.addRenderableWidget(prevButton);
-        
+
         ArrowButton nextButton = new ArrowButton(centerX + 115, arrowY, 35, 15, (btn) -> {
             this.increaseSelectedPage();
             this.tryToggleSubRaceButtons();
         });
         nextButton.setFlipped();
         this.addRenderableWidget(nextButton);
-        
+
         this.previousSubRaceButton = new BigArrowButton(centerX + 30, centerY - 30, 20, 100, (btn) -> this.decreaseSubRace());
         this.previousSubRaceButton.visible = false;
         this.addRenderableWidget(this.previousSubRaceButton);
-        
+
         this.nextSubRaceButton = new BigArrowButton(centerX + 140, centerY - 30, 20, 100, (btn) -> this.increaseSubRace());
         this.nextSubRaceButton.setFlipped();
         this.nextSubRaceButton.visible = false;
         this.addRenderableWidget(this.nextSubRaceButton);
-        
+
         SimpleButton finishButton = new SimpleButton(centerX - 35, centerY + 165, 70, 30, Component.translatable("gui.mineminenomi.finish"), (btn) -> this.completeCreation());
         finishButton.setTextOnly();
         finishButton.setFontSize(1.5F);
         this.addRenderableWidget(finishButton);
-        
+
         this.updateSelection();
     }
 
@@ -195,7 +196,7 @@ public class CharacterCreatorScreen extends Screen {
         java.util.Optional<ResourceLocation> subRace = (this.hasSubRaces && this.subRaces != null && this.subRaceId < this.subRaces.length) ? java.util.Optional.of(this.subRaces[this.subRaceId].getRegistryName()) : java.util.Optional.empty();
 
         net.neoforged.neoforge.network.PacketDistributor.sendToServer(new xyz.pixelatedw.mineminenomi.networking.packets.CFinishCharacterCreatorPacket(faction, race, subRace, style));
-        
+
         this.minecraft.setScreen(null);
     }
 
@@ -243,17 +244,17 @@ public class CharacterCreatorScreen extends Screen {
         this.subRaceLabel = subRaceLabel;
         this.topAbilities = info.getTopAbilities().stream().map(s -> (xyz.pixelatedw.mineminenomi.api.abilities.Ability) s.get()).toList();
         this.bottomAbilities = info.getBottomAbilities().stream().map(s -> (xyz.pixelatedw.mineminenomi.api.abilities.Ability) s.get()).toList();
-        
+
         this.createAbilitySlotButtons();
     }
 
     private void createAbilitySlotButtons() {
         this.abilitySlots.forEach(this::removeWidget);
         this.abilitySlots.clear();
-        
+
         int centerX = this.minecraft.getWindow().getGuiScaledWidth() / 2;
         int centerY = this.minecraft.getWindow().getGuiScaledHeight() / 2;
-        
+
         int i = 0;
         int xOffset = 0;
         int yOffset = 0;

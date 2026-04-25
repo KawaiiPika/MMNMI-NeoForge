@@ -37,13 +37,6 @@ public record CFinishCharacterCreatorPacket(
             var player = context.player();
             PlayerStats stats = PlayerStats.get(player);
             if (stats != null) {
-                boolean hasCharBook = !player.getMainHandItem().isEmpty() && player.getMainHandItem().getItem() instanceof xyz.pixelatedw.mineminenomi.items.CharacterCreatorItem;
-                boolean hasEmptyStats = stats.getBasic().identity().faction().isEmpty() || stats.getBasic().identity().race().isEmpty() || stats.getBasic().identity().fightingStyle().isEmpty();
-                
-                if (!hasCharBook && !hasEmptyStats) {
-                    return;
-                }
-
                 ResourceLocation finalFaction = payload.faction().orElseGet(() -> {
                     java.util.List<xyz.pixelatedw.mineminenomi.api.entities.charactercreator.Faction> factions = xyz.pixelatedw.mineminenomi.init.ModRegistries.FACTIONS.stream().filter(xyz.pixelatedw.mineminenomi.api.entities.charactercreator.ICharacterCreatorEntry::isInBook).toList();
                     if (!factions.isEmpty()) {
@@ -108,16 +101,6 @@ public record CFinishCharacterCreatorPacket(
                     }
                 }
 
-                if (stats.isCyborg()) {
-                    stats.setCola(stats.getMaxCola());
-                }
-
-                for (net.minecraft.world.item.ItemStack is : player.getInventory().items) {
-                    if (is != null && is.getItem() instanceof xyz.pixelatedw.mineminenomi.items.CharacterCreatorItem) {
-                        player.getInventory().removeItem(is);
-                    }
-                }
-                
                 stats.sync(player);
             }
         });

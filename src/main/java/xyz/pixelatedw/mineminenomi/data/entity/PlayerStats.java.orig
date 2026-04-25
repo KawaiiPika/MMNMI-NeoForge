@@ -276,7 +276,7 @@ public class PlayerStats {
     }
 
     public long getExtol() { return basic.extol(); }
-    
+
     public void setHasShadow(boolean hasShadow) {
         this.basic = updateBasicStats(basic.doriki(), basic.cola(), basic.ultraCola(), basic.loyalty(), basic.bounty(), basic.belly(), basic.extol(), hasShadow, basic.hasHeart(), basic.hasStrawDoll(), basic.isRogue(), basic.stamina(), basic.maxStamina());
     }
@@ -307,10 +307,6 @@ public class PlayerStats {
         return maxCola;
     }
 
-    public void setCola(int cola) {
-        this.basic = updateBasicStats(basic.doriki(), cola, basic.ultraCola(), basic.loyalty(), basic.bounty(), basic.belly(), basic.extol(), basic.hasShadow(), basic.hasHeart(), basic.hasStrawDoll(), basic.isRogue(), basic.stamina(), basic.maxStamina());
-    }
-
     public void updateCola() {
         int clampedCola = Math.clamp(basic.cola(), 0, getMaxCola());
         if (clampedCola != basic.cola()) {
@@ -319,7 +315,7 @@ public class PlayerStats {
     }
 
     public boolean isCyborg() {
-        return basic.identity().race().map(race -> race.equals(xyz.pixelatedw.mineminenomi.init.ModRegistries.RACES.getKey(xyz.pixelatedw.mineminenomi.init.ModRaces.CYBORG.get()))).orElse(false);
+        return basic.identity().race().map(race -> race.equals(xyz.pixelatedw.mineminenomi.init.ModRegistries.RACES_REGISTRY.getKey(xyz.pixelatedw.mineminenomi.init.ModRaces.CYBORG.get()))).orElse(false);
     }
 
     public void setFaction(ResourceLocation faction) {
@@ -399,7 +395,7 @@ public class PlayerStats {
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).isEmpty()) {
                     list.set(i, abilityId);
-                    
+
                     xyz.pixelatedw.mineminenomi.api.abilities.Ability instance = xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.get(ability);
                     if (instance != null && instance.isPassive()) {
                         java.util.List<String> activeList = new java.util.ArrayList<>(combat.activeAbilities());
