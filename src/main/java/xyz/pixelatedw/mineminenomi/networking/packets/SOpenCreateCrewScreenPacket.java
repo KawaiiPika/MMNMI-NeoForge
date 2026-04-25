@@ -18,9 +18,7 @@ public record SOpenCreateCrewScreenPacket() implements CustomPacketPayload {
         return TYPE;
     }
 
-    public static void handle(final SOpenCreateCrewScreenPacket payload, final IPayloadContext context) {
-        context.enqueueWork(() -> {
-            Minecraft.getInstance().setScreen(new xyz.pixelatedw.mineminenomi.client.gui.screens.CreateCrewScreen());
-        });
+    public static void handle(final SOpenCreateCrewScreenPacket payload, final net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        xyz.pixelatedw.mineminenomi.client.networking.ClientPacketHandlers.handleOpenCreateCrewScreen(payload, context);
     }
 }

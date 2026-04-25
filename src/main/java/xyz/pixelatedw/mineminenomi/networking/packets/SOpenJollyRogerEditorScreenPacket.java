@@ -35,15 +35,7 @@ public record SOpenJollyRogerEditorScreenPacket(boolean isEditing, Crew crew, Li
         return TYPE;
     }
 
-    public static void handle(final SOpenJollyRogerEditorScreenPacket payload, final IPayloadContext context) {
-        if (context.flow().isClientbound()) {
-            context.enqueueWork(() -> ClientHandler.handle(payload));
-        }
-    }
-
-    public static class ClientHandler {
-        public static void handle(final SOpenJollyRogerEditorScreenPacket payload) {
-            net.minecraft.client.Minecraft.getInstance().setScreen(new xyz.pixelatedw.mineminenomi.client.gui.screens.JollyRogerEditorScreen(payload.isEditing(), payload.crew(), payload.elements()));
-        }
+    public static void handle(final SOpenJollyRogerEditorScreenPacket payload, final net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        xyz.pixelatedw.mineminenomi.client.networking.ClientPacketHandlers.handleOpenJollyRogerEditorScreen(payload, context);
     }
 }

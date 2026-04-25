@@ -27,22 +27,7 @@ public record SSyncStrikerCrewPacket(int entityId, Crew crew) implements CustomP
         return TYPE;
     }
 
-    public static void handle(final SSyncStrikerCrewPacket payload, final IPayloadContext context) {
-        if (context.flow().isClientbound()) {
-            context.enqueueWork(() -> ClientHandler.handle(payload));
-        }
-    }
-
-    public static class ClientHandler {
-        public static void handle(final SSyncStrikerCrewPacket payload) {
-            Minecraft mc = Minecraft.getInstance();
-            if (mc.player != null && mc.level != null) {
-                Entity entity = mc.level.getEntity(payload.entityId());
-                // TODO: Update StrikerEntity
-                // if (entity instanceof xyz.pixelatedw.mineminenomi.entities.vehicles.StrikerEntity striker) {
-                //    striker.setCrew(payload.crew());
-                // }
-            }
-        }
+    public static void handle(final SSyncStrikerCrewPacket payload, final net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        xyz.pixelatedw.mineminenomi.client.networking.ClientPacketHandlers.handleSyncStrikerCrew(payload, context);
     }
 }

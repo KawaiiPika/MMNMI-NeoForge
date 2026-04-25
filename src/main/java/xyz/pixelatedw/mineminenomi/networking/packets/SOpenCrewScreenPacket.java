@@ -24,15 +24,7 @@ public record SOpenCrewScreenPacket(Crew crew) implements CustomPacketPayload {
         return TYPE;
     }
 
-    public static void handle(final SOpenCrewScreenPacket payload, final IPayloadContext context) {
-        if (context.flow().isClientbound()) {
-            context.enqueueWork(() -> ClientHandler.handle(payload));
-        }
-    }
-
-    public static class ClientHandler {
-        public static void handle(final SOpenCrewScreenPacket payload) {
-            net.minecraft.client.Minecraft.getInstance().setScreen(new xyz.pixelatedw.mineminenomi.client.gui.screens.CrewDetailsScreen(payload.crew()));
-        }
+    public static void handle(final SOpenCrewScreenPacket payload, final net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        xyz.pixelatedw.mineminenomi.client.networking.ClientPacketHandlers.handleOpenCrewScreen(payload, context);
     }
 }

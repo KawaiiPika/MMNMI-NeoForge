@@ -39,13 +39,7 @@ public record SSimpleMessageScreenEventPacket(SimpleMessageScreenDTO event) impl
         return TYPE;
     }
 
-    public static void handle(final SSimpleMessageScreenEventPacket payload, final IPayloadContext context) {
-        context.enqueueWork(() -> {
-            Minecraft mc = Minecraft.getInstance();
-            Screen screen = mc.screen;
-            if (screen instanceof IEventReceiverScreen eventReceiver) {
-                eventReceiver.handleEvent(payload.event());
-            }
-        });
+    public static void handle(final SSimpleMessageScreenEventPacket payload, final net.neoforged.neoforge.network.handling.IPayloadContext context) {
+        xyz.pixelatedw.mineminenomi.client.networking.ClientPacketHandlers.handleSimpleMessageScreenEvent(payload, context);
     }
 }
