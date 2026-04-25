@@ -50,10 +50,7 @@ public class FubukiAbility extends Ability {
                     }
                 }
 
-                entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(currentRange))
-                    .stream()
-                    .filter(target -> target != entity)
-                    .filter(target -> target.distanceToSqr(entity) <= currentRange * currentRange)
+                entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(currentRange), target -> target != entity && target.distanceToSqr(entity) <= currentRange * currentRange)
                     .forEach(target -> {
                         // Apply effect and damage
                         target.addEffect(new net.minecraft.world.effect.MobEffectInstance(

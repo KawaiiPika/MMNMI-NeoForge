@@ -17,7 +17,7 @@ public class TsunoTokageAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         Vec3 look = entity.getLookAngle();
-        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(1.5).move(look.scale(10.0)))) {
+        for (var target : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(1.5).move(look.scale(10.0)), e -> e != entity)) {
             if (target instanceof LivingEntity living) {
                 living.hurt(entity.damageSources().mobAttack(entity), 16.0F);
                 living.setDeltaMovement(look.scale(1.5));

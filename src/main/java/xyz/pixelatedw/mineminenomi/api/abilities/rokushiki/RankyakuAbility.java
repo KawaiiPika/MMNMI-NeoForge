@@ -30,7 +30,7 @@ public class RankyakuAbility extends Ability {
                 entity.level().addParticle(net.minecraft.core.particles.ParticleTypes.SWEEP_ATTACK, x, y, z, 0, 0, 0);
                 entity.level().addParticle(net.minecraft.core.particles.ParticleTypes.CLOUD, x, y, z, 0, 0.05, 0);
             } else {
-                for (Entity target : entity.level().getEntities(entity, new net.minecraft.world.phys.AABB(x - 0.5, y - 0.5, z - 0.5, x + 0.5, y + 0.5, z + 0.5))) {
+                for (Entity target : entity.level().getEntitiesOfClass(LivingEntity.class, new net.minecraft.world.phys.AABB(x - 0.5, y - 0.5, z - 0.5, x + 0.5, y + 0.5, z + 0.5), e -> e != entity)) {
                     if (target instanceof LivingEntity livingTarget) {
                         livingTarget.hurt(entity.damageSources().mobAttack(entity), 10.0F);
                         livingTarget.setDeltaMovement(look.scale(1.5).add(0, 0.2, 0));

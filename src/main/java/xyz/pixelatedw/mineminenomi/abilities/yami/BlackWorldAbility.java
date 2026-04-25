@@ -13,7 +13,7 @@ public class BlackWorldAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         // Darkness field — blindness + heavy slow on all nearby
-        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(20.0))) {
+        for (var target : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(20.0), e -> e != entity)) {
             if (target instanceof LivingEntity living) {
                 living.addEffect(new net.minecraft.world.effect.MobEffectInstance(
                     net.minecraft.world.effect.MobEffects.BLINDNESS, 200, 0));

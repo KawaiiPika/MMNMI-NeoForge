@@ -44,7 +44,7 @@ public class DaiEnkaEnteiAbility extends Ability {
                 entity.level().explode(entity, hitPos.x, hitPos.y, hitPos.z, 8.0F, true, net.minecraft.world.level.Level.ExplosionInteraction.BLOCK);
                 
                 AABB aabb = new AABB(hitPos, hitPos).inflate(12.0);
-                for (Entity target : entity.level().getEntities(entity, aabb)) {
+                for (Entity target : entity.level().getEntitiesOfClass(LivingEntity.class, aabb, e -> e != entity)) {
                     if (target instanceof LivingEntity livingTarget) {
                         livingTarget.hurt(entity.damageSources().explosion(entity, entity), 30.0F);
                         livingTarget.setRemainingFireTicks(400);
