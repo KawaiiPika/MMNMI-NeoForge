@@ -13,7 +13,7 @@ import net.neoforged.neoforge.client.gui.widget.ScrollPanel;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
 import xyz.pixelatedw.mineminenomi.api.crew.JollyRogerElement;
 import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
-import xyz.pixelatedw.mineminenomi.api.ui.TexturedRectUI;
+import xyz.pixelatedw.mineminenomi.client.ui.TexturedRectUI;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 
 import xyz.pixelatedw.mineminenomi.client.gui.screens.JollyRogerEditorScreen;

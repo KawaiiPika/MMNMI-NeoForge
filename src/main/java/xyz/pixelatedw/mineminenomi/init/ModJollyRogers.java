@@ -97,10 +97,10 @@ public class ModJollyRogers {
    public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_SWORDS_1 = background("swords", "Swords", (layer) -> (new JollyRogerElement(layer)).setCanBeFlipped(false, true));
    public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_SWORDS_2 = background("swords2", "Swords", JollyRogerElement::new);
    public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_SWORDS_3 = background("swords3", "Swords", (layer) -> (new JollyRogerElement(layer)).setCanBeFlipped(false, true));
-   public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_BISENTO_1 = background("bisento1", "Bisento", (layer) -> (new JollyRogerElement(layer)).setCanBeFlipped(true, true).setUseLimit(2));
+   public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_BISENTO_1 = background("bisento1", "Bisento", (layer) -> (new JollyRogerElement(layer)).setCanBeFlipped(true, false).setCanBeFlipped(false, true).setUseLimit(2));
    public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_GUNS_1 = background("guns", "Guns", (layer) -> (new JollyRogerElement(layer)).setCanBeFlipped(false, true));
    public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_GUNS_2 = background("guns2", "Guns", JollyRogerElement::new);
-   public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_BOW_1 = background("bow", "Bow", (layer) -> (new JollyRogerElement(layer)).setCanBeFlipped(true, true));
+   public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_BOW_1 = background("bow", "Bow", (layer) -> (new JollyRogerElement(layer)).setCanBeFlipped(true, false).setCanBeFlipped(false, true));
    public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_SKULLS = background("skulls", "Skulls", (layer) -> (new JollyRogerElement(layer)).addUseCheck(BASE_SKULL_ONLY));
    public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_BONES_1 = background("bones", "Bones", JollyRogerElement::new);
    public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_BONES_2 = background("bones2", "Bones", JollyRogerElement::new);
@@ -112,7 +112,7 @@ public class ModJollyRogers {
    public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_LINES_1 = background("lines", "Lines", (layer) -> (new JollyRogerElement(layer)).setCanBeColored().setUseLimit(2));
    public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_LINES_2 = background("lines2", "Lines", (layer) -> (new JollyRogerElement(layer)).setCanBeColored());
    public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_BUBBLES_1 = background("bubbles", "Bubbles", (layer) -> (new JollyRogerElement(layer)).setCanBeColored().setCanBeFlipped(true, false).setUseLimit(2));
-   public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_TRIANGLES_1 = background("triangles", "Triangles", (layer) -> (new JollyRogerElement(layer)).setCanBeColored().setCanBeFlipped(true, true).setUseLimit(4));
+   public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_TRIANGLES_1 = background("triangles", "Triangles", (layer) -> (new JollyRogerElement(layer)).setCanBeColored().setCanBeFlipped(true, false).setCanBeFlipped(false, true).setUseLimit(4));
    public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_PLUS_1 = background("plus", "Plus", (layer) -> (new JollyRogerElement(layer)).setCanBeColored());
    public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_PLUS_2 = background("plus2", "Plus", (layer) -> (new JollyRogerElement(layer)).setCanBeColored());
    public static final DeferredHolder<JollyRogerElement, JollyRogerElement> BACKGROUND_CIRCLES_1 = background("circles", "Circles", (layer) -> (new JollyRogerElement(layer)).setCanBeColored().setCanBeFlipped(false, true));

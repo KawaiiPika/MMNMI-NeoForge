@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.ui.TexturedRectUI;
+import xyz.pixelatedw.mineminenomi.client.ui.TexturedRectUI;
 
 public class JollyRogerElement {
    private ResourceLocation key;
