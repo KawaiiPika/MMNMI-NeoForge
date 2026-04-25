@@ -22,7 +22,7 @@ public class KagemushaAbility extends Ability {
             net.minecraft.world.effect.MobEffects.MOVEMENT_SPEED, 10, 5));
         entity.setDeltaMovement(look.scale(3.5));
         // Hit any entity at lunge destination
-        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(2.0).move(look.scale(5.0)))) {
+        for (var target : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(2.0).move(look.scale(5.0)), e -> e != entity)) {
             if (target instanceof LivingEntity living) {
                 living.hurt(entity.damageSources().mobAttack(entity), 11.0F);
                 living.setDeltaMovement(look.scale(2.0).add(0, 0.4, 0));

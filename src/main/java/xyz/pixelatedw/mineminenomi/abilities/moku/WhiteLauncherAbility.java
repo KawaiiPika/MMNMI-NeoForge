@@ -42,10 +42,7 @@ public class WhiteLauncherAbility extends Ability {
             // must use setInvulnerableTicks on the target if they don't want to hit repeatedly, or just rely
             // on standard hurt resistance which handles the invincibility frames for us. We'll rely on the
             // standard i-frames provided by LivingEntity.hurt() which naturally prevents multi-hits per tick.
-            entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(RANGE))
-                .stream()
-                .filter(target -> target != entity)
-                .filter(target -> target.distanceToSqr(entity) <= RANGE * RANGE)
+            entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(RANGE), target -> target != entity && target.distanceToSqr(entity) <= RANGE * RANGE)
                 .forEach(target -> {
                     target.hurt(entity.damageSources().mobAttack(entity), DAMAGE);
                 });

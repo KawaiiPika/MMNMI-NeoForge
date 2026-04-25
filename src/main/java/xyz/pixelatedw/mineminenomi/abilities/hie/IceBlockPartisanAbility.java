@@ -14,7 +14,7 @@ public class IceBlockPartisanAbility extends Ability {
     protected void startUsing(LivingEntity entity) {
         Vec3 look = entity.getLookAngle();
         // Forward ice spears
-        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(2.0).move(look.scale(10.0)))) {
+        for (var target : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(2.0).move(look.scale(10.0)), e -> e != entity)) {
             if (target instanceof LivingEntity living) {
                 living.hurt(entity.damageSources().mobAttack(entity), 9.0F);
                 living.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 100, 2));

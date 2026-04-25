@@ -20,7 +20,7 @@ public class IceBlockPheasantAbility extends Ability {
             
             for (double i = 0; i < 20.0; i += 1.0) {
                 Vec3 waveCenter = startPos.add(look.scale(i));
-                for (net.minecraft.world.entity.Entity target : entity.level().getEntities(entity, new net.minecraft.world.phys.AABB(waveCenter.x - 2, waveCenter.y - 2, waveCenter.z - 2, waveCenter.x + 2, waveCenter.y + 2, waveCenter.z + 2))) {
+                for (net.minecraft.world.entity.Entity target : entity.level().getEntitiesOfClass(LivingEntity.class, new net.minecraft.world.phys.AABB(waveCenter.x - 2, waveCenter.y - 2, waveCenter.z - 2, waveCenter.x + 2, waveCenter.y + 2, waveCenter.z + 2), e -> e != entity)) {
                     if (target instanceof LivingEntity livingTarget) {
                         livingTarget.hurt(entity.damageSources().indirectMagic(entity, entity), 18.0F);
                         livingTarget.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 120, 3));

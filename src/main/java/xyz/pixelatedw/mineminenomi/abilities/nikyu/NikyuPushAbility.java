@@ -14,7 +14,7 @@ public class NikyuPushAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         Vec3 look = entity.getLookAngle();
-        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(3.0).move(look.scale(3.0)))) {
+        for (var target : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(3.0).move(look.scale(3.0)), e -> e != entity)) {
             if (target instanceof LivingEntity living) {
                 living.setDeltaMovement(look.scale(4.5).add(0, 0.3, 0));
                 living.hurt(entity.damageSources().mobAttack(entity), 6.0F);
