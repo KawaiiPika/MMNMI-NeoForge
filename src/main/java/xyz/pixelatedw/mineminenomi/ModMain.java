@@ -6,6 +6,9 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.config.ModConfig;
+import xyz.pixelatedw.mineminenomi.config.ServerConfig;
 
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -16,7 +19,7 @@ public class ModMain {
     public static final String PROJECT_ID = "mineminenomi";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public ModMain(IEventBus modEventBus) {
+    public ModMain(IEventBus modEventBus, ModContainer container) {
         // Register the setup methods
         modEventBus.addListener(this::commonSetup);
         
@@ -44,6 +47,7 @@ public class ModMain {
         xyz.pixelatedw.mineminenomi.init.ModFeatures.register(modEventBus);
         xyz.pixelatedw.mineminenomi.init.ModStructures.register(modEventBus);
         xyz.pixelatedw.mineminenomi.init.ModDimensions.register(modEventBus);
+        container.registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

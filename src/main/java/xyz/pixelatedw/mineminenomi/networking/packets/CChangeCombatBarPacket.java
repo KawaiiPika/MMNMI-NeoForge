@@ -8,12 +8,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
+import xyz.pixelatedw.mineminenomi.config.ServerConfig;
 
-public record CChangeCombatBarPacket(int change) implements CustomPacketPayload {
+public record CChangeCombatBarPacket(int targetBarIndex) implements CustomPacketPayload {
     public static final Type<CChangeCombatBarPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(ModMain.PROJECT_ID, "change_combat_bar"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, CChangeCombatBarPacket> CODEC = StreamCodec.composite(
-            ByteBufCodecs.VAR_INT, CChangeCombatBarPacket::change,
+            ByteBufCodecs.VAR_INT, CChangeCombatBarPacket::targetBarIndex,
             CChangeCombatBarPacket::new
     );
 
@@ -27,11 +28,12 @@ public record CChangeCombatBarPacket(int change) implements CustomPacketPayload 
             var player = context.player();
             PlayerStats stats = PlayerStats.get(player);
             if (stats != null) {
-                int current = stats.getCombatBarSet();
-                int next = (current + payload.change()) % 10; // Max 10 bars
-                if (next < 0) next = 9;
-                stats.setCombatBarSet(next);
-                stats.sync(player);
+                int maxBars = ServerConfig.getAbilityBars();
+                int target = payload.targetBarIndex();
+                if (target >= 0 && target < maxBars) {
+                    stats.setCombatBarSet(target);
+                    stats.sync(player);
+                }
             }
         });
     }

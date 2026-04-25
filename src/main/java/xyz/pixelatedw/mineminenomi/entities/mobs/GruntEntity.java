@@ -75,6 +75,18 @@ public class GruntEntity extends OPEntity {
     public static GruntEntity createPirateGrunt(EntityType<? extends GruntEntity> type, Level level) {
         GruntEntity entity = new GruntEntity(type, level);
         entity.entityData.set(DATA_VARIANT_ID, level.random.nextInt(8) + 1);
+        if (!level.isClientSide()) {
+            entity.getStats().setFaction(ModFactions.PIRATE.getId());
+        }
+        return entity;
+    }
+
+    public static GruntEntity createBanditGrunt(EntityType<? extends GruntEntity> type, Level level) {
+        GruntEntity entity = new GruntEntity(type, level);
+        entity.entityData.set(DATA_VARIANT_ID, level.random.nextInt(3) + 1);
+        if (!level.isClientSide()) {
+            entity.getStats().setFaction(ModFactions.BANDIT.getId());
+        }
         return entity;
     }
 }

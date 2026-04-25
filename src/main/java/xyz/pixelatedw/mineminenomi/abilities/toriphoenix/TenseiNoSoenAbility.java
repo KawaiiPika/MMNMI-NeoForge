@@ -21,7 +21,7 @@ public class TenseiNoSoenAbility extends Ability {
     private static final float DAMAGE = 50.0F;
 
     public TenseiNoSoenAbility() {
-        super(ResourceLocation.fromNamespaceAndPath("mineminenomi", "tori_tori_no_mi_model_1"));
+        super(ResourceLocation.fromNamespaceAndPath("mineminenomi", "tori_tori_no_mi_model_phoenix"));
     }
 
     @Override

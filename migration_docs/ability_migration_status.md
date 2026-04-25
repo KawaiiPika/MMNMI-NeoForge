@@ -60,7 +60,7 @@ Abilities are organized into the following UI categories:
 
 - **Paramecia**: Horu Horu, Doru Doru, Awa Awa, Bane Bane, Doa Doa, Deka Deka, Kilo Kilo, Ori Ori, Jiki Jiki, Sabi Sabi, Beta Beta, Kachi Kachi, Mini Mini, Nagi Nagi, Kobu Kobu, Karu Karu, Kuku Kuku, Baku Baku, Kira Kira, Zushi Zushi.
 - **Logia**: Yuki Yuki, Yomi Yomi, Gasu Gasu.
-- **Zoan**: Core logic for several Ryu Ryu no Mi models (Allosaurus, Brachiosaurus, Pteranodon), Zou Zou no Mi models, Tori Tori no Mi (Phoenix), and Neko Neko no Mi (Leopard) have been started but remain unverified due to build environment issues.
+- **Zoan**: Fully ported! (Batch 5 completed)
 
 ---
 
@@ -118,7 +118,7 @@ To systematically port the remaining abilities, they have been grouped into logi
 - **Batch 2: Gravity & Weight Paramecias**: Zushi, Kilo, Ton, Fuwa (if applicable).
 - **Batch 3: Creation & Manipulation Paramecias**: Doru, Awa, Doa, Ori, Beta, Kuku, Baku, Kira.
 - **Batch 4: Body & Misc Paramecias**: Horu, Bane, Deka, Jiki, Sabi, Kachi, Mini, Nagi, Kobu, Karu.
-- **Batch 5: Remaining Zoans**: Ryu Ryu models, Zou Zou, Tori Tori (Phoenix), Neko Neko (Leopard).
+- **Batch 5: Remaining Zoans**: Ryu Ryu models, Zou Zou, Tori Tori (Phoenix), Neko Neko (Leopard). (COMPLETED)
 - **Batch 6: Partially Ported Cleanup**: Finish remaining core abilities for all partially ported fruits.
 
 ### Fighting Styles & Races

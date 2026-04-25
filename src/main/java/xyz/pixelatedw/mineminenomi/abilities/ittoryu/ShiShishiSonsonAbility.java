@@ -53,7 +53,7 @@ public class ShiShishiSonsonAbility extends Ability {
             // Simplified line check: if the target is roughly between start and end
             target.hurt(entity.damageSources().mobAttack(entity), DAMAGE);
             if (!entity.level().isClientSide) {
-                WyHelper.spawnParticles(ParticleTypes.SWEEP_ATTACK, (ServerLevel)entity.level(), target.getX(), target.getY() + target.getBbHeight()/2, target.getZ());
+                ((net.minecraft.server.level.ServerLevel)entity.level()).sendParticles(net.minecraft.core.particles.ParticleTypes.SWEEP_ATTACK, target.getX(), target.getY() + target.getBbHeight()/2, target.getZ(), 1, 0, 0, 0, 0);
             }
         }
 

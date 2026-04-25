@@ -15,6 +15,9 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
+
+import xyz.pixelatedw.mineminenomi.client.render.ModRenderTypes;
+import xyz.pixelatedw.mineminenomi.client.render.ModRenderTypeBuffers;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 
 import java.util.ArrayList;
@@ -64,7 +67,7 @@ public class AuraLayer<T extends LivingEntity, M extends EntityModel<T>> extends
                     float green = (float)(rgb >> 8 & 255) / 255.0F;
                     float blue = (float)(rgb & 255) / 255.0F;
 
-                    VertexConsumer vertex = buffer.getBuffer(RenderType.entityTranslucent(this.getTextureLocation(entity)));
+                    VertexConsumer vertex = buffer.getBuffer(ModRenderTypes.getAuraRenderType());
 
                     matrixStack.scale(1.02f, 1.02f, 1.02f);
                     int color = ((int)(0.4f * 255) << 24) | ((int)(red * 255) << 16) | ((int)(green * 255) << 8) | (int)(blue * 255);

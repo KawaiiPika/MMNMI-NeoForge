@@ -39,3 +39,24 @@ run/
 repo/
 !**/src/**/repo/
 logs/
+tmp/
+
+.env
+
+# Local AI and Jules Bridge
+jules_bridge.py
+activities_debug.json
+out.log
+list_prs.py
+GITHUB_TOKEN.env
+*.env
+*.sh
+fix_*.py
+re_add_dials2.py
+check.py
+test.py
+test_*.py
+setup_gemini_jules.ps1
+gemini.cmd
+jules.cmd
+nlm.cmd
