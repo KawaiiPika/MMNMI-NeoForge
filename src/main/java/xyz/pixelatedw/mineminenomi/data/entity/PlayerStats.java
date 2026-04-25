@@ -207,6 +207,7 @@ public class PlayerStats {
     public double getDoriki() { return basic.doriki(); }
     public long getBelly() { return basic.belly(); }
     public long getBounty() { return basic.bounty(); }
+    public double getLoyalty() { return basic.loyalty(); }
     public Optional<ResourceLocation> getFaction() { return basic.identity().faction(); }
     public Optional<ResourceLocation> getRace() { return basic.identity().race(); }
     public Optional<ResourceLocation> getSubRace() { return basic.identity().subRace(); }
