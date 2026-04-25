@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "c": {
+      "item": "minecraft:iron_bars"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "   ",
+    "ici",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "mineminenomi:normal_handcuffs"
+  }
+}

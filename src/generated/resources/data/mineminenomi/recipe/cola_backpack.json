@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "u": {
+      "item": "mineminenomi:ultra_cola"
+    }
+  },
+  "pattern": [
+    "u u",
+    "uiu",
+    "u u"
+  ],
+  "result": {
+    "count": 1,
+    "id": "mineminenomi:cola_backpack"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "mineminenomi:smithing_dial",
+  "addition": {
+    "item": "mineminenomi:flame_dial"
+  },
+  "additionAmount": 3,
+  "base": {
+    "item": "mineminenomi:clima_tact"
+  },
+  "result": {
+    "count": 1,
+    "id": "mineminenomi:clima_tact"
+  }
+}

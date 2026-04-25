@@ -1,3 +1,4 @@
+cat << 'INNER_EOF' > src/main/java/xyz/pixelatedw/mineminenomi/datagen/ModRecipeProvider.java
 package xyz.pixelatedw.mineminenomi.datagen;
 
 import net.minecraft.core.HolderLookup;
@@ -8,6 +9,7 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.SpecialRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
@@ -15,9 +17,11 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Blocks;
+import xyz.pixelatedw.mineminenomi.api.crafting.SmithingDialRecipeBuilder;
+import xyz.pixelatedw.mineminenomi.api.crafting.SmithingEnchantmentRecipeBuilder;
 import xyz.pixelatedw.mineminenomi.init.ModArmors;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
-
+import xyz.pixelatedw.mineminenomi.init.ModEnchantments;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
 import xyz.pixelatedw.mineminenomi.init.ModRecipes;
 import xyz.pixelatedw.mineminenomi.init.ModTags;
@@ -61,15 +65,24 @@ public class ModRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.KEY.get(), 1).define('g', Items.GOLD_INGOT).pattern(" g ").pattern(" g ").pattern(" g ").unlockedBy("has_gold", has(Items.GOLD_INGOT)).save(output);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.VIVRE_CARD.get(), 1).requires(Items.PAPER).unlockedBy("has_paper", has(Items.PAPER)).save(output);
 
-        xyz.pixelatedw.mineminenomi.api.crafting.SmithingEnchantmentRecipeBuilder.smithing(Ingredient.of(ModWeapons.CLIMA_TACT.get()), Ingredient.of(Items.ECHO_SHARD), 1, RecipeCategory.COMBAT, lookupProvider.lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT).getOrThrow(net.minecraft.world.item.enchantment.Enchantments.MENDING), 1)
-            .unlockedBy("has_clima_tact", has(ModWeapons.CLIMA_TACT.get()))
-            .save(output, ResourceLocation.fromNamespaceAndPath("mineminenomi", "clima_tact_enchantment"));
+        SmithingDialRecipeBuilder.smithing(Ingredient.of(Items.NAUTILUS_SHELL), Ingredient.of(Items.GLOWSTONE_DUST), 8, RecipeCategory.TOOLS, ModItems.BREATH_DIAL.get()).unlockedBy("has_nautilus_shell", has(Items.NAUTILUS_SHELL)).save(output, ResourceLocation.fromNamespaceAndPath("mineminenomi", "breath_dial_smithing"));
+        SmithingDialRecipeBuilder.smithing(Ingredient.of(Items.NAUTILUS_SHELL), Ingredient.of(Items.GHAST_TEAR), 10, RecipeCategory.TOOLS, ModItems.AXE_DIAL.get()).unlockedBy("has_nautilus_shell", has(Items.NAUTILUS_SHELL)).save(output, ResourceLocation.fromNamespaceAndPath("mineminenomi", "axe_dial_smithing"));
+        SmithingDialRecipeBuilder.smithing(Ingredient.of(Items.NAUTILUS_SHELL), Ingredient.of(Items.IRON_INGOT), 8, RecipeCategory.TOOLS, ModItems.EISEN_DIAL.get()).unlockedBy("has_nautilus_shell", has(Items.NAUTILUS_SHELL)).save(output, ResourceLocation.fromNamespaceAndPath("mineminenomi", "eisen_dial_smithing"));
+        SmithingDialRecipeBuilder.smithing(Ingredient.of(Items.NAUTILUS_SHELL), Ingredient.of(Items.BLAZE_POWDER), 6, RecipeCategory.TOOLS, ModItems.FLAME_DIAL.get()).unlockedBy("has_nautilus_shell", has(Items.NAUTILUS_SHELL)).save(output, ResourceLocation.fromNamespaceAndPath("mineminenomi", "flame_dial_smithing"));
+        SmithingDialRecipeBuilder.smithing(Ingredient.of(Items.NAUTILUS_SHELL), Ingredient.of(Items.GLOWSTONE), 10, RecipeCategory.TOOLS, ModItems.FLASH_DIAL.get()).unlockedBy("has_nautilus_shell", has(Items.NAUTILUS_SHELL)).save(output, ResourceLocation.fromNamespaceAndPath("mineminenomi", "flash_dial_smithing"));
+        SmithingDialRecipeBuilder.smithing(Ingredient.of(Items.NAUTILUS_SHELL), Ingredient.of(Items.SLIME_BALL), 10, RecipeCategory.TOOLS, ModItems.IMPACT_DIAL.get()).unlockedBy("has_nautilus_shell", has(Items.NAUTILUS_SHELL)).save(output, ResourceLocation.fromNamespaceAndPath("mineminenomi", "impact_dial_smithing"));
+        SmithingDialRecipeBuilder.smithing(Ingredient.of(Items.NAUTILUS_SHELL), Ingredient.of(ModItems.MILKY_DIAL.get()), 4, RecipeCategory.TOOLS, ModItems.MILKY_DIAL.get()).unlockedBy("has_nautilus_shell", has(Items.NAUTILUS_SHELL)).save(output, ResourceLocation.fromNamespaceAndPath("mineminenomi", "milky_dial_smithing"));
 
-        xyz.pixelatedw.mineminenomi.api.crafting.SmithingDialRecipeBuilder.smithing(Ingredient.of(ModWeapons.CLIMA_TACT.get()), Ingredient.of(ModItems.FLAME_DIAL.get()), 3, RecipeCategory.COMBAT, ModWeapons.CLIMA_TACT.get())
-            .unlockedBy("has_clima_tact", has(ModWeapons.CLIMA_TACT.get()))
-            .save(output, ResourceLocation.fromNamespaceAndPath("mineminenomi", "clima_tact_flame_dial"));
+        SmithingEnchantmentRecipeBuilder.smithing(Ingredient.of(ModTags.Items.RANGED_ENCHANTABLE_BY_SMITHING), Ingredient.of(ModItems.FLAME_DIAL.get()), 1, RecipeCategory.COMBAT, lookupProvider.lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT).getOrThrow(Enchantments.FLAME), 1).unlockedBy("has_flame_dial", has(ModItems.FLAME_DIAL.get())).save(output, ResourceLocation.fromNamespaceAndPath("mineminenomi", "ranged_flame_dial_enchanting"));
+        SmithingEnchantmentRecipeBuilder.smithing(Ingredient.of(ModTags.Items.RANGED_ENCHANTABLE_BY_SMITHING), Ingredient.of(ModItems.BREATH_DIAL.get()), 1, RecipeCategory.COMBAT, lookupProvider.lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT).getOrThrow(Enchantments.PUNCH), 1).unlockedBy("has_breath_dial", has(ModItems.BREATH_DIAL.get())).save(output, ResourceLocation.fromNamespaceAndPath("mineminenomi", "ranged_breath_dial_enchanting"));
+        SmithingEnchantmentRecipeBuilder.smithing(Ingredient.of(ModTags.Items.RANGED_ENCHANTABLE_BY_SMITHING), Ingredient.of(ModItems.EISEN_DIAL.get()), 1, RecipeCategory.COMBAT, lookupProvider.lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT).getOrThrow(Enchantments.POWER), 1).unlockedBy("has_eisen_dial", has(ModItems.EISEN_DIAL.get())).save(output, ResourceLocation.fromNamespaceAndPath("mineminenomi", "ranged_eisen_dial_enchanting"));
 
-
-
+        SmithingEnchantmentRecipeBuilder.smithing(Ingredient.of(ModTags.Items.MELEE_ENCHANTABLE_BY_SMITHING), Ingredient.of(ModItems.DENSE_KAIROSEKI.get()), 3, RecipeCategory.COMBAT, lookupProvider.lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT).getOrThrow(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.ENCHANTMENT, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "kairoseki"))), 1).unlockedBy("has_dense_kairoseki", has(ModItems.DENSE_KAIROSEKI.get())).save(output, ResourceLocation.fromNamespaceAndPath("mineminenomi", "melee_kairoseki_enchanting"));
+        SmithingEnchantmentRecipeBuilder.smithing(Ingredient.of(ModTags.Items.MELEE_ENCHANTABLE_BY_SMITHING), Ingredient.of(ModItems.FLAME_DIAL.get()), 2, RecipeCategory.COMBAT, lookupProvider.lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT).getOrThrow(Enchantments.FIRE_ASPECT), 3).unlockedBy("has_flame_dial", has(ModItems.FLAME_DIAL.get())).save(output, ResourceLocation.fromNamespaceAndPath("mineminenomi", "melee_flame_dial_enchanting"));
+        SmithingEnchantmentRecipeBuilder.smithing(Ingredient.of(ModTags.Items.MELEE_ENCHANTABLE_BY_SMITHING), Ingredient.of(ModItems.EISEN_DIAL.get()), 2, RecipeCategory.COMBAT, lookupProvider.lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT).getOrThrow(Enchantments.SHARPNESS), 3).unlockedBy("has_eisen_dial", has(ModItems.EISEN_DIAL.get())).save(output, ResourceLocation.fromNamespaceAndPath("mineminenomi", "melee_eisen_dial_enchanting"));
+        SmithingEnchantmentRecipeBuilder.smithing(Ingredient.of(ModTags.Items.MELEE_ENCHANTABLE_BY_SMITHING), Ingredient.of(ModItems.FLASH_DIAL.get()), 2, RecipeCategory.COMBAT, lookupProvider.lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT).getOrThrow(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.ENCHANTMENT, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "flash_dial"))), 3).unlockedBy("has_flash_dial", has(ModItems.FLASH_DIAL.get())).save(output, ResourceLocation.fromNamespaceAndPath("mineminenomi", "melee_flash_dial_enchanting"));
+        SmithingEnchantmentRecipeBuilder.smithing(Ingredient.of(ModTags.Items.MELEE_ENCHANTABLE_BY_SMITHING), Ingredient.of(ModItems.IMPACT_DIAL.get()), 2, RecipeCategory.COMBAT, lookupProvider.lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT).getOrThrow(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.ENCHANTMENT, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "impact_dial"))), 3).unlockedBy("has_impact_dial", has(ModItems.IMPACT_DIAL.get())).save(output, ResourceLocation.fromNamespaceAndPath("mineminenomi", "melee_impact_dial_enchanting"));
+        SmithingEnchantmentRecipeBuilder.smithing(Ingredient.of(ModTags.Items.MELEE_ENCHANTABLE_BY_SMITHING), Ingredient.of(ModItems.BREATH_DIAL.get()), 2, RecipeCategory.COMBAT, lookupProvider.lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT).getOrThrow(Enchantments.KNOCKBACK), 3).unlockedBy("has_breath_dial", has(ModItems.BREATH_DIAL.get())).save(output, ResourceLocation.fromNamespaceAndPath("mineminenomi", "melee_breath_dial_enchanting"));
     }
 }
+INNER_EOF
