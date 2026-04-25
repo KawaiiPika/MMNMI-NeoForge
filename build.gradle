@@ -75,6 +75,7 @@ neoForge {
         // The gametest system is also enabled by default for other run configs under the /test command.
         gameTestServer {
             type = "gameTestServer"
+            jvmArguments.add("--enable-preview")
             systemProperty 'neoforge.enabledGameTestNamespaces', 'mineminenomi'
 
         }
