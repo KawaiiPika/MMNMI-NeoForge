@@ -22,6 +22,7 @@ public class SubeSubeDeflectAbility extends Ability {
     @Override
     public boolean checkInvulnerability(LivingEntity entity, net.minecraft.world.damagesource.DamageSource source) {
         if (isUsing(entity)) {
+            if (source.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) return false;
             // Check if it's a physical attack (simplified: not magic, not fire, not explosion)
             if (!source.is(net.minecraft.world.damagesource.DamageTypes.MAGIC) && 
                 !source.is(net.minecraft.world.damagesource.DamageTypes.EXPLOSION) &&

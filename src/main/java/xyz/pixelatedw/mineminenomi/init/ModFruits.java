@@ -109,7 +109,7 @@ public class ModFruits {
     public static final DeferredItem<AkumaNoMiItem> DORU_DORU_NO_MI = ModRegistry.ITEMS.register("doru_doru_no_mi",
             () -> new AkumaNoMiItem(2, FruitType.PARAMECIA));
     public static final DeferredItem<AkumaNoMiItem> GASU_GASU_NO_MI = ModRegistry.ITEMS.register("gasu_gasu_no_mi",
-            () -> new AkumaNoMiItem(3, FruitType.LOGIA));
+            () -> new AkumaNoMiItem(3, FruitType.LOGIA, ModAbilities.GASU_LOGIA, ModAbilities.GASU_IMMUNITY, ModAbilities.GASU_FLY));
     public static final DeferredItem<AkumaNoMiItem> GOE_GOE_NO_MI = ModRegistry.ITEMS.register("goe_goe_no_mi",
             () -> new AkumaNoMiItem(1, FruitType.PARAMECIA));
     public static final DeferredItem<AkumaNoMiItem> HISO_HISO_NO_MI = ModRegistry.ITEMS.register("hiso_hiso_no_mi",
@@ -161,7 +161,7 @@ public class ModFruits {
     public static final DeferredItem<AkumaNoMiItem> SARA_SARA_NO_MI_AXOLOTL = ModRegistry.ITEMS.register("sara_sara_no_mi_axolotl",
             () -> new AkumaNoMiItem(2, FruitType.ZOAN, ModAbilities.AXOLOTL_HEAVY_POINT, ModAbilities.AXOLOTL_WALK_POINT, ModAbilities.POISON_SPIT, ModAbilities.AXOLOTL_HEAL, ModAbilities.PLAY_DEAD, ModAbilities.HEART_REGEN));
     public static final DeferredItem<AkumaNoMiItem> SUBE_SUBE_NO_MI = ModRegistry.ITEMS.register("sube_sube_no_mi",
-            () -> new AkumaNoMiItem(1, FruitType.PARAMECIA, ModAbilities.SUBE_SUBE_SPUR, ModAbilities.SUBE_SUBE_DEFLECT));
+            () -> new AkumaNoMiItem(1, FruitType.PARAMECIA, ModAbilities.SUBE_SUBE_DEFLECT, ModAbilities.SUBE_SUBE_SPUR));
     public static final DeferredItem<AkumaNoMiItem> SUI_SUI_NO_MI = ModRegistry.ITEMS.register("sui_sui_no_mi",
             () -> new AkumaNoMiItem(2, FruitType.PARAMECIA));
     public static final DeferredItem<AkumaNoMiItem> SUPA_SUPA_NO_MI = ModRegistry.ITEMS.register("supa_supa_no_mi",
@@ -173,9 +173,9 @@ public class ModFruits {
     public static final DeferredItem<AkumaNoMiItem> WARA_WARA_NO_MI = ModRegistry.ITEMS.register("wara_wara_no_mi",
             () -> new AkumaNoMiItem(3, FruitType.PARAMECIA, ModAbilities.LIFE_MINUS));
     public static final DeferredItem<AkumaNoMiItem> YOMI_YOMI_NO_MI = ModRegistry.ITEMS.register("yomi_yomi_no_mi",
-            () -> new AkumaNoMiItem(2, FruitType.PARAMECIA));
+            () -> new AkumaNoMiItem(2, FruitType.PARAMECIA, ModAbilities.YOMI_NO_REIKI, ModAbilities.YOMI_IMMUNITY));
     public static final DeferredItem<AkumaNoMiItem> YUKI_YUKI_NO_MI = ModRegistry.ITEMS.register("yuki_yuki_no_mi",
-            () -> new AkumaNoMiItem(3, FruitType.LOGIA));
+            () -> new AkumaNoMiItem(3, FruitType.LOGIA, ModAbilities.YUKI_LOGIA, ModAbilities.YUKI_RABI, ModAbilities.YUKI_TRAVEL, ModAbilities.YUKI_IMMUNITY, ModAbilities.YUKI_GAKI, ModAbilities.TABIRA_YUKI));
     public static final DeferredItem<AkumaNoMiItem> ZUSHI_ZUSHI_NO_MI = ModRegistry.ITEMS.register("zushi_zushi_no_mi",
             () -> new AkumaNoMiItem(3, FruitType.PARAMECIA));
 
