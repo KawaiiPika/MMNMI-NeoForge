@@ -11,6 +11,15 @@ public class MorganMusterGoal extends TickedGoal<Mob> {
    private boolean used;
 
    public MorganMusterGoal(Mob entity) {
+import xyz.pixelatedw.mineminenomi.api.WyHelper;
+import xyz.pixelatedw.mineminenomi.api.entities.ai.TickedGoal;
+import xyz.pixelatedw.mineminenomi.api.helpers.GoalHelper;
+import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MorganEntity;
+import xyz.pixelatedw.mineminenomi.init.ModMobs;
+
+public class MorganMusterGoal extends TickedGoal {
+
+   public MorganMusterGoal(MorganEntity entity) {
       super(entity);
    }
 
@@ -23,6 +32,7 @@ public class MorganMusterGoal extends TickedGoal<Mob> {
       } else {
          return !(this.entity.getHealth() > (this.entity.getMaxHealth() * 0.5f));
       }
+      return false; // WIP
    }
 
    @Override

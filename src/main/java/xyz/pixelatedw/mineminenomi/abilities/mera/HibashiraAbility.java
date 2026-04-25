@@ -14,7 +14,7 @@ public class HibashiraAbility extends Ability {
     protected void startUsing(LivingEntity entity) {
         var look = entity.getLookAngle();
         // Fire pillar — set fire to nearby area
-        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(3.0).move(look.scale(5.0)))) {
+        for (var target : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(3.0).move(look.scale(5.0)), e -> e != entity)) {
             if (target instanceof LivingEntity living) {
                 living.igniteForSeconds(5);
                 living.hurt(entity.damageSources().onFire(), 8.0F);

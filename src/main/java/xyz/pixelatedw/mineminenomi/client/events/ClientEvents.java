@@ -94,6 +94,8 @@ public class ClientEvents {
     public static void onRegisterLayerDefinitions(net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.ZouHeavyModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.ZouHeavyModel::createBodyLayer);
         event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.ZouGuardModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.ZouGuardModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.PteranodonFlyModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.PteranodonFlyModel::createBodyLayer);
+        event.registerLayerDefinition(xyz.pixelatedw.mineminenomi.client.models.morphs.PteranodonAssaultModel.LAYER_LOCATION, xyz.pixelatedw.mineminenomi.client.models.morphs.PteranodonAssaultModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -130,6 +132,14 @@ public class ClientEvents {
         xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
             net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "zou_heavy"), 
             new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.ZouHeavyModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.ZouHeavyModel.LAYER_LOCATION)), 0.8f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/zou_heavy.png")));
+
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "pteranodon_fly"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.PteranodonFlyModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.PteranodonFlyModel.LAYER_LOCATION)), 1.5f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/pteranodon_fly.png")));
+
+        xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderingHandler.registerRenderer(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "pteranodon_assault"),
+            new xyz.pixelatedw.mineminenomi.client.render.morphs.MorphRenderer<>(ctx, new xyz.pixelatedw.mineminenomi.client.models.morphs.PteranodonAssaultModel<>(ctx.bakeLayer(xyz.pixelatedw.mineminenomi.client.models.morphs.PteranodonAssaultModel.LAYER_LOCATION)), 0.8f, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/models/morphs/pteranodon_assault.png")));
 
         for (net.minecraft.client.resources.PlayerSkin.Model skin : event.getSkins()) {
             net.minecraft.client.renderer.entity.LivingEntityRenderer<net.minecraft.client.player.AbstractClientPlayer, net.minecraft.client.model.PlayerModel<net.minecraft.client.player.AbstractClientPlayer>> renderer = event.getSkin(skin);
