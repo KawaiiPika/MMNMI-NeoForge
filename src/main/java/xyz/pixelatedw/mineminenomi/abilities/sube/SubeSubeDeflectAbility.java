@@ -39,6 +39,17 @@ public class SubeSubeDeflectAbility extends Ability {
         return false;
     }
 
+    // Modern deflection hooked via event if needed, or handled inside invulnerability if we want to reverse.
+    public net.minecraft.world.entity.projectile.ProjectileDeflection getDeflection(net.minecraft.world.entity.projectile.Projectile projectile, LivingEntity entity) {
+        if (isUsing(entity)) {
+            if (entity.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                serverLevel.sendParticles(net.minecraft.core.particles.ParticleTypes.END_ROD, entity.getX(), entity.getY() + 1, entity.getZ(), 5, 0.1, 0.1, 0.1, 0.02);
+            }
+            return net.minecraft.world.entity.projectile.ProjectileDeflection.REVERSE;
+        }
+        return net.minecraft.world.entity.projectile.ProjectileDeflection.NONE;
+    }
+
     @Override
     public Component getDisplayName() { 
         return Component.translatable("ability.mineminenomi.sube_sube_deflect"); 
