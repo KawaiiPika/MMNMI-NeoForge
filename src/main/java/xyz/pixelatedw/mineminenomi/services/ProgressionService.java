@@ -14,10 +14,38 @@ public class ProgressionService {
         PlayerStats stats = PlayerStats.get(player);
         double doriki = stats.getDoriki();
         
-        // Example logic: Grant 1 point of each type every 1000 Doriki
-        // In a real scenario, this would track 'last processed doriki' to avoid re-granting.
-        // For now, we'll just provide the helper methods for other systems to use.
+        int lastProcessedDoriki = stats.getBasic().trainingPoints().getOrDefault("LAST_PROCESSED_DORIKI", 0);
+        int currentTier = (int) (doriki / 1000);
+        int lastTier = lastProcessedDoriki / 1000;
+
+        if (currentTier > lastTier) {
+            int tiersGained = currentTier - lastTier;
+            for (TrainingPointType type : TrainingPointType.values()) {
+                stats.alterTrainingPoints(type, tiersGained);
+            }
+                        java.util.Map<String, Integer> pointsMap = new java.util.HashMap<>(stats.getBasic().trainingPoints());
+            pointsMap.put("LAST_PROCESSED_DORIKI", currentTier * 1000);
+            stats.setBasic(new PlayerStats.BasicStats(
+                stats.getBasic().doriki(), stats.getBasic().cola(), stats.getBasic().ultraCola(), stats.getBasic().loyalty(),
+                stats.getBasic().bounty(), stats.getBasic().belly(), stats.getBasic().extol(), stats.getBasic().identity(),
+                stats.getBasic().hasShadow(), stats.getBasic().hasHeart(), stats.getBasic().hasStrawDoll(), stats.getBasic().isRogue(),
+                stats.getBasic().stamina(), stats.getBasic().maxStamina(), pointsMap
+            ));
+            stats.sync(player);
+        }
     }
+
+    public static boolean spendTrainingPoints(Player player, TrainingPointType type, int amount) {
+        PlayerStats stats = PlayerStats.get(player);
+        int currentPoints = stats.getTrainingPoints(type);
+        if (currentPoints >= amount) {
+            stats.setTrainingPoints(type, currentPoints - amount);
+            stats.sync(player);
+            return true;
+        }
+        return false;
+    }
+
 
     public static void grantTrainingPoints(Player player, TrainingPointType type, int amount) {
         PlayerStats stats = PlayerStats.get(player);
