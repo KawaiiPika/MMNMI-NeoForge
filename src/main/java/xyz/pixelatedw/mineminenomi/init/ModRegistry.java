@@ -29,7 +29,6 @@ public class ModRegistry {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = ModDeferredRegistry.CREATIVE_TABS;
     public static final DeferredRegister<net.minecraft.world.item.ArmorMaterial> ARMOR_MATERIALS = ModDeferredRegistry.ARMOR_MATERIALS;
     public static final DeferredRegister<net.neoforged.neoforge.attachment.AttachmentType<?>> ATTACHMENT_TYPES = ModDeferredRegistry.ATTACHMENT_TYPES;
-    public static final DeferredRegister<net.minecraft.commands.synchronization.ArgumentTypeInfo<?, ?>> COMMAND_ARGUMENT_TYPES = ModDeferredRegistry.COMMAND_ARGUMENT_TYPES;
 
 
 

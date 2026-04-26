@@ -10,7 +10,6 @@ import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityUseConditions;
 import xyz.pixelatedw.mineminenomi.api.util.Result;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
-import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 
 import java.util.List;
 
@@ -32,10 +31,6 @@ public class HiryuKaenAbility extends Ability {
         // Jump high into the air
         Vec3 look = entity.getLookAngle();
         entity.setDeltaMovement(look.x * 2.0, 1.5, look.z * 2.0);
-        entity.hurtMarked = true;
-        if (entity instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
-            serverPlayer.connection.send(new ClientboundSetEntityMotionPacket(entity));
-        }
     }
 
     @Override

@@ -13,10 +13,6 @@ import xyz.pixelatedw.mineminenomi.api.helpers.AbilityUseConditions;
 import xyz.pixelatedw.mineminenomi.api.util.Result;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 import xyz.pixelatedw.mineminenomi.init.ModSounds;
-import xyz.pixelatedw.mineminenomi.init.ModDataAttachments;
-import xyz.pixelatedw.mineminenomi.data.entity.AnimationStateData;
-import net.minecraft.resources.ResourceLocation;
-import java.util.Optional;
 
 import java.util.List;
 
@@ -37,9 +33,6 @@ public class ShiShishiSonsonAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         // Start charge
-        if (!entity.level().isClientSide) {
-            entity.setData(ModDataAttachments.ANIMATION_STATE, new AnimationStateData(Optional.of(ResourceLocation.fromNamespaceAndPath("mineminenomi", "ittoryu_charge")), entity.level().getGameTime()));
-        }
     }
 
     @Override
@@ -92,12 +85,5 @@ public class ShiShishiSonsonAbility extends Ability {
     @Override
     public Component getDisplayName() {
         return Component.literal("Shi Shishi Sonson");
-    }
-
-    @Override
-    protected void stopUsing(LivingEntity entity) {
-        if (!entity.level().isClientSide) {
-            entity.setData(ModDataAttachments.ANIMATION_STATE, new AnimationStateData());
-        }
     }
 }

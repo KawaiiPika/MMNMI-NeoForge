@@ -28,7 +28,7 @@ jobs:
 
       - name: Run Game Tests
         run: ./gradlew runGameTestServer
-        
+
       - name: Build with Gradle
         run: ./gradlew build
 
