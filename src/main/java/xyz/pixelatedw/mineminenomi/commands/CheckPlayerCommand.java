@@ -110,6 +110,8 @@ public class CheckPlayerCommand {
                 builder.append(pointType.name()).append(" Training Points: ").append(statsData.getTrainingPoints(pointType)).append("\n");
             }
 
+            // builder.append("In Combat ?: ").append(WyHelper.isInCombat(player)).append("\n");
+            // builder.append("Combat Cache Timer: ").append(combatData.getLastAttackTime()).append("\n");
 
             if (showAttributes) {
                 builder.append("-----\n");

@@ -24,7 +24,6 @@ public class ModMain {
         modEventBus.addListener(this::commonSetup);
         
         xyz.pixelatedw.mineminenomi.init.ModRegistries.init(modEventBus);
-        xyz.pixelatedw.mineminenomi.init.ModCommandArgumentTypes.COMMAND_ARGUMENTS.register(modEventBus);
         xyz.pixelatedw.mineminenomi.init.ModRegistry.init(modEventBus);
         xyz.pixelatedw.mineminenomi.init.ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
 
@@ -35,6 +34,7 @@ public class ModMain {
         xyz.pixelatedw.mineminenomi.init.ModRaces.init();
         xyz.pixelatedw.mineminenomi.init.ModFightingStyles.init();
         xyz.pixelatedw.mineminenomi.init.ModMaterials.init();
+        xyz.pixelatedw.mineminenomi.init.ModCommandArgumentTypes.init();
         xyz.pixelatedw.mineminenomi.init.ModCreativeTabs.init();
         xyz.pixelatedw.mineminenomi.init.ModItems.init();
         xyz.pixelatedw.mineminenomi.init.ModFruits.init();

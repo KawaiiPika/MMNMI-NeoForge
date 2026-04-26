@@ -26,6 +26,7 @@ public class ModDeferredRegistry {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, "mineminenomi");
     public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIALS = DeferredRegister.create(Registries.ARMOR_MATERIAL, "mineminenomi");
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, "mineminenomi");
+    public static final DeferredRegister<net.minecraft.commands.synchronization.ArgumentTypeInfo<?, ?>> COMMAND_ARGUMENT_TYPES = DeferredRegister.create(Registries.COMMAND_ARGUMENT_TYPE, "mineminenomi");
 
     public static void init(IEventBus eventBus) {
         ITEMS.register(eventBus);
@@ -38,5 +39,6 @@ public class ModDeferredRegistry {
         CREATIVE_TABS.register(eventBus);
         ARMOR_MATERIALS.register(eventBus);
         ATTACHMENT_TYPES.register(eventBus);
+        COMMAND_ARGUMENT_TYPES.register(eventBus);
     }
 }
