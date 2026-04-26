@@ -22,8 +22,5 @@ public class ModCommands {
         QuestCommand.register(event.getDispatcher(), event.getBuildContext());
         ChallengeCommand.register(event.getDispatcher(), event.getBuildContext());
         CheckFruitsCommand.register(event.getDispatcher(), event.getBuildContext());
-        FGCommand.register(event.getDispatcher(), event.getBuildContext());
-        LoyaltyCommand.register(event.getDispatcher(), event.getBuildContext());
-        CheckPlayerCommand.register(event.getDispatcher(), event.getBuildContext());
     }
 }

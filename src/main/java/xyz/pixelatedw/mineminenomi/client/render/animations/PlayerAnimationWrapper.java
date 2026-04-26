@@ -12,7 +12,6 @@ public class PlayerAnimationWrapper extends HierarchicalModel<LivingEntity> {
     private final ModelPart root;
 
     public PlayerAnimationWrapper(HumanoidModel<?> humanoidModel) {
-        this.root = new ModelPart(List.of(), Map.of(
         ModelPart trueRoot = new ModelPart(List.of(), Map.of(
                 "head", humanoidModel.head,
                 "hat", humanoidModel.hat,

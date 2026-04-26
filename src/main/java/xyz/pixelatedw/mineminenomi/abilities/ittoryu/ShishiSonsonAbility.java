@@ -36,7 +36,6 @@ public class ShishiSonsonAbility extends Ability {
 
     @Override
     protected void startUsing(LivingEntity entity) {
-        // Start charge
         if (!entity.level().isClientSide) {
             entity.setData(ModDataAttachments.ANIMATION_STATE, new AnimationStateData(Optional.of(ResourceLocation.fromNamespaceAndPath("mineminenomi", "ittoryu_charge")), entity.level().getGameTime()));
         }
@@ -58,19 +57,6 @@ public class ShishiSonsonAbility extends Ability {
             }
         }
     }
-
-    private void performDash(LivingEntity entity) {
-        net.minecraft.world.phys.HitResult hit = WyHelper.rayTraceBlockSafe(entity, MAX_TELEPORT_DISTANCE);
-        BlockPos targetPos = null;
-        if (hit instanceof net.minecraft.world.phys.BlockHitResult blockHit) {
-            targetPos = blockHit.getBlockPos();
-        } else {
-            Vec3 look = entity.getLookAngle();
-            Vec3 target = entity.position().add(look.scale(MAX_TELEPORT_DISTANCE));
-            targetPos = BlockPos.containing(target);
-        }
-        Vec3 startPos = entity.position();
-
 
     private void performDash(LivingEntity entity) {
         net.minecraft.world.phys.HitResult hit = WyHelper.rayTraceBlockSafe(entity, MAX_TELEPORT_DISTANCE);
