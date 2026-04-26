@@ -27,7 +27,7 @@ public class ThunderBallAbility extends Ability {
         if (!entity.level().isClientSide) {
             SniperPelletEntity ball = new SniperPelletEntity(ModEntities.SNIPER_PELLET.get(), entity.level());
             ball.setOwner(entity);
-            ball.setPos(entity.getX(), entity.getY() + entity.getEyeHeight(), entity.getZ());
+            ball.teleportTo(entity.getX(), entity.getY() + entity.getEyeHeight(), entity.getZ());
             ball.setDamage(8.0f);
             // Thunder effect could be lightning bolt on hit, but for now just higher damage
             

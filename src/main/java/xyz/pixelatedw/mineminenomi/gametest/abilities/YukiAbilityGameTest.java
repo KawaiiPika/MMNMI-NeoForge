@@ -10,17 +10,16 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.gametest.GameTestHolder;
-import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import xyz.pixelatedw.mineminenomi.abilities.yuki.FubukiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yuki.YukiLogiaAbility;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 
 
 @GameTestHolder("mineminenomi")
-@PrefixGameTestTemplate(false)
+@net.neoforged.neoforge.gametest.PrefixGameTestTemplate(false)
 public class YukiAbilityGameTest {
 
-    @GameTest(template="empty_chest")
+    @GameTest(template="empty")
     public void testYukiLogiaImmunity(GameTestHelper helper) {
         Player mockPlayer = helper.makeMockPlayer(GameType.SURVIVAL);
         mockPlayer.setPos(helper.absolutePos(new BlockPos(1, 1, 1)).getCenter());
@@ -42,7 +41,7 @@ public class YukiAbilityGameTest {
         });
     }
 
-    @GameTest(template = "empty_chest", timeoutTicks = 200)
+    @GameTest(template="empty", timeoutTicks = 200)
     public void testFubukiAoE(GameTestHelper helper) {
         Player mockPlayer = helper.makeMockServerPlayerInLevel();
         BlockPos relativeTarget = new BlockPos(2, 1, 2);
