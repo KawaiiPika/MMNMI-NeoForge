@@ -10,8 +10,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import xyz.pixelatedw.mineminenomi.api.enums.TrainingPointType;
+import xyz.pixelatedw.mineminenomi.builder.TestEntityBuilder;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.*;
 
 class ProgressionServiceTest {
@@ -32,8 +36,10 @@ class ProgressionServiceTest {
 
     @BeforeEach
     void setup() {
-        player = mock(Player.class);
-        stats = mock(PlayerStats.class);
+        TestEntityBuilder builder = TestEntityBuilder.instance().withDoriki(0);
+        player = builder.build();
+        stats = builder.getStats();
+
         playerStatsMockedStatic = Mockito.mockStatic(PlayerStats.class);
         playerStatsMockedStatic.when(() -> PlayerStats.get(player)).thenReturn(stats);
     }
@@ -45,12 +51,58 @@ class ProgressionServiceTest {
 
     @Test
     void testGrantTrainingPoints() {
+        PlayerStats mockStats = mock(PlayerStats.class);
+        playerStatsMockedStatic.when(() -> PlayerStats.get(player)).thenReturn(mockStats);
+
         TrainingPointType type = TrainingPointType.MARTIAL_ARTS;
         int amount = 5;
 
         ProgressionService.grantTrainingPoints(player, type, amount);
 
-        verify(stats).alterTrainingPoints(type, amount);
-        verify(stats).sync(player);
+        verify(mockStats).alterTrainingPoints(type, amount);
+        verify(mockStats).sync(player);
+    }
+
+    @Test
+    void testCheckProgressionEarnsPoints() {
+        stats.setDoriki(2500); // Should earn 2 points for each type
+
+        ProgressionService.checkProgression(player);
+
+        assertEquals(2, stats.getTrainingPoints(TrainingPointType.MARTIAL_ARTS));
+        assertEquals(2, stats.getTrainingPoints(TrainingPointType.WEAPON_MASTERY));
+        assertEquals(2000, stats.getBasic().trainingPoints().getOrDefault("LAST_PROCESSED_DORIKI", 0));
+    }
+
+    @Test
+    void testCheckProgressionDoesNotRegrantPoints() {
+        stats.setDoriki(2500);
+        ProgressionService.checkProgression(player);
+        assertEquals(2, stats.getTrainingPoints(TrainingPointType.MARTIAL_ARTS));
+
+        stats.setDoriki(2999);
+        ProgressionService.checkProgression(player);
+        assertEquals(2, stats.getTrainingPoints(TrainingPointType.MARTIAL_ARTS)); // Still 2
+        assertEquals(2000, stats.getBasic().trainingPoints().getOrDefault("LAST_PROCESSED_DORIKI", 0));
+    }
+
+    @Test
+    void testSpendTrainingPoints() {
+        stats.setTrainingPoints(TrainingPointType.MARTIAL_ARTS, 5);
+
+        boolean success = ProgressionService.spendTrainingPoints(player, TrainingPointType.MARTIAL_ARTS, 3);
+
+        assertTrue(success);
+        assertEquals(2, stats.getTrainingPoints(TrainingPointType.MARTIAL_ARTS));
+    }
+
+    @Test
+    void testSpendTrainingPointsInsufficient() {
+        stats.setTrainingPoints(TrainingPointType.MARTIAL_ARTS, 2);
+
+        boolean success = ProgressionService.spendTrainingPoints(player, TrainingPointType.MARTIAL_ARTS, 3);
+
+        assertFalse(success);
+        assertEquals(2, stats.getTrainingPoints(TrainingPointType.MARTIAL_ARTS));
     }
 }
