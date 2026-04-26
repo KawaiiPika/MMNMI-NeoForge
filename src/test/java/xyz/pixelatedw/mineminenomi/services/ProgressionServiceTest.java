@@ -51,16 +51,11 @@ class ProgressionServiceTest {
 
     @Test
     void testGrantTrainingPoints() {
-        PlayerStats mockStats = mock(PlayerStats.class);
-        playerStatsMockedStatic.when(() -> PlayerStats.get(player)).thenReturn(mockStats);
-
         TrainingPointType type = TrainingPointType.MARTIAL_ARTS;
         int amount = 5;
 
         ProgressionService.grantTrainingPoints(player, type, amount);
 
-        verify(mockStats).alterTrainingPoints(type, amount);
-        verify(mockStats).sync(player);
         assertEquals(5, stats.getTrainingPoints(type));
     }
 

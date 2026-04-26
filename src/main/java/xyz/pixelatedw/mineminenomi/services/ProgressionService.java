@@ -15,16 +15,12 @@ public class ProgressionService {
         double doriki = stats.getDoriki();
         
         int lastProcessedDoriki = stats.getBasic().trainingPoints().getOrDefault("LAST_PROCESSED_DORIKI", 0);
-        int currentTier = (int) (doriki / 1000);
         int currentTier = Math.min((int) (doriki / 1000), 10);
         int lastTier = lastProcessedDoriki / 1000;
 
         if (currentTier > lastTier) {
             int tiersGained = currentTier - lastTier;
             for (TrainingPointType type : TrainingPointType.values()) {
-                stats.alterTrainingPoints(type, tiersGained);
-            }
-                        java.util.Map<String, Integer> pointsMap = new java.util.HashMap<>(stats.getBasic().trainingPoints());
                 // Assuming legacy cap is implicitly handled by Doriki max tier = 10, total points per type = 10.
                 stats.alterTrainingPoints(type, tiersGained);
             }
@@ -38,19 +34,6 @@ public class ProgressionService {
             ));
             stats.sync(player);
         }
-    }
-
-    public static boolean spendTrainingPoints(Player player, TrainingPointType type, int amount) {
-        PlayerStats stats = PlayerStats.get(player);
-        int currentPoints = stats.getTrainingPoints(type);
-        if (currentPoints >= amount) {
-            stats.setTrainingPoints(type, currentPoints - amount);
-            stats.sync(player);
-            return true;
-        }
-        return false;
-    }
-
     }
 
     public static boolean spendTrainingPoints(Player player, TrainingPointType type, int amount) {
