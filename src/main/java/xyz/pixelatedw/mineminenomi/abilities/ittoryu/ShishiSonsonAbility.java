@@ -13,6 +13,10 @@ import xyz.pixelatedw.mineminenomi.api.helpers.AbilityUseConditions;
 import xyz.pixelatedw.mineminenomi.api.util.Result;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 import xyz.pixelatedw.mineminenomi.init.ModSounds;
+import xyz.pixelatedw.mineminenomi.init.ModDataAttachments;
+import xyz.pixelatedw.mineminenomi.data.entity.AnimationStateData;
+import net.minecraft.resources.ResourceLocation;
+import java.util.Optional;
 
 import java.util.List;
 
@@ -33,6 +37,9 @@ public class ShishiSonsonAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         // Start charge
+        if (!entity.level().isClientSide) {
+            entity.setData(ModDataAttachments.ANIMATION_STATE, new AnimationStateData(Optional.of(ResourceLocation.fromNamespaceAndPath("mineminenomi", "ittoryu_charge")), entity.level().getGameTime()));
+        }
     }
 
     @Override
@@ -51,6 +58,19 @@ public class ShishiSonsonAbility extends Ability {
             }
         }
     }
+
+    private void performDash(LivingEntity entity) {
+        net.minecraft.world.phys.HitResult hit = WyHelper.rayTraceBlockSafe(entity, MAX_TELEPORT_DISTANCE);
+        BlockPos targetPos = null;
+        if (hit instanceof net.minecraft.world.phys.BlockHitResult blockHit) {
+            targetPos = blockHit.getBlockPos();
+        } else {
+            Vec3 look = entity.getLookAngle();
+            Vec3 target = entity.position().add(look.scale(MAX_TELEPORT_DISTANCE));
+            targetPos = BlockPos.containing(target);
+        }
+        Vec3 startPos = entity.position();
+
 
     private void performDash(LivingEntity entity) {
         net.minecraft.world.phys.HitResult hit = WyHelper.rayTraceBlockSafe(entity, MAX_TELEPORT_DISTANCE);
@@ -85,5 +105,12 @@ public class ShishiSonsonAbility extends Ability {
     @Override
     public Component getDisplayName() {
         return Component.literal("Shishi Sonson");
+    }
+
+    @Override
+    protected void stopUsing(LivingEntity entity) {
+        if (!entity.level().isClientSide) {
+            entity.setData(ModDataAttachments.ANIMATION_STATE, new AnimationStateData());
+        }
     }
 }
