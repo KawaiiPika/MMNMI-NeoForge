@@ -6,6 +6,7 @@ import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
 @GameTestHolder("mineminenomi")
+@PrefixGameTestTemplate(false)
 public class ExampleGameTest {
 
     @GameTest(template="empty")
