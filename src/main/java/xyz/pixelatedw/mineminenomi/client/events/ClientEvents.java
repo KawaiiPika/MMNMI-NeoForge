@@ -5,47 +5,12 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
-import net.neoforged.neoforge.client.event.RegisterShadersEvent;
-
-import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
-import xyz.pixelatedw.mineminenomi.client.particles.effects.haki.HaoshokuHakiParticleEffect;
-import xyz.pixelatedw.mineminenomi.client.particles.effects.haki.EmissionBurstParticleEffect;
-import xyz.pixelatedw.mineminenomi.client.particles.effects.haki.InternalDestructionBurstParticleEffect;
-import xyz.pixelatedw.mineminenomi.client.particles.effects.zou.GreatStompParticleEffect;
-import xyz.pixelatedw.mineminenomi.client.particles.effects.zushi.GraviZoneParticleEffect;
-import xyz.pixelatedw.mineminenomi.client.particles.effects.zushi.GraviPull1ParticleEffect;
-import xyz.pixelatedw.mineminenomi.client.particles.effects.zushi.GraviPull2ParticleEffect;
-
 import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.client.gui.overlays.AbilityBarOverlay;
 import xyz.pixelatedw.mineminenomi.client.gui.overlays.HaoshokuOverlay;
 
 @EventBusSubscriber(modid = ModMain.PROJECT_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class ClientEvents {
-
-    @SubscribeEvent
-    public static void onRegisterParticleProviders(RegisterParticleProvidersEvent event) {
-        // Registering Haki Particle Providers
-        // Assuming we map them to some standard SimpleParticleTypes for now to satisfy the provider.
-        // In a full implementation, we'd add custom ModParticleTypes fields for HAKI_BURSTS.
-        event.registerSpriteSet(xyz.pixelatedw.mineminenomi.init.ModParticleTypes.CHIYU.get(), HaoshokuHakiParticleEffect.Provider::new);
-        event.registerSpriteSet(xyz.pixelatedw.mineminenomi.init.ModParticleTypes.DOUBLE_CIRCLE.get(), EmissionBurstParticleEffect.Provider::new);
-        event.registerSpriteSet(xyz.pixelatedw.mineminenomi.init.ModParticleTypes.SIMPLE_CIRCLE.get(), InternalDestructionBurstParticleEffect.Provider::new);
-        event.registerSpriteSet(xyz.pixelatedw.mineminenomi.init.ModParticleTypes.GREAT_STOMP.get(), GreatStompParticleEffect.Provider::new);
-        event.registerSpriteSet(xyz.pixelatedw.mineminenomi.init.ModParticleTypes.GRAVI_ZONE.get(), GraviZoneParticleEffect.Provider::new);
-        event.registerSpriteSet(xyz.pixelatedw.mineminenomi.init.ModParticleTypes.GRAVI_PULL_1.get(), GraviPull1ParticleEffect.Provider::new);
-        event.registerSpriteSet(xyz.pixelatedw.mineminenomi.init.ModParticleTypes.GRAVI_PULL_2.get(), GraviPull2ParticleEffect.Provider::new);
-
-    }
-
-    @SubscribeEvent
-    public static void onRegisterShaders(RegisterShadersEvent event) {
-        try {
-            event.registerShader(new net.minecraft.client.renderer.ShaderInstance(event.getResourceProvider(), net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "rendertype_entity_aura_haki"), com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_TEX_COLOR), (shaderInstance) -> xyz.pixelatedw.mineminenomi.client.render.ModRenderTypes.auraHakiShaderInstance = shaderInstance);
-        } catch (java.io.IOException e) {
-            xyz.pixelatedw.mineminenomi.ModMain.LOGGER.error("Failed to load custom shaders", e);
-        }
-    }
 
     @SubscribeEvent
     public static void onRegisterGuiLayers(RegisterGuiLayersEvent event) {
@@ -57,8 +22,37 @@ public class ClientEvents {
     public static void onRegisterRenderers(net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.MARINE_GRUNT.get(), 
             ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.MARINE_BRUTE.get(),
+            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.6F));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.MARINE_CAPTAIN.get(),
+            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.MARINE_SNIPER.get(),
+            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.MARINE_VICE_ADMIRAL.get(),
+            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.55F));
+
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.PIRATE_GRUNT.get(), 
             ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.PIRATE_BRUTE.get(),
+            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.6F));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.PIRATE_CAPTAIN.get(),
+            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.PIRATE_SNIPER.get(),
+            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.PIRATE_NOTORIOUS_CAPTAIN.get(),
+            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.55F));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.PIRATE_TRADER.get(),
+            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
+
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.BANDIT_GRUNT.get(),
+            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.BANDIT_BRUTE.get(),
+            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.6F));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.BANDIT_CAPTAIN.get(),
+            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.BANDIT_SNIPER.get(),
+            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
+
         
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.GOMU_PISTOL.get(), 
             xyz.pixelatedw.mineminenomi.client.renderers.entity.GomuPistolRenderer::new);
@@ -66,46 +60,41 @@ public class ClientEvents {
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.GOMU_BAZOOKA.get(), 
             xyz.pixelatedw.mineminenomi.client.renderers.entity.GomuBazookaRenderer::new);
         
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.HIGAN.get(),
-            ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
-        
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.HIKEN.get(),
-            ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 3.0F, true));
-            
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.DAI_FUNKA.get(),
-            ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 2.5F, true));
-            
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.YASAKANI.get(),
-            ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
-            
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.MEIGO.get(),
-            ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.5F, true));
-            
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.RYUSEI_KAZAN.get(),
-            ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 2.0F, true));
-            
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.AMATERASU.get(),
-            ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.5F, true));
-            
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.PARTISAN.get(),
-            ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.5F, true));
-            
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.SANGO.get(),
-            ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
-            
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.WHITE_BLOW.get(),
-            ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.5F, true));
-            
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.DESERT_SPADA.get(),
-            ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.5F, true));
-
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.STRONG_RIGHT.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.RADICAL_BEAM.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.FRESH_FIRE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.COUP_DE_VENT.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.ELECTRICAL_LUNA.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.ELECTRICAL_SHOWER.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.ELECTRO_VISUAL.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.HIGAN.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.HIKEN.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 3.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.DAI_FUNKA.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 2.5F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.YASAKANI.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.MEIGO.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.5F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.SPRING_DEATH_KNOCK_PROJECTILE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.RYUSEI_KAZAN.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 2.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.AMATERASU.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.5F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.PARTISAN.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.5F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.SANGO.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.WHITE_BLOW.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.5F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.SNIPER_PELLET.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 0.5F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.DESERT_SPADA.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.5F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.GEKISHIN.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.5F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.PAD_HO.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.OVERHEAT.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 0.5F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.MERO_MERO_MELLOW.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.NOSE_FANCY_CANNON.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 0.5F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.BRICK_BAT.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 0.5F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.BARA_BARA_HO.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.NEGATIVE_HOLLOW.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.GOMU_GOMU_NO_BAZOOKA.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.NORO_NORO_BEAM.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.PISTOL_KISS.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 0.5F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.WHITE_OUT.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 2.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.THROWN_SPEAR.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.YAKKODORI.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.SANBYAKUROKUJU_POUND_HO.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.5F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.SANJUROKU_POUND_HO_PROJECTILE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.TATSU_MAKI_PROJECTILE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.5F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.NANAJUNI_POUND_HO_PROJECTILE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.NANAHYAKUNIJU_POUND_HO_PROJECTILE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 2.0F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.HYAKUHACHI_POUND_HO_PROJECTILE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.2F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.SENHACHIJU_POUND_HO_PROJECTILE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 2.5F, true));
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.RELAX_HOUR_PROJECTILE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
 
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.STRONG_RIGHT.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.RADICAL_BEAM.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
@@ -123,6 +112,7 @@ public class ClientEvents {
 
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.SPHERE.get(),
             xyz.pixelatedw.mineminenomi.client.renderers.entities.SphereRenderer::new);
+
     }
 
     @SubscribeEvent
@@ -134,7 +124,6 @@ public class ClientEvents {
     @SubscribeEvent
     public static void onClientSetup(net.neoforged.fml.event.lifecycle.FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            xyz.pixelatedw.mineminenomi.client.render.ModRenderTypeBuffers.getInstance().initHakiAuraShader(Minecraft.getInstance());
         });
     }
 
@@ -146,11 +135,6 @@ public class ClientEvents {
             
             xyz.pixelatedw.mineminenomi.data.entity.PlayerStats stats = xyz.pixelatedw.mineminenomi.data.entity.PlayerStats.get(mc.player);
             if (stats != null && stats.isKenbunshokuActive()) {
-                var chain = xyz.pixelatedw.mineminenomi.client.render.ModRenderTypeBuffers.getInstance().getHakiAuraPostChain();
-                if (chain != null) {
-                    chain.process(event.getPartialTick().getGameTimeDeltaPartialTick(true));
-                    mc.getMainRenderTarget().bindWrite(false);
-                }
             }
         }
     }

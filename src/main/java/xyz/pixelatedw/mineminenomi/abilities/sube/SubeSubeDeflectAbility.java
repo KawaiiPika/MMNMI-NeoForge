@@ -22,6 +22,7 @@ public class SubeSubeDeflectAbility extends Ability {
     @Override
     public boolean checkInvulnerability(LivingEntity entity, net.minecraft.world.damagesource.DamageSource source) {
         if (isUsing(entity)) {
+            if (source.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) return false;
             // Check if it's a physical attack (simplified: not magic, not fire, not explosion)
             if (!source.is(net.minecraft.world.damagesource.DamageTypes.MAGIC) && 
                 !source.is(net.minecraft.world.damagesource.DamageTypes.EXPLOSION) &&
@@ -36,6 +37,17 @@ public class SubeSubeDeflectAbility extends Ability {
             }
         }
         return false;
+    }
+
+    // Modern deflection hooked via event if needed, or handled inside invulnerability if we want to reverse.
+    public net.minecraft.world.entity.projectile.ProjectileDeflection getDeflection(net.minecraft.world.entity.projectile.Projectile projectile, LivingEntity entity) {
+        if (isUsing(entity)) {
+            if (entity.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                serverLevel.sendParticles(net.minecraft.core.particles.ParticleTypes.END_ROD, entity.getX(), entity.getY() + 1, entity.getZ(), 5, 0.1, 0.1, 0.1, 0.02);
+            }
+            return net.minecraft.world.entity.projectile.ProjectileDeflection.REVERSE;
+        }
+        return net.minecraft.world.entity.projectile.ProjectileDeflection.NONE;
     }
 
     @Override

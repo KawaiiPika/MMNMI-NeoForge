@@ -15,15 +15,17 @@ import xyz.pixelatedw.mineminenomi.particles.SimpleParticleData;
 
 public class SimpleParticle extends Particle {
     private final SimpleParticleData data;
-    private final ParticleRenderType type;
     protected float quadSize;
     private int maxFrames = 1;
     private int animIdx = 0;
+    private final Particle.LifetimeAlpha lifetimeAlpha;
+    private final net.minecraft.client.renderer.texture.TextureAtlasSprite sprite;
 
-    public SimpleParticle(ClientLevel level, double x, double y, double z, SimpleParticleData data, ParticleRenderType type) {
+    public SimpleParticle(ClientLevel level, double x, double y, double z, SimpleParticleData data, ResourceLocation texture) {
         super(level, x, y, z);
         this.data = data;
-        this.type = type;
+        ResourceLocation spriteId = ResourceLocation.fromNamespaceAndPath(texture.getNamespace(), texture.getPath().replace("textures/", "").replace(".png", ""));
+        this.sprite = net.minecraft.client.Minecraft.getInstance().getTextureAtlas(net.minecraft.client.renderer.texture.TextureAtlas.LOCATION_PARTICLES).apply(spriteId);
         this.rCol = data.getRed();
         this.gCol = data.getGreen();
         this.bCol = data.getBlue();
@@ -33,6 +35,7 @@ public class SimpleParticle extends Particle {
         this.xd = data.getDeltaMovementX();
         this.yd = data.getDeltaMovementY();
         this.zd = data.getDeltaMovementZ();
+        this.lifetimeAlpha = new Particle.LifetimeAlpha(data.getAlpha(), 0.0F, 0.5F, 1.0F); // Fades from mid-life to end
     }
 
     public void setMaxFrames(int maxFrames) {
@@ -41,7 +44,7 @@ public class SimpleParticle extends Particle {
 
     @Override
     public ParticleRenderType getRenderType() {
-        return this.type;
+        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
     @Override
@@ -118,34 +121,40 @@ public class SimpleParticle extends Particle {
             vector3f.add((float) Mth.lerp(partialTicks, this.xo, this.x), (float) Mth.lerp(partialTicks, this.yo, this.y), (float) Mth.lerp(partialTicks, this.zo, this.z));
         }
 
-        float f2 = 0.0F;
-        float f3 = 1.0F;
-        float f4 = (float) this.animIdx / (float) this.maxFrames;
-        float f5 = (float) (this.animIdx + 1) / (float) this.maxFrames;
+        float spriteV0 = this.sprite.getV0();
+        float spriteV1 = this.sprite.getV1();
+        float frameHeight = (spriteV1 - spriteV0) / this.maxFrames;
+        float f4 = spriteV0 + this.animIdx * frameHeight;
+        float f5 = spriteV0 + (this.animIdx + 1) * frameHeight;
+
+        float f2 = this.sprite.getU0();
+        float f3 = this.sprite.getU1();
+
+        float currentAlpha = this.lifetimeAlpha.currentAlphaForAge(this.age, this.lifetime, partialTicks);
         
         int j = this.getLightColor(partialTicks);
-        buffer.addVertex(avec3f[0].x(), avec3f[0].y(), avec3f[0].z()).setUv(f3, f5).setColor(this.rCol, this.gCol, this.bCol, this.alpha).setLight(j);
-        buffer.addVertex(avec3f[1].x(), avec3f[1].y(), avec3f[1].z()).setUv(f3, f4).setColor(this.rCol, this.gCol, this.bCol, this.alpha).setLight(j);
-        buffer.addVertex(avec3f[2].x(), avec3f[2].y(), avec3f[2].z()).setUv(f2, f4).setColor(this.rCol, this.gCol, this.bCol, this.alpha).setLight(j);
-        buffer.addVertex(avec3f[3].x(), avec3f[3].y(), avec3f[3].z()).setUv(f2, f5).setColor(this.rCol, this.gCol, this.bCol, this.alpha).setLight(j);
+        buffer.addVertex(avec3f[0].x(), avec3f[0].y(), avec3f[0].z()).setUv(f3, f5).setColor(this.rCol, this.gCol, this.bCol, currentAlpha).setLight(j);
+        buffer.addVertex(avec3f[1].x(), avec3f[1].y(), avec3f[1].z()).setUv(f3, f4).setColor(this.rCol, this.gCol, this.bCol, currentAlpha).setLight(j);
+        buffer.addVertex(avec3f[2].x(), avec3f[2].y(), avec3f[2].z()).setUv(f2, f4).setColor(this.rCol, this.gCol, this.bCol, currentAlpha).setLight(j);
+        buffer.addVertex(avec3f[3].x(), avec3f[3].y(), avec3f[3].z()).setUv(f2, f5).setColor(this.rCol, this.gCol, this.bCol, currentAlpha).setLight(j);
     }
 
     public static class Factory implements ParticleProvider<SimpleParticleData> {
-        private final ParticleRenderType type;
         private final int maxFrames;
+        private final ResourceLocation texture;
 
         public Factory(ResourceLocation texture) {
             this(texture, 1);
         }
 
         public Factory(ResourceLocation texture, int maxFrames) {
-            this.type = new SimpleParticleRenderType(texture);
             this.maxFrames = maxFrames;
+            this.texture = texture;
         }
 
         @Override
         public Particle createParticle(SimpleParticleData data, ClientLevel level, double x, double y, double z, double xd, double yd, double zd) {
-            SimpleParticle part = new SimpleParticle(level, x, y, z, data, this.type);
+            SimpleParticle part = new SimpleParticle(level, x, y, z, data, this.texture);
             part.setMaxFrames(this.maxFrames);
             return part;
         }

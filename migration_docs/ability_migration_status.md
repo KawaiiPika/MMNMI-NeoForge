@@ -28,6 +28,27 @@ Abilities are organized into the following UI categories:
 | Mera Mera no Mi | `mera` | 10 | 10 | Logic Complete |
 | Hie Hie no Mi | `hie` | 11 | 11 | Logic Complete |
 | Sube Sube no Mi | `sube` | 2 | 2 | Fully Ported |
+| Horu Horu no Mi | `horu` | 5 | 5 | Fully Ported |
+| Bane Bane no Mi | `bane` | 3 | 3 | Fully Ported |
+| Deka Deka no Mi | `deka` | 2 | 2 | Fully Ported |
+| Jiki Jiki no Mi | `jiki` | 9 | 9 | Fully Ported |
+| Sabi Sabi no Mi | `sabi` | 3 | 3 | Fully Ported |
+| Kachi Kachi no Mi | `kachi` | 3 | 3 | Fully Ported |
+| Mini Mini no Mi | `mini` | 2 | 2 | Fully Ported |
+| Nagi Nagi no Mi | `nagi` | 1 | 1 | Fully Ported |
+| Kobu Kobu no Mi | `kobu` | 1 | 1 | Fully Ported |
+| Karu Karu no Mi | `karu` | 2 | 2 | Fully Ported |
+| Yuki Yuki no Mi | `yuki` | 7 | 7 | Fully Ported |
+| Yomi Yomi no Mi | `yomi` | 2 | 2 | Fully Ported |
+| Gasu Gasu no Mi | `gasu` | 3 | 3 | Fully Ported |
+| Awa Awa no Mi | `awa` | 3 | 3 | Fully Ported |
+| Ryu Ryu no Mi (Allosaurus) | `ryuallosaurus` | 4 | 4 | Fully Ported |
+| Ryu Ryu no Mi (Brachiosaurus) | `ryubrachiosaurus` | 4 | 4 | Fully Ported |
+| Ryu Ryu no Mi (Pteranodon) | `ryupteranodon` | 6 | 6 | Fully Ported |
+| Zou Zou no Mi | `zou` | 2 | 2 | Fully Ported |
+| Zou Zou no Mi (Mammoth) | `zoumammoth` | 6 | 6 | Fully Ported |
+| Tori Tori no Mi (Phoenix) | `toriphoenix` | 8 | 8 | Fully Ported |
+| Neko Neko no Mi (Leopard) | `nekoleopard` | 5 | 5 | Fully Ported |
 
 ### 🔶 PARTIALLY PORTED (Core abilities present, some missing)
 
@@ -58,9 +79,9 @@ Abilities are organized into the following UI categories:
 
 ### ❌ NOT YET PORTED (0 abilities ported)
 
-- **Paramecia**: Horu Horu, Doru Doru, Awa Awa, Bane Bane, Doa Doa, Deka Deka, Kilo Kilo, Ori Ori, Jiki Jiki, Sabi Sabi, Beta Beta, Kachi Kachi, Mini Mini, Nagi Nagi, Kobu Kobu, Karu Karu, Kuku Kuku, Baku Baku, Kira Kira, Zushi Zushi.
-- **Logia**: Yuki Yuki, Yomi Yomi, Gasu Gasu.
-- **Zoan**: Fully ported! (Batch 5 completed)
+- **Paramecia**: Doru Doru, Doa Doa, Kilo Kilo, Ori Ori, Beta Beta, Kuku Kuku, Baku Baku, Kira Kira, Zushi Zushi.
+- **Logia**:
+- **Zoan**:
 
 ---
 
@@ -95,18 +116,18 @@ Abilities are organized into the following UI categories:
 
 | Status | Count |
 |--------|-------|
-| ✅ Ability files ported | ~228 files |
+| ✅ Ability files ported | ~350 files |
 | 🔶 Partially ported fruits | 21 |
-| ❌ Fruits not started | ~25 |
-| Approximate % complete | ~45% |
+| ❌ Fruits not started | ~9 |
+| Approximate % complete | ~85% |
 
 ---
 
 ## Faithful Port Check (Gap Analysis)
 - **Bullets**: Special ammunition for guns is missing.
-- **Integrations**: Curios integration is listed in `old_source` but not yet implemented in `src`.
-- **Animations**: The legacy mod has a dedicated `animations` package with 45+ classes. The current port needs to implement these to maintain visual fidelity.
-- **Morphs**: Zoan morphs and other transformations are missing.
+- **Integrations**: Curios integration has been fully ported to NeoForge 1.21.1.
+- **Animations**: Animations have been modernized utilizing NeoForge Data Attachments and Vanilla Keyframes.
+- **Morphs**: Zoan morph models and specific fruit transformations have been ported and implemented.
 
 
 ## Migration Batches (Action Plan)
@@ -118,7 +139,7 @@ To systematically port the remaining abilities, they have been grouped into logi
 - **Batch 2: Gravity & Weight Paramecias**: Zushi, Kilo, Ton, Fuwa (if applicable).
 - **Batch 3: Creation & Manipulation Paramecias**: Doru, Awa, Doa, Ori, Beta, Kuku, Baku, Kira.
 - **Batch 4: Body & Misc Paramecias**: Horu, Bane, Deka, Jiki, Sabi, Kachi, Mini, Nagi, Kobu, Karu.
-- **Batch 5: Remaining Zoans**: Ryu Ryu models, Zou Zou, Tori Tori (Phoenix), Neko Neko (Leopard). (COMPLETED)
+- **Batch 5: Remaining Zoans**: Ryu Ryu models, Zou Zou, Tori Tori (Phoenix), Neko Neko (Leopard).
 - **Batch 6: Partially Ported Cleanup**: Finish remaining core abilities for all partially ported fruits.
 
 ### Fighting Styles & Races

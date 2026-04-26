@@ -7,46 +7,22 @@ import xyz.pixelatedw.mineminenomi.api.abilities.zoan.ZoanAbility;
 public class PhoenixAssaultPointAbility extends ZoanAbility {
 
     public PhoenixAssaultPointAbility() {
-        super(ResourceLocation.fromNamespaceAndPath("mineminenomi", "tori_tori_no_mi_model_phoenix"));
+        super(ResourceLocation.fromNamespaceAndPath("mineminenomi", "tori_tori_no_mi_model_1"));
     }
 
     @Override
     public ResourceLocation getMorphModelId() {
-        return ResourceLocation.fromNamespaceAndPath("mineminenomi", "phoenix_assault");
+        return ResourceLocation.fromNamespaceAndPath("mineminenomi", "phoenix2");
     }
 
     @Override
-    public double getScaleModifier() { return 0.0; }
+    public double getScaleModifier() { return 0.2; }
 
     @Override
-    public double getHealthModifier() { return 0; }
+    public double getHealthModifier() { return 10; }
 
     @Override
-    public double getDamageModifier() { return 3; }
-
-    @Override
-    protected void onTick(net.minecraft.world.entity.LivingEntity entity, long duration) {
-        if (!entity.onGround()) {
-            if (entity instanceof net.minecraft.world.entity.player.Player player) {
-                if (!player.getAbilities().mayfly) {
-                    player.getAbilities().mayfly = true;
-                    player.onUpdateAbilities();
-                }
-            }
-        }
-    }
-
-    @Override
-    protected void stopUsing(net.minecraft.world.entity.LivingEntity entity) {
-        super.stopUsing(entity);
-        if (entity instanceof net.minecraft.world.entity.player.Player player) {
-            if (!player.isCreative() && !player.isSpectator()) {
-                player.getAbilities().mayfly = false;
-                player.getAbilities().flying = false;
-                player.onUpdateAbilities();
-            }
-        }
-    }
+    public double getDamageModifier() { return 6; }
 
     @Override
     public Component getDisplayName() {

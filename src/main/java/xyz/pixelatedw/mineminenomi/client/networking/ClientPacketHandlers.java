@@ -3,6 +3,8 @@ package xyz.pixelatedw.mineminenomi.client.networking;
 import net.minecraft.client.Minecraft;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import xyz.pixelatedw.mineminenomi.networking.packets.*;
+import xyz.pixelatedw.mineminenomi.client.gui.screens.CrewDetailsScreen;
+import xyz.pixelatedw.mineminenomi.client.gui.screens.JollyRogerEditorScreen;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.client.gui.screens.Screen;
 import xyz.pixelatedw.mineminenomi.api.ui.IEventReceiverScreen;
@@ -46,6 +48,18 @@ public class ClientPacketHandlers {
             Screen screen = mc.screen;
             if (screen instanceof IEventReceiverScreen eventReceiver) {
                 eventReceiver.handleEvent(payload.event());
+            }
+        });
+    }
+
+    public static void handlePointsGained(final SPointsGainedPacket payload, final IPayloadContext context) {
+        context.enqueueWork(() -> {
+            Minecraft mc = Minecraft.getInstance();
+            if (mc.player != null) {
+                mc.player.displayClientMessage(
+                    net.minecraft.network.chat.Component.translatable("info.mineminenomi.points_gained", payload.amount(), payload.pointType()),
+                    true
+                );
             }
         });
     }

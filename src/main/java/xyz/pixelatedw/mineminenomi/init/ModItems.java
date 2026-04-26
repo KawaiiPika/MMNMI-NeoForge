@@ -66,6 +66,14 @@ public class ModItems {
     public static final Supplier<Item> IRON_DEVIL_FRUIT_BOX     = ModRegistry.ITEMS.register("iron_devil_fruit_box",     () -> new AkumaNoMiBoxItem(AkumaNoMiBoxItem.TIER_2_FRUITS));
     public static final Supplier<Item> GOLDEN_DEVIL_FRUIT_BOX   = ModRegistry.ITEMS.register("golden_devil_fruit_box",   () -> new AkumaNoMiBoxItem(AkumaNoMiBoxItem.TIER_3_FRUITS));
 
+    // ── Ammunition ────────────────────────────────────────────────────────────
+    public static final Supplier<BulletItem> BULLET = ModRegistry.ITEMS.register("bullet", xyz.pixelatedw.mineminenomi.items.bullets.NormalBulletItem::new);
+    public static final Supplier<BulletItem> KAIROSEKI_BULLET = ModRegistry.ITEMS.register("kairoseki_bullet", xyz.pixelatedw.mineminenomi.items.bullets.KairosekiBulletItem::new);
+    public static final Supplier<BulletItem> FIRE_BULLET = ModRegistry.ITEMS.register("fire_bullet", xyz.pixelatedw.mineminenomi.items.bullets.FireBulletItem::new);
+    public static final Supplier<BulletItem> EXPLODING_BULLET = ModRegistry.ITEMS.register("exploding_bullet", xyz.pixelatedw.mineminenomi.items.bullets.ExplodingBulletItem::new);
+    public static final Supplier<BulletItem> CANNON_BALL = ModRegistry.ITEMS.register("cannon_ball", xyz.pixelatedw.mineminenomi.items.bullets.CannonBallItem::new);
+
+
 
     // Dials
 

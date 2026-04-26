@@ -11,12 +11,12 @@ import net.minecraft.world.entity.player.Player;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
 import xyz.pixelatedw.mineminenomi.api.crew.JollyRoger;
 import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
-import xyz.pixelatedw.mineminenomi.networking.ModNetworking;
+
 
 import xyz.pixelatedw.mineminenomi.networking.packets.CLeaveCrewPacket;
 import xyz.pixelatedw.mineminenomi.networking.packets.COpenJollyRogerEditorScreenPacket;
 import xyz.pixelatedw.mineminenomi.client.gui.panels.CrewMembersScrollPanel;
-import xyz.pixelatedw.mineminenomi.client.gui.widgets.PlankButton;
+
 
 public class CrewDetailsScreen extends Screen {
    private Player player;
@@ -36,8 +36,8 @@ public class CrewDetailsScreen extends Screen {
       RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
       int posX = (this.width - 256) / 2;
       int posY = (this.height - 256) / 2;
-      RendererHelper.drawStringWithBorder(this.font, graphics, (Component)this.crewNameLabel, this.width / 5, posY + 140, -1);
-      RendererHelper.drawStringWithBorder(this.font, graphics, (Component)this.crewMembersLabel, this.width - this.width / 3, 30, -1);
+      graphics.drawString(this.font, (Component)this.crewNameLabel, this.width / 5, posY + 140, -1, false);
+      graphics.drawString(this.font, (Component)this.crewMembersLabel, this.width - this.width / 3, 30, -1, false);
       if (this.jollyRoger != null) {
          this.jollyRoger.render(graphics, this.width / 5, posY + 20, 0.4F);
       }
@@ -49,7 +49,7 @@ public class CrewDetailsScreen extends Screen {
       super.render(graphics, mouseX, mouseY, partialTicks);
    }
 
-   public void init() {
+   public void m_7856_() {
       this.clearWidgets();
       if (this.crew != null) {
          this.player = this.minecraft.player;
@@ -60,12 +60,12 @@ public class CrewDetailsScreen extends Screen {
          this.crewMembersLabel = Component.literal(var10001 + Component.translatable("gui.crew_members").getString() + ": ");
          this.membersListPanel = new CrewMembersScrollPanel(this, this.crew.getMembers());
          this.addRenderableWidget(this.membersListPanel);
-         this.addWidget(this.membersListPanel);
+         this.setFocused(this.membersListPanel);
          int posX = (this.width - 256) / 2;
          int posY = (this.height - 256) / 2;
-         this.addRenderableWidget(new PlankButton(posX, this.height - 40, 80, 26, Component.translatable("gui.leave"), this::leaveCrew));
+         this.addRenderableWidget(net.minecraft.client.gui.components.Button.builder(Component.translatable("gui.leave"), btn -> this.leaveCrew(btn)).bounds(posX, this.height - 40, 80, 26).build());
          if (this.isClientCaptain()) {
-            this.addRenderableWidget(new PlankButton(posX + 90, this.height - 40, 120, 26, Component.translatable("gui.change_jolly_roger"), this::openJollyRogerEditor));
+            this.addRenderableWidget(net.minecraft.client.gui.components.Button.builder(Component.translatable("gui.change_jolly_roger"), btn -> this.openJollyRogerEditor(btn)).bounds(posX + 90, this.height - 40, 120, 26).build());
          }
 
       }
@@ -83,13 +83,10 @@ public class CrewDetailsScreen extends Screen {
 
    private void leaveCrew(Button btn) {
       net.neoforged.neoforge.network.PacketDistributor.sendToServer(new CLeaveCrewPacket());
-      this.onClose();
+      this.init();
    }
 
    private void openJollyRogerEditor(Button btn) {
       net.neoforged.neoforge.network.PacketDistributor.sendToServer(new COpenJollyRogerEditorScreenPacket());
-   }
-   public <T extends net.minecraft.client.gui.components.events.GuiEventListener & net.minecraft.client.gui.components.Renderable & net.minecraft.client.gui.narration.NarratableEntry> void addRenderableWidgetPublic(T widget) {
-      this.addRenderableWidget(widget);
    }
 }

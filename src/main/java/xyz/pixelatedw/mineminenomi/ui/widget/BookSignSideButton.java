@@ -54,7 +54,7 @@ public class BookSignSideButton extends Button {
         
         // blit(ResourceLocation, x, y, u, v, width, height, textureWidth, textureHeight)
         // The old one used: graphics.m_280163_(ModResources.BUTTON, this.m_252754_(), this.m_252907_(), (float)(this.isFlipped ? this.textureWidth : 0), 8.0F, this.textureWidth, 50, this.isFlipped ? -120 : 120, 50);
-        // Note the negative textureWidth for flipping. In 1.21.1 blit doesn't support negative width for flipping easily, 
+        // Note the negative textureWidth for flipping. In 1.21.1 blit doesn't support negative width for flipping easily,
         // we might need to use pose().scale(-1, 1, 1) or a different approach.
         graphics.pose().pushPose();
         graphics.pose().translate(0, 0, 50.0F);

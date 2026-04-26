@@ -11,34 +11,51 @@ import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.client.gui.widget.ScrollPanel;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
 import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
-import xyz.pixelatedw.mineminenomi.networking.ModNetworking;
+
 
 import xyz.pixelatedw.mineminenomi.networking.packets.CKickFromCrewPacket;
 import xyz.pixelatedw.mineminenomi.client.gui.screens.CrewDetailsScreen;
-import xyz.pixelatedw.mineminenomi.client.gui.widgets.SimpleButton;
+
 
 public class CrewMembersScrollPanel extends ScrollPanel {
+    private boolean isFocused;
+    @Override
+    public void setFocused(boolean focused) {
+        this.isFocused = focused;
+    }
+    @Override
+    public boolean isFocused() {
+        return this.isFocused;
+    }
+
+    @Override
+    public NarrationPriority narrationPriority() {
+        return NarrationPriority.NONE;
+    }
+    @Override
+    public void updateNarration(net.minecraft.client.gui.narration.NarrationElementOutput narrationElementOutput) {}
+
+
    private static final int ENTRY_HEIGHT = 20;
    private static final Component KICK_BUTTON_TEXT = Component.literal("X");
    private final CrewDetailsScreen parent;
    private final List<Crew.Member> displayedMembers;
-   private final SimpleButton[] listButtons;
+   private final net.minecraft.client.gui.components.Button[] listButtons;
 
    public CrewMembersScrollPanel(CrewDetailsScreen parent, List<Crew.Member> list) {
       super(parent.getMinecraft(), parent.width / 3, parent.height - 100, 50, parent.width - parent.width / 3 - 10);
       this.parent = parent;
       this.displayedMembers = list;
-      this.listButtons = new SimpleButton[this.displayedMembers.size()];
+      this.listButtons = new net.minecraft.client.gui.components.Button[this.displayedMembers.size()];
       if (this.parent.isClientCaptain()) {
          for(int i = 0; i < this.displayedMembers.size(); ++i) {
-            final int index = i;
-            Crew.Member member = (Crew.Member)this.displayedMembers.get(index);
+            Crew.Member member = (Crew.Member)this.displayedMembers.get(i);
             if (member != null && !member.isCaptain()) {
-               SimpleButton kickButton = new SimpleButton(0, 0, 10, 10, KICK_BUTTON_TEXT, (b) -> {
+               net.minecraft.client.gui.components.Button kickButton = net.minecraft.client.gui.components.Button.builder(KICK_BUTTON_TEXT, b -> {
                   net.neoforged.neoforge.network.PacketDistributor.sendToServer(new CKickFromCrewPacket(member.getUUID()));
-                  this.displayedMembers.remove(index);
-               });
-               this.listButtons[index] = kickButton;
+                  this.displayedMembers.remove(member);
+               }).bounds(0, 0, 10, 10).build();
+               this.listButtons[i] = kickButton;
             }
          }
       }
@@ -58,12 +75,12 @@ public class CrewMembersScrollPanel extends ScrollPanel {
                memberName = memberName.substring(0, 20) + "...";
             }
 
-            memberName = memberName + (member.isCaptain() ? " (" + Component.translatable("crew.rank.captain").getString() + ")" : "");
-            RendererHelper.drawStringWithBorder(this.parent.getMinecraft().font, guiGraphics, Component.literal(memberName), x, y + 1 + yOffset, -1);
-            SimpleButton kickButton = this.listButtons[i];
+            memberName = memberName + (member.isCaptain() ? " (" + Component.translatable("crew.captain").getString() + ")" : "");
+            guiGraphics.drawString(this.parent.getMinecraft().font, (String)memberName, x, y + 1 + yOffset, -1, false);
+            net.minecraft.client.gui.components.Button kickButton = this.listButtons[i];
             if (!member.isCaptain() && kickButton != null) {
                kickButton.setPosition(x - 20, y + yOffset);
-               kickButton.setHoverTextColor(16711680);
+
                kickButton.render(guiGraphics, mouseX, mouseY, 0.0F);
             }
 
@@ -91,27 +108,27 @@ public class CrewMembersScrollPanel extends ScrollPanel {
    public boolean mouseClicked(double mouseX, double mouseY, int button) {
       for(GuiEventListener btn : this.listButtons) {
          if (btn != null && btn.mouseClicked(mouseX, mouseY, button)) {
-            this.parent.addRenderableWidgetPublic((net.minecraft.client.gui.components.AbstractWidget) btn);
+            this.setFocused(btn);
             if (button == 0) {
-               this.setFocused(true);
+               this.setDragging(true);
             }
 
             return true;
          }
       }
 
-      return false;
+      return super.mouseClicked(mouseX, mouseY, button);
    }
 
    public boolean mouseScrolled(double mouseX, double mouseY, double scroll) {
-      return false;
+      return this.getContentHeight() < this.height ? false : super.mouseScrolled(mouseX, mouseY, 0, scroll);
    }
 
    public boolean m_6348_(double p_mouseReleased_1_, double p_mouseReleased_3_, int p_mouseReleased_5_) {
       return false;
    }
 
-   public boolean m_5953_(double mouseX, double mouseY) {
+   public boolean isMouseOver(double mouseX, double mouseY) {
       return mouseX >= (double)this.left && mouseY >= (double)this.top && mouseX < (double)(this.left + this.width - 5) && mouseY < (double)(this.top + this.height);
    }
 
@@ -119,10 +136,14 @@ public class CrewMembersScrollPanel extends ScrollPanel {
       return this.displayedMembers.size() * 20 - 2;
    }
 
-   @Override
-   public net.minecraft.client.gui.narration.NarratableEntry.NarrationPriority narrationPriority() {
-      return net.minecraft.client.gui.narration.NarratableEntry.NarrationPriority.NONE;
+   protected int getScrollAmount() {
+      return 12;
    }
-   @Override
-   public void updateNarration(net.minecraft.client.gui.narration.NarrationElementOutput output) {}
+
+   public NarratableEntry.NarrationPriority m_142684_() {
+      return NarrationPriority.NONE;
+   }
+
+   public void m_142291_(NarrationElementOutput narration) {
+   }
 }

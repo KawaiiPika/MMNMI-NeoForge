@@ -18,7 +18,7 @@ public class VulcanizationAbility extends Ability {
             // Note: Stat modifications like Armor should be applied using Data Components/Attachments or active effect logic.
             // Simplified for this task scope.
             var trace = xyz.pixelatedw.mineminenomi.api.WyHelper.rayTraceEntities(entity, 3.0);
-            Entity target = trace != null ? trace.getEntity() : null;
+            Entity target = trace != null && !trace.isEmpty() ? trace.get(0) : null;
             if (target instanceof LivingEntity livingTarget) {
                 livingTarget.hurt(entity.damageSources().mobAttack(entity), 4.0F);
             }

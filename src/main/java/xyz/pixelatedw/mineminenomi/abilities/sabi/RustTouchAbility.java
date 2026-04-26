@@ -20,7 +20,7 @@ public class RustTouchAbility extends Ability {
     protected void startUsing(LivingEntity entity) {
         if (!entity.level().isClientSide) {
             var trace = xyz.pixelatedw.mineminenomi.api.WyHelper.rayTraceEntities(entity, 3.0);
-            Entity target = trace != null ? trace.getEntity() : null;
+            Entity target = trace != null && !trace.isEmpty() ? trace.get(0) : null;
             if (target instanceof LivingEntity livingTarget) {
                 if (livingTarget.hurt(entity.damageSources().mobAttack(entity), 10.0F)) {
                     livingTarget.addEffect(new MobEffectInstance(MobEffects.POISON, 160, 2));

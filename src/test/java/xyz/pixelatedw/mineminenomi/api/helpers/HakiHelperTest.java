@@ -57,12 +57,12 @@ class HakiHelperTest extends xyz.pixelatedw.mineminenomi.effects.AbstractMinecra
         try (MockedStatic<PlayerStats> mockedStats = Mockito.mockStatic(PlayerStats.class)) {
             mockedStats.when(() -> PlayerStats.get(attacker)).thenReturn(stats);
             when(stats.isBusoshokuActive()).thenReturn(true);
-            when(stats.getBusoshokuHakiExp()).thenReturn(2500.0f); // 2500 / 5000 = 0.5 boost
+            when(stats.getBusoshokuHakiExp()).thenReturn(50.0f); // 50 / 100 = 0.5 boost
             when(stats.isAbilityActive("mineminenomi:busoshoku_haki_imbuing")).thenReturn(false);
             when(stats.isAbilityActive("mineminenomi:haoshoku_haki_infusion")).thenReturn(false);
 
             float originalAmount = 10.0f;
-            float expectedBoost = 1.0f + (2500.0f / 5000.0f);
+            float expectedBoost = 1.0f + (50.0f / 100.0f);
             float expectedAmount = originalAmount * expectedBoost;
 
             float result = HakiHelper.calculateHakiDamage(attacker, target, originalAmount);
@@ -129,7 +129,7 @@ class HakiHelperTest extends xyz.pixelatedw.mineminenomi.effects.AbstractMinecra
         try (MockedStatic<PlayerStats> mockedStats = Mockito.mockStatic(PlayerStats.class)) {
             mockedStats.when(() -> PlayerStats.get(attacker)).thenReturn(stats);
             when(stats.isBusoshokuActive()).thenReturn(true);
-            when(stats.getBusoshokuHakiExp()).thenReturn(5000.0f); // Max exp
+            when(stats.getBusoshokuHakiExp()).thenReturn(100.0f); // Max exp
             when(stats.isAbilityActive("mineminenomi:busoshoku_haki_imbuing")).thenReturn(true);
             when(stats.isAbilityActive("mineminenomi:haoshoku_haki_infusion")).thenReturn(true);
 
@@ -154,11 +154,28 @@ class HakiHelperTest extends xyz.pixelatedw.mineminenomi.effects.AbstractMinecra
         try (MockedStatic<PlayerStats> mockedStats = Mockito.mockStatic(PlayerStats.class)) {
             mockedStats.when(() -> PlayerStats.get(attacker)).thenReturn(stats);
             when(stats.isBusoshokuActive()).thenReturn(true);
-            when(stats.getBusoshokuHakiExp()).thenReturn(2500.0f);
+            when(stats.getBusoshokuHakiExp()).thenReturn(50.0f);
 
             HakiHelper.onHakiDamageTaken(attacker);
 
-            verify(stats).setBusoshokuHakiExp(2500.0f + 0.1f);
+            verify(stats).setBusoshokuHakiExp(50.0f + 0.1f);
+            verify(stats).sync(attacker);
+        }
+    }
+
+    @Test
+    void testOnHakiDamageTaken_CapsAt100() {
+        LivingEntity attacker = mock(LivingEntity.class);
+        PlayerStats stats = mock(PlayerStats.class);
+
+        try (MockedStatic<PlayerStats> mockedStats = Mockito.mockStatic(PlayerStats.class)) {
+            mockedStats.when(() -> PlayerStats.get(attacker)).thenReturn(stats);
+            when(stats.isBusoshokuActive()).thenReturn(true);
+            when(stats.getBusoshokuHakiExp()).thenReturn(99.95f);
+
+            HakiHelper.onHakiDamageTaken(attacker);
+
+            verify(stats).setBusoshokuHakiExp(100.0f);
             verify(stats).sync(attacker);
         }
     }

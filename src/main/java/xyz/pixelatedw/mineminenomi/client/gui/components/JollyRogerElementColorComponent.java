@@ -2,9 +2,9 @@ package xyz.pixelatedw.mineminenomi.client.gui.components;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.jspecify.annotations.Nullable;
+import javax.annotation.Nullable;
 import net.minecraft.client.gui.GuiGraphics;
-import net.neoforged.neoforge.client.gui.widget.ExtendedSlider;
+import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
@@ -17,16 +17,34 @@ import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
 
 import xyz.pixelatedw.mineminenomi.client.gui.screens.JollyRogerEditorScreen;
 
-public class JollyRogerElementColorComponent implements Renderable, GuiEventListener, net.minecraft.client.gui.narration.NarratableEntry {
+public class JollyRogerElementColorComponent implements Renderable, GuiEventListener, NarratableEntry {
+    private boolean isFocused;
+    @Override
+    public void setFocused(boolean focused) {
+        this.isFocused = focused;
+    }
+    @Override
+    public boolean isFocused() {
+        return this.isFocused;
+    }
+
+    @Override
+    public NarrationPriority narrationPriority() {
+        return NarrationPriority.NONE;
+    }
+    @Override
+    public void updateNarration(net.minecraft.client.gui.narration.NarrationElementOutput narrationElementOutput) {}
+
+
    private final JollyRogerEditorScreen parentScreen;
    private boolean isVisible = true;
    private List<GuiEventListener> buttons = new ArrayList();
    private List<Renderable> renderable = new ArrayList();
    private int posX;
    private int posY;
-   private net.neoforged.neoforge.client.gui.widget.ExtendedSlider redSlider;
-   private net.neoforged.neoforge.client.gui.widget.ExtendedSlider greenSlider;
-   private net.neoforged.neoforge.client.gui.widget.ExtendedSlider blueSlider;
+   private ExtendedSlider redSlider;
+   private ExtendedSlider greenSlider;
+   private ExtendedSlider blueSlider;
 
    public JollyRogerElementColorComponent(JollyRogerEditorScreen parentScreen, int posX, int posY) {
       this.parentScreen = parentScreen;
@@ -41,14 +59,14 @@ public class JollyRogerElementColorComponent implements Renderable, GuiEventList
       posX -= this.parentScreen.isSmallScreen() ? 0 : 70;
       posY += this.parentScreen.isSmallScreen() ? 30 : 0;
       int height = this.parentScreen.isSmallScreen() ? 15 : 20;
-      this.redSlider = new net.neoforged.neoforge.client.gui.widget.ExtendedSlider(posX, posY, 50, height, Component.empty(), Component.empty(), (double)0.0F, (double)255.0F, (double)255.0F, true);
-      this.parentScreen.addRenderableWidgetPublic(this.redSlider);
+      this.redSlider = new ExtendedSlider(posX, posY, 50, height, Component.empty(), Component.empty(), (double)0.0F, (double)255.0F, (double)255.0F, true);
+      this.addWidget(this.redSlider);
       posY += 17 + (this.parentScreen.isSmallScreen() ? 0 : 5);
-      this.greenSlider = new net.neoforged.neoforge.client.gui.widget.ExtendedSlider(posX, posY, 50, height, Component.empty(), Component.empty(), (double)0.0F, (double)255.0F, (double)255.0F, true);
-      this.parentScreen.addRenderableWidgetPublic(this.greenSlider);
+      this.greenSlider = new ExtendedSlider(posX, posY, 50, height, Component.empty(), Component.empty(), (double)0.0F, (double)255.0F, (double)255.0F, true);
+      this.addWidget(this.greenSlider);
       posY += 17 + (this.parentScreen.isSmallScreen() ? 0 : 5);
-      this.blueSlider = new net.neoforged.neoforge.client.gui.widget.ExtendedSlider(posX, posY, 50, height, Component.empty(), Component.empty(), (double)0.0F, (double)255.0F, (double)255.0F, true);
-      this.parentScreen.addRenderableWidgetPublic(this.blueSlider);
+      this.blueSlider = new ExtendedSlider(posX, posY, 50, height, Component.empty(), Component.empty(), (double)0.0F, (double)255.0F, (double)255.0F, true);
+      this.addWidget(this.blueSlider);
    }
 
    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
@@ -56,15 +74,15 @@ public class JollyRogerElementColorComponent implements Renderable, GuiEventList
          Component red = Component.translatable("gui.red");
          int posX = this.posX - this.parentScreen.getMinecraft().font.width(red) - 75;
          int var10004 = this.posY + 6;
-         RendererHelper.drawStringWithBorder(this.parentScreen.getMinecraft().font, graphics, red, posX, var10004, 16777215);
+         graphics.drawString(this.parentScreen.getMinecraft().font, red, posX, var10004, 16777215, false);
          Component green = Component.translatable("gui.green");
          posX = this.posX - this.parentScreen.getMinecraft().font.width(green) - 75;
          var10004 = this.posY + 28;
-         RendererHelper.drawStringWithBorder(this.parentScreen.getMinecraft().font, graphics, Component.translatable("gui.green"), posX, var10004, 16777215);
+         graphics.drawString(this.parentScreen.getMinecraft().font, Component.translatable("gui.green"), posX, var10004, 16777215, false);
          Component blue = Component.translatable("gui.blue");
          posX = this.posX - this.parentScreen.getMinecraft().font.width(blue) - 75;
          var10004 = this.posY + 50;
-         RendererHelper.drawStringWithBorder(this.parentScreen.getMinecraft().font, graphics, Component.translatable("gui.blue"), posX, var10004, 16777215);
+         graphics.drawString(this.parentScreen.getMinecraft().font, Component.translatable("gui.blue"), posX, var10004, 16777215, false);
 
          for(Renderable btn : this.renderable) {
             btn.render(graphics, mouseX, mouseY, partialTicks);
@@ -79,10 +97,10 @@ public class JollyRogerElementColorComponent implements Renderable, GuiEventList
       } else {
          for(GuiEventListener btn : this.buttons) {
             if (btn.mouseClicked(mouseX, mouseY, mouseType)) {
-               if (btn instanceof net.neoforged.neoforge.client.gui.widget.ExtendedSlider) {
-                  this.parentScreen.addRenderableWidgetPublic((net.minecraft.client.gui.components.AbstractWidget) btn);
+               if (btn instanceof AbstractSliderButton) {
+                  this.parentScreen.setFocused(btn);
                   if (mouseType == 0) {
-                     this.parentScreen.setFocused(this);
+                     this.parentScreen.setDragging(true);
                   }
                }
 
@@ -94,8 +112,8 @@ public class JollyRogerElementColorComponent implements Renderable, GuiEventList
       }
    }
 
-   public boolean m_5953_(double mouseX, double mouseY) {
-      return this.redSlider.isHovered() || this.greenSlider.isHovered() || this.blueSlider.isHovered();
+   public boolean isMouseOver(double mouseX, double mouseY) {
+      return this.redSlider.isFocused() || this.greenSlider.isFocused() || this.blueSlider.isFocused();
    }
 
    public void setVisible(boolean flag) {
@@ -112,28 +130,36 @@ public class JollyRogerElementColorComponent implements Renderable, GuiEventList
          this.greenSlider.setValue((double)255.0F);
          this.blueSlider.setValue((double)255.0F);
       }
+
    }
 
    public int getRed() {
-      return this.redSlider != null ? (int) this.redSlider.getValue() : 255;
+      return this.redSlider.getValueInt();
    }
 
    public int getGreen() {
-      return this.greenSlider != null ? (int) this.greenSlider.getValue() : 255;
+      return this.greenSlider.getValueInt();
    }
 
    public int getBlue() {
-      return this.blueSlider != null ? (int) this.blueSlider.getValue() : 255;
+      return this.blueSlider.getValueInt();
    }
 
-   @Override
-   public net.minecraft.client.gui.narration.NarratableEntry.NarrationPriority narrationPriority() {
-      return net.minecraft.client.gui.narration.NarratableEntry.NarrationPriority.NONE;
+   public <T extends GuiEventListener & Renderable> void addWidget(T widget) {
+      this.buttons.add(widget);
+      this.renderable.add(widget);
    }
-   @Override
-   public void updateNarration(net.minecraft.client.gui.narration.NarrationElementOutput output) {}
-   @Override
-   public void setFocused(boolean p_265728_) {}
-   @Override
-   public boolean isFocused() { return false; }
+
+   public NarratableEntry.NarrationPriority m_142684_() {
+      return NarrationPriority.NONE;
+   }
+
+
+
+   public boolean isDragging() {
+      return false;
+   }
+
+   public void m_142291_(NarrationElementOutput output) {
+   }
 }
