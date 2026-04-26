@@ -207,6 +207,7 @@ public class PlayerStats {
     public double getDoriki() { return basic.doriki(); }
     public long getBelly() { return basic.belly(); }
     public long getBounty() { return basic.bounty(); }
+    public double getLoyalty() { return basic.loyalty(); }
     public Optional<ResourceLocation> getFaction() { return basic.identity().faction(); }
     public Optional<ResourceLocation> getRace() { return basic.identity().race(); }
     public Optional<ResourceLocation> getSubRace() { return basic.identity().subRace(); }
@@ -267,6 +268,26 @@ public class PlayerStats {
         setBelly(getBelly() + amount);
     }
 
+    public void alterBounty(long amount) {
+        setBounty(getBounty() + amount);
+    }
+
+    public void alterDoriki(double amount) {
+        setDoriki(getDoriki() + amount);
+    }
+
+    public void alterLoyalty(double amount) {
+        setLoyalty(getLoyalty() + amount);
+    }
+
+    public void alterBusoshokuHakiExp(float amount) {
+        setBusoshokuHakiExp(getBusoshokuHakiExp() + amount);
+    }
+
+    public void alterKenbunshokuHakiExp(float amount) {
+        setKenbunshokuHakiExp(getKenbunshokuHakiExp() + amount);
+    }
+
     public void setExtol(long extol) {
         this.basic = updateBasicStats(basic.doriki(), basic.cola(), basic.ultraCola(), basic.loyalty(), basic.bounty(), basic.belly(), extol, basic.hasShadow(), basic.hasHeart(), basic.hasStrawDoll(), basic.isRogue(), basic.stamina(), basic.maxStamina());
     }
@@ -292,6 +313,10 @@ public class PlayerStats {
     }
 
     public boolean hasStrawDoll() { return basic.hasStrawDoll(); }
+
+    public void setLoyalty(double loyalty) {
+        this.basic = updateBasicStats(basic.doriki(), basic.cola(), basic.ultraCola(), loyalty, basic.bounty(), basic.belly(), basic.extol(), basic.hasShadow(), basic.hasHeart(), basic.hasStrawDoll(), basic.isRogue(), basic.stamina(), basic.maxStamina());
+    }
 
     public void setDoriki(double doriki) {
         double newDoriki = Math.min(Math.max(0, doriki), 10000.0);
@@ -443,8 +468,7 @@ public class PlayerStats {
     public void setCombat(CombatStats combat) { this.combat = combat; }
 
     public void sync(LivingEntity entity) {
-        if (entity instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
-            xyz.pixelatedw.mineminenomi.networking.ModNetworking.sendTo(new xyz.pixelatedw.mineminenomi.networking.packets.SUpdatePlayerStatsPacket(this), serverPlayer);
-        }
+        // Native sync is handled by AttachmentType.builder().sync() in ModDataAttachments when entity.setData is used.
+        entity.setData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.PLAYER_STATS, this);
     }
 }
