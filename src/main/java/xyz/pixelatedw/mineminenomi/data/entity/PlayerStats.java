@@ -477,6 +477,14 @@ public class PlayerStats {
             entity.setData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.PLAYER_STATS, this);
         } catch (RuntimeException | Error e) {
             // Ignored for GameTests where MockPlayers do not have proper network channels registered
+        if (entity instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
+            if (serverPlayer.connection != null) {
+                try {
+                    xyz.pixelatedw.mineminenomi.networking.ModNetworking.sendTo(new xyz.pixelatedw.mineminenomi.networking.packets.SUpdatePlayerStatsPacket(this), serverPlayer);
+                } catch (Exception e) {
+                    // Ignore packet errors for mock players in GameTests
+                }
+            }
         }
     }
 }
