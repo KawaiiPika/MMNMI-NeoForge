@@ -51,4 +51,16 @@ public class ClientPacketHandlers {
             }
         });
     }
+
+    public static void handlePointsGained(final SPointsGainedPacket payload, final IPayloadContext context) {
+        context.enqueueWork(() -> {
+            Minecraft mc = Minecraft.getInstance();
+            if (mc.player != null) {
+                mc.player.displayClientMessage(
+                    net.minecraft.network.chat.Component.translatable("info.mineminenomi.points_gained", payload.amount(), payload.pointType()),
+                    true
+                );
+            }
+        });
+    }
 }

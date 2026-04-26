@@ -13,7 +13,7 @@ public class TetsuBoshiAbility extends SniperProjectileAbility {
     protected void startUsing(LivingEntity entity) {
         SniperPelletEntity pellet = new SniperPelletEntity(ModEntities.SNIPER_PELLET.get(), entity.level());
         pellet.setOwner(entity);
-        pellet.setPos(entity.getX(), entity.getY() + entity.getEyeHeight(), entity.getZ());
+        pellet.teleportTo(entity.getX(), entity.getY() + entity.getEyeHeight(), entity.getZ());
         pellet.setDamage(15.0f);
         
         this.shootProjectile(entity, pellet, 4.0f, 0.5f);
