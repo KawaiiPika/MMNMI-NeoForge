@@ -66,6 +66,14 @@ public class ModItems {
     public static final Supplier<Item> IRON_DEVIL_FRUIT_BOX     = ModRegistry.ITEMS.register("iron_devil_fruit_box",     () -> new AkumaNoMiBoxItem(AkumaNoMiBoxItem.TIER_2_FRUITS));
     public static final Supplier<Item> GOLDEN_DEVIL_FRUIT_BOX   = ModRegistry.ITEMS.register("golden_devil_fruit_box",   () -> new AkumaNoMiBoxItem(AkumaNoMiBoxItem.TIER_3_FRUITS));
 
+    // ── Ammunition ────────────────────────────────────────────────────────────
+    public static final Supplier<BulletItem> BULLET = ModRegistry.ITEMS.register("bullet", xyz.pixelatedw.mineminenomi.items.bullets.NormalBulletItem::new);
+    public static final Supplier<BulletItem> KAIROSEKI_BULLET = ModRegistry.ITEMS.register("kairoseki_bullet", xyz.pixelatedw.mineminenomi.items.bullets.KairosekiBulletItem::new);
+    public static final Supplier<BulletItem> FIRE_BULLET = ModRegistry.ITEMS.register("fire_bullet", xyz.pixelatedw.mineminenomi.items.bullets.FireBulletItem::new);
+    public static final Supplier<BulletItem> EXPLODING_BULLET = ModRegistry.ITEMS.register("exploding_bullet", xyz.pixelatedw.mineminenomi.items.bullets.ExplodingBulletItem::new);
+    public static final Supplier<BulletItem> CANNON_BALL = ModRegistry.ITEMS.register("cannon_ball", xyz.pixelatedw.mineminenomi.items.bullets.CannonBallItem::new);
+
+
 
     // Dials
 
@@ -82,14 +90,6 @@ public class ModItems {
     public static final DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> AXE_DIAL = ModRegistry.ITEMS.register("axe_dial", () -> new net.minecraft.world.item.Item(new net.minecraft.world.item.Item.Properties()));
     public static final DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> MILKY_DIAL = ModRegistry.ITEMS.register("milky_dial", () -> new net.minecraft.world.item.Item(new net.minecraft.world.item.Item.Properties()));
     public static final DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> FLASH_DIAL = ModRegistry.ITEMS.register("flash_dial", () -> new xyz.pixelatedw.mineminenomi.items.dials.FlashDialItem(ModBlocks.FLASH_DIAL.get()));
-
-
-    // Bullets
-    public static final Supplier<Item> NORMAL_BULLET        = ModRegistry.ITEMS.register("bullet",               xyz.pixelatedw.mineminenomi.items.bullets.NormalBulletItem::new);
-    public static final Supplier<Item> KAIROSEKI_BULLET     = ModRegistry.ITEMS.register("kairoseki_bullet",     xyz.pixelatedw.mineminenomi.items.bullets.KairosekiBulletItem::new);
-    public static final Supplier<Item> CANNON_BALL          = ModRegistry.ITEMS.register("cannon_ball",          xyz.pixelatedw.mineminenomi.items.bullets.CannonBallItem::new);
-    public static final Supplier<Item> FIRE_BULLET          = ModRegistry.ITEMS.register("fire_bullet",          xyz.pixelatedw.mineminenomi.items.bullets.FireBulletItem::new);
-    public static final Supplier<Item> EXPLODING_BULLET     = ModRegistry.ITEMS.register("exploding_bullet",     xyz.pixelatedw.mineminenomi.items.bullets.ExplodingBulletItem::new);
 
     public static void init() {
         // Triggers class loading / DeferredRegister entries
