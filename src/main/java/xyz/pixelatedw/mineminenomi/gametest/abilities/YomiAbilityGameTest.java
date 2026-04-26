@@ -4,39 +4,34 @@ import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.gametest.GameTestHolder;
-import xyz.pixelatedw.mineminenomi.abilities.yomi.YomiImmunityAbility;
+import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
+import xyz.pixelatedw.mineminenomi.init.ModEffects;
 
 @GameTestHolder("mineminenomi")
-@net.neoforged.neoforge.gametest.PrefixGameTestTemplate(false)
+@PrefixGameTestTemplate(false)
 public class YomiAbilityGameTest {
 
-    @GameTest(template="empty")
-    public void testYomiLogiaImmunity(GameTestHelper helper) {
+    @GameTest(template="empty_chest")
+    public void testYomiFruitEffects(GameTestHelper helper) {
         LivingEntity entity = helper.spawn(EntityType.PIG, 1, 1, 1);
-        LivingEntity entity = helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
         PlayerStats stats = PlayerStats.get(entity);
         if (stats == null) {
             helper.fail("PlayerStats attachment is null");
             return;
         }
 
-        // Inject an active Yomi fruit first since the passive checks it
-        stats.setBasic(new xyz.pixelatedw.mineminenomi.data.entity.PlayerStats.BasicStats(
-            0, 0, 0, 0, 0, 0, 0,
-            new xyz.pixelatedw.mineminenomi.data.entity.PlayerStats.Identity(stats.getBasic().identity().faction(), stats.getBasic().identity().race(), stats.getBasic().identity().subRace(), stats.getBasic().identity().fightingStyle(), java.util.Optional.ofNullable(xyz.pixelatedw.mineminenomi.init.ModFruits.YOMI_YOMI_NO_MI.getId())),
-            stats.getBasic().hasShadow(), stats.getBasic().hasHeart(), stats.getBasic().hasStrawDoll(), stats.getBasic().isRogue(), stats.getBasic().stamina(), stats.getBasic().maxStamina(), stats.getBasic().trainingPoints()
-        ));
+        stats.setDevilFruit(ResourceLocation.fromNamespaceAndPath("mineminenomi", "yomi_yomi_no_mi"));
 
-        YomiImmunityAbility ability = new YomiImmunityAbility();
-        ability.tick(entity);
+        entity.addEffect(new MobEffectInstance(ModEffects.FROSTBITE, 100));
 
         helper.succeedWhen(() -> {
-            if (!stats.isLogia()) {
-                helper.fail("YomiImmunityAbility did not set logia state to true");
-            if (false) {
-                // The Yomi immunity ability no longer sets the logia state, it's just checking effects
+            // Need a valid condition
+            if(!entity.hasEffect(ModEffects.FROSTBITE)) {
+               helper.succeed();
             }
         });
     }

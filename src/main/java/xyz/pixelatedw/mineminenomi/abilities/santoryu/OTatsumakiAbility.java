@@ -11,10 +11,6 @@ import xyz.pixelatedw.mineminenomi.api.helpers.AbilityUseConditions;
 import xyz.pixelatedw.mineminenomi.api.util.Result;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 import xyz.pixelatedw.mineminenomi.init.ModSounds;
-import xyz.pixelatedw.mineminenomi.init.ModDataAttachments;
-import xyz.pixelatedw.mineminenomi.data.entity.AnimationStateData;
-import net.minecraft.resources.ResourceLocation;
-import java.util.Optional;
 
 import java.util.List;
 
@@ -35,7 +31,6 @@ public class OTatsumakiAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         if (!entity.level().isClientSide) {
-            entity.setData(ModDataAttachments.ANIMATION_STATE, new AnimationStateData(Optional.of(ResourceLocation.fromNamespaceAndPath("mineminenomi", "body_rotation_wide_arms")), entity.level().getGameTime()));
             entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), ModSounds.SPIN.get(), SoundSource.PLAYERS, 2.0F, 0.75F);
         }
     }
@@ -76,12 +71,5 @@ public class OTatsumakiAbility extends Ability {
     @Override
     public Component getDisplayName() {
         return Component.literal("O Tatsumaki");
-    }
-
-    @Override
-    protected void stopUsing(LivingEntity entity) {
-        if (!entity.level().isClientSide) {
-            entity.setData(ModDataAttachments.ANIMATION_STATE, new AnimationStateData());
-        }
     }
 }

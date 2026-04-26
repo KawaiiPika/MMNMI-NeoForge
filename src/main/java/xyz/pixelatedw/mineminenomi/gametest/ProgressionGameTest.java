@@ -11,10 +11,9 @@ import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 import xyz.pixelatedw.mineminenomi.services.ProgressionService;
 
 @GameTestHolder("mineminenomi")
-@net.neoforged.neoforge.gametest.PrefixGameTestTemplate(false)
 public class ProgressionGameTest {
 
-    @GameTest(template="empty")
+    @GameTest(template="minecraft:empty")
     public void testDorikiProgressionCaps(GameTestHelper helper) {
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
 
@@ -41,7 +40,7 @@ public class ProgressionGameTest {
         helper.succeed();
     }
 
-    @GameTest(template="empty")
+    @GameTest(template="minecraft:empty")
     public void testHakiExpCap(GameTestHelper helper) {
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
 
