@@ -39,13 +39,8 @@ public class GoroLogiaAbility extends Ability {
 
 @Override
     public void onLogiaDodge(LivingEntity entity, LivingEntity attacker) {
-        super.onLogiaDodge(entity, attacker);
         // Side effect: Shocks attacker when dodged
         attacker.hurt(entity.damageSources().lightningBolt(), 4.0F);
-
-        if (entity.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
-            serverLevel.sendParticles(net.minecraft.core.particles.ParticleTypes.ELECTRIC_SPARK, entity.getX(), entity.getY() + entity.getBbHeight() / 2, entity.getZ(), 20, entity.getBbWidth(), entity.getBbHeight() / 2, entity.getBbWidth(), 0.1);
-        }
     }
 
 @Override

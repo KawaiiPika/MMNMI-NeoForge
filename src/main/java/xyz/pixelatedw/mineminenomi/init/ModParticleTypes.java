@@ -8,14 +8,16 @@ import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import xyz.pixelatedw.mineminenomi.client.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticleType;
-
-import static xyz.pixelatedw.mineminenomi.init.ModRegistry.PARTICLE_TYPES;
-
 public class ModParticleTypes {
+    public static final net.neoforged.neoforge.registries.DeferredRegister<net.minecraft.core.particles.ParticleType<?>> PARTICLE_TYPES = net.neoforged.neoforge.registries.DeferredRegister.create(net.minecraft.core.registries.Registries.PARTICLE_TYPE, "mineminenomi");
 
     private static DeferredHolder<ParticleType<?>, SimpleParticleType> register(String name) {
         return PARTICLE_TYPES.register(name, () -> new SimpleParticleType(true));
     }
+
+
+
+
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> YUKI = register("yuki_particle");
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> YUKI2 = register("yuki2_particle");

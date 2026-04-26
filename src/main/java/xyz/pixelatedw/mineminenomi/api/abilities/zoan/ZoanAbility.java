@@ -46,7 +46,7 @@ public abstract class ZoanAbility extends Ability {
             xyz.pixelatedw.mineminenomi.data.entity.MorphData morphData = entity.getData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.MORPH_DATA);
             java.util.List<ResourceLocation> activeMorphs = new java.util.ArrayList<>(morphData.activeMorphs());
             if (!activeMorphs.contains(getMorphModelId())) activeMorphs.add(getMorphModelId());
-            entity.setData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.MORPH_DATA, new xyz.pixelatedw.mineminenomi.data.entity.MorphData(java.util.Optional.of(getMorphModelId()), activeMorphs, entity.level().getGameTime()));
+            entity.setData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.MORPH_DATA, new xyz.pixelatedw.mineminenomi.data.entity.MorphData(java.util.Optional.of(getMorphModelId()), activeMorphs));
         }
 
         float healthPercentage = entity.getHealth() / entity.getMaxHealth();
@@ -61,11 +61,6 @@ public abstract class ZoanAbility extends Ability {
         }
 
         entity.setHealth(entity.getMaxHealth() * healthPercentage);
-
-        if (entity.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
-            serverLevel.sendParticles(net.minecraft.core.particles.ParticleTypes.POOF, entity.getX(), entity.getY() + entity.getBbHeight() / 2, entity.getZ(), 30, entity.getBbWidth(), entity.getBbHeight() / 2, entity.getBbWidth(), 0.05);
-            serverLevel.playSound(null, entity.getX(), entity.getY(), entity.getZ(), net.minecraft.sounds.SoundEvents.GENERIC_EXPLODE.value(), net.minecraft.sounds.SoundSource.PLAYERS, 0.5f, 1.0f);
-        }
     }
 
     @Override
@@ -75,7 +70,7 @@ public abstract class ZoanAbility extends Ability {
             java.util.List<ResourceLocation> activeMorphs = new java.util.ArrayList<>(morphData.activeMorphs());
             activeMorphs.remove(getMorphModelId());
             java.util.Optional<ResourceLocation> current = activeMorphs.isEmpty() ? java.util.Optional.empty() : java.util.Optional.of(activeMorphs.get(0));
-            entity.setData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.MORPH_DATA, new xyz.pixelatedw.mineminenomi.data.entity.MorphData(current, activeMorphs, entity.level().getGameTime()));
+            entity.setData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.MORPH_DATA, new xyz.pixelatedw.mineminenomi.data.entity.MorphData(current, activeMorphs));
         }
 
         float healthPercentage = entity.getHealth() / entity.getMaxHealth();
@@ -86,11 +81,6 @@ public abstract class ZoanAbility extends Ability {
         removeModifier(entity, Attributes.STEP_HEIGHT);
 
         entity.setHealth(entity.getMaxHealth() * healthPercentage);
-
-        if (entity.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
-            serverLevel.sendParticles(net.minecraft.core.particles.ParticleTypes.POOF, entity.getX(), entity.getY() + entity.getBbHeight() / 2, entity.getZ(), 30, entity.getBbWidth(), entity.getBbHeight() / 2, entity.getBbWidth(), 0.05);
-            serverLevel.playSound(null, entity.getX(), entity.getY(), entity.getZ(), net.minecraft.sounds.SoundEvents.GENERIC_EXPLODE.value(), net.minecraft.sounds.SoundSource.PLAYERS, 0.5f, 1.0f);
-        }
     }
 
     private void applyModifier(LivingEntity entity, net.minecraft.core.Holder<net.minecraft.world.entity.ai.attributes.Attribute> attribute, double amount, AttributeModifier.Operation operation) {
