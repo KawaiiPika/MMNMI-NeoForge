@@ -13,6 +13,7 @@ import xyz.pixelatedw.mineminenomi.services.ProgressionService;
 
 @GameTestHolder("mineminenomi")
 @PrefixGameTestTemplate(false)
+@net.neoforged.neoforge.gametest.PrefixGameTestTemplate(false)
 public class ProgressionGameTest {
 
     @GameTest(template="empty")

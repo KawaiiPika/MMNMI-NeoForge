@@ -3,29 +3,50 @@ package xyz.pixelatedw.mineminenomi.abilities.ittoryu;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityUseConditions;
+import xyz.pixelatedw.mineminenomi.api.util.Result;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
+import xyz.pixelatedw.mineminenomi.init.ModDataAttachments;
+import xyz.pixelatedw.mineminenomi.data.entity.AnimationStateData;
+import net.minecraft.resources.ResourceLocation;
+import java.util.Optional;
+import net.minecraft.network.protocol.game.ClientboundAnimatePacket;
+import net.minecraft.server.level.ServerLevel;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.SanjurokuPoundHoProjectile;
 
 public class SanjurokuPoundHoAbility extends Ability {
 
-    private static final float COOLDOWN = 200.0F;
+    private static final float COOLDOWN = 320.0F;
+
+    @Override
+    public Result canUse(LivingEntity entity) {
+        Result result = super.canUse(entity);
+        if (result.isFail()) return result;
+        return AbilityUseConditions.requiresSword(entity);
+    }
 
     @Override
     protected void startUsing(LivingEntity entity) {
         if (!entity.level().isClientSide) {
+            entity.setData(ModDataAttachments.ANIMATION_STATE, new AnimationStateData(Optional.of(ResourceLocation.fromNamespaceAndPath("mineminenomi", "over_shoulder_slash")), entity.level().getGameTime()));
+            ((ServerLevel)entity.level()).getChunkSource().broadcastAndSend(entity, new ClientboundAnimatePacket(entity, 0));
             SanjurokuPoundHoProjectile proj = new SanjurokuPoundHoProjectile(entity.level(), entity);
             proj.shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 1.5F, 1.0F);
             entity.level().addFreshEntity(proj);
             
-            PlayerStats stats = PlayerStats.get(entity);
-            if (stats != null && getAbilityId() != null) {
-                stats.setAbilityCooldown(getAbilityId().toString(), (int)COOLDOWN, entity.level().getGameTime());
-            }
+            startCooldown(entity, (long)COOLDOWN);
         }
     }
 
     @Override
     public Component getDisplayName() {
         return Component.literal("Sanjuroku Pound Ho");
+    }
+
+    @Override
+    protected void stopUsing(LivingEntity entity) {
+        if (!entity.level().isClientSide) {
+            entity.setData(ModDataAttachments.ANIMATION_STATE, new AnimationStateData());
+        }
     }
 }

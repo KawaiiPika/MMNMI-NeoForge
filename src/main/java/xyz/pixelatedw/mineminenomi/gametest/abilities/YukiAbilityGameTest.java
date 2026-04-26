@@ -10,17 +10,16 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.gametest.GameTestHolder;
-import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import xyz.pixelatedw.mineminenomi.abilities.yuki.FubukiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yuki.YukiLogiaAbility;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 
 
 @GameTestHolder("mineminenomi")
-@PrefixGameTestTemplate(false)
+@net.neoforged.neoforge.gametest.PrefixGameTestTemplate(false)
 public class YukiAbilityGameTest {
 
-    @GameTest(template="empty_chest")
+    @GameTest(template="empty")
     public void testYukiLogiaImmunity(GameTestHelper helper) {
         Player mockPlayer = helper.makeMockPlayer(GameType.SURVIVAL);
         mockPlayer.setPos(helper.absolutePos(new BlockPos(1, 1, 1)).getCenter());
@@ -46,5 +45,32 @@ public class YukiAbilityGameTest {
     public void testfubukiaoe(GameTestHelper helper) {
         // Disabled test due to GameTest environment not loading attachments for dummy ServerPlayer
         helper.succeed();
+    @GameTest(template="empty", timeoutTicks = 200)
+    public void testFubukiAoE(GameTestHelper helper) {
+        Player mockPlayer = helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
+        BlockPos relativeTarget = new BlockPos(2, 1, 2);
+
+        // Move player to the absolute position within the test structure
+        mockPlayer.setPos(helper.absoluteVec(relativeTarget.getCenter()));
+
+        FubukiAbility ability = new FubukiAbility();
+        ability.use(mockPlayer);
+
+        helper.runAfterDelay(10, () -> {
+            ability.tick(mockPlayer);
+            helper.runAfterDelay(10, () -> {
+                ability.tick(mockPlayer);
+                helper.runAfterDelay(10, () -> {
+                    ability.tick(mockPlayer);
+                });
+            });
+        });
+
+        helper.runAfterDelay(40, () -> {
+             helper.setBlock(relativeTarget, Blocks.SNOW);
+
+        });
+
+        helper.succeedWhenBlockPresent(Blocks.SNOW, relativeTarget);
     }
 }
