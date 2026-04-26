@@ -1,0 +1,14 @@
+--- ./src/main/java/xyz/pixelatedw/mineminenomi/init/ModCommands.java
++++ ./src/main/java/xyz/pixelatedw/mineminenomi/init/ModCommands.java
+@@ -19,10 +19,7 @@
+         QuestCommand.register(event.getDispatcher(), event.getBuildContext());
+         ChallengeCommand.register(event.getDispatcher(), event.getBuildContext());
+         CheckFruitsCommand.register(event.getDispatcher(), event.getBuildContext());
+-<<<<<<< HEAD
+         FGCommand.register(event.getDispatcher(), event.getBuildContext());
+         LoyaltyCommand.register(event.getDispatcher(), event.getBuildContext());
+         CheckPlayerCommand.register(event.getDispatcher(), event.getBuildContext());
+-=======
+->>>>>>> origin/main
+     }
+ }
