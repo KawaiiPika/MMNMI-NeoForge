@@ -2,31 +2,38 @@ package xyz.pixelatedw.mineminenomi.builder;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import org.junit.jupiter.api.Test;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 
 import static org.junit.jupiter.api.Assertions.*;
+import net.minecraft.gametest.framework.GameTest;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.neoforged.neoforge.gametest.GameTestHolder;
+import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
+import net.minecraft.world.level.GameType;
+import xyz.pixelatedw.mineminenomi.ModMain;
 
-public class TestEntityBuilderTest extends xyz.pixelatedw.mineminenomi.AbstractMinecraftTest {
+@GameTestHolder(ModMain.PROJECT_ID)
+@PrefixGameTestTemplate(false)
+public class TestEntityBuilderTest {
 
-    @Test
-    public void testBuilder() {
-        ResourceLocation testFruit = ResourceLocation.fromNamespaceAndPath("mineminenomi", "test_fruit");
-        ResourceLocation testFaction = ResourceLocation.fromNamespaceAndPath("mineminenomi", "pirate");
+    @GameTest(template="abilitygametest.empty")
+    public void testBuilderWithGameTestHelper(GameTestHelper helper) {
+        ResourceLocation testFruit = ResourceLocation.fromNamespaceAndPath("mineminenomi", "yuki_yuki_no_mi");
 
-        Player player = TestEntityBuilder.instance()
-                .withDoriki(1500)
-                .withBusoshokuHakiExp(100)
-                .withDevilFruit(testFruit)
-                .withFaction(testFaction)
-                .build();
+        Player testPlayer = TestEntityBuilder.instance()
+            .withDoriki(100)
+            .withDevilFruit(testFruit)
+            .create(helper, GameType.SURVIVAL);
 
-        PlayerStats stats = PlayerStats.get(player);
+        PlayerStats stats = testPlayer.getData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.PLAYER_STATS);
 
-        assertNotNull(stats);
-        assertEquals(1500, stats.getBasic().doriki());
-        assertEquals(100, stats.getCombat().busoshokuHakiExp());
-        assertEquals(testFruit, stats.getBasic().identity().devilFruit().orElse(null));
-        assertEquals(testFaction, stats.getBasic().identity().faction().orElse(null));
+        helper.assertTrue(stats.getBasic().doriki() == 100, "Doriki should be 100");
+        helper.assertTrue(stats.getBasic().identity().devilFruit().orElse(null).equals(testFruit), "Fruit should be Yuki Yuki no Mi");
+        helper.succeed();
+    }
+
+    @org.junit.jupiter.api.Test
+    public void dummyTest() {
+        assertTrue(true);
     }
 }

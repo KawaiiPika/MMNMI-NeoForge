@@ -43,20 +43,20 @@
 - [ ] **Network Synching**: Ensure `selectedAbilitySlot` and other stats are synced correctly to the client.
 - [/] **Port remaining Ability logic**: Fruit abilities and Fighting Styles.
   - [x] **Batch 1: Logias & Simple Paramecias**: Yuki, Yomi, Gasu, Sube, Bari.
-  - [/] **Batch 2: Gravity & Weight Paramecias**: Zushi, Kilo, Ton (if exists), Fuwa (if exists).
-  - [ ] **Batch 3: Creation & Manipulation Paramecias**: Doru, Awa, Doa, Ori, Beta, Kuku, Baku, Kira.
-  - [ ] **Batch 4: Body & Misc Paramecias**: Horu, Bane, Deka, Jiki, Sabi, Kachi, Mini, Nagi, Kobu, Karu.
-  - [ ] **Batch 5: Remaining Zoans (Models)**: Ryu Ryu (Allosaurus, Brachiosaurus, Pteranodon), Zou Zou, Tori Tori (Phoenix), Neko Neko (Leopard).
+  - [ ] **Batch 2: Gravity & Weight Paramecias**: Zushi, Kilo, Ton (if exists), Fuwa (if exists).
+  - [/] **Batch 3: Creation & Manipulation Paramecias**: Doru, Awa, Doa, Ori, Beta, Kuku, Baku, Kira.
+  - [x] **Batch 4: Body & Misc Paramecias**: Horu, Bane, Deka, Jiki, Sabi, Kachi, Mini, Nagi, Kobu, Karu.
+  - [x] **Batch 5: Remaining Zoans (Models)**: Ryu Ryu (Allosaurus, Brachiosaurus, Pteranodon), Zou Zou, Tori Tori (Phoenix), Neko Neko (Leopard).
   - [ ] **Batch 6: Partially Ported Cleanup**: Finish missing abilities for Magu, Goro, Pika, Moku, Ope, Kage, Ito, Doku, Hana, Horo, Wara, Mero, Pero, Bara, Bomu, Suke, Noro, Yami, Suna.
   - [ ] **Batch 7: Fighting Styles - Swordsman**: Santoryu, Ittoryu.
   - [ ] **Batch 8: Fighting Styles - Martial Arts & Tech**: Brawler, Fishman Karate, Cyborg, Mink/Electro, Hasshoken, Ryusoken.
   - [ ] **Batch 9: Fighting Styles - Misc**: Missing parts of Art of Weather, Snipper, Doctor, etc.
 - [ ] **Haki Progression Logic**: Implement the logic for earning and spending Haki/Doriki points.
 - [ ] **Mob AI**: Migrate specialized AI goals from legacy code.
-  - [ ] **Batch 1: Base & Ambient Mobs**: Civilians, Animals, Traders, Barkeepers.
-  - [ ] **Batch 2: Marines Hierarchy**: Grunts, Captains, Trainers, Brutes, Snipers, Pacifistas.
-  - [ ] **Batch 3: Pirates Hierarchy**: Pirates, Bandits, Notorious, Captains.
-  - [ ] **Batch 4: Bosses & Special Entities**: OPBossEntity, OPEntity, WorldGov.
+  - [x] **Batch 1: Base & Ambient Mobs**: Civilians, Animals, Traders, Barkeepers.
+  - [x] **Batch 2: Marines Hierarchy**: Grunts, Captains, Trainers, Brutes, Snipers, Pacifistas.
+  - [x] **Batch 3: Pirates Hierarchy**: Pirates, Bandits, Notorious, Captains.
+  - [x] **Batch 4: Bosses & Special Entities**: OPBossEntity, OPEntity, WorldGov.
 
 ## Missing Systems (Gap Analysis)
 - [ ] **Animations**: 45+ legacy animations (Backflip, BattoStrike, etc.) and specialized ones for Fruits/Styles.
@@ -68,7 +68,7 @@
 - [ ] **Challenges System**: Arenas and faction-specific challenges (Arlong, Buggy, Krieg, etc.).
 - [ ] **Audio System**: Legacy audio handling and custom sound events.
 - [ ] **Bullets**: Special ammo for guns.
-- [ ] **Integrations**: Curios integration (Priority for faithful port).
+- [x] **Integrations**: Curios integration (Priority for faithful port).
 
 ## Pending Commands
 - [ ] `AbilityCommand`, `QuestCommand`, `ChallengeCommand`, `CheckFruitsCommand`, `FGCommand`, `LoyaltyCommand`, etc.
@@ -85,7 +85,7 @@
 - [ ] Complete implementation and verification of TankyudonAbility (Ryu Ryu no Mi: Model Pteranodon).
 
 ## Expert Recommendations & Technical Guidelines
-- [ ] **Animations System**: Refactor legacy animations to use Vanilla `HierarchicalModel` and `AnimationDefinition`.
+- [x] **Animations System**: Refactor legacy animations to use Vanilla `HierarchicalModel` and `AnimationDefinition`.
 - [ ] **Weapons & Tools**: Migrate legacy `ToolActions` to `ItemAbilities` and implement built-in Data Maps (`neoforge:strippables`, `neoforge:waxables`, `neoforge:furnace_fuels`).
 - [ ] **Networking Thread Safety**: Ensure all `CustomPacketPayload` ability/UI handlers that modify game state are wrapped in `context.enqueueWork`.
 - [ ] **Mob AI & Abilities**: Replace nested loops with AABB spatial queries (`level.getEntitiesOfClass`) and in-memory filtering for targeting.

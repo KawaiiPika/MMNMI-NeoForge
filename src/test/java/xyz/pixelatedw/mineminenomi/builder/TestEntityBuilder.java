@@ -1,6 +1,9 @@
 package xyz.pixelatedw.mineminenomi.builder;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.world.level.GameType;
+
 import net.minecraft.world.entity.player.Player;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 import xyz.pixelatedw.mineminenomi.init.ModDataAttachments;
@@ -120,6 +123,13 @@ public class TestEntityBuilder {
         when(player.getData(ModDataAttachments.PLAYER_STATS)).thenReturn(stats);
         when(player.level()).thenReturn(mock(net.minecraft.world.level.Level.class));
         return player;
+    }
+
+
+    public Player create(GameTestHelper helper, GameType gameType) {
+        Player testPlayer = helper.makeMockPlayer(gameType);
+        testPlayer.setData(ModDataAttachments.PLAYER_STATS, stats);
+        return testPlayer;
     }
 
     public PlayerStats getStats() {
