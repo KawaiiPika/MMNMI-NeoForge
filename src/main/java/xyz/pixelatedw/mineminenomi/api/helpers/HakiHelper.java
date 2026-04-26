@@ -11,7 +11,7 @@ public class HakiHelper {
         PlayerStats stats = PlayerStats.get(attacker);
         if (stats == null || !stats.isBusoshokuActive()) return originalAmount;
         
-        double boost = 1.0 + (stats.getBusoshokuHakiExp() / 5000.0);
+        double boost = 1.0 + (stats.getBusoshokuHakiExp() / 100.0);
         
         // Imbuing boost
         if (stats.isAbilityActive("mineminenomi:busoshoku_haki_imbuing")) {
@@ -33,7 +33,8 @@ public class HakiHelper {
     public static void onHakiDamageTaken(LivingEntity attacker) {
         PlayerStats stats = PlayerStats.get(attacker);
         if (stats != null && stats.isBusoshokuActive()) {
-            stats.setBusoshokuHakiExp(stats.getBusoshokuHakiExp() + 0.1f);
+            float newExp = Math.min(100.0f, stats.getBusoshokuHakiExp() + 0.1f);
+            stats.setBusoshokuHakiExp(newExp);
             stats.sync(attacker);
         }
     }
