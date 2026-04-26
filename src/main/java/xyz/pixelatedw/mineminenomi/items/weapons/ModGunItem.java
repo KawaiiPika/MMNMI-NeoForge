@@ -119,8 +119,10 @@ public class ModGunItem extends ProjectileWeaponItem {
                 if (powder instanceof xyz.pixelatedw.mineminenomi.items.BulletItem bulletItem) {
                     Object projObj = bulletItem.createProjectile(level, player);
                     if (projObj instanceof net.minecraft.world.entity.projectile.Projectile proj) {
-                        this.shootProjectile(player, proj, 0, this.bulletSpeed, this.inaccuracy, 0.0F, null);
-                        level.addFreshEntity(proj);
+                        if (level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                            this.shootProjectile(player, proj, 0, this.bulletSpeed, this.inaccuracy, 0.0F, null);
+                            level.addFreshEntity(proj);
+                        }
                     }
                 } else if (itemStack.is(xyz.pixelatedw.mineminenomi.init.ModWeapons.BAZOOKA.get())) {
                     // TODO: Create Cannonball entity once ported, for now do nothing
