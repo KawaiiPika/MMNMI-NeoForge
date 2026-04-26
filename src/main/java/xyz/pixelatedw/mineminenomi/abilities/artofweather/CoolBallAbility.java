@@ -29,7 +29,7 @@ public class CoolBallAbility extends Ability {
         if (!entity.level().isClientSide) {
             SniperPelletEntity ball = new SniperPelletEntity(ModEntities.SNIPER_PELLET.get(), entity.level());
             ball.setOwner(entity);
-            ball.setPos(entity.getX(), entity.getY() + entity.getEyeHeight(), entity.getZ());
+            ball.teleportTo(entity.getX(), entity.getY() + entity.getEyeHeight(), entity.getZ());
             ball.setDamage(2.0f);
             ball.setEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 1));
             

@@ -13,7 +13,7 @@ public class KaenBoshiAbility extends SniperProjectileAbility {
     protected void startUsing(LivingEntity entity) {
         SniperPelletEntity pellet = new SniperPelletEntity(ModEntities.SNIPER_PELLET.get(), entity.level());
         pellet.setOwner(entity);
-        pellet.setPos(entity.getX(), entity.getY() + entity.getEyeHeight(), entity.getZ());
+        pellet.teleportTo(entity.getX(), entity.getY() + entity.getEyeHeight(), entity.getZ());
         pellet.setDamage(8.0f);
         pellet.setFireTicks(100); // 5 seconds
         
