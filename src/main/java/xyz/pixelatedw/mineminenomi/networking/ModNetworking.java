@@ -134,6 +134,7 @@ public class ModNetworking {
                 (payload, context) -> xyz.pixelatedw.mineminenomi.client.networking.ClientPacketHandlers.handlePointsGained(payload, context)
         );
 
+
         registrar.playToServer(
                 xyz.pixelatedw.mineminenomi.networking.packets.CUnlockAbilityPacket.TYPE,
                 xyz.pixelatedw.mineminenomi.networking.packets.CUnlockAbilityPacket.STREAM_CODEC,

@@ -28,6 +28,7 @@ public class ServerConfig {
         return INSTANCE.maxAbilityBars.get();
     }
 
+
     public static boolean isMobRewardsEnabled() {
         return true;
     }
@@ -75,4 +76,6 @@ public class ServerConfig {
     public static double getDorikiLimit() {
         return 10000.0;
     }
+
+
 }

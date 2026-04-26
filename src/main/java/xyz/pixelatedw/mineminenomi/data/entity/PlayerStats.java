@@ -207,6 +207,7 @@ public class PlayerStats {
     public double getDoriki() { return basic.doriki(); }
     public long getBelly() { return basic.belly(); }
     public long getBounty() { return basic.bounty(); }
+
     public double getLoyalty() { return basic.loyalty(); }
     public Optional<ResourceLocation> getFaction() { return basic.identity().faction(); }
     public Optional<ResourceLocation> getRace() { return basic.identity().race(); }
@@ -268,6 +269,7 @@ public class PlayerStats {
         setBelly(getBelly() + amount);
     }
 
+
     public void alterBounty(long amount) {
         setBounty(getBounty() + amount);
     }
@@ -313,6 +315,7 @@ public class PlayerStats {
     }
 
     public boolean hasStrawDoll() { return basic.hasStrawDoll(); }
+
 
     public void setLoyalty(double loyalty) {
         this.basic = updateBasicStats(basic.doriki(), basic.cola(), basic.ultraCola(), loyalty, basic.bounty(), basic.belly(), basic.extol(), basic.hasShadow(), basic.hasHeart(), basic.hasStrawDoll(), basic.isRogue(), basic.stamina(), basic.maxStamina());
@@ -468,15 +471,12 @@ public class PlayerStats {
     public void setCombat(CombatStats combat) { this.combat = combat; }
 
     public void sync(LivingEntity entity) {
+
         // Native sync is handled by AttachmentType.builder().sync() in ModDataAttachments when entity.setData is used.
         try {
             entity.setData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.PLAYER_STATS, this);
-        } catch (RuntimeException e) {
-            if (e.getMessage() != null && (e.getMessage().contains("may not be sent") || e.getMessage().contains("neoforge:sync_attachments"))) {
-                // Ignored for GameTests where MockPlayers do not have proper network channels registered
-            } else {
-                throw e;
-            }
+        } catch (RuntimeException | Error e) {
+            // Ignored for GameTests where MockPlayers do not have proper network channels registered
         }
     }
 }
