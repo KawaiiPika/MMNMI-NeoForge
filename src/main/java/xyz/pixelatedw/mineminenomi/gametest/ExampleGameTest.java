@@ -9,7 +9,7 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 @PrefixGameTestTemplate(false)
 public class ExampleGameTest {
 
-    @GameTest(template="minecraft:empty")
+    @GameTest(template="empty")
     public void empty(GameTestHelper helper) {
         helper.succeed();
     }
