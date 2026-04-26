@@ -39,14 +39,39 @@ public class ModFightingStyles {
     });
     public static final DeferredHolder<FightingStyle, FightingStyle> BRAWLER = ModRegistries.FIGHTING_STYLES_REGISTRY.register("brawler", () -> {
         CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(ModResources.BRAWLER, BRAWLER_ORDER);
-        info.addTopAbilities(ModAbilities.CHARGED_PUNCH, ModAbilities.TACKLE, ModAbilities.HAKAI_HO, ModAbilities.JISHIN_HO, ModAbilities.KING_PUNCH);
-        info.addBottomAbilities(ModAbilities.BRAWLER_DAMAGE_PERK);
+        info.addTopAbilities(ModAbilities.CHARGED_PUNCH, ModAbilities.TACKLE, ModAbilities.HAKAI_HO, ModAbilities.JISHIN_HO, ModAbilities.KING_PUNCH, ModAbilities.SUPLEX, ModAbilities.SPINNING_BRAWL, ModAbilities.DAMAGE_ABSORPTION);
+        info.addBottomAbilities(ModAbilities.BRAWLER_PASSIVE_BONUSES);
         return new FightingStyle().setBookDetails(info);
     });
     public static final DeferredHolder<FightingStyle, FightingStyle> BLACK_LEG = ModRegistries.FIGHTING_STYLES_REGISTRY.register("black_leg", () -> {
         CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(ModResources.BLACK_LEG, BLACK_LEG_ORDER);
         info.addTopAbilities(ModAbilities.GEPPO); // Skywalk is Geppo
         info.addBottomAbilities(ModAbilities.BLACK_LEG_DAMAGE_PERK, ModAbilities.BLACK_LEG_SPEED_PERK);
+        return new FightingStyle().setBookDetails(info);
+    });
+
+
+    private static final int FISHMAN_KARATE_ORDER = idx++;
+    private static final int HASSHOKEN_ORDER = idx++;
+    private static final int RYUSOKEN_ORDER = idx++;
+
+    public static final DeferredHolder<FightingStyle, FightingStyle> FISHMAN_KARATE = ModRegistries.FIGHTING_STYLES_REGISTRY.register("fishman_karate", () -> {
+        CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/gui/icons/fishman-karate.png"), FISHMAN_KARATE_ORDER);
+        info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+        info.addBottomAbilities(ModAbilities.FISHMAN_PASSIVE_BONUSES);
+        return new FightingStyle().setBookDetails(info);
+    });
+
+    public static final DeferredHolder<FightingStyle, FightingStyle> HASSHOKEN = ModRegistries.FIGHTING_STYLES_REGISTRY.register("hasshoken", () -> {
+        CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/gui/icons/hasshoken.png"), HASSHOKEN_ORDER);
+        info.addTopAbilities(ModAbilities.BUJAOGEN, ModAbilities.BUTO, ModAbilities.BUTO_KAITEN, ModAbilities.KIRYU_KIRIKUGI, ModAbilities.MUKIRYU_MUKIRIKUGI);
+        info.addBottomAbilities(ModAbilities.HASSHOKEN_PASSIVE_BONUSES);
+        return new FightingStyle().setBookDetails(info);
+    });
+
+    public static final DeferredHolder<FightingStyle, FightingStyle> RYUSOKEN = ModRegistries.FIGHTING_STYLES_REGISTRY.register("ryusoken", () -> {
+        CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "textures/gui/icons/ryusoken.png"), RYUSOKEN_ORDER);
+        info.addTopAbilities(ModAbilities.RYU_NO_IBUKI, ModAbilities.RYU_NO_KAGIZUME);
         return new FightingStyle().setBookDetails(info);
     });
 
