@@ -9,9 +9,10 @@ import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.init.ModFactions;
 
 @GameTestHolder(ModMain.PROJECT_ID)
+@net.neoforged.neoforge.gametest.PrefixGameTestTemplate(false)
 public class PirateHierarchyTest {
 
-    @GameTest(template = "examplegametest.empty")
+    @GameTest(template = "empty")
     public void testPirateFactionChecks(GameTestHelper helper) {
         GruntEntity grunt = helper.spawn(EntityType.ZOMBIE, new BlockPos(1, 2, 1)).convertTo(xyz.pixelatedw.mineminenomi.init.ModMobs.PIRATE_GRUNT.get(), true);
         if (grunt != null) {
@@ -25,7 +26,7 @@ public class PirateHierarchyTest {
         }
     }
 
-    @GameTest(template = "examplegametest.empty")
+    @GameTest(template = "empty")
     public void testMarineFactionChecks(GameTestHelper helper) {
         CaptainEntity marine = helper.spawn(EntityType.ZOMBIE, new BlockPos(1, 2, 1)).convertTo(xyz.pixelatedw.mineminenomi.init.ModMobs.MARINE_CAPTAIN.get(), true);
         if (marine != null) {
@@ -39,7 +40,7 @@ public class PirateHierarchyTest {
         }
     }
 
-    @GameTest(template = "examplegametest.empty")
+    @GameTest(template = "empty")
     public void testBanditFactionChecks(GameTestHelper helper) {
         SniperEntity bandit = helper.spawn(EntityType.ZOMBIE, new BlockPos(1, 2, 1)).convertTo(xyz.pixelatedw.mineminenomi.init.ModMobs.BANDIT_SNIPER.get(), true);
         if (bandit != null) {

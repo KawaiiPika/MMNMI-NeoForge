@@ -127,6 +127,12 @@ public class ModNetworking {
                 xyz.pixelatedw.mineminenomi.networking.packets.SSimpleMessageScreenEventPacket.STREAM_CODEC,
                 (payload, context) -> xyz.pixelatedw.mineminenomi.client.networking.ClientPacketHandlers.handleSimpleMessageScreenEvent(payload, context)
         );
+
+        registrar.playToClient(
+                xyz.pixelatedw.mineminenomi.networking.packets.SPointsGainedPacket.TYPE,
+                xyz.pixelatedw.mineminenomi.networking.packets.SPointsGainedPacket.STREAM_CODEC,
+                (payload, context) -> xyz.pixelatedw.mineminenomi.client.networking.ClientPacketHandlers.handlePointsGained(payload, context)
+        );
     }
 
     public static void sendTo(CustomPacketPayload payload, net.minecraft.server.level.ServerPlayer player) {

@@ -61,6 +61,17 @@ class ProgressionServiceTest {
 
         verify(mockStats).alterTrainingPoints(type, amount);
         verify(mockStats).sync(player);
+        assertEquals(5, stats.getTrainingPoints(type));
+    }
+
+    @Test
+    void testGrantTrainingPointsMax10() {
+        TrainingPointType type = TrainingPointType.MARTIAL_ARTS;
+        int amount = 15;
+
+        ProgressionService.grantTrainingPoints(player, type, amount);
+
+        assertEquals(10, stats.getTrainingPoints(type));
     }
 
     @Test
@@ -72,6 +83,16 @@ class ProgressionServiceTest {
         assertEquals(2, stats.getTrainingPoints(TrainingPointType.MARTIAL_ARTS));
         assertEquals(2, stats.getTrainingPoints(TrainingPointType.WEAPON_MASTERY));
         assertEquals(2000, stats.getBasic().trainingPoints().getOrDefault("LAST_PROCESSED_DORIKI", 0));
+    }
+
+    @Test
+    void testCheckProgressionMaxTier() {
+        stats.setDoriki(15000); // Exceeds 10000
+
+        ProgressionService.checkProgression(player);
+
+        assertEquals(10, stats.getTrainingPoints(TrainingPointType.MARTIAL_ARTS));
+        assertEquals(10000, stats.getBasic().trainingPoints().getOrDefault("LAST_PROCESSED_DORIKI", 0));
     }
 
     @Test

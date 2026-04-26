@@ -16,6 +16,7 @@ public class ProgressionService {
         
         int lastProcessedDoriki = stats.getBasic().trainingPoints().getOrDefault("LAST_PROCESSED_DORIKI", 0);
         int currentTier = (int) (doriki / 1000);
+        int currentTier = Math.min((int) (doriki / 1000), 10);
         int lastTier = lastProcessedDoriki / 1000;
 
         if (currentTier > lastTier) {
@@ -24,6 +25,10 @@ public class ProgressionService {
                 stats.alterTrainingPoints(type, tiersGained);
             }
                         java.util.Map<String, Integer> pointsMap = new java.util.HashMap<>(stats.getBasic().trainingPoints());
+                // Assuming legacy cap is implicitly handled by Doriki max tier = 10, total points per type = 10.
+                stats.alterTrainingPoints(type, tiersGained);
+            }
+            java.util.Map<String, Integer> pointsMap = new java.util.HashMap<>(stats.getBasic().trainingPoints());
             pointsMap.put("LAST_PROCESSED_DORIKI", currentTier * 1000);
             stats.setBasic(new PlayerStats.BasicStats(
                 stats.getBasic().doriki(), stats.getBasic().cola(), stats.getBasic().ultraCola(), stats.getBasic().loyalty(),
@@ -46,14 +51,40 @@ public class ProgressionService {
         return false;
     }
 
+    }
+
+    public static boolean spendTrainingPoints(Player player, TrainingPointType type, int amount) {
+        PlayerStats stats = PlayerStats.get(player);
+        int currentPoints = stats.getTrainingPoints(type);
+        if (currentPoints >= amount) {
+            stats.setTrainingPoints(type, currentPoints - amount);
+            stats.sync(player);
+            return true;
+        }
+        return false;
+    }
+
 
     public static void grantTrainingPoints(Player player, TrainingPointType type, int amount) {
         PlayerStats stats = PlayerStats.get(player);
-        stats.alterTrainingPoints(type, amount);
-        stats.sync(player);
-        
-        // Optional: Send a message to the player
-        // player.displayClientMessage(Component.translatable("info.mineminenomi.points_gained", amount, type.name()), true);
+        // Ensure points don't exceed the logical max tier based on doriki limit (10 points max per category usually)
+        int currentPoints = stats.getTrainingPoints(type);
+        if (currentPoints + amount > 10) {
+            amount = 10 - currentPoints;
+        }
+        if (amount > 0) {
+            stats.alterTrainingPoints(type, amount);
+            stats.sync(player);
+
+            if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
+                xyz.pixelatedw.mineminenomi.networking.ModNetworking.sendTo(
+                    new xyz.pixelatedw.mineminenomi.networking.packets.SPointsGainedPacket(amount, type.name()),
+                    serverPlayer
+                );
+            } else {
+                player.displayClientMessage(net.minecraft.network.chat.Component.translatable("info.mineminenomi.points_gained", amount, type.name()), true);
+            }
+        }
     }
 
     /**
