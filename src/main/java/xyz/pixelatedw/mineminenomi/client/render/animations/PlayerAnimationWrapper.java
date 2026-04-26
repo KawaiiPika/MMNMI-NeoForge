@@ -13,6 +13,7 @@ public class PlayerAnimationWrapper extends HierarchicalModel<LivingEntity> {
 
     public PlayerAnimationWrapper(HumanoidModel<?> humanoidModel) {
         this.root = new ModelPart(List.of(), Map.of(
+        ModelPart trueRoot = new ModelPart(List.of(), Map.of(
                 "head", humanoidModel.head,
                 "hat", humanoidModel.hat,
                 "body", humanoidModel.body,
@@ -21,6 +22,7 @@ public class PlayerAnimationWrapper extends HierarchicalModel<LivingEntity> {
                 "right_leg", humanoidModel.rightLeg,
                 "left_leg", humanoidModel.leftLeg
         ));
+        this.root = new ModelPart(List.of(), Map.of("root", trueRoot));
     }
 
     @Override
