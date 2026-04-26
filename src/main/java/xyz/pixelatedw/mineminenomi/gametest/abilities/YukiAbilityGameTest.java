@@ -41,10 +41,6 @@ public class YukiAbilityGameTest {
         });
     }
 
-    @GameTest(template="empty_chest", timeoutTicks = 200)
-    public void testfubukiaoe(GameTestHelper helper) {
-        // Disabled test due to GameTest environment not loading attachments for dummy ServerPlayer
-        helper.succeed();
     @GameTest(template="empty", timeoutTicks = 200)
     public void testFubukiAoE(GameTestHelper helper) {
         Player mockPlayer = helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);

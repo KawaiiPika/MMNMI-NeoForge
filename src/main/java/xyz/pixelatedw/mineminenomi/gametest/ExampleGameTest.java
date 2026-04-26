@@ -5,7 +5,6 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 
 @GameTestHolder("mineminenomi")
-@PrefixGameTestTemplate(false)
 @net.neoforged.neoforge.gametest.PrefixGameTestTemplate(false)
 public class ExampleGameTest {
 

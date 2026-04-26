@@ -7,7 +7,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import net.minecraft.server.level.ServerLevel;
 
 public class FubukiAbility extends Ability {
 
@@ -32,38 +31,35 @@ public class FubukiAbility extends Ability {
             }
 
             if (duration % 20 == 0) {
-                ServerLevel serverLevel = (ServerLevel) entity.level();
                 int multiplier = (int) (duration / 20) + 1;
                 int currentRange = 5 * multiplier;
                 float currentDamage = 4.0F * multiplier;
 
-                // Emulate placing snow layers using heightmap, must be queued cleanly
-                serverLevel.getServer().execute(() -> {
-                    BlockPos center = entity.blockPosition();
-                    for (int x = -currentRange; x <= currentRange; x++) {
-                        for (int z = -currentRange; z <= currentRange; z++) {
-                            if (x * x + z * z <= currentRange * currentRange) {
-                                if (entity.getRandom().nextFloat() < 0.2F) {
-                                    BlockPos surfacePos = serverLevel.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, center.offset(x, 0, z));
-                                    if (serverLevel.isEmptyBlock(surfacePos) && Blocks.SNOW.defaultBlockState().canSurvive(serverLevel, surfacePos)) {
-                                        serverLevel.setBlockAndUpdate(surfacePos, Blocks.SNOW.defaultBlockState());
-                                    }
+                // Emulate placing snow layers using heightmap
+                BlockPos center = entity.blockPosition();
+                for (int x = -currentRange; x <= currentRange; x++) {
+                    for (int z = -currentRange; z <= currentRange; z++) {
+                        if (x * x + z * z <= currentRange * currentRange) {
+                            if (entity.getRandom().nextFloat() < 0.2F) {
+                                BlockPos surfacePos = entity.level().getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, center.offset(x, 0, z));
+                                if (entity.level().isEmptyBlock(surfacePos) && Blocks.SNOW.defaultBlockState().canSurvive(entity.level(), surfacePos)) {
+                                    entity.level().setBlockAndUpdate(surfacePos, Blocks.SNOW.defaultBlockState());
                                 }
                             }
                         }
                     }
+                }
 
-                    serverLevel.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(currentRange))
-                        .stream()
-                        .filter(target -> target != entity)
-                        .filter(target -> target.distanceToSqr(entity) <= currentRange * currentRange)
-                        .forEach(target -> {
-                            // Apply effect and damage
-                            target.addEffect(new net.minecraft.world.effect.MobEffectInstance(
-                                net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 100, 2));
-                            target.hurt(entity.damageSources().freeze(), currentDamage);
-                        });
-                });
+                entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(currentRange))
+                    .stream()
+                    .filter(target -> target != entity)
+                    .filter(target -> target.distanceToSqr(entity) <= currentRange * currentRange)
+                    .forEach(target -> {
+                        // Apply effect and damage
+                        target.addEffect(new net.minecraft.world.effect.MobEffectInstance(
+                            net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 100, 2));
+                        target.hurt(entity.damageSources().freeze(), currentDamage);
+                    });
             }
         } else {
              if (duration < CHARGE_TICKS) {
