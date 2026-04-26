@@ -14,7 +14,7 @@ public class YomiAbilityGameTest {
 
     @GameTest(template="empty")
     public void testYomiLogiaImmunity(GameTestHelper helper) {
-        LivingEntity entity = helper.makeMockServerPlayerInLevel();
+        LivingEntity entity = helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
         PlayerStats stats = PlayerStats.get(entity);
         if (stats == null) {
             helper.fail("PlayerStats attachment is null");

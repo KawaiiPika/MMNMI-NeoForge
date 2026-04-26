@@ -1,0 +1,11 @@
+--- ./src/main/java/xyz/pixelatedw/mineminenomi/gametest/abilities/YomiAbilityGameTest.java
++++ ./src/main/java/xyz/pixelatedw/mineminenomi/gametest/abilities/YomiAbilityGameTest.java
+@@ -16,7 +16,7 @@
+
+     @GameTest(template="empty")
+     public void testYomiLogiaImmunity(GameTestHelper helper) {
+-        LivingEntity entity = helper.spawn(EntityType.PIG, 1, 1, 1);
++        LivingEntity entity = helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
+         PlayerStats stats = PlayerStats.get(entity);
+         if (stats == null) {
+             helper.fail("PlayerStats attachment is null");
