@@ -323,6 +323,24 @@ public class ModAnimations {
             ))
             .build();
 
+    public static final AnimationDefinition BODY_ROTATION_WIDE_ARMS = AnimationDefinition.Builder.withLength(1.0f).looping()
+            .addAnimation("right_arm", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                    new Keyframe(0f, KeyframeAnimations.degreeVec(0, 0, 90), AnimationChannel.Interpolations.LINEAR),
+                    new Keyframe(1.0f, KeyframeAnimations.degreeVec(0, 0, 90), AnimationChannel.Interpolations.LINEAR)
+            ))
+            .addAnimation("left_arm", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                    new Keyframe(0f, KeyframeAnimations.degreeVec(0, 0, -90), AnimationChannel.Interpolations.LINEAR),
+                    new Keyframe(1.0f, KeyframeAnimations.degreeVec(0, 0, -90), AnimationChannel.Interpolations.LINEAR)
+            ))
+            .addAnimation("root", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                    new Keyframe(0f, KeyframeAnimations.degreeVec(0, 0, 0), AnimationChannel.Interpolations.LINEAR),
+                    new Keyframe(0.25f, KeyframeAnimations.degreeVec(0, 90, 0), AnimationChannel.Interpolations.LINEAR),
+                    new Keyframe(0.5f, KeyframeAnimations.degreeVec(0, 180, 0), AnimationChannel.Interpolations.LINEAR),
+                    new Keyframe(0.75f, KeyframeAnimations.degreeVec(0, 270, 0), AnimationChannel.Interpolations.LINEAR),
+                    new Keyframe(1.0f, KeyframeAnimations.degreeVec(0, 360, 0), AnimationChannel.Interpolations.LINEAR)
+            ))
+            .build();
+
     static {
         REGISTRY.put("scream", SCREAM);
         REGISTRY.put("backflip", BACKFLIP);
@@ -332,6 +350,7 @@ public class ModAnimations {
         REGISTRY.put("block", BLOCK);
         REGISTRY.put("dodge", DODGE);
 
+        REGISTRY.put("body_rotation_wide_arms", BODY_ROTATION_WIDE_ARMS);
         REGISTRY.put("aim_sniper", AIM_SNIPER);
         REGISTRY.put("aim_flintlock_right", AIM_FLINTLOCK_RIGHT);
         REGISTRY.put("aim_flintlock_left", AIM_FLINTLOCK_LEFT);
