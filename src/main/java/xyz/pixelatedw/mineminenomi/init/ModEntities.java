@@ -311,5 +311,26 @@ public class ModEntities {
 
     public static final java.util.function.Supplier<net.minecraft.world.entity.EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.awa.RelaxHourProjectile>> RELAX_HOUR_PROJECTILE = ModRegistry.ENTITY_TYPES.register("relax_hour_projectile", () -> net.minecraft.world.entity.EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.awa.RelaxHourProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.awa.RelaxHourProjectile::new, net.minecraft.world.entity.MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("relax_hour_projectile"));
 
+
+    public static final Supplier<EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.NormalBulletProjectile>> NORMAL_BULLET = ModRegistry.ENTITY_TYPES.register("normal_bullet",
+            () -> EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.NormalBulletProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.NormalBulletProjectile::new, MobCategory.MISC)
+                    .sized(0.2F, 0.2F).clientTrackingRange(10).updateInterval(20).build("normal_bullet"));
+
+    public static final Supplier<EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.KairosekiBulletProjectile>> KAIROSEKI_BULLET = ModRegistry.ENTITY_TYPES.register("kairoseki_bullet",
+            () -> EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.KairosekiBulletProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.KairosekiBulletProjectile::new, MobCategory.MISC)
+                    .sized(0.2F, 0.2F).clientTrackingRange(10).updateInterval(20).build("kairoseki_bullet"));
+
+    public static final Supplier<EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.CannonBallProjectile>> CANNON_BALL = ModRegistry.ENTITY_TYPES.register("cannon_ball",
+            () -> EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.CannonBallProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.CannonBallProjectile::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F).clientTrackingRange(10).updateInterval(20).build("cannon_ball"));
+
+    public static final Supplier<EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.FireBulletProjectile>> FIRE_BULLET = ModRegistry.ENTITY_TYPES.register("fire_bullet",
+            () -> EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.FireBulletProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.FireBulletProjectile::new, MobCategory.MISC)
+                    .sized(0.2F, 0.2F).clientTrackingRange(10).updateInterval(20).build("fire_bullet"));
+
+    public static final Supplier<EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.ExplodingBulletProjectile>> EXPLODING_BULLET = ModRegistry.ENTITY_TYPES.register("exploding_bullet",
+            () -> EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.ExplodingBulletProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.ExplodingBulletProjectile::new, MobCategory.MISC)
+                    .sized(0.2F, 0.2F).clientTrackingRange(10).updateInterval(20).build("exploding_bullet"));
+
     public static void init() {}
 }

@@ -116,17 +116,23 @@ public class ModGunItem extends ProjectileWeaponItem {
                     return;
                 }
 
-                if (powder instanceof xyz.pixelatedw.mineminenomi.items.BulletItem bulletItem) {
-                    Object projObj = bulletItem.createProjectile(level, player);
-                    if (projObj instanceof net.minecraft.world.entity.projectile.Projectile proj) {
-                        this.shootProjectile(player, proj, 0, this.bulletSpeed, this.inaccuracy, 0.0F, null);
-                        level.addFreshEntity(proj);
+                if (level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                    if (powder instanceof xyz.pixelatedw.mineminenomi.items.BulletItem bulletItem) {
+                        Object projObj = bulletItem.createProjectile(serverLevel, player);
+                        if (projObj instanceof net.minecraft.world.entity.projectile.Projectile proj) {
+                            this.shootProjectile(player, proj, 0, this.bulletSpeed, this.inaccuracy, 0.0F, null);
+                            serverLevel.addFreshEntity(proj);
+                        }
+                    } else if (itemStack.is(xyz.pixelatedw.mineminenomi.init.ModWeapons.BAZOOKA.get()) && ammoStack.is(xyz.pixelatedw.mineminenomi.init.ModTags.Items.BAZOOKA_AMMO)) {
+                        Object projObj = ((xyz.pixelatedw.mineminenomi.items.BulletItem)ammoStack.getItem()).createProjectile(serverLevel, player);
+                        if (projObj instanceof net.minecraft.world.entity.projectile.Projectile proj) {
+                            this.shootProjectile(player, proj, 0, this.bulletSpeed, this.inaccuracy, 0.0F, null);
+                            serverLevel.addFreshEntity(proj);
+                        }
+                    } else if (flag && ammoStack.isEmpty()) {
+                        // Creative mode dummy shoot if no ammo
+                        // TODO: Generic projectile creation
                     }
-                } else if (itemStack.is(xyz.pixelatedw.mineminenomi.init.ModWeapons.BAZOOKA.get())) {
-                    // TODO: Create Cannonball entity once ported, for now do nothing
-                } else if (flag && ammoStack.isEmpty()) {
-                    // Creative mode dummy shoot if no ammo
-                    // TODO: Generic projectile creation
                 }
 
                 itemStack.hurtAndBreak(1, player, net.minecraft.world.entity.LivingEntity.getSlotForHand(player.getUsedItemHand()));
