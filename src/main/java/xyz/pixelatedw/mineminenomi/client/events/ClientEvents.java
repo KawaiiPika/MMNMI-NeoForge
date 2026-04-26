@@ -11,6 +11,11 @@ import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import xyz.pixelatedw.mineminenomi.client.particles.effects.haki.HaoshokuHakiParticleEffect;
 import xyz.pixelatedw.mineminenomi.client.particles.effects.haki.EmissionBurstParticleEffect;
 import xyz.pixelatedw.mineminenomi.client.particles.effects.haki.InternalDestructionBurstParticleEffect;
+import xyz.pixelatedw.mineminenomi.client.particles.effects.zou.GreatStompParticleEffect;
+import xyz.pixelatedw.mineminenomi.client.particles.effects.zushi.GraviZoneParticleEffect;
+import xyz.pixelatedw.mineminenomi.client.particles.effects.zushi.GraviPull1ParticleEffect;
+import xyz.pixelatedw.mineminenomi.client.particles.effects.zushi.GraviPull2ParticleEffect;
+
 import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.client.gui.overlays.AbilityBarOverlay;
 import xyz.pixelatedw.mineminenomi.client.gui.overlays.HaoshokuOverlay;
@@ -26,6 +31,11 @@ public class ClientEvents {
         event.registerSpriteSet(xyz.pixelatedw.mineminenomi.init.ModParticleTypes.CHIYU.get(), HaoshokuHakiParticleEffect.Provider::new);
         event.registerSpriteSet(xyz.pixelatedw.mineminenomi.init.ModParticleTypes.DOUBLE_CIRCLE.get(), EmissionBurstParticleEffect.Provider::new);
         event.registerSpriteSet(xyz.pixelatedw.mineminenomi.init.ModParticleTypes.SIMPLE_CIRCLE.get(), InternalDestructionBurstParticleEffect.Provider::new);
+        event.registerSpriteSet(xyz.pixelatedw.mineminenomi.init.ModParticleTypes.GREAT_STOMP.get(), GreatStompParticleEffect.Provider::new);
+        event.registerSpriteSet(xyz.pixelatedw.mineminenomi.init.ModParticleTypes.GRAVI_ZONE.get(), GraviZoneParticleEffect.Provider::new);
+        event.registerSpriteSet(xyz.pixelatedw.mineminenomi.init.ModParticleTypes.GRAVI_PULL_1.get(), GraviPull1ParticleEffect.Provider::new);
+        event.registerSpriteSet(xyz.pixelatedw.mineminenomi.init.ModParticleTypes.GRAVI_PULL_2.get(), GraviPull2ParticleEffect.Provider::new);
+
     }
 
     @SubscribeEvent

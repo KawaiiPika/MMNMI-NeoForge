@@ -67,6 +67,11 @@ public class ModParticleTypes {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> DOUBLE_CIRCLE = register("double_circle");
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> HOLE = register("hole");
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> COMMAND_MARK = register("command_mark_particle");
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GREAT_STOMP = register("great_stomp");
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GRAVI_ZONE = register("gravi_zone");
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GRAVI_PULL_1 = register("gravi_pull_1");
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GRAVI_PULL_2 = register("gravi_pull_2");
+
 
     @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = net.neoforged.api.distmarker.Dist.CLIENT)
     public static class Client {
