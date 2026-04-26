@@ -1,1 +1,8 @@
-{"values":["mineminenomi:bullet","mineminenomi:kairoseki_bullet"]}
+{
+  "values": [
+    "mineminenomi:bullet",
+    "mineminenomi:kairoseki_bullet",
+    "mineminenomi:fire_bullet",
+    "mineminenomi:exploding_bullet"
+  ]
+}
