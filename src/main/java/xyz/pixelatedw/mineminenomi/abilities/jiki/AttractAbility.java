@@ -15,26 +15,42 @@ public class AttractAbility extends Ability {
 
     @Override
     protected void startUsing(LivingEntity entity) {
-        if (!entity.level().isClientSide) {
-            for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(40.0))) {
-                if (target instanceof ItemEntity itemEntity) {
-                    // Pull item toward user
-                    Vec3 pull = entity.position().add(0, 1.5, 0).subtract(itemEntity.position()).normalize().scale(0.8);
-                    itemEntity.setDeltaMovement(itemEntity.getDeltaMovement().add(pull));
-                    itemEntity.setNoPickUpDelay();
-                } else if (target instanceof LivingEntity living) {
-                    // For simplicity in this port, we pull the entity slightly if they are wearing armor
-                    boolean hasArmor = false;
-                    for (var armor : living.getArmorSlots()) {
-                        if (!armor.isEmpty()) { hasArmor = true; break; }
-                    }
-                    if (hasArmor) {
-                        Vec3 pull = entity.position().subtract(living.position()).normalize().scale(0.5);
-                        living.setDeltaMovement(living.getDeltaMovement().add(pull));
-                    }
-                }
+        // Continuous usage handled in onTick
+    }
+
+    @Override
+    protected void stopUsing(LivingEntity entity) {
+        this.startCooldown(entity, 60);
+    }
+
+    @Override
+    public void onTick(LivingEntity entity, long duration) {
+        if (duration > 100) {
+            this.stop(entity);
+            return;
+        }
+        if (duration % 5 != 0) return; // Optimize queries to every 5 ticks
+
+        var aabb = entity.getBoundingBox().inflate(40.0);
+
+        for (ItemEntity itemEntity : entity.level().getEntitiesOfClass(ItemEntity.class, aabb)) {
+            // Check if item is magnetic (ideally via tags, assuming any armor/weapon for now)
+            if (itemEntity.getItem().getItem() instanceof net.minecraft.world.item.ArmorItem || itemEntity.getItem().getItem() instanceof net.minecraft.world.item.TieredItem) {
+                Vec3 pull = entity.position().add(0, 1.0, 0).subtract(itemEntity.position()).normalize().scale(0.6);
+                itemEntity.push(pull.x, pull.y, pull.z);
+                itemEntity.setNoPickUpDelay();
             }
-            this.startCooldown(entity, 60);
+        }
+
+        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, aabb, e -> e != entity)) {
+            boolean hasArmor = false;
+            for (var armor : living.getArmorSlots()) {
+                if (!armor.isEmpty()) { hasArmor = true; break; }
+            }
+            if (hasArmor || (!living.getMainHandItem().isEmpty() && living.getMainHandItem().getItem() instanceof net.minecraft.world.item.TieredItem)) {
+                Vec3 pull = entity.position().subtract(living.position()).normalize().scale(0.4);
+                living.push(pull.x, pull.y, pull.z);
+            }
         }
     }
 

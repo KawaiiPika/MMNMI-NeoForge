@@ -20,12 +20,11 @@ public class DekaTrampleAbility extends Ability {
     @Override
     public void onTick(LivingEntity entity, long duration) {
         if (!entity.level().isClientSide && entity.onGround() && entity.isSprinting()) {
-            for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(5.0))) {
-                if (target instanceof LivingEntity living) {
-                    living.hurt(entity.damageSources().mobAttack(entity), 8.0F);
-                    Vec3 knockback = entity.getLookAngle().scale(2.0);
-                    living.setDeltaMovement(knockback.x, 0.2, knockback.z);
-                }
+            if (entity.tickCount % 5 != 0) return; // limit tick frequency for trample
+            for (LivingEntity target : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(5.0), e -> e != entity)) {
+                target.hurt(entity.damageSources().mobAttack(entity), 8.0F);
+                Vec3 knockback = entity.getLookAngle().scale(2.0);
+                target.push(knockback.x, 0.2, knockback.z);
             }
         }
     }

@@ -456,6 +456,17 @@ public class ModAbilities {
     public static final java.util.function.Supplier<Ability> YOMI_NO_REIKI = ABILITIES.register("yomi_no_reiki", xyz.pixelatedw.mineminenomi.abilities.yomi.YomiNoReikiAbility::new);
     public static final java.util.function.Supplier<Ability> YOMI_IMMUNITY = ABILITIES.register("yomi_immunity", xyz.pixelatedw.mineminenomi.abilities.yomi.YomiImmunityAbility::new);
 
+    public static final Supplier<Ability> KILO_PRESS_1 = ABILITIES.register("1_kilo_press", xyz.pixelatedw.mineminenomi.abilities.kilo.KiloPress1Ability::new);
+    public static final Supplier<Ability> KILO_PUNCH_5000 = ABILITIES.register("5000_kilo_punch", xyz.pixelatedw.mineminenomi.abilities.kilo.KiloPunch5000Ability::new);
+    public static final Supplier<Ability> KILO_PRESS_10000 = ABILITIES.register("10000_kilo_press", xyz.pixelatedw.mineminenomi.abilities.kilo.KiloPress10000Ability::new);
+
+    public static final Supplier<Ability> GRAVI_PULL = ABILITIES.register("gravi_pull", xyz.pixelatedw.mineminenomi.abilities.zushi.GraviPullAbility::new);
+    public static final Supplier<Ability> GRAVI_ZONE = ABILITIES.register("gravi_zone", xyz.pixelatedw.mineminenomi.abilities.zushi.GraviZoneAbility::new);
+    public static final Supplier<Ability> JIGOKU_TABI = ABILITIES.register("jigoku_tabi", xyz.pixelatedw.mineminenomi.abilities.zushi.JigokuTabiAbility::new);
+    public static final Supplier<Ability> MOKO = ABILITIES.register("moko", xyz.pixelatedw.mineminenomi.abilities.zushi.MokoAbility::new);
+    public static final Supplier<Ability> SAGARI_NO_RYUSEI = ABILITIES.register("sagari_no_ryusei", xyz.pixelatedw.mineminenomi.abilities.zushi.SagariNoRyuseiAbility::new);
+    public static final Supplier<Ability> ABARE_HIMATSURI = ABILITIES.register("abare_himatsuri", xyz.pixelatedw.mineminenomi.abilities.zushi.AbareHimatsuriAbility::new);
+
     public static void register(IEventBus bus) {
         ABILITIES.register(bus);
     }

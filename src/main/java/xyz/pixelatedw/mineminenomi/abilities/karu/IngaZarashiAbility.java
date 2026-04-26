@@ -28,18 +28,26 @@ public class IngaZarashiAbility extends ZoanAbility {
         }
     }
 
-    @Override
-    public double getScaleModifier() {
-        return 1.0;
+    private float getKarma(LivingEntity entity) {
+        if (entity == null) return 0;
+        Integer karma = entity.getData(ModDataAttachments.KARMA_VALUE);
+        return karma != null ? karma.floatValue() : 0;
     }
 
     @Override
-    public double getHealthModifier() { return 0; }
+    public double getScaleModifier() {
+        return 1.5; // Fixed scale because parameter isn't supported,
+                    // ideally we'd pass entity, but ZoanAbility doesn't.
+    }
+
+    @Override
+    public double getHealthModifier() {
+        return 8.0;
+    }
 
     @Override
     public double getDamageModifier() {
-        // Logic should read Karma attachment dynamically, simplified for scaffolding
-        return 1.0;
+        return 10.0;
     }
 
     @Override

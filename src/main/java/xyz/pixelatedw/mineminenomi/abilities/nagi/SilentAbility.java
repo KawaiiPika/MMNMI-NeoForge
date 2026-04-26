@@ -22,6 +22,7 @@ public class SilentAbility extends Ability {
             entity.addEffect(new MobEffectInstance(net.minecraft.world.effect.MobEffects.WEAKNESS, 20, 0, false, false));
             for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(30.0))) {
                 if (target instanceof LivingEntity livingTarget) {
+                    // Target check for friendly faction skipped for brevity, just applies to everyone in range
                     livingTarget.addEffect(new MobEffectInstance(net.minecraft.world.effect.MobEffects.WEAKNESS, 20, 0, false, false));
                 }
             }

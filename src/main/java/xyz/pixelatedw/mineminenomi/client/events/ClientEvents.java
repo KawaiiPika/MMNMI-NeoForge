@@ -39,6 +39,12 @@ public class ClientEvents {
             
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.DAI_FUNKA.get(),
             ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 2.5F, true));
+
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.MOKO_PROJECTILE.get(),
+            net.minecraft.client.renderer.entity.NoopRenderer::new);
+
+        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.SAGARI_NO_RYUSEI_PROJECTILE.get(),
+            net.minecraft.client.renderer.entity.NoopRenderer::new);
             
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.YASAKANI.get(),
             ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
