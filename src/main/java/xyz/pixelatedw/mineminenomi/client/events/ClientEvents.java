@@ -29,13 +29,6 @@ public class ClientEvents {
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.MARINE_SNIPER.get(),
             ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.MARINE_VICE_ADMIRAL.get(),
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.MARINE_BRUTE.get(), 
-            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.6F));
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.MARINE_CAPTAIN.get(), 
-            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.MARINE_SNIPER.get(), 
-            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.MARINE_VICE_ADMIRAL.get(), 
             ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.55F));
 
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.PIRATE_GRUNT.get(), 
@@ -58,24 +51,6 @@ public class ClientEvents {
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.BANDIT_CAPTAIN.get(),
             ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.BANDIT_SNIPER.get(),
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.PIRATE_BRUTE.get(), 
-            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.6F));
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.PIRATE_CAPTAIN.get(), 
-            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.PIRATE_SNIPER.get(), 
-            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.PIRATE_NOTORIOUS_CAPTAIN.get(), 
-            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.55F));
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.PIRATE_TRADER.get(), 
-            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
-
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.BANDIT_GRUNT.get(), 
-            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.BANDIT_BRUTE.get(), 
-            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.6F));
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.BANDIT_CAPTAIN.get(), 
-            ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
-        event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModMobs.BANDIT_SNIPER.get(), 
             ctx -> new xyz.pixelatedw.mineminenomi.client.renderers.entity.OPHumanoidRenderer<>(ctx, new net.minecraft.client.model.HumanoidModel<>(ctx.bakeLayer(net.minecraft.client.model.geom.ModelLayers.PLAYER)), 0.5F));
 
         
