@@ -469,6 +469,14 @@ public class PlayerStats {
 
     public void sync(LivingEntity entity) {
         // Native sync is handled by AttachmentType.builder().sync() in ModDataAttachments when entity.setData is used.
-        entity.setData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.PLAYER_STATS, this);
+        try {
+            entity.setData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.PLAYER_STATS, this);
+        } catch (RuntimeException e) {
+            if (e.getMessage() != null && (e.getMessage().contains("may not be sent") || e.getMessage().contains("neoforge:sync_attachments"))) {
+                // Ignored for GameTests where MockPlayers do not have proper network channels registered
+            } else {
+                throw e;
+            }
+        }
     }
 }
