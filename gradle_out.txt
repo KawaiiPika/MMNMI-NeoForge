@@ -1,0 +1,430 @@
+Reusing configuration cache.
+> Task :createMinecraftArtifacts UP-TO-DATE
+
+> Task :compileJava
+/app/src/main/java/xyz/pixelatedw/mineminenomi/events/CombatEvents.java:23: error: cannot find symbol
+                DamageAbsorptionAbility ability = (DamageAbsorptionAbility) ModAbilities.DAMAGE_ABSORPTION.get();
+                                                                                        ^
+  symbol:   variable DAMAGE_ABSORPTION
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/events/CombatEvents.java:33: error: cannot find symbol
+                SamehadaShoteiAbility ability = (SamehadaShoteiAbility) ModAbilities.SAMEHADA_SHOTEI.get();
+                                                                                    ^
+  symbol:   variable SAMEHADA_SHOTEI
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/events/ModEvents.java:10: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(modid = ModMain.PROJECT_ID, bus = EventBusSubscriber.Bus.MOD)
+                                                ^
+/app/src/main/java/xyz/pixelatedw/mineminenomi/events/ModEvents.java:10: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(modid = ModMain.PROJECT_ID, bus = EventBusSubscriber.Bus.MOD)
+                                                                        ^
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModParticleTypes.java:73: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+    @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = net.neoforged.api.distmarker.Dist.CLIENT)
+                        ^
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModParticleTypes.java:73: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+    @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = net.neoforged.api.distmarker.Dist.CLIENT)
+                                                ^
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:42: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.CHARGED_PUNCH, ModAbilities.TACKLE, ModAbilities.HAKAI_HO, ModAbilities.JISHIN_HO, ModAbilities.KING_PUNCH, ModAbilities.SUPLEX, ModAbilities.SPINNING_BRAWL, ModAbilities.DAMAGE_ABSORPTION);
+                                                                                                                                                                  ^
+  symbol:   variable SUPLEX
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:42: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.CHARGED_PUNCH, ModAbilities.TACKLE, ModAbilities.HAKAI_HO, ModAbilities.JISHIN_HO, ModAbilities.KING_PUNCH, ModAbilities.SUPLEX, ModAbilities.SPINNING_BRAWL, ModAbilities.DAMAGE_ABSORPTION);
+                                                                                                                                                                                       ^
+  symbol:   variable SPINNING_BRAWL
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:42: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.CHARGED_PUNCH, ModAbilities.TACKLE, ModAbilities.HAKAI_HO, ModAbilities.JISHIN_HO, ModAbilities.KING_PUNCH, ModAbilities.SUPLEX, ModAbilities.SPINNING_BRAWL, ModAbilities.DAMAGE_ABSORPTION);
+                                                                                                                                                                                                                    ^
+  symbol:   variable DAMAGE_ABSORPTION
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:43: error: cannot find symbol
+        info.addBottomAbilities(ModAbilities.BRAWLER_PASSIVE_BONUSES);
+                                            ^
+  symbol:   variable BRAWLER_PASSIVE_BONUSES
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                         ^
+  symbol:   variable KACHIAGE_HAISOKU
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                        ^
+  symbol:   variable KARAKUSAGAWARA_SEIKEN
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                                                            ^
+  symbol:   variable MIZU_OSU
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                                                                                   ^
+  symbol:   variable MIZU_SHURYUDAN
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                                                                                                                ^
+  symbol:   variable MIZU_TAIHO
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                                                                                                                                         ^
+  symbol:   variable PACK_OF_SHARKS
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                                                                                                                                                                      ^
+  symbol:   variable SAMEHADA_SHOTEI
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                                                                                                                                                                                                    ^
+  symbol:   variable SHARK_ON_TOOTH
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                                                                                                                                                                                                                                 ^
+  symbol:   variable TWO_FISH_ENGINE
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                                                                                                                                                                                                                                                               ^
+  symbol:   variable UCHIMIZU
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                                                                                                                                                                                                                                                                                      ^
+  symbol:   variable YARINAMI
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:61: error: cannot find symbol
+        info.addBottomAbilities(ModAbilities.FISHMAN_PASSIVE_BONUSES);
+                                            ^
+  symbol:   variable FISHMAN_PASSIVE_BONUSES
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:67: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.BUJAOGEN, ModAbilities.BUTO, ModAbilities.BUTO_KAITEN, ModAbilities.KIRYU_KIRIKUGI, ModAbilities.MUKIRYU_MUKIRIKUGI);
+                                         ^
+  symbol:   variable BUJAOGEN
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:67: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.BUJAOGEN, ModAbilities.BUTO, ModAbilities.BUTO_KAITEN, ModAbilities.KIRYU_KIRIKUGI, ModAbilities.MUKIRYU_MUKIRIKUGI);
+                                                                ^
+  symbol:   variable BUTO
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:67: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.BUJAOGEN, ModAbilities.BUTO, ModAbilities.BUTO_KAITEN, ModAbilities.KIRYU_KIRIKUGI, ModAbilities.MUKIRYU_MUKIRIKUGI);
+                                                                                   ^
+  symbol:   variable BUTO_KAITEN
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:67: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.BUJAOGEN, ModAbilities.BUTO, ModAbilities.BUTO_KAITEN, ModAbilities.KIRYU_KIRIKUGI, ModAbilities.MUKIRYU_MUKIRIKUGI);
+                                                                                                             ^
+  symbol:   variable KIRYU_KIRIKUGI
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:67: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.BUJAOGEN, ModAbilities.BUTO, ModAbilities.BUTO_KAITEN, ModAbilities.KIRYU_KIRIKUGI, ModAbilities.MUKIRYU_MUKIRIKUGI);
+                                                                                                                                          ^
+  symbol:   variable MUKIRYU_MUKIRIKUGI
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:68: error: cannot find symbol
+        info.addBottomAbilities(ModAbilities.HASSHOKEN_PASSIVE_BONUSES);
+                                            ^
+  symbol:   variable HASSHOKEN_PASSIVE_BONUSES
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:74: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.RYU_NO_IBUKI, ModAbilities.RYU_NO_KAGIZUME);
+                                         ^
+  symbol:   variable RYU_NO_IBUKI
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:74: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.RYU_NO_IBUKI, ModAbilities.RYU_NO_KAGIZUME);
+                                                                    ^
+  symbol:   variable RYU_NO_KAGIZUME
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModKeybindings.java:12: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(modid = ModMain.PROJECT_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+                                                                     ^
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModKeybindings.java:12: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(modid = ModMain.PROJECT_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+                                                                                             ^
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModRegistries.java:14: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(modid = "mineminenomi", bus = EventBusSubscriber.Bus.MOD)
+                                            ^
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModRegistries.java:14: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(modid = "mineminenomi", bus = EventBusSubscriber.Bus.MOD)
+                                                                    ^
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModRaces.java:54: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.ELECLAW);
+                                         ^
+  symbol:   variable ELECLAW
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModRaces.java:60: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.ELECLAW);
+                                         ^
+  symbol:   variable ELECLAW
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModRaces.java:66: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.ELECLAW);
+                                         ^
+  symbol:   variable ELECLAW
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModRaces.java:72: error: cannot find symbol
+        info.addTopAbilities(ModAbilities.ELECLAW);
+                                         ^
+  symbol:   variable ELECLAW
+  location: class ModAbilities
+/app/src/main/java/xyz/pixelatedw/mineminenomi/datagen/ModDataMapProvider.java:19: warning: [removal] gather() in DataMapProvider has been deprecated and marked for removal
+    protected void gather() {
+                   ^
+/app/src/main/java/xyz/pixelatedw/mineminenomi/datagen/DataGenerators.java:15: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(modid = ModMain.PROJECT_ID, bus = EventBusSubscriber.Bus.MOD)
+                                                ^
+/app/src/main/java/xyz/pixelatedw/mineminenomi/datagen/DataGenerators.java:15: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(modid = ModMain.PROJECT_ID, bus = EventBusSubscriber.Bus.MOD)
+                                                                        ^
+/app/src/main/java/xyz/pixelatedw/mineminenomi/networking/ModNetworking.java:10: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(modid = "mineminenomi", bus = EventBusSubscriber.Bus.MOD)
+                                            ^
+/app/src/main/java/xyz/pixelatedw/mineminenomi/networking/ModNetworking.java:10: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(modid = "mineminenomi", bus = EventBusSubscriber.Bus.MOD)
+                                                                    ^
+/app/src/main/java/xyz/pixelatedw/mineminenomi/gametest/abilities/YukiAbilityGameTest.java:46: warning: [removal] makeMockServerPlayerInLevel() in GameTestHelper has been deprecated and marked for removal
+        Player mockPlayer = helper.makeMockServerPlayerInLevel();
+                                  ^
+/app/src/main/java/xyz/pixelatedw/mineminenomi/client/events/ClientEvents.java:12: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(modid = ModMain.PROJECT_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+                                                                     ^
+/app/src/main/java/xyz/pixelatedw/mineminenomi/client/events/ClientEvents.java:12: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(modid = ModMain.PROJECT_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+                                                                                             ^
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+30 errors
+16 warnings
+
+> Task :compileJava FAILED
+
+[Incubating] Problems report is available at: file:///app/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler output below.
+  Note: Recompile with -Xlint:deprecation for details.
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/events/CombatEvents.java:23: error: cannot find symbol
+                  DamageAbsorptionAbility ability = (DamageAbsorptionAbility) ModAbilities.DAMAGE_ABSORPTION.get();
+                                                                                          ^
+    symbol:   variable DAMAGE_ABSORPTION
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/events/CombatEvents.java:33: error: cannot find symbol
+                  SamehadaShoteiAbility ability = (SamehadaShoteiAbility) ModAbilities.SAMEHADA_SHOTEI.get();
+                                                                                      ^
+    symbol:   variable SAMEHADA_SHOTEI
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:42: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.CHARGED_PUNCH, ModAbilities.TACKLE, ModAbilities.HAKAI_HO, ModAbilities.JISHIN_HO, ModAbilities.KING_PUNCH, ModAbilities.SUPLEX, ModAbilities.SPINNING_BRAWL, ModAbilities.DAMAGE_ABSORPTION);
+                                                                                                                                                                    ^
+    symbol:   variable SUPLEX
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:42: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.CHARGED_PUNCH, ModAbilities.TACKLE, ModAbilities.HAKAI_HO, ModAbilities.JISHIN_HO, ModAbilities.KING_PUNCH, ModAbilities.SUPLEX, ModAbilities.SPINNING_BRAWL, ModAbilities.DAMAGE_ABSORPTION);
+                                                                                                                                                                                         ^
+    symbol:   variable SPINNING_BRAWL
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:42: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.CHARGED_PUNCH, ModAbilities.TACKLE, ModAbilities.HAKAI_HO, ModAbilities.JISHIN_HO, ModAbilities.KING_PUNCH, ModAbilities.SUPLEX, ModAbilities.SPINNING_BRAWL, ModAbilities.DAMAGE_ABSORPTION);
+                                                                                                                                                                                                                      ^
+    symbol:   variable DAMAGE_ABSORPTION
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:43: error: cannot find symbol
+          info.addBottomAbilities(ModAbilities.BRAWLER_PASSIVE_BONUSES);
+                                              ^
+    symbol:   variable BRAWLER_PASSIVE_BONUSES
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                           ^
+    symbol:   variable KACHIAGE_HAISOKU
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                          ^
+    symbol:   variable KARAKUSAGAWARA_SEIKEN
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                                                              ^
+    symbol:   variable MIZU_OSU
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                                                                                     ^
+    symbol:   variable MIZU_SHURYUDAN
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                                                                                                                  ^
+    symbol:   variable MIZU_TAIHO
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                                                                                                                                           ^
+    symbol:   variable PACK_OF_SHARKS
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                                                                                                                                                                        ^
+    symbol:   variable SAMEHADA_SHOTEI
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                                                                                                                                                                                                      ^
+    symbol:   variable SHARK_ON_TOOTH
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                                                                                                                                                                                                                                   ^
+    symbol:   variable TWO_FISH_ENGINE
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                                                                                                                                                                                                                                                                 ^
+    symbol:   variable UCHIMIZU
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:60: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.KACHIAGE_HAISOKU, ModAbilities.KARAKUSAGAWARA_SEIKEN, ModAbilities.MIZU_OSU, ModAbilities.MIZU_SHURYUDAN, ModAbilities.MIZU_TAIHO, ModAbilities.PACK_OF_SHARKS, ModAbilities.SAMEHADA_SHOTEI, ModAbilities.SHARK_ON_TOOTH, ModAbilities.TWO_FISH_ENGINE, ModAbilities.UCHIMIZU, ModAbilities.YARINAMI);
+                                                                                                                                                                                                                                                                                                                                        ^
+    symbol:   variable YARINAMI
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:61: error: cannot find symbol
+          info.addBottomAbilities(ModAbilities.FISHMAN_PASSIVE_BONUSES);
+                                              ^
+    symbol:   variable FISHMAN_PASSIVE_BONUSES
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:67: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.BUJAOGEN, ModAbilities.BUTO, ModAbilities.BUTO_KAITEN, ModAbilities.KIRYU_KIRIKUGI, ModAbilities.MUKIRYU_MUKIRIKUGI);
+                                           ^
+    symbol:   variable BUJAOGEN
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:67: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.BUJAOGEN, ModAbilities.BUTO, ModAbilities.BUTO_KAITEN, ModAbilities.KIRYU_KIRIKUGI, ModAbilities.MUKIRYU_MUKIRIKUGI);
+                                                                  ^
+    symbol:   variable BUTO
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:67: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.BUJAOGEN, ModAbilities.BUTO, ModAbilities.BUTO_KAITEN, ModAbilities.KIRYU_KIRIKUGI, ModAbilities.MUKIRYU_MUKIRIKUGI);
+                                                                                     ^
+    symbol:   variable BUTO_KAITEN
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:67: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.BUJAOGEN, ModAbilities.BUTO, ModAbilities.BUTO_KAITEN, ModAbilities.KIRYU_KIRIKUGI, ModAbilities.MUKIRYU_MUKIRIKUGI);
+                                                                                                               ^
+    symbol:   variable KIRYU_KIRIKUGI
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:67: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.BUJAOGEN, ModAbilities.BUTO, ModAbilities.BUTO_KAITEN, ModAbilities.KIRYU_KIRIKUGI, ModAbilities.MUKIRYU_MUKIRIKUGI);
+                                                                                                                                            ^
+    symbol:   variable MUKIRYU_MUKIRIKUGI
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:68: error: cannot find symbol
+          info.addBottomAbilities(ModAbilities.HASSHOKEN_PASSIVE_BONUSES);
+                                              ^
+    symbol:   variable HASSHOKEN_PASSIVE_BONUSES
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:74: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.RYU_NO_IBUKI, ModAbilities.RYU_NO_KAGIZUME);
+                                           ^
+    symbol:   variable RYU_NO_IBUKI
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModFightingStyles.java:74: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.RYU_NO_IBUKI, ModAbilities.RYU_NO_KAGIZUME);
+                                                                      ^
+    symbol:   variable RYU_NO_KAGIZUME
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModRaces.java:54: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.ELECLAW);
+                                           ^
+    symbol:   variable ELECLAW
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModRaces.java:60: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.ELECLAW);
+                                           ^
+    symbol:   variable ELECLAW
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModRaces.java:66: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.ELECLAW);
+                                           ^
+    symbol:   variable ELECLAW
+    location: class ModAbilities
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModRaces.java:72: error: cannot find symbol
+          info.addTopAbilities(ModAbilities.ELECLAW);
+                                           ^
+    symbol:   variable ELECLAW
+    location: class ModAbilities
+  Note: Recompile with -Xlint:unchecked for details.
+  Note: Some input files use or override a deprecated API.
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/events/ModEvents.java:10: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+  @EventBusSubscriber(modid = ModMain.PROJECT_ID, bus = EventBusSubscriber.Bus.MOD)
+                                                  ^
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/events/ModEvents.java:10: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+  @EventBusSubscriber(modid = ModMain.PROJECT_ID, bus = EventBusSubscriber.Bus.MOD)
+                                                                          ^
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModParticleTypes.java:73: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+      @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = net.neoforged.api.distmarker.Dist.CLIENT)
+                          ^
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModParticleTypes.java:73: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+      @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = net.neoforged.api.distmarker.Dist.CLIENT)
+                                                  ^
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModKeybindings.java:12: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+  @EventBusSubscriber(modid = ModMain.PROJECT_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+                                                                       ^
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModKeybindings.java:12: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+  @EventBusSubscriber(modid = ModMain.PROJECT_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+                                                                                               ^
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModRegistries.java:14: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+  @EventBusSubscriber(modid = "mineminenomi", bus = EventBusSubscriber.Bus.MOD)
+                                              ^
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/init/ModRegistries.java:14: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+  @EventBusSubscriber(modid = "mineminenomi", bus = EventBusSubscriber.Bus.MOD)
+                                                                      ^
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/datagen/ModDataMapProvider.java:19: warning: [removal] gather() in DataMapProvider has been deprecated and marked for removal
+      protected void gather() {
+                     ^
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/datagen/DataGenerators.java:15: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+  @EventBusSubscriber(modid = ModMain.PROJECT_ID, bus = EventBusSubscriber.Bus.MOD)
+                                                  ^
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/datagen/DataGenerators.java:15: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+  @EventBusSubscriber(modid = ModMain.PROJECT_ID, bus = EventBusSubscriber.Bus.MOD)
+                                                                          ^
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/networking/ModNetworking.java:10: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+  @EventBusSubscriber(modid = "mineminenomi", bus = EventBusSubscriber.Bus.MOD)
+                                              ^
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/networking/ModNetworking.java:10: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+  @EventBusSubscriber(modid = "mineminenomi", bus = EventBusSubscriber.Bus.MOD)
+                                                                      ^
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/gametest/abilities/YukiAbilityGameTest.java:46: warning: [removal] makeMockServerPlayerInLevel() in GameTestHelper has been deprecated and marked for removal
+          Player mockPlayer = helper.makeMockServerPlayerInLevel();
+                                    ^
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/client/events/ClientEvents.java:12: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+  @EventBusSubscriber(modid = ModMain.PROJECT_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+                                                                       ^
+  /app/src/main/java/xyz/pixelatedw/mineminenomi/client/events/ClientEvents.java:12: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+  @EventBusSubscriber(modid = ModMain.PROJECT_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+                                                                                               ^
+  Note: Some input files use unchecked or unsafe operations.
+  30 errors
+  16 warnings
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+BUILD FAILED in 5s
+2 actionable tasks: 1 executed, 1 up-to-date
+Configuration cache entry reused.
