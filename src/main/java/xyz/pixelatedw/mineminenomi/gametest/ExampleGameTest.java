@@ -8,7 +8,7 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 @GameTestHolder("mineminenomi")
 public class ExampleGameTest {
 
-    @GameTest(template="minecraft:empty")
+    @GameTest(template="empty")
     public void empty(GameTestHelper helper) {
         helper.succeed();
     }
