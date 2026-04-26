@@ -24,6 +24,7 @@ public class ModMain {
         modEventBus.addListener(this::commonSetup);
         
         xyz.pixelatedw.mineminenomi.init.ModRegistries.init(modEventBus);
+        xyz.pixelatedw.mineminenomi.init.ModCommandArgumentTypes.COMMAND_ARGUMENTS.register(modEventBus);
         xyz.pixelatedw.mineminenomi.init.ModRegistry.init(modEventBus);
         xyz.pixelatedw.mineminenomi.init.ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
 

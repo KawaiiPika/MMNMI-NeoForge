@@ -18,5 +18,8 @@ public class ModCommands {
         HakiExpCommand.register(event.getDispatcher(), event.getBuildContext());
         RemoveDFCommand.register(event.getDispatcher(), event.getBuildContext());
         PointsCommand.register(event.getDispatcher(), event.getBuildContext());
+        FGCommand.register(event.getDispatcher(), event.getBuildContext());
+        LoyaltyCommand.register(event.getDispatcher(), event.getBuildContext());
+        CheckPlayerCommand.register(event.getDispatcher(), event.getBuildContext());
     }
 }
