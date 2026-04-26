@@ -99,7 +99,6 @@ public class ClientEvents {
     @SubscribeEvent
     public static void onClientSetup(net.neoforged.fml.event.lifecycle.FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            xyz.pixelatedw.mineminenomi.client.render.ModRenderTypeBuffers.getInstance().initHakiAuraShader(Minecraft.getInstance());
         });
     }
 
@@ -111,11 +110,6 @@ public class ClientEvents {
             
             xyz.pixelatedw.mineminenomi.data.entity.PlayerStats stats = xyz.pixelatedw.mineminenomi.data.entity.PlayerStats.get(mc.player);
             if (stats != null && stats.isKenbunshokuActive()) {
-                var chain = xyz.pixelatedw.mineminenomi.client.render.ModRenderTypeBuffers.getInstance().getHakiAuraPostChain();
-                if (chain != null) {
-                    chain.process(event.getPartialTick().getGameTimeDeltaPartialTick(true));
-                    mc.getMainRenderTarget().bindWrite(false);
-                }
             }
         }
     }
