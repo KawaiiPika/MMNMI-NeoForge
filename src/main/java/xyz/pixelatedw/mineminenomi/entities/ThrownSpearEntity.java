@@ -27,7 +27,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 
 import org.jspecify.annotations.Nullable;
 
-public class ThrownSpearEntity extends AbstractArrow implements net.minecraft.world.entity.projectile.ItemSupplier, IEntityWithComplexSpawn {
+public class ThrownSpearEntity extends AbstractArrow implements IEntityWithComplexSpawn {
     private static final EntityDataAccessor<Byte> ID_LOYALTY = SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<Boolean> ID_FOIL = SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.BOOLEAN);
     
@@ -101,11 +101,6 @@ public class ThrownSpearEntity extends AbstractArrow implements net.minecraft.wo
     @Override
     protected ItemStack getDefaultPickupItem() {
         return this.itemStack.copy();
-    }
-
-    @Override
-    public ItemStack getItem() {
-        return this.itemStack;
     }
 
     public void setAttackDamage(float damage) {
