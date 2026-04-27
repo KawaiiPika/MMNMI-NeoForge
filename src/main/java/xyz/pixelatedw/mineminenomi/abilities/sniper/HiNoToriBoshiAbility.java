@@ -13,7 +13,7 @@ public class HiNoToriBoshiAbility extends SniperProjectileAbility {
     protected void startUsing(LivingEntity entity) {
         SniperPelletEntity pellet = new SniperPelletEntity(ModEntities.SNIPER_PELLET.get(), entity.level());
         pellet.setOwner(entity);
-        pellet.teleportTo(entity.getX(), entity.getY() + entity.getEyeHeight(), entity.getZ());
+        pellet.setPos(entity.getX(), entity.getY() + entity.getEyeHeight(), entity.getZ());
         pellet.setDamage(20.0f);
         pellet.setFireTicks(200);
         pellet.setExplosive(true);

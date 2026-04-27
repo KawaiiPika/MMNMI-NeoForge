@@ -61,9 +61,4 @@ public class RyuseiKazanEntity extends ThrowableItemProjectile {
     private void explode() {
         this.level().explode(this.getOwner(), this.getX(), this.getY(), this.getZ(), 2.0F, true, Level.ExplosionInteraction.MOB);
     }
-
-    @Override
-    public boolean deflect(net.minecraft.world.entity.projectile.ProjectileDeflection deflection, net.minecraft.world.entity.Entity entity, net.minecraft.world.entity.Entity owner, boolean deflects) {
-        return false; // These elemental projectiles are too dense/volatile to deflect normally
-    }
 }

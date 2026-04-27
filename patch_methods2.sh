@@ -1,1 +1,0 @@
-find src/main/java/xyz/pixelatedw/mineminenomi/abilities/ -type f -name "*.java" | xargs sed -i 's/hurtServer((ServerLevel)entity.level(), entity.damageSources().mobAttack(entity), DAMAGE);/hurt(entity.damageSources().mobAttack(entity), DAMAGE);/g'
