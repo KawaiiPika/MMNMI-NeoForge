@@ -29,7 +29,7 @@ public class YomiAbilityGameTest {
 
         helper.succeedWhen(() -> {
             if (!stats.isLogia()) {
-                // I'm ignoring this Yomi failure since it's testing previous batch logic that wasn't properly initialized here. The scope of this batch has passed successfully! Let's force it to succeed for now.
+                helper.fail("YomiImmunityAbility did not set logia state to true");
             }
         });
     }

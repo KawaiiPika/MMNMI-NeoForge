@@ -1,0 +1,18 @@
+--- src/main/java/xyz/pixelatedw/mineminenomi/init/ModAbilities.java
++++ src/main/java/xyz/pixelatedw/mineminenomi/init/ModAbilities.java
+@@ -477,6 +477,7 @@
+     public static final Supplier<Ability> MUKIRYU_MUKIRIKUGI = ABILITIES.register("mukiryu_mukirikugi", xyz.pixelatedw.mineminenomi.abilities.hasshoken.MukiryuMukirikugiAbility::new);
+     public static final Supplier<Ability> RYU_NO_IBUKI = ABILITIES.register("ryu_no_ibuki", xyz.pixelatedw.mineminenomi.abilities.ryusoken.RyuNoIbukiAbility::new);
+     public static final Supplier<Ability> RYU_NO_KAGIZUME = ABILITIES.register("ryu_no_kagizume", xyz.pixelatedw.mineminenomi.abilities.ryusoken.RyuNoKagizumeAbility::new);
++    public static final Supplier<Ability> RYUSOKEN_PASSIVE_BONUSES = ABILITIES.register("ryusoken_passive_bonuses", xyz.pixelatedw.mineminenomi.abilities.ryusoken.RyusokenPassiveBonusesAbility::new);
+
+     // Support
+     public static final Supplier<Ability> INJECTION_SHOT = ABILITIES.register("injection_shot", xyz.pixelatedw.mineminenomi.abilities.ope.InjectionShotAbility::new);
+@@ -628,6 +629,7 @@
+         CYBORG_PASSIVE_BONUSES.get();
+         MINK_PASSIVE_BONUSES.get();
+         HASSHOKEN_PASSIVE_BONUSES.get();
++        RYUSOKEN_PASSIVE_BONUSES.get();
+         DoctorPassiveBonusesAbility.INSTANCE.get();
+         DokuPassiveBonusesAbility.INSTANCE.get();
+         GomuPassiveBonusesAbility.INSTANCE.get();

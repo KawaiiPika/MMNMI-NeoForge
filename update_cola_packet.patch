@@ -1,0 +1,22 @@
+--- src/main/java/xyz/pixelatedw/mineminenomi/networking/ClientPacketHandlers.java
++++ src/main/java/xyz/pixelatedw/mineminenomi/networking/ClientPacketHandlers.java
+@@ -8,6 +8,7 @@
+ import xyz.pixelatedw.mineminenomi.data.world.WantedPostersData;
+ import xyz.pixelatedw.mineminenomi.networking.packets.SUpdateEntityAbilitiesPacket;
+ import xyz.pixelatedw.mineminenomi.networking.packets.SUpdatePlayerStatsPacket;
++import xyz.pixelatedw.mineminenomi.networking.packets.server.SUpdateColaAmountPacket;
+ import xyz.pixelatedw.mineminenomi.networking.packets.SUpdateWantedPostersPacket;
+ import xyz.pixelatedw.mineminenomi.client.gui.screens.ScreenHelper;
+
+@@ -37,4 +38,11 @@
+             }
+         });
+     }
++
++    public static void handleUpdateColaAmount(SUpdateColaAmountPacket packet, IPayloadContext context) {
++        context.enqueueWork(() -> {
++            Player player = context.player();
++            // Optionally update UI for cola
++        });
++    }
+ }

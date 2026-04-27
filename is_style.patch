@@ -1,0 +1,36 @@
+--- src/main/java/xyz/pixelatedw/mineminenomi/data/entity/PlayerStats.java
++++ src/main/java/xyz/pixelatedw/mineminenomi/data/entity/PlayerStats.java
+@@ -370,6 +370,34 @@
+     public int getMaxUltraCola() { return 1000; }
+
++    public boolean isBrawler() {
++        return getFightingStyle().isPresent() && getFightingStyle().get().getPath().equals("brawler");
++    }
++
++    public boolean isFishmanKarate() {
++        return getFightingStyle().isPresent() && getFightingStyle().get().getPath().equals("fishman_karate");
++    }
++
++    public boolean isCyborg() {
++        return getFightingStyle().isPresent() && getFightingStyle().get().getPath().equals("cyborg");
++    }
++
++    public boolean isMink() {
++        return getRace().isPresent() && getRace().get().getPath().equals("mink");
++    }
++
++    public boolean isElectro() {
++        return getFightingStyle().isPresent() && getFightingStyle().get().getPath().equals("electro");
++    }
++
++    public boolean isHasshoken() {
++        return getFightingStyle().isPresent() && getFightingStyle().get().getPath().equals("hasshoken");
++    }
++
++    public boolean isRyusoken() {
++        return getFightingStyle().isPresent() && getFightingStyle().get().getPath().equals("ryusoken");
++    }
++
+     public void setEquippedAbility(int slot, ResourceLocation ability) {
+         java.util.List<String> list = new java.util.ArrayList<>(combat.equippedAbilities());
+         if (slot >= 0 && slot < list.size()) {

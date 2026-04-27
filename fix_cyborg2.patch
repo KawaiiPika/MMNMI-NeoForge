@@ -1,0 +1,55 @@
+--- src/main/java/xyz/pixelatedw/mineminenomi/abilities/cyborg/ColaBackpackBonusAbility.java
++++ src/main/java/xyz/pixelatedw/mineminenomi/abilities/cyborg/ColaBackpackBonusAbility.java
+@@ -8,31 +8,25 @@
+ import net.minecraft.world.item.ItemStack;
+ import net.neoforged.neoforge.network.PacketDistributor;
+ import xyz.pixelatedw.mineminenomi.api.abilities.AbilityCategory;
+ import xyz.pixelatedw.mineminenomi.api.abilities.AbilityType;
+-import xyz.pixelatedw.mineminenomi.api.abilities.IAbility;
+-import xyz.pixelatedw.mineminenomi.api.abilities.PassiveAbility;
++import xyz.pixelatedw.mineminenomi.api.abilities.PassiveAbility;
+ import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
+ import xyz.pixelatedw.mineminenomi.init.ModArmors;
+ import xyz.pixelatedw.mineminenomi.init.ModDataAttachments;
+ import xyz.pixelatedw.mineminenomi.init.ModRegistry;
+-import xyz.pixelatedw.mineminenomi.networking.packets.server.SUpdateColaAmountPacket;
+ import java.util.function.Supplier;
+
+ public class ColaBackpackBonusAbility extends PassiveAbility {
+    public static final int EXTRA_COLA = 500;
+-   public static final Supplier<AbilityCore<ColaBackpackBonusAbility>> INSTANCE = ModRegistry.registerAbility("cola_backpack_bonus", "Cola Backpack Bonus", (id, name) -> (new AbilityCore.Builder<>(id, name, AbilityCategory.EQUIPMENT, AbilityType.PASSIVE, ColaBackpackBonusAbility::new)).setHidden().setUnlockCheck(ColaBackpackBonusAbility::canUnlock).build("mineminenomi"));
+
+-   public ColaBackpackBonusAbility(AbilityCore<ColaBackpackBonusAbility> ability) {
+-      super(ability);
+-      this.addRemoveEvent(this::removeEvent);
++   public ColaBackpackBonusAbility() {
++      super();
+    }
+
+-   private void removeEvent(LivingEntity entity, IAbility ability) {
++   private void removeEvent(LivingEntity entity) {
+       if (entity instanceof ServerPlayer player) {
+          PlayerStats stats = player.getData(ModDataAttachments.PLAYER_STATS);
+          int cola = Mth.clamp(stats.getCola(), 0, stats.getMaxCola() - EXTRA_COLA);
+          stats.setCola(cola);
+          player.setData(ModDataAttachments.PLAYER_STATS, stats);
+-         // PacketDistributor.sendToPlayer(player, new SUpdateColaAmountPacket(cola));
+       }
+
+    }
+@@ -40,5 +34,15 @@
+-   private static boolean canUnlock(LivingEntity entity) {
++   public xyz.pixelatedw.mineminenomi.api.util.Result canUnlock(LivingEntity entity) {
+       ItemStack headStack = entity.getItemBySlot(EquipmentSlot.CHEST);
+-      return !headStack.isEmpty() && headStack.getItem() == ModArmors.COLA_BACKPACK.get();
++      return (!headStack.isEmpty() && headStack.getItem() == ModArmors.COLA_BACKPACK.get()) ? xyz.pixelatedw.mineminenomi.api.util.Result.success() : xyz.pixelatedw.mineminenomi.api.util.Result.fail(net.minecraft.network.chat.Component.literal(""));
++   }
++
++   public net.minecraft.network.chat.Component getDisplayName() {
++       return net.minecraft.network.chat.Component.literal("Cola Backpack Bonus");
++   }
++
++   public net.minecraft.resources.ResourceLocation getId() {
++       return net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "cola_backpack_bonus");
+    }
+ }

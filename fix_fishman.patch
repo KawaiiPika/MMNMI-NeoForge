@@ -1,0 +1,13 @@
+--- src/main/java/xyz/pixelatedw/mineminenomi/data/entity/PlayerStats.java
++++ src/main/java/xyz/pixelatedw/mineminenomi/data/entity/PlayerStats.java
+@@ -377,6 +377,10 @@
+         return getFightingStyle().isPresent() && getFightingStyle().get().getPath().equals("fishman_karate");
+     }
+
++    public boolean isFishman() {
++        return getRace().isPresent() && getRace().get().getPath().equals("fishman");
++    }
++
+     public boolean isCyborg() {
+         return getFightingStyle().isPresent() && getFightingStyle().get().getPath().equals("cyborg");
+     }

@@ -276,7 +276,7 @@ public class PlayerStats {
     }
 
     public long getExtol() { return basic.extol(); }
-    
+
     public void setHasShadow(boolean hasShadow) {
         this.basic = updateBasicStats(basic.doriki(), basic.cola(), basic.ultraCola(), basic.loyalty(), basic.bounty(), basic.belly(), basic.extol(), hasShadow, basic.hasHeart(), basic.hasStrawDoll(), basic.isRogue(), basic.stamina(), basic.maxStamina());
     }
@@ -380,10 +380,6 @@ public class PlayerStats {
         return getFightingStyle().isPresent() && getFightingStyle().get().getPath().equals("fishman_karate");
     }
 
-    public boolean isFishman() {
-        return getRace().isPresent() && getRace().get().getPath().equals("fishman");
-    }
-
     public boolean isCyborg() {
         return getFightingStyle().isPresent() && getFightingStyle().get().getPath().equals("cyborg");
     }
@@ -420,7 +416,7 @@ public class PlayerStats {
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).isEmpty()) {
                     list.set(i, abilityId);
-                    
+
                     xyz.pixelatedw.mineminenomi.api.abilities.Ability instance = xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.get(ability);
                     if (instance != null && instance.isPassive()) {
                         java.util.List<String> activeList = new java.util.ArrayList<>(combat.activeAbilities());

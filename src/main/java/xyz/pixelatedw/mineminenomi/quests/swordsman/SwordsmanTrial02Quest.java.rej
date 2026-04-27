@@ -1,0 +1,11 @@
+--- SwordsmanTrial02Quest.java
++++ SwordsmanTrial02Quest.java
+@@ -46,7 +46,7 @@
+         super.finishQuest(player);
+
+         if (player.getData(ModDataAttachments.PLAYER_STATS) instanceof PlayerStats stats) {
+-            stats.grantAbility(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "yakkodori"));
++            stats.grantAbility(((net.neoforged.neoforge.registries.DeferredHolder<xyz.pixelatedw.mineminenomi.api.abilities.Ability, ? extends xyz.pixelatedw.mineminenomi.api.abilities.Ability>) xyz.pixelatedw.mineminenomi.init.ModAbilities.YAKKODORI).getId());
+             // send data
+         }
+     }

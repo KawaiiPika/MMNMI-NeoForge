@@ -142,11 +142,11 @@ public class ModAbilities {
     public static final java.util.function.Supplier<Ability> WHITE_OUT = ABILITIES.register("white_out", xyz.pixelatedw.mineminenomi.abilities.moku.WhiteOutAbility::new);
     public static final java.util.function.Supplier<Ability> DESERT_SPADA = ABILITIES.register("desert_spada", xyz.pixelatedw.mineminenomi.abilities.suna.DesertSpadaAbility::new);
     public static final java.util.function.Supplier<Ability> SABLES = ABILITIES.register("sables", xyz.pixelatedw.mineminenomi.abilities.suna.SablesAbility::new);
-    
+
     // Paramecia - Bara Bara
     public static final java.util.function.Supplier<Ability> BARA_BARA_HO = ABILITIES.register("bara_bara_ho", xyz.pixelatedw.mineminenomi.abilities.bara.BaraBaraHoAbility::new);
     public static final java.util.function.Supplier<Ability> BARA_BARA_FESTIVAL = ABILITIES.register("bara_bara_festival", xyz.pixelatedw.mineminenomi.abilities.bara.BaraBaraFestivalAbility::new);
-    
+
     // Paramecia - Bomu Bomu
     public static final java.util.function.Supplier<Ability> BAKUDAN = ABILITIES.register("bakudan", xyz.pixelatedw.mineminenomi.abilities.bomu.BakudanAbility::new);
     public static final java.util.function.Supplier<Ability> NOSE_FANCY_CANNON = ABILITIES.register("nose_fancy_cannon", xyz.pixelatedw.mineminenomi.abilities.bomu.NoseFancyCannonAbility::new);
@@ -495,7 +495,6 @@ public class ModAbilities {
 
     public static final Supplier<Ability> RYU_NO_IBUKI = ABILITIES.register("ryu_no_ibuki", xyz.pixelatedw.mineminenomi.abilities.ryusoken.RyuNoIbukiAbility::new);
     public static final Supplier<Ability> RYU_NO_KAGIZUME = ABILITIES.register("ryu_no_kagizume", xyz.pixelatedw.mineminenomi.abilities.ryusoken.RyuNoKagizumeAbility::new);
-    public static final Supplier<Ability> RYUSOKEN_PASSIVE_BONUSES = ABILITIES.register("ryusoken_passive_bonuses", xyz.pixelatedw.mineminenomi.abilities.ryusoken.RyusokenPassiveBonusesAbility::new);
 
     public static void register(IEventBus bus) {
         ABILITIES.register(bus);

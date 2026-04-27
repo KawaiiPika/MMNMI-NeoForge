@@ -1,43 +1,63 @@
 package xyz.pixelatedw.mineminenomi.abilities.brawler;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
-import xyz.pixelatedw.mineminenomi.api.abilities.basic.PerkAbility;
-import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
+import xyz.pixelatedw.mineminenomi.api.abilities.basic.PassiveStatBonusAbility;
+import xyz.pixelatedw.mineminenomi.init.ModAttributes;
+import xyz.pixelatedw.mineminenomi.init.ModDataAttachments;
 
-public class BrawlerPassiveBonusesAbility extends PerkAbility {
+import java.util.UUID;
+import java.util.function.Predicate;
 
-    private static final ResourceLocation ATTACK_SPEED_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath("mineminenomi", "brawler_attack_speed");
-    // TODO Add Punch Damage modifier when ported
+public class BrawlerPassiveBonusesAbility extends PassiveStatBonusAbility {
+   private static final AttributeModifier BRAWLER_ATTACK_SPEED_MODIFIER;
+   private static final Predicate<LivingEntity> BRAWLER_CHECK;
 
-    public BrawlerPassiveBonusesAbility() {
-        super("Brawler Passive Bonuses", "Provides extra punch damage and attack speed when fighting empty-handed");
-    }
+   public BrawlerPassiveBonusesAbility() {
+      super();
+      this.pushDynamicAttribute(ModAttributes.PUNCH_DAMAGE, this::getModifier);
+      this.pushStaticAttribute(Attributes.ATTACK_SPEED, BRAWLER_ATTACK_SPEED_MODIFIER);
+   }
 
-    @Override
-    public void tick(LivingEntity entity) {
-        if (!this.isUsing(entity)) {
-            PlayerStats stats = PlayerStats.get(entity);
-            if (stats != null && getAbilityId() != null) {
-                stats.setAbilityActive(getAbilityId().toString(), true);
-            }
-        }
+   private AttributeModifier getModifier(LivingEntity entity) {
+      double bonus = this.getBonus(entity);
+      return new AttributeModifier(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "brawler_punch_bonus"), bonus, AttributeModifier.Operation.ADD_VALUE);
+   }
 
-        ItemStack heldItem = entity.getMainHandItem();
-        boolean isEmptyHanded = heldItem.isEmpty();
+   private double getBonus(LivingEntity entity) {
+      double doriki = 0.0;
+      if (entity.hasData(ModDataAttachments.PLAYER_STATS)) {
+         doriki = entity.getData(ModDataAttachments.PLAYER_STATS).getDoriki();
+      }
+      return 2.0 + doriki * 5.0E-4;
+   }
 
-        if (isEmptyHanded) {
-            if (entity.getAttribute(Attributes.ATTACK_SPEED) != null && entity.getAttribute(Attributes.ATTACK_SPEED).getModifier(ATTACK_SPEED_MODIFIER_ID) == null) {
-                // The old code added -0.5 attack speed... Brawler attack speed bonus/penalty
-                entity.getAttribute(Attributes.ATTACK_SPEED).addTransientModifier(new AttributeModifier(ATTACK_SPEED_MODIFIER_ID, -0.5, AttributeModifier.Operation.ADD_VALUE));
-            }
-        } else {
-            if (entity.getAttribute(Attributes.ATTACK_SPEED) != null) {
-                entity.getAttribute(Attributes.ATTACK_SPEED).removeModifier(ATTACK_SPEED_MODIFIER_ID);
-            }
-        }
-    }
+   public Predicate<LivingEntity> getCheck() {
+      return BRAWLER_CHECK;
+   }
+
+   static {
+      BRAWLER_ATTACK_SPEED_MODIFIER = new AttributeModifier(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "brawler_speed_multiplier"), -0.5, AttributeModifier.Operation.ADD_VALUE);
+      BRAWLER_CHECK = (entity) -> {
+         ItemStack heldItem = entity.getMainHandItem();
+         return heldItem.isEmpty();
+      };
+   }
+
+   public xyz.pixelatedw.mineminenomi.api.util.Result canUnlock(LivingEntity entity) {
+      if (entity.hasData(ModDataAttachments.PLAYER_STATS)) {
+         return entity.getData(ModDataAttachments.PLAYER_STATS).isBrawler() ? xyz.pixelatedw.mineminenomi.api.util.Result.success() : xyz.pixelatedw.mineminenomi.api.util.Result.fail(null);
+      }
+      return xyz.pixelatedw.mineminenomi.api.util.Result.fail(null);
+   }
+
+   public net.minecraft.network.chat.Component getDisplayName() {
+       return net.minecraft.network.chat.Component.literal("Brawler Passive Bonuses");
+   }
+
+   public net.minecraft.resources.ResourceLocation getId() {
+       return net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "brawler_passive_bonuses");
+   }
 }

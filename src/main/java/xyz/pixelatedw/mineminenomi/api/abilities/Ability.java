@@ -110,8 +110,8 @@ public abstract class Ability {
         return xyz.pixelatedw.mineminenomi.api.util.Result.success();
     }
 
-    public Result canUnlock(LivingEntity entity) {
-        return Result.success();
+    public xyz.pixelatedw.mineminenomi.api.util.Result canUnlock(LivingEntity entity) {
+        return xyz.pixelatedw.mineminenomi.api.util.Result.success();
     }
 
     protected long startTick = -1;
