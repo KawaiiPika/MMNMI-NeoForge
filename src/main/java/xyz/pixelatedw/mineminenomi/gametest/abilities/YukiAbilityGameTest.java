@@ -45,6 +45,7 @@ public class YukiAbilityGameTest {
     @GameTest(template="empty", timeoutTicks = 200)
     public void testFubukiAoE(GameTestHelper helper) {
         Player mockPlayer = helper.makeMockPlayer(GameType.SURVIVAL); // replaced makeMockServerPlayerInLevel
+        Player mockPlayer = helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
         BlockPos relativeTarget = new BlockPos(2, 1, 2);
 
         // Move player to the absolute position within the test structure

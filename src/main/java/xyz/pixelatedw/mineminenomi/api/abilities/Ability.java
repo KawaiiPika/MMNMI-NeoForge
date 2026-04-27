@@ -114,6 +114,13 @@ public abstract class Ability {
         return xyz.pixelatedw.mineminenomi.api.util.Result.success();
     }
 
+
+    public double getRequiredDoriki() {
+        return 0.0;
+    }
+
+
+
     protected long startTick = -1;
 
     public void tick(LivingEntity entity) {

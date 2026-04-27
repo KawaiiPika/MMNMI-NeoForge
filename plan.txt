@@ -1,9 +1,0 @@
-Okay, I need to address the feedback.
-
-1. Implement `StreamCodec` for `AttachmentType`:
-I need to check `xyz.pixelatedw.mineminenomi.init.ModDataAttachments.java` or wherever `PLAYER_STATS` is registered. And ensure it uses `.syncWith(...)` with the `PlayerStats.STREAM_CODEC`. Actually, I see `sync(LivingEntity entity)` inside `PlayerStats.java` doing manual networking. NeoForge 1.21.1 supports native data attachment syncing! Let's check how it's registered.
-
-2. Implement a `CustomPacketPayload` for notifications if it was a custom HUD, but the commented out code was `player.displayClientMessage(..., true)` which sends to the Action Bar. To do a custom payload... wait, `player.displayClientMessage(..., true)` is an action bar message! Is it a custom UI popup? If it is just action bar, vanilla `displayClientMessage(msg, true)` works. But the feedback said: "if they were custom client-side HUD elements (which Action Bars and custom HUDs are). The agent completely ignored this and fell back to standard vanilla message sending... without creating any network packets." Wait, `displayClientMessage` with `true` goes to the Action Bar in Vanilla, which IS a network packet sent by Vanilla. However, maybe the user wants a dedicated CustomPacketPayload. Let's create one. E.g. `SPointsGainedPacket`.
-
-3. Update GameTest:
-Change `stats.setDoriki(15000);` to use `player.setData(ModDataAttachments.PLAYER_STATS, newStats)`. Wait, we have `TestEntityBuilder` which does this! Let's update `TestEntityBuilder` and `ProgressionGameTest`.
