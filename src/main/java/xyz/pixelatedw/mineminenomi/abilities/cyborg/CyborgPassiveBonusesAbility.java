@@ -1,34 +1,47 @@
 package xyz.pixelatedw.mineminenomi.abilities.cyborg;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import xyz.pixelatedw.mineminenomi.api.abilities.basic.PerkAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.basic.PassiveStatBonusAbility;
+import xyz.pixelatedw.mineminenomi.init.ModAttributes;
+import xyz.pixelatedw.mineminenomi.init.ModDataAttachments;
 
-public class CyborgPassiveBonusesAbility extends PerkAbility {
-    private static final ResourceLocation ARMOR_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath("mineminenomi", "cyborg_armor_bonus");
-    private static final ResourceLocation ARMOR_TOUGHNESS_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath("mineminenomi", "cyborg_armor_toughness_bonus");
+import java.util.function.Predicate;
 
-    public CyborgPassiveBonusesAbility() {
-        super("Cyborg Passive Bonuses", "Provides extra armor, toughness and damage for Cyborgs");
-    }
+public class CyborgPassiveBonusesAbility extends PassiveStatBonusAbility {
+   private static final AttributeModifier CYBORG_ARMOR;
+   private static final AttributeModifier CYBORG_ARMOR_TOUGHNESS;
+   private static final AttributeModifier CYBORG_DAMAGE;
+   private static final Predicate<LivingEntity> CYBORG_CHECK;
 
-    @Override
-    public void tick(LivingEntity entity) {
-        if (!this.isUsing(entity)) {
-            xyz.pixelatedw.mineminenomi.data.entity.PlayerStats stats = xyz.pixelatedw.mineminenomi.data.entity.PlayerStats.get(entity);
-            if (stats != null && getAbilityId() != null) {
-                stats.setAbilityActive(getAbilityId().toString(), true);
-            }
-        }
+   public CyborgPassiveBonusesAbility() {
+      super();
+      this.pushStaticAttribute(Attributes.ARMOR, CYBORG_ARMOR);
+      this.pushStaticAttribute(Attributes.ARMOR_TOUGHNESS, CYBORG_ARMOR_TOUGHNESS);
+      this.pushStaticAttribute(ModAttributes.PUNCH_DAMAGE, CYBORG_DAMAGE);
+   }
 
-        if (entity.getAttribute(Attributes.ARMOR) != null && entity.getAttribute(Attributes.ARMOR).getModifier(ARMOR_MODIFIER_ID) == null) {
-            entity.getAttribute(Attributes.ARMOR).addTransientModifier(new AttributeModifier(ARMOR_MODIFIER_ID, 10.0, AttributeModifier.Operation.ADD_VALUE));
-        }
+   public Predicate<LivingEntity> getCheck() {
+      return CYBORG_CHECK;
+   }
 
-        if (entity.getAttribute(Attributes.ARMOR_TOUGHNESS) != null && entity.getAttribute(Attributes.ARMOR_TOUGHNESS).getModifier(ARMOR_TOUGHNESS_MODIFIER_ID) == null) {
-            entity.getAttribute(Attributes.ARMOR_TOUGHNESS).addTransientModifier(new AttributeModifier(ARMOR_TOUGHNESS_MODIFIER_ID, 4.0, AttributeModifier.Operation.ADD_VALUE));
-        }
-    }
+   static {
+      CYBORG_ARMOR = new AttributeModifier(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "cyborg_armor_bonus"), 10.0, AttributeModifier.Operation.ADD_VALUE);
+      CYBORG_ARMOR_TOUGHNESS = new AttributeModifier(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "cyborg_armor_toughness_bonus"), 4.0, AttributeModifier.Operation.ADD_VALUE);
+      CYBORG_DAMAGE = new AttributeModifier(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "cyborg_damage_bonus"), 2.0, AttributeModifier.Operation.ADD_VALUE);
+      CYBORG_CHECK = (entity) -> entity.hasData(ModDataAttachments.PLAYER_STATS) && entity.getData(ModDataAttachments.PLAYER_STATS).isCyborg();
+   }
+
+   public xyz.pixelatedw.mineminenomi.api.util.Result canUnlock(LivingEntity entity) {
+      return CYBORG_CHECK.test(entity) ? xyz.pixelatedw.mineminenomi.api.util.Result.success() : xyz.pixelatedw.mineminenomi.api.util.Result.fail(null);
+   }
+
+   public net.minecraft.network.chat.Component getDisplayName() {
+       return net.minecraft.network.chat.Component.literal("Cyborg Passive Bonuses");
+   }
+
+   public net.minecraft.resources.ResourceLocation getId() {
+       return net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "cyborg_passive_bonuses");
+   }
 }

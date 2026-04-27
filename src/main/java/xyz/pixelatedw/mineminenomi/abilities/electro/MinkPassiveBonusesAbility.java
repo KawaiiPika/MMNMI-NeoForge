@@ -1,36 +1,55 @@
 package xyz.pixelatedw.mineminenomi.abilities.electro;
 
-import net.minecraft.network.chat.Component;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.resources.ResourceLocation;
-import xyz.pixelatedw.mineminenomi.api.abilities.basic.PerkAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.basic.PassiveStatBonusAbility;
+import xyz.pixelatedw.mineminenomi.init.ModAttributes;
+import xyz.pixelatedw.mineminenomi.init.ModDataAttachments;
+import xyz.pixelatedw.mineminenomi.init.ModTags;
 
-public class MinkPassiveBonusesAbility extends PerkAbility {
+import java.util.function.Predicate;
 
-    private static final ResourceLocation JUMP_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath("mineminenomi", "mink_jump_bonus");
-    private static final ResourceLocation FALL_RESISTANCE_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath("mineminenomi", "mink_fall_resistance_bonus");
+public class MinkPassiveBonusesAbility extends PassiveStatBonusAbility {
+   private static final AttributeModifier SPEED_MODIFIER;
+   private static final AttributeModifier JUMP_MODIFIER;
+   private static final AttributeModifier JUMP_RESISTANCE_MODIFIER;
+   private static final Predicate<LivingEntity> TEMPERATURE_CHECK;
 
-    public MinkPassiveBonusesAbility() {
-        super("Mink Passive Bonuses", "Provides extra jump height and fall resistance for Minks");
-    }
+   public MinkPassiveBonusesAbility() {
+      super();
+      this.pushStaticAttribute(Attributes.MOVEMENT_SPEED, SPEED_MODIFIER);
+      this.pushStaticAttribute(ModAttributes.JUMP_HEIGHT, JUMP_MODIFIER);
+      this.pushStaticAttribute(ModAttributes.FALL_RESISTANCE, JUMP_RESISTANCE_MODIFIER);
+   }
 
-    @Override
-    public void tick(LivingEntity entity) {
-        if (!this.isUsing(entity)) {
-            xyz.pixelatedw.mineminenomi.data.entity.PlayerStats stats = xyz.pixelatedw.mineminenomi.data.entity.PlayerStats.get(entity);
-            if (stats != null && getAbilityId() != null) {
-                stats.setAbilityActive(getAbilityId().toString(), true);
-            }
-        }
+   public Predicate<LivingEntity> getCheck() {
+      return TEMPERATURE_CHECK;
+   }
 
-        if (entity.getAttribute(Attributes.JUMP_STRENGTH) != null && entity.getAttribute(Attributes.JUMP_STRENGTH).getModifier(JUMP_MODIFIER_ID) == null) {
-            entity.getAttribute(Attributes.JUMP_STRENGTH).addTransientModifier(new AttributeModifier(JUMP_MODIFIER_ID, 0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-        }
+   static {
+      SPEED_MODIFIER = new AttributeModifier(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "mink_speed_multiplier"), 0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+      JUMP_MODIFIER = new AttributeModifier(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "mink_jump_boost_addition"), 1.6, AttributeModifier.Operation.ADD_VALUE);
+      JUMP_RESISTANCE_MODIFIER = new AttributeModifier(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "mink_jump_resistance"), 2.25, AttributeModifier.Operation.ADD_VALUE);
+      TEMPERATURE_CHECK = (entity) -> {
+         BlockPos position = entity.blockPosition();
+         return entity.level().getBiome(position).is(ModTags.Biomes.MINK_DEBUFF_BIOMES);
+      };
+   }
 
-        if (entity.getAttribute(Attributes.SAFE_FALL_DISTANCE) != null && entity.getAttribute(Attributes.SAFE_FALL_DISTANCE).getModifier(FALL_RESISTANCE_MODIFIER_ID) == null) {
-            entity.getAttribute(Attributes.SAFE_FALL_DISTANCE).addTransientModifier(new AttributeModifier(FALL_RESISTANCE_MODIFIER_ID, 5.0, AttributeModifier.Operation.ADD_VALUE));
-        }
-    }
+   public xyz.pixelatedw.mineminenomi.api.util.Result canUnlock(LivingEntity entity) {
+      if (entity.hasData(ModDataAttachments.PLAYER_STATS)) {
+         return entity.getData(ModDataAttachments.PLAYER_STATS).isMink() ? xyz.pixelatedw.mineminenomi.api.util.Result.success() : xyz.pixelatedw.mineminenomi.api.util.Result.fail(null);
+      }
+      return xyz.pixelatedw.mineminenomi.api.util.Result.fail(null);
+   }
+
+   public net.minecraft.network.chat.Component getDisplayName() {
+       return net.minecraft.network.chat.Component.literal("Mink Passive Bonuses");
+   }
+
+   public net.minecraft.resources.ResourceLocation getId() {
+       return net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "mink_passive_bonuses");
+   }
 }

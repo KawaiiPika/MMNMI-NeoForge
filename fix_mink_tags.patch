@@ -1,0 +1,15 @@
+--- src/main/java/xyz/pixelatedw/mineminenomi/init/ModTags.java
++++ src/main/java/xyz/pixelatedw/mineminenomi/init/ModTags.java
+@@ -62,5 +62,13 @@
+         public static final TagKey<Item> TIER_4_LOOT = tag("tier_4_loot");
+         public static final TagKey<Item> TIER_5_LOOT = tag("tier_5_loot");
+     }
++
++    public static class Biomes {
++        private static TagKey<net.minecraft.world.level.biome.Biome> tag(String name) {
++            return net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BIOME, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(ModMain.PROJECT_ID, name));
++        }
++
++        public static final TagKey<net.minecraft.world.level.biome.Biome> MINK_DEBUFF_BIOMES = tag("mink_debuff_biomes");
++    }
+ }

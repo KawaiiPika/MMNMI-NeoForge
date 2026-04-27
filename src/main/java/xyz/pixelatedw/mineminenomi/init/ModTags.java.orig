@@ -14,12 +14,4 @@ public class ModTags {
             return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("mineminenomi", name));
         }
     }
-
-    public static class Biomes {
-        private static TagKey<net.minecraft.world.level.biome.Biome> tag(String name) {
-            return net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BIOME, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", name));
-        }
-
-        public static final TagKey<net.minecraft.world.level.biome.Biome> MINK_DEBUFF_BIOMES = tag("mink_debuff_biomes");
-    }
 }

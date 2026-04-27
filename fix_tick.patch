@@ -1,0 +1,16 @@
+--- src/main/java/xyz/pixelatedw/mineminenomi/events/CommonEvents.java
++++ src/main/java/xyz/pixelatedw/mineminenomi/events/CommonEvents.java
+@@ -77,14 +77,6 @@
+                 if (ability.checkInvulnerability(target, source)) {
+                     event.setInvulnerable(true);
+                 }
+-            }
+-
+-            // Tick active passive abilities
+-            for (String activeAbilityId : stats.getCombat().activeAbilities()) {
+-                xyz.pixelatedw.mineminenomi.api.abilities.Ability ability = xyz.pixelatedw.mineminenomi.init.ModAbilities.REGISTRY.get(net.minecraft.resources.ResourceLocation.parse(activeAbilityId));
+-                if (ability instanceof xyz.pixelatedw.mineminenomi.api.abilities.basic.PassiveAbility passiveAbility) {
+-                    passiveAbility.tick(entity);
+-                }
+             }
+         }

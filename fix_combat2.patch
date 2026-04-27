@@ -1,0 +1,11 @@
+--- src/main/java/xyz/pixelatedw/mineminenomi/events/CombatEvents.java
++++ src/main/java/xyz/pixelatedw/mineminenomi/events/CombatEvents.java
+@@ -58,7 +58,7 @@
+                     // Emulate "HitTriggerComponent" logic (unarmed/empty hand check could go here)
+                     if (entity.getMainHandItem().isEmpty()) {
+                          // Add ability damage
+-                         event.getContainer().addModifier(net.neoforged.neoforge.common.damagesource.DamageContainer.Reduction.ABSORPTION, -7.0F); // Emulating added damage
++                         event.getContainer().setNewDamage(event.getContainer().getNewDamage() + 7.0F); // Emulating added damage
+                          attacker.push(attacker.position().subtract(entity.position()).normalize().scale(0.6).add(0, 0.5, 0));
+                     }
+                 }

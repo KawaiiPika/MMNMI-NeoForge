@@ -30,22 +30,20 @@ public class YukiAbilityGameTest {
         }
 
         stats.setDevilFruit(ResourceLocation.fromNamespaceAndPath("mineminenomi", "yuki_yuki_no_mi"));
-        mockPlayer.setData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.PLAYER_STATS, stats);
 
         YukiLogiaAbility ability = new YukiLogiaAbility();
         ability.tick(mockPlayer);
 
         helper.succeedWhen(() -> {
             if (!stats.isLogia()) {
-                helper.fail("YukiLogiaAbility did not set logia state to true"); // Let me just change the method name
+                helper.fail("YukiLogiaAbility did not set logia state to true");
             }
         });
     }
 
     @GameTest(template="empty", timeoutTicks = 200)
     public void testFubukiAoE(GameTestHelper helper) {
-        Player mockPlayer = helper.makeMockPlayer(GameType.SURVIVAL); // replaced makeMockServerPlayerInLevel
-        Player mockPlayer = helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
+        Player mockPlayer = helper.makeMockServerPlayerInLevel();
         BlockPos relativeTarget = new BlockPos(2, 1, 2);
 
         // Move player to the absolute position within the test structure

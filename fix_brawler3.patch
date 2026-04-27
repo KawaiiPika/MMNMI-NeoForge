@@ -1,0 +1,20 @@
+--- src/main/java/xyz/pixelatedw/mineminenomi/abilities/brawler/BrawlerPassiveBonusesAbility.java
++++ src/main/java/xyz/pixelatedw/mineminenomi/abilities/brawler/BrawlerPassiveBonusesAbility.java
+@@ -43,15 +43,15 @@
+          return heldItem.isEmpty();
+       };
+    }
+
+-   @Override
+-   public xyz.pixelatedw.mineminenomi.api.util.Result canUnlock(LivingEntity entity) {
++   public xyz.pixelatedw.mineminenomi.api.util.Result canUnlock(LivingEntity entity) {
+       if (entity.hasData(ModDataAttachments.PLAYER_STATS)) {
+-         return entity.getData(ModDataAttachments.PLAYER_STATS).isBrawler() ? xyz.pixelatedw.mineminenomi.api.util.Result.success() : xyz.pixelatedw.mineminenomi.api.util.Result.fail(net.minecraft.network.chat.Component.literal(""));
++         return entity.getData(ModDataAttachments.PLAYER_STATS).isBrawler() ? xyz.pixelatedw.mineminenomi.api.util.Result.success() : xyz.pixelatedw.mineminenomi.api.util.Result.fail(null);
+       }
+-      return xyz.pixelatedw.mineminenomi.api.util.Result.fail(net.minecraft.network.chat.Component.literal(""));
++      return xyz.pixelatedw.mineminenomi.api.util.Result.fail(null);
+    }
+
+    public net.minecraft.network.chat.Component getDisplayName() {
+        return net.minecraft.network.chat.Component.literal("Brawler Passive Bonuses");

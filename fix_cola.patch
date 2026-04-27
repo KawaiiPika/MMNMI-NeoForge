@@ -1,0 +1,28 @@
+--- src/main/java/xyz/pixelatedw/mineminenomi/abilities/cyborg/ColaBackpackBonusAbility.java
++++ src/main/java/xyz/pixelatedw/mineminenomi/abilities/cyborg/ColaBackpackBonusAbility.java
+@@ -8,6 +8,7 @@
+ import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
+ import xyz.pixelatedw.mineminenomi.init.ModArmors;
+ import xyz.pixelatedw.mineminenomi.init.ModDataAttachments;
++import xyz.pixelatedw.mineminenomi.init.ModDataComponents;
+
+ public class ColaBackpackBonusAbility extends PassiveAbility {
+    public static final int EXTRA_COLA = 500;
+@@ -17,14 +18,18 @@
+    }
+
+    private void removeEvent(LivingEntity entity) {
++      ItemStack headStack = entity.getItemBySlot(EquipmentSlot.CHEST);
+       if (entity instanceof ServerPlayer player) {
+          PlayerStats stats = player.getData(ModDataAttachments.PLAYER_STATS);
+          int cola = Mth.clamp(stats.getCola(), 0, stats.getMaxCola() - EXTRA_COLA);
+          stats.setCola(cola);
+          player.setData(ModDataAttachments.PLAYER_STATS, stats);
++
++         if (!headStack.isEmpty() && headStack.getItem() == ModArmors.COLA_BACKPACK.get()) {
++             headStack.set(ModDataComponents.COLA, Mth.clamp(stats.getCola(), 0, EXTRA_COLA));
++         }
+       }
+    }
+
+    public xyz.pixelatedw.mineminenomi.api.util.Result canUnlock(LivingEntity entity) {

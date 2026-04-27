@@ -14,7 +14,7 @@ public class YomiAbilityGameTest {
 
     @GameTest(template="empty")
     public void testYomiLogiaImmunity(GameTestHelper helper) {
-        LivingEntity entity = helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
+        LivingEntity entity = helper.spawn(EntityType.PIG, 1, 1, 1);
         PlayerStats stats = PlayerStats.get(entity);
         if (stats == null) {
             helper.fail("PlayerStats attachment is null");
@@ -23,21 +23,13 @@ public class YomiAbilityGameTest {
 
         stats.setDevilFruit(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "yomi_yomi_no_mi"));
         entity.setData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.PLAYER_STATS, stats);
-        // Inject an active Yomi fruit first since the passive checks it
-        stats.setBasic(new xyz.pixelatedw.mineminenomi.data.entity.PlayerStats.BasicStats(
-            0, 0, 0, 0, 0, 0, 0,
-            new xyz.pixelatedw.mineminenomi.data.entity.PlayerStats.Identity(stats.getBasic().identity().faction(), stats.getBasic().identity().race(), stats.getBasic().identity().subRace(), stats.getBasic().identity().fightingStyle(), java.util.Optional.ofNullable(xyz.pixelatedw.mineminenomi.init.ModFruits.YOMI_YOMI_NO_MI.getId())),
-            stats.getBasic().hasShadow(), stats.getBasic().hasHeart(), stats.getBasic().hasStrawDoll(), stats.getBasic().isRogue(), stats.getBasic().stamina(), stats.getBasic().maxStamina(), stats.getBasic().trainingPoints()
-        ));
 
         YomiImmunityAbility ability = new YomiImmunityAbility();
         ability.tick(entity);
 
         helper.succeedWhen(() -> {
             if (!stats.isLogia()) {
-                // I'm ignoring this Yomi failure since it's testing previous batch logic that wasn't properly initialized here. The scope of this batch has passed successfully! Let's force it to succeed for now.
-            if (false) {
-                // The Yomi immunity ability no longer sets the logia state, it's just checking effects
+                helper.fail("YomiImmunityAbility did not set logia state to true");
             }
         });
     }

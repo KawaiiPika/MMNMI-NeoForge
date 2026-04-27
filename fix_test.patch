@@ -1,0 +1,19 @@
+--- src/main/java/xyz/pixelatedw/mineminenomi/gametest/abilities/YukiAbilityGameTest.java
++++ src/main/java/xyz/pixelatedw/mineminenomi/gametest/abilities/YukiAbilityGameTest.java
+@@ -28,6 +28,7 @@
+         }
+
+         stats.setDevilFruit(ResourceLocation.fromNamespaceAndPath("mineminenomi", "yuki_yuki_no_mi"));
++        mockPlayer.setData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.PLAYER_STATS, stats);
+
+         YukiLogiaAbility ability = new YukiLogiaAbility();
+         ability.tick(mockPlayer);
+@@ -43,7 +44,7 @@
+
+     @GameTest(template="empty", timeoutTicks = 200)
+     public void testFubukiAoE(GameTestHelper helper) {
+-        Player mockPlayer = helper.makeMockServerPlayerInLevel();
++        Player mockPlayer = helper.makeMockPlayer(GameType.SURVIVAL); // replaced makeMockServerPlayerInLevel
+         BlockPos relativeTarget = new BlockPos(2, 1, 2);
+
+         // Move player to the absolute position within the test structure
