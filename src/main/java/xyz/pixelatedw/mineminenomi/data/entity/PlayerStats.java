@@ -109,25 +109,22 @@ public class PlayerStats {
                               float busoshokuHakiExp, float kenbunshokuHakiExp, int hakiOveruse, java.util.List<String> equippedAbilities,
                               java.util.List<String> activeAbilities,
                               int currentCombatBarSet, int selectedAbilitySlot, boolean isInCombatMode, boolean busoshokuActive, boolean kenbunshokuActive,
-                              java.util.Map<String, Long> abilityCooldowns, java.util.Map<String, Long> abilityMaxCooldowns) {
+                              java.util.Map<String, Long> abilityCooldowns, java.util.Map<String, Long> abilityMaxCooldowns,
+                              java.util.Map<String, Integer> abilityStates) {
+        private record CooldownData(java.util.Map<String, Long> cooldowns, java.util.Map<String, Long> maxCooldowns, java.util.Map<String, Integer> states) {}
+        private static final Codec<CooldownData> COOLDOWN_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                Codec.unboundedMap(Codec.STRING, Codec.LONG).optionalFieldOf("abilityCooldowns", new java.util.HashMap<>()).forGetter(CooldownData::cooldowns),
+                Codec.unboundedMap(Codec.STRING, Codec.LONG).optionalFieldOf("abilityMaxCooldowns", new java.util.HashMap<>()).forGetter(CooldownData::maxCooldowns),
+                Codec.unboundedMap(Codec.STRING, Codec.INT).optionalFieldOf("abilityStates", new java.util.HashMap<>()).forGetter(CooldownData::states)
+        ).apply(instance, CooldownData::new));
+
         public static final Codec<CombatStats> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                Codec.BOOL.fieldOf("isLogia").forGetter(CombatStats::isLogia),
-                Codec.BOOL.fieldOf("hasYamiPower").forGetter(CombatStats::hasYamiPower),
-                Codec.BOOL.fieldOf("hasYomiPower").forGetter(CombatStats::hasYomiPower),
-                Codec.BOOL.fieldOf("hasAwakenedFruit").forGetter(CombatStats::hasAwakenedFruit),
-                Codec.FLOAT.fieldOf("busoshokuHakiExp").forGetter(CombatStats::busoshokuHakiExp),
-                Codec.FLOAT.fieldOf("kenbunshokuHakiExp").forGetter(CombatStats::kenbunshokuHakiExp),
-                Codec.INT.fieldOf("hakiOveruse").forGetter(CombatStats::hakiOveruse),
-                Codec.STRING.listOf().fieldOf("equippedAbilities").forGetter(CombatStats::equippedAbilities),
-                Codec.STRING.listOf().fieldOf("activeAbilities").forGetter(CombatStats::activeAbilities),
-                Codec.INT.fieldOf("currentCombatBarSet").forGetter(CombatStats::currentCombatBarSet),
-                Codec.INT.fieldOf("selectedAbilitySlot").forGetter(CombatStats::selectedAbilitySlot),
-                Codec.BOOL.fieldOf("isInCombatMode").forGetter(CombatStats::isInCombatMode),
-                Codec.BOOL.fieldOf("busoshokuActive").forGetter(CombatStats::busoshokuActive),
-                Codec.BOOL.fieldOf("kenbunshokuActive").forGetter(CombatStats::kenbunshokuActive),
-                Codec.unboundedMap(Codec.STRING, Codec.LONG).fieldOf("abilityCooldowns").forGetter(CombatStats::abilityCooldowns),
-                Codec.unboundedMap(Codec.STRING, Codec.LONG).fieldOf("abilityMaxCooldowns").forGetter(CombatStats::abilityMaxCooldowns)
-        ).apply(instance, CombatStats::new));
+                Codec.BOOL.fieldOf("isLogia").forGetter(CombatStats::isLogia), Codec.BOOL.fieldOf("hasYamiPower").forGetter(CombatStats::hasYamiPower), Codec.BOOL.fieldOf("hasYomiPower").forGetter(CombatStats::hasYomiPower), Codec.BOOL.fieldOf("hasAwakenedFruit").forGetter(CombatStats::hasAwakenedFruit),
+                Codec.FLOAT.fieldOf("busoshokuHakiExp").forGetter(CombatStats::busoshokuHakiExp), Codec.FLOAT.fieldOf("kenbunshokuHakiExp").forGetter(CombatStats::kenbunshokuHakiExp), Codec.INT.fieldOf("hakiOveruse").forGetter(CombatStats::hakiOveruse), Codec.STRING.listOf().fieldOf("equippedAbilities").forGetter(CombatStats::equippedAbilities),
+                Codec.STRING.listOf().fieldOf("activeAbilities").forGetter(CombatStats::activeAbilities), Codec.INT.fieldOf("currentCombatBarSet").forGetter(CombatStats::currentCombatBarSet), Codec.INT.fieldOf("selectedAbilitySlot").forGetter(CombatStats::selectedAbilitySlot), Codec.BOOL.fieldOf("isInCombatMode").forGetter(CombatStats::isInCombatMode),
+                Codec.BOOL.fieldOf("busoshokuActive").forGetter(CombatStats::busoshokuActive), Codec.BOOL.fieldOf("kenbunshokuActive").forGetter(CombatStats::kenbunshokuActive),
+                COOLDOWN_CODEC.optionalFieldOf("abilityData", new CooldownData(new java.util.HashMap<>(), new java.util.HashMap<>(), new java.util.HashMap<>())).forGetter(c -> new CooldownData(c.abilityCooldowns(), c.abilityMaxCooldowns(), c.abilityStates()))
+        ).apply(instance, (a,b,c,d,e,f,g,h,i,j,k,l,m,n, data) -> new CombatStats(a,b,c,d,e,f,g,h,i,j,k,l,m,n, data.cooldowns(), data.maxCooldowns(), data.states())));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, CombatStats> STREAM_CODEC = new StreamCodec<RegistryFriendlyByteBuf, CombatStats>() {
             @Override
@@ -139,7 +136,8 @@ public class PlayerStats {
                         ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list()).decode(buffer),
                         buffer.readVarInt(), buffer.readVarInt(), buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean(),
                         ByteBufCodecs.<RegistryFriendlyByteBuf, String, Long, java.util.Map<String, Long>>map(java.util.HashMap::new, ByteBufCodecs.STRING_UTF8, ByteBufCodecs.VAR_LONG).decode(buffer),
-                        ByteBufCodecs.<RegistryFriendlyByteBuf, String, Long, java.util.Map<String, Long>>map(java.util.HashMap::new, ByteBufCodecs.STRING_UTF8, ByteBufCodecs.VAR_LONG).decode(buffer)
+                        ByteBufCodecs.<RegistryFriendlyByteBuf, String, Long, java.util.Map<String, Long>>map(java.util.HashMap::new, ByteBufCodecs.STRING_UTF8, ByteBufCodecs.VAR_LONG).decode(buffer),
+                        ByteBufCodecs.<RegistryFriendlyByteBuf, String, Integer, java.util.Map<String, Integer>>map(java.util.HashMap::new, ByteBufCodecs.STRING_UTF8, ByteBufCodecs.VAR_INT).decode(buffer)
                 );
             }
 
@@ -161,6 +159,7 @@ public class PlayerStats {
                 buffer.writeBoolean(value.kenbunshokuActive());
                 ByteBufCodecs.<RegistryFriendlyByteBuf, String, Long, java.util.Map<String, Long>>map(java.util.HashMap::new, ByteBufCodecs.STRING_UTF8, ByteBufCodecs.VAR_LONG).encode(buffer, value.abilityCooldowns());
                 ByteBufCodecs.<RegistryFriendlyByteBuf, String, Long, java.util.Map<String, Long>>map(java.util.HashMap::new, ByteBufCodecs.STRING_UTF8, ByteBufCodecs.VAR_LONG).encode(buffer, value.abilityMaxCooldowns());
+                ByteBufCodecs.<RegistryFriendlyByteBuf, String, Integer, java.util.Map<String, Integer>>map(java.util.HashMap::new, ByteBufCodecs.STRING_UTF8, ByteBufCodecs.VAR_INT).encode(buffer, value.abilityStates());
             }
         };
     }
@@ -187,7 +186,7 @@ public class PlayerStats {
     );
 
     private BasicStats basic = new BasicStats(0, 100, 0, 0, 0, 0, 0, new Identity(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty()), true, true, true, false, 100.0, 100.0, new HashMap<>());
-    private CombatStats combat = new CombatStats(false, false, false, false, 0, 0, 0, new java.util.ArrayList<>(java.util.Collections.nCopies(24, "")), new java.util.ArrayList<>(), 0, 0, false, false, false, new java.util.HashMap<>(), new java.util.HashMap<>());
+    private CombatStats combat = new CombatStats(false, false, false, false, 0, 0, 0, new java.util.ArrayList<>(java.util.Collections.nCopies(24, "")), new java.util.ArrayList<>(), 0, 0, false, false, false, new java.util.HashMap<>(), new java.util.HashMap<>(), new java.util.HashMap<>());
 
     public PlayerStats() {}
 
@@ -240,7 +239,7 @@ public class PlayerStats {
     public boolean isBandit() { return basic.identity().faction().isPresent() && basic.identity().faction().get().getPath().equals("bandit"); }
 
     public void setLogia(boolean logia) {
-        this.combat = new CombatStats(logia, combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), combat.equippedAbilities(), combat.activeAbilities(), combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(), combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns());
+        this.combat = new CombatStats(logia, combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), combat.equippedAbilities(), combat.activeAbilities(), combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(), combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns(), combat.abilityStates());
     }
 
     public int getTrainingPoints(TrainingPointType type) {
@@ -329,32 +328,32 @@ public class PlayerStats {
 
     public void setBusoshokuHakiExp(float exp) {
         float newExp = Math.min(Math.max(0, exp), 100.0f);
-        this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), newExp, combat.kenbunshokuHakiExp(), combat.hakiOveruse(), combat.equippedAbilities(), combat.activeAbilities(), combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(), combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns());
+        this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), newExp, combat.kenbunshokuHakiExp(), combat.hakiOveruse(), combat.equippedAbilities(), combat.activeAbilities(), combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(), combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns(), combat.abilityStates());
     }
 
     public void setKenbunshokuHakiExp(float exp) {
         float newExp = Math.min(Math.max(0, exp), 100.0f);
-        this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), newExp, combat.hakiOveruse(), combat.equippedAbilities(), combat.activeAbilities(), combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(), combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns());
+        this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), newExp, combat.hakiOveruse(), combat.equippedAbilities(), combat.activeAbilities(), combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(), combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns(), combat.abilityStates());
     }
 
     public void setBusoshokuActive(boolean active) {
-        this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), combat.equippedAbilities(), combat.activeAbilities(), combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(), active, combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns());
+        this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), combat.equippedAbilities(), combat.activeAbilities(), combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(), active, combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns(), combat.abilityStates());
     }
 
     public void setKenbunshokuActive(boolean active) {
-        this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), combat.equippedAbilities(), combat.activeAbilities(), combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(), combat.busoshokuActive(), active, combat.abilityCooldowns(), combat.abilityMaxCooldowns());
+        this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), combat.equippedAbilities(), combat.activeAbilities(), combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(), combat.busoshokuActive(), active, combat.abilityCooldowns(), combat.abilityMaxCooldowns(), combat.abilityStates());
     }
 
     public void setCombatBarSet(int set) {
-        this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), combat.equippedAbilities(), combat.activeAbilities(), set, combat.selectedAbilitySlot(), combat.isInCombatMode(), combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns());
+        this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), combat.equippedAbilities(), combat.activeAbilities(), set, combat.selectedAbilitySlot(), combat.isInCombatMode(), combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns(), combat.abilityStates());
     }
 
     public void setInCombatMode(boolean inCombatMode) {
-        this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), combat.equippedAbilities(), combat.activeAbilities(), combat.currentCombatBarSet(), combat.selectedAbilitySlot(), inCombatMode, combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns());
+        this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), combat.equippedAbilities(), combat.activeAbilities(), combat.currentCombatBarSet(), combat.selectedAbilitySlot(), inCombatMode, combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns(), combat.abilityStates());
     }
 
     public void setSelectedAbilitySlot(int slot) {
-        this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), combat.equippedAbilities(), combat.activeAbilities(), combat.currentCombatBarSet(), slot, combat.isInCombatMode(), combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns());
+        this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), combat.equippedAbilities(), combat.activeAbilities(), combat.currentCombatBarSet(), slot, combat.isInCombatMode(), combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns(), combat.abilityStates());
     }
 
     private BasicStats updateBasicStats(Identity identity) {
@@ -369,7 +368,7 @@ public class PlayerStats {
         java.util.List<String> list = new java.util.ArrayList<>(combat.equippedAbilities());
         if (slot >= 0 && slot < list.size()) {
             list.set(slot, ability != null ? ability.toString() : "");
-            this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), list, combat.activeAbilities(), combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(), combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns());
+            this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), list, combat.activeAbilities(), combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(), combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns(), combat.abilityStates());
         }
     }
 
@@ -386,14 +385,14 @@ public class PlayerStats {
                     if (instance != null && instance.isPassive()) {
                         java.util.List<String> activeList = new java.util.ArrayList<>(combat.activeAbilities());
                         if (!activeList.contains(abilityId)) activeList.add(abilityId);
-                        this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), list, activeList, combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(), combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns());
+                        this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), list, activeList, combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(), combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns(), combat.abilityStates());
                         return;
                     }
 
                     break;
                 }
             }
-            this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), list, combat.activeAbilities(), combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(), combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns());
+            this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(), combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), list, combat.activeAbilities(), combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(), combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns(), combat.abilityStates());
         }
     }
 
@@ -418,7 +417,7 @@ public class PlayerStats {
         this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(),
                 combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), combat.equippedAbilities(),
                 activeList, combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(),
-                combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns());
+                combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns(), combat.abilityStates());
     }
 
     public void setAbilityCooldown(String abilityId, long cooldownDurationTicks, long currentGameTime) {
@@ -429,7 +428,21 @@ public class PlayerStats {
         this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(),
                 combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), combat.equippedAbilities(),
                 combat.activeAbilities(), combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(),
-                combat.busoshokuActive(), combat.kenbunshokuActive(), cooldowns, maxCooldowns);
+                combat.busoshokuActive(), combat.kenbunshokuActive(), cooldowns, maxCooldowns, combat.abilityStates());
+    }
+
+    public int getAbilityState(String key) {
+        if (this.combat.abilityStates() == null) return 0;
+        return this.combat.abilityStates().getOrDefault(key, 0);
+    }
+
+    public void setAbilityState(String key, int value) {
+        java.util.Map<String, Integer> states = this.combat.abilityStates() != null ? new java.util.HashMap<>(this.combat.abilityStates()) : new java.util.HashMap<>();
+        states.put(key, value);
+        this.combat = new CombatStats(combat.isLogia(), combat.hasYamiPower(), combat.hasYomiPower(), combat.hasAwakenedFruit(),
+                combat.busoshokuHakiExp(), combat.kenbunshokuHakiExp(), combat.hakiOveruse(), combat.equippedAbilities(),
+                combat.activeAbilities(), combat.currentCombatBarSet(), combat.selectedAbilitySlot(), combat.isInCombatMode(),
+                combat.busoshokuActive(), combat.kenbunshokuActive(), combat.abilityCooldowns(), combat.abilityMaxCooldowns(), states);
     }
 
     public java.util.List<String> getActiveAbilities() {

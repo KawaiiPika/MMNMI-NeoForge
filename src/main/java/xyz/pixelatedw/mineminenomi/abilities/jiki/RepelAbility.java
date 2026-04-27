@@ -15,25 +15,42 @@ public class RepelAbility extends Ability {
 
     @Override
     protected void startUsing(LivingEntity entity) {
-        if (!entity.level().isClientSide) {
-            for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(20.0))) {
-                if (target instanceof ItemEntity itemEntity) {
-                    Vec3 push = itemEntity.position().subtract(entity.position()).normalize().scale(2.0);
-                    itemEntity.setDeltaMovement(push.x, 0.5, push.z);
-                    itemEntity.setNoPickUpDelay();
-                } else if (target instanceof LivingEntity living) {
-                    // Similar to Attract, simple push logic for armor wearers in this port
-                    boolean hasArmor = false;
-                    for (var armor : living.getArmorSlots()) {
-                        if (!armor.isEmpty()) { hasArmor = true; break; }
-                    }
-                    if (hasArmor) {
-                        Vec3 push = living.position().subtract(entity.position()).normalize().scale(2.0);
-                        living.setDeltaMovement(push.x, 0.5, push.z);
-                    }
-                }
+        // Handled in onTick
+    }
+
+    @Override
+    protected void stopUsing(LivingEntity entity) {
+        this.startCooldown(entity, 100);
+    }
+
+    @Override
+    public void onTick(LivingEntity entity, long duration) {
+        if (duration > 100) {
+            this.stop(entity);
+            return;
+        }
+
+        if (duration % 5 != 0) return;
+
+        var aabb = entity.getBoundingBox().inflate(20.0);
+
+        for (ItemEntity itemEntity : entity.level().getEntitiesOfClass(ItemEntity.class, aabb)) {
+            if (itemEntity.getItem().getItem() instanceof net.minecraft.world.item.ArmorItem || itemEntity.getItem().getItem() instanceof net.minecraft.world.item.TieredItem) {
+                Vec3 push = itemEntity.position().subtract(entity.position()).normalize().scale(1.2);
+                itemEntity.push(push.x, 0.2, push.z);
+                itemEntity.setNoPickUpDelay();
             }
-            this.startCooldown(entity, 100);
+        }
+
+        for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, aabb, e -> e != entity)) {
+            boolean hasArmor = false;
+            for (var armor : living.getArmorSlots()) {
+                if (!armor.isEmpty()) { hasArmor = true; break; }
+            }
+            if (hasArmor || (!living.getMainHandItem().isEmpty() && living.getMainHandItem().getItem() instanceof net.minecraft.world.item.TieredItem)) {
+                Vec3 push = living.position().subtract(entity.position()).normalize().scale(0.8);
+                living.push(push.x, 0.2, push.z);
+            }
         }
     }
 

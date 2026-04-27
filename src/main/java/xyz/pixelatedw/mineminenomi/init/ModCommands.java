@@ -18,5 +18,9 @@ public class ModCommands {
         HakiExpCommand.register(event.getDispatcher(), event.getBuildContext());
         RemoveDFCommand.register(event.getDispatcher(), event.getBuildContext());
         PointsCommand.register(event.getDispatcher(), event.getBuildContext());
+        AbilityCommand.register(event.getDispatcher(), event.getBuildContext());
+        QuestCommand.register(event.getDispatcher(), event.getBuildContext());
+        ChallengeCommand.register(event.getDispatcher(), event.getBuildContext());
+        CheckFruitsCommand.register(event.getDispatcher(), event.getBuildContext());
     }
 }

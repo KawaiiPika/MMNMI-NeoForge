@@ -1,12 +1,12 @@
 package xyz.pixelatedw.mineminenomi.api.helpers;
 
 import net.minecraft.world.entity.LivingEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityCore;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.Entity;
 
 public class AbilityHelper {
-    public static boolean verifyIfAbilityIsBanned(AbilityCore<?> core) {
+    public static boolean verifyIfAbilityIsBanned(Ability ability) {
         return false;
     }
 
@@ -40,7 +40,7 @@ public class AbilityHelper {
         );
     }
 
-    public static void checkAndUnlockAbility(LivingEntity entity, AbilityCore<?> core) {
+    public static void checkAndUnlockAbility(LivingEntity entity, Ability ability) {
         // Stub
     }
 

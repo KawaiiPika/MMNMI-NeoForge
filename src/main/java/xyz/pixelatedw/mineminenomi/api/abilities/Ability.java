@@ -147,7 +147,13 @@ public abstract class Ability {
     public void onDamageTaken(LivingEntity entity, net.minecraft.world.damagesource.DamageSource source) {}
 
     public long getDuration(LivingEntity entity) {
-        return startTick == -1 ? 0 : entity.level().getGameTime() - startTick;
+        PlayerStats stats = PlayerStats.get(entity);
+        net.minecraft.resources.ResourceLocation id = getAbilityId();
+        if (stats != null && id != null && stats.isAbilityActive(id.toString())) {
+            long start = stats.getAbilityState(id.toString() + "_start_tick");
+            return (entity.level().getGameTime() % Integer.MAX_VALUE) - start;
+        }
+        return 0;
     }
 
     public net.minecraft.resources.ResourceLocation getTexture() {

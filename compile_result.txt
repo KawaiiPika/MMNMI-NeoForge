@@ -1,0 +1,14 @@
+ERROR:
+odEntities
+      public static final Supplier<EntityType<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.zushi.SagariNoRyuseiProjectile>> SAGARI_NO_RYUSEI_PROJECTILE = ModRegistry.ENTITY_TYPES.register("sagari_no_ryusei_projectile", () -> EntityType.Builder.<xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.zushi.SagariNoRyuseiProjectile>of(xyz.pixelatedw.mineminenomi.entities.projectiles.abilities.zushi.SagariNoRyuseiProjectile::new, MobCategory.MISC).sized(24.0F, 24.0F).clientTrackingRange(10).updateInterval(20).build("sagari_no_ryusei_projectile"));
+                                                                                                                                          ^
+  4 errors
+  15 warnings
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+BUILD FAILED in 9s
+2 actionable tasks: 1 executed, 1 up-to-date
+Configuration cache entry reused.
