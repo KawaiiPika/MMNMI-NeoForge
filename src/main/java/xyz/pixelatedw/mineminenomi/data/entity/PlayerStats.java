@@ -207,6 +207,8 @@ public class PlayerStats {
     public double getDoriki() { return basic.doriki(); }
     public long getBelly() { return basic.belly(); }
     public long getBounty() { return basic.bounty(); }
+
+    public double getLoyalty() { return basic.loyalty(); }
     public Optional<ResourceLocation> getFaction() { return basic.identity().faction(); }
     public Optional<ResourceLocation> getRace() { return basic.identity().race(); }
     public Optional<ResourceLocation> getSubRace() { return basic.identity().subRace(); }
@@ -267,6 +269,27 @@ public class PlayerStats {
         setBelly(getBelly() + amount);
     }
 
+
+    public void alterBounty(long amount) {
+        setBounty(getBounty() + amount);
+    }
+
+    public void alterDoriki(double amount) {
+        setDoriki(getDoriki() + amount);
+    }
+
+    public void alterLoyalty(double amount) {
+        setLoyalty(getLoyalty() + amount);
+    }
+
+    public void alterBusoshokuHakiExp(float amount) {
+        setBusoshokuHakiExp(getBusoshokuHakiExp() + amount);
+    }
+
+    public void alterKenbunshokuHakiExp(float amount) {
+        setKenbunshokuHakiExp(getKenbunshokuHakiExp() + amount);
+    }
+
     public void setExtol(long extol) {
         this.basic = updateBasicStats(basic.doriki(), basic.cola(), basic.ultraCola(), basic.loyalty(), basic.bounty(), basic.belly(), extol, basic.hasShadow(), basic.hasHeart(), basic.hasStrawDoll(), basic.isRogue(), basic.stamina(), basic.maxStamina());
     }
@@ -293,6 +316,11 @@ public class PlayerStats {
 
     public boolean hasStrawDoll() { return basic.hasStrawDoll(); }
 
+
+    public void setLoyalty(double loyalty) {
+        this.basic = updateBasicStats(basic.doriki(), basic.cola(), basic.ultraCola(), loyalty, basic.bounty(), basic.belly(), basic.extol(), basic.hasShadow(), basic.hasHeart(), basic.hasStrawDoll(), basic.isRogue(), basic.stamina(), basic.maxStamina());
+    }
+
     public void setDoriki(double doriki) {
         double newDoriki = Math.min(Math.max(0, doriki), 10000.0);
         this.basic = updateBasicStats(newDoriki, basic.cola(), basic.ultraCola(), basic.loyalty(), basic.bounty(), basic.belly(), basic.extol(), basic.hasShadow(), basic.hasHeart(), basic.hasStrawDoll(), basic.isRogue(), basic.stamina(), basic.maxStamina());
@@ -306,38 +334,6 @@ public class PlayerStats {
         Identity newIdentity = new Identity(Optional.ofNullable(faction), basic.identity().race(), basic.identity().subRace(), basic.identity().fightingStyle(), basic.identity().devilFruit());
         this.basic = updateBasicStats(newIdentity);
     }
-    public double getLoyalty() { return basic.loyalty(); }
-
-
-
-    public void setLoyalty(double loyalty) {
-
-        double newLoyalty = Math.min(Math.max(-100, loyalty), 100.0);
-
-        this.basic = updateBasicStats(basic.doriki(), basic.cola(), basic.ultraCola(), newLoyalty, basic.bounty(), basic.belly(), basic.extol(), basic.hasShadow(), basic.hasHeart(), basic.hasStrawDoll(), basic.isRogue(), basic.stamina(), basic.maxStamina());
-
-    }
-
-
-
-    public boolean alterLoyalty(double amount, xyz.pixelatedw.mineminenomi.api.enums.StatChangeSource source) {
-
-        double currentLoyalty = basic.loyalty();
-
-        double newLoyalty = Math.min(Math.max(-100, currentLoyalty + amount), 100.0);
-
-        if (currentLoyalty != newLoyalty) {
-
-            setLoyalty(newLoyalty);
-
-            return true;
-
-        }
-
-        return false;
-
-    }
-
 
     public void setRace(ResourceLocation race) {
         Identity newIdentity = new Identity(basic.identity().faction(), Optional.ofNullable(race), basic.identity().subRace(), basic.identity().fightingStyle(), basic.identity().devilFruit());
@@ -475,14 +471,12 @@ public class PlayerStats {
     public void setCombat(CombatStats combat) { this.combat = combat; }
 
     public void sync(LivingEntity entity) {
-        if (entity instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
-            if (serverPlayer.connection != null) {
-                try {
-                    xyz.pixelatedw.mineminenomi.networking.ModNetworking.sendTo(new xyz.pixelatedw.mineminenomi.networking.packets.SUpdatePlayerStatsPacket(this), serverPlayer);
-                } catch (Exception e) {
-                    // Ignore packet errors for mock players in GameTests
-                }
-            }
+
+        // Native sync is handled by AttachmentType.builder().sync() in ModDataAttachments when entity.setData is used.
+        try {
+            entity.setData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.PLAYER_STATS, this);
+        } catch (RuntimeException | Error e) {
+            // Ignored for GameTests where MockPlayers do not have proper network channels registered
         }
     }
 }

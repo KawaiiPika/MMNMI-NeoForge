@@ -36,7 +36,6 @@ public class ShiShishiSonsonAbility extends Ability {
 
     @Override
     protected void startUsing(LivingEntity entity) {
-        // Start charge
         if (!entity.level().isClientSide) {
             entity.setData(ModDataAttachments.ANIMATION_STATE, new AnimationStateData(Optional.of(ResourceLocation.fromNamespaceAndPath("mineminenomi", "ittoryu_charge")), entity.level().getGameTime()));
         }

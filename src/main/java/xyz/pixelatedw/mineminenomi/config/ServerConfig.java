@@ -27,4 +27,55 @@ public class ServerConfig {
     public static int getAbilityBars() {
         return INSTANCE.maxAbilityBars.get();
     }
+
+
+    public static boolean isMobRewardsEnabled() {
+        return true;
+    }
+
+    public static double getDorikiRewardMultiplier() {
+        return 1.0;
+    }
+
+    public static double getBellyRewardMultiplier() {
+        return 1.0;
+    }
+
+    public static double getBountyRewardMultiplier() {
+        return 1.0;
+    }
+
+    public static double getHakiExpMultiplier() {
+        return 1.0;
+    }
+
+    public static double getLoyaltyMultiplier() {
+        return 1.0;
+    }
+
+    public static boolean isMinimumDorikiPerKillEnabled() {
+        return false;
+    }
+
+    public static float getHakiExpLimit() {
+        return 100.0f;
+    }
+
+    public static double getDorikiKeepPercentage() {
+        return 10.0;
+    }
+
+    public static double getBountyKeepPercentage() {
+        return 10.0;
+    }
+
+    public static double getBellyKeepPercentage() {
+        return 10.0;
+    }
+
+    public static double getDorikiLimit() {
+        return 10000.0;
+    }
+
+
 }
