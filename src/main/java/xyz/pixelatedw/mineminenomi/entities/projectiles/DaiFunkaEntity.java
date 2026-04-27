@@ -75,9 +75,4 @@ public class DaiFunkaEntity extends ThrowableItemProjectile {
             }
         }
     }
-
-    @Override
-    public boolean deflect(net.minecraft.world.entity.projectile.ProjectileDeflection deflection, net.minecraft.world.entity.Entity entity, net.minecraft.world.entity.Entity owner, boolean deflects) {
-        return false; // These elemental projectiles are too dense/volatile to deflect normally
-    }
 }

@@ -483,6 +483,7 @@ public class PlayerStats {
                     // Ignore packet errors for mock players in GameTests
                 }
             }
+            xyz.pixelatedw.mineminenomi.networking.ModNetworking.sendTo(new xyz.pixelatedw.mineminenomi.networking.packets.SUpdatePlayerStatsPacket(this), serverPlayer);
         }
     }
 }

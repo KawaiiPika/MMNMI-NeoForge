@@ -4,42 +4,61 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.block.Blocks;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
+import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 
 public class LavaFlowAbility extends Ability {
-
-    private static final int HOLD_TIME = 100;
-    private int originY = -1;
 
     public LavaFlowAbility() {
         super(ResourceLocation.fromNamespaceAndPath("mineminenomi", "magu_magu_no_mi"));
     }
 
     @Override
+    public boolean isUsing(LivingEntity entity) {
+        PlayerStats stats = PlayerStats.get(entity);
+        return stats != null && stats.isAbilityActive(this.getId().toString());
+    }
+
+    @Override
     protected void startUsing(LivingEntity entity) {
-        this.originY = entity.blockPosition().getY() - 5;
+        PlayerStats stats = PlayerStats.get(entity);
+        if (stats != null) {
+            stats.setAbilityActive(this.getId().toString(), true);
+            stats.sync(entity);
+        }
+    }
+
+    @Override
+    protected void stopUsing(LivingEntity entity) {
+        PlayerStats stats = PlayerStats.get(entity);
+        if (stats != null) {
+            stats.setAbilityActive(this.getId().toString(), false);
+            stats.sync(entity);
+        }
     }
 
     @Override
     protected void onTick(LivingEntity entity, long duration) {
         if (!entity.level().isClientSide) {
-            if (this.originY >= 0) {
-                BlockPos pos = entity.blockPosition();
-                boolean isBlockBelowOrigin = pos.getY() < this.originY;
-                boolean areEyesInLava = entity.isEyeInFluidType(net.neoforged.neoforge.common.NeoForgeMod.LAVA_TYPE.value());
-
-                if (!areEyesInLava) {
-                    MaguHelper.generateLavaPool(entity.level(), entity.blockPosition().below(2), 4);
-                } else if (areEyesInLava && !isBlockBelowOrigin) {
-                    MaguHelper.generateLavaPool(entity.level(), entity.blockPosition().below(1), 3);
+            BlockPos pos = entity.blockPosition().below();
+            for (int x = -2; x <= 2; x++) {
+                for (int z = -2; z <= 2; z++) {
+                    BlockPos targetPos = pos.offset(x, 0, z);
+                    if (entity.level().getBlockState(targetPos).isSolidRender(entity.level(), targetPos)) {
+                        entity.level().setBlockAndUpdate(targetPos, Blocks.MAGMA_BLOCK.defaultBlockState());
+                    }
                 }
             }
         }
         
-        if (duration >= HOLD_TIME) {
-            this.stop(entity);
-            this.startCooldown(entity, 300);
+        if (duration >= 200) { // 10 seconds
+            stopUsing(entity);
         }
+    }
+
+    private ResourceLocation getId() {
+        return ResourceLocation.fromNamespaceAndPath("mineminenomi", "lava_flow");
     }
 
     @Override

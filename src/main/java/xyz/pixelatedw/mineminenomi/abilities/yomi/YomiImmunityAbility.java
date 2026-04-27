@@ -24,8 +24,6 @@ public class YomiImmunityAbility extends Ability {
     @Override
     public void tick(LivingEntity entity) {
         super.tick(entity);
-        xyz.pixelatedw.mineminenomi.data.entity.PlayerStats stats = xyz.pixelatedw.mineminenomi.data.entity.PlayerStats.get(entity);
-        if (stats != null && !stats.isLogia()) stats.setLogia(true);
         if (entity.hasEffect(ModEffects.FROSTBITE)) entity.removeEffect(ModEffects.FROSTBITE);
         if (entity.hasEffect(ModEffects.DIZZY)) entity.removeEffect(ModEffects.DIZZY);
         if (entity.hasEffect(ModEffects.DRUNK)) entity.removeEffect(ModEffects.DRUNK);
