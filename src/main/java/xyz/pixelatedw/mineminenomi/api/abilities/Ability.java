@@ -114,13 +114,6 @@ public abstract class Ability {
         return Result.success();
     }
 
-
-    public double getRequiredDoriki() {
-        return 0.0;
-    }
-
-
-
     protected long startTick = -1;
 
     public void tick(LivingEntity entity) {

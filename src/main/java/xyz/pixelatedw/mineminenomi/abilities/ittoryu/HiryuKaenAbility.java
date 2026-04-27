@@ -7,8 +7,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.helpers.AbilityUseConditions;
-import xyz.pixelatedw.mineminenomi.api.util.Result;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 
 import java.util.List;
@@ -18,13 +16,6 @@ public class HiryuKaenAbility extends Ability {
     private static final float DAMAGE = 20.0F;
     private static final float RANGE = 4.5F;
     private static final int COOLDOWN = 240;
-
-    @Override
-    public Result canUse(LivingEntity entity) {
-        Result result = super.canUse(entity);
-        if (result.isFail()) return result;
-        return AbilityUseConditions.requiresSword(entity);
-    }
 
     @Override
     protected void startUsing(LivingEntity entity) {
@@ -43,19 +34,20 @@ public class HiryuKaenAbility extends Ability {
             
             boolean hitAnything = false;
             for (LivingEntity target : targets) {
+                target.hurt(entity.damageSources().mobAttack(entity), DAMAGE);
+                target.setRemainingFireTicks(80); // 4 seconds of fire
                 if (!entity.level().isClientSide) {
-                    target.hurt(entity.damageSources().mobAttack(entity), DAMAGE);
-                }
-                target.igniteForSeconds(4.0F); // 4 seconds of fire
-                if (!entity.level().isClientSide) {
-                    ((net.minecraft.server.level.ServerLevel)entity.level()).sendParticles(ParticleTypes.FLAME,  target.getX(), target.getY() + target.getBbHeight()/2, target.getZ(), 1, 0, 0, 0, 0);
+                    ((net.minecraft.server.level.ServerLevel)entity.level()).sendParticles(net.minecraft.core.particles.ParticleTypes.FLAME, target.getX(), target.getY() + target.getBbHeight()/2, target.getZ(), 1, 0, 0, 0, 0);
                 }
                 hitAnything = true;
             }
 
-            if (hitAnything || entity.onGround() || getDuration(entity) > 60) {
+            if (hitAnything || entity.onGround()) {
                 stopUsing(entity);
-                startCooldown(entity, COOLDOWN);
+                PlayerStats stats = PlayerStats.get(entity);
+                if (stats != null && getAbilityId() != null) {
+                    stats.setAbilityCooldown(getAbilityId().toString(), COOLDOWN, entity.level().getGameTime());
+                }
             }
         }
     }

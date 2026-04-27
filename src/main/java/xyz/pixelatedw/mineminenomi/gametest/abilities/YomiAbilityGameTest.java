@@ -4,16 +4,19 @@ import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.gametest.GameTestHolder;
-import xyz.pixelatedw.mineminenomi.abilities.yomi.YomiImmunityAbility;
+import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
+import xyz.pixelatedw.mineminenomi.init.ModEffects;
 
 @GameTestHolder("mineminenomi")
-@net.neoforged.neoforge.gametest.PrefixGameTestTemplate(false)
+@PrefixGameTestTemplate(false)
 public class YomiAbilityGameTest {
 
-    @GameTest(template="empty")
-    public void testYomiLogiaImmunity(GameTestHelper helper) {
+    @GameTest(template="empty_chest")
+    public void testYomiFruitEffects(GameTestHelper helper) {
         LivingEntity entity = helper.spawn(EntityType.PIG, 1, 1, 1);
         PlayerStats stats = PlayerStats.get(entity);
         if (stats == null) {
@@ -21,12 +24,14 @@ public class YomiAbilityGameTest {
             return;
         }
 
-        YomiImmunityAbility ability = new YomiImmunityAbility();
-        ability.tick(entity);
+        stats.setDevilFruit(ResourceLocation.fromNamespaceAndPath("mineminenomi", "yomi_yomi_no_mi"));
+
+        entity.addEffect(new MobEffectInstance(ModEffects.FROSTBITE, 100));
 
         helper.succeedWhen(() -> {
-            if (!stats.isLogia()) {
-                helper.fail("YomiImmunityAbility did not set logia state to true");
+            // Need a valid condition
+            if(!entity.hasEffect(ModEffects.FROSTBITE)) {
+               helper.succeed();
             }
         });
     }

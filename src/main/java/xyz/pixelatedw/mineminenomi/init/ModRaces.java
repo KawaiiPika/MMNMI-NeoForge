@@ -51,25 +51,25 @@ public class ModRaces {
     });
     public static final DeferredHolder<Race, Race> MINK_DOG = ModRegistries.RACES_REGISTRY.register("mink_dog", () -> {
         CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(ModResources.MINK1, 1);
-        info.addTopAbilities(ModAbilities.ELECLAW);
+        info.addTopAbilities(ModAbilities.ELECTRO);
         info.addBottomAbilities(ModAbilities.MINK_SPEED_PERK, ModAbilities.MINK_JUMP_PERK);
         return Race.subRace().setBookDetails(info);
     });
     public static final DeferredHolder<Race, Race> MINK_LION = ModRegistries.RACES_REGISTRY.register("mink_lion", () -> {
         CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(ModResources.MINK2, 2);
-        info.addTopAbilities(ModAbilities.ELECLAW);
+        info.addTopAbilities(ModAbilities.ELECTRO);
         info.addBottomAbilities(ModAbilities.MINK_SPEED_PERK, ModAbilities.MINK_JUMP_PERK);
         return Race.subRace().setBookDetails(info);
     });
     public static final DeferredHolder<Race, Race> MINK_BUNNY = ModRegistries.RACES_REGISTRY.register("mink_bunny", () -> {
         CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(ModResources.MINK3, 3);
-        info.addTopAbilities(ModAbilities.ELECLAW);
+        info.addTopAbilities(ModAbilities.ELECTRO);
         info.addBottomAbilities(ModAbilities.MINK_SPEED_PERK, ModAbilities.MINK_JUMP_PERK);
         return Race.subRace().setBookDetails(info);
     });
     public static final DeferredHolder<Race, Race> MINK = ModRegistries.RACES_REGISTRY.register("mink", () -> {
         CharacterCreatorSelectionInfo info = new CharacterCreatorSelectionInfo(ModResources.MINK1, MINK_ORDER);
-        info.addTopAbilities(ModAbilities.ELECLAW);
+        info.addTopAbilities(ModAbilities.ELECTRO);
         info.addBottomAbilities(ModAbilities.MINK_SPEED_PERK, ModAbilities.MINK_JUMP_PERK);
         List<Supplier<Race>> subRaces = new ArrayList<>();
         subRaces.add(MINK_DOG);

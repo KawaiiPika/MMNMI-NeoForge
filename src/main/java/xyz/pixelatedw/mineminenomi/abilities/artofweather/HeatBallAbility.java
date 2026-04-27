@@ -27,7 +27,7 @@ public class HeatBallAbility extends Ability {
         if (!entity.level().isClientSide) {
             SniperPelletEntity ball = new SniperPelletEntity(ModEntities.SNIPER_PELLET.get(), entity.level());
             ball.setOwner(entity);
-            ball.teleportTo(entity.getX(), entity.getY() + entity.getEyeHeight(), entity.getZ());
+            ball.setPos(entity.getX(), entity.getY() + entity.getEyeHeight(), entity.getZ());
             ball.setDamage(6.0f);
             ball.setFireTicks(60);
             

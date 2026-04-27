@@ -9,16 +9,8 @@ import java.util.function.Supplier;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 
 public class ModCreativeTabs {
-    public static final net.neoforged.neoforge.registries.DeferredHolder<CreativeModeTab, CreativeModeTab> MINEMINENOMI_TAB = ModRegistry.CREATIVE_TABS.register("mineminenomi_tab", () -> CreativeModeTab.builder()
-            .title(net.minecraft.network.chat.Component.translatable("itemGroup.mineminenomi"))
-            .icon(() -> new ItemStack(ModFruits.GOMU_GOMU_NO_MI.get()))
-            .displayItems((params, output) -> {
-                ModRegistry.ITEMS.getEntries().forEach(item -> output.accept(item.get()));
-            })
-            .build());
 
     public static final Supplier<CreativeModeTab> DEVIL_FRUITS_TAB = ModRegistry.CREATIVE_TABS.register("devil_fruits", () -> CreativeModeTab.builder()
-
             .title(Component.translatable("itemGroup.mineminenomi.devil_fruits"))
             .icon(() -> new ItemStack(ModFruits.GOMU_GOMU_NO_MI.get())) 
             .displayItems((params, output) -> {

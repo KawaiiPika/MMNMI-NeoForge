@@ -13,7 +13,7 @@ public class AbilityUseConditions {
 
     public static Result requiresSword(LivingEntity entity) {
         ItemStack stack = entity.getMainHandItem();
-        boolean hasSwordInHand = stack.canPerformAction(net.neoforged.neoforge.common.ItemAbilities.SWORD_DIG);
+        boolean hasSwordInHand = ItemsHelper.isSword(stack);
         if (hasSwordInHand) {
             return Result.success();
         } else {
