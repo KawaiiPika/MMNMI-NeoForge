@@ -5,27 +5,33 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.TsunoTokagePillarEntity;
 
-/**
- * Tsuno Tokage — Shadow Spear; fires a shadow spear that pierces enemies.
- * Implemented as a powerful piercing line attack.
- */
 public class TsunoTokageAbility extends Ability {
     private static final ResourceLocation FRUIT = ResourceLocation.fromNamespaceAndPath("mineminenomi", "kage_kage_no_mi");
-    public TsunoTokageAbility() { super(FRUIT); }
+
+    public TsunoTokageAbility() {
+        super(FRUIT);
+    }
 
     @Override
     protected void startUsing(LivingEntity entity) {
-        Vec3 look = entity.getLookAngle();
-        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(1.5).move(look.scale(10.0)))) {
-            if (target instanceof LivingEntity living) {
-                living.hurt(entity.damageSources().mobAttack(entity), 16.0F);
-                living.setDeltaMovement(look.scale(1.5));
-                living.hurtMarked = true;
-            }
+        if (!entity.level().isClientSide) {
+            Vec3 look = entity.getLookAngle();
+            TsunoTokagePillarEntity projectile = new TsunoTokagePillarEntity(entity.level(), entity);
+            projectile.shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 1.5F, 0.0F);
+            entity.level().addFreshEntity(projectile);
+
+            entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(),
+                net.minecraft.sounds.SoundEvents.WITHER_SHOOT,
+                net.minecraft.sounds.SoundSource.PLAYERS, 1.5F, 0.5F);
+
+            this.startCooldown(entity, 300);
         }
     }
 
     @Override
-    public Component getDisplayName() { return Component.translatable("ability.mineminenomi.tsuno_tokage"); }
+    public Component getDisplayName() {
+        return Component.translatable("ability.mineminenomi.tsuno_tokage");
+    }
 }

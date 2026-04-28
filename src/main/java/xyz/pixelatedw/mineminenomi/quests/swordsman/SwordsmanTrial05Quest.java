@@ -15,7 +15,7 @@ import xyz.pixelatedw.mineminenomi.quests.objectives.SharedKillChecks;
 public class SwordsmanTrial05Quest extends Quest {
     public static final String ID = "trial_hiryu_kaen";
     public static final QuestId<SwordsmanTrial05Quest> INSTANCE = new QuestId.Builder<>(SwordsmanTrial05Quest::new)
-            .addRequirements(ModQuests.SWORDSMAN_TRIAL_04)
+            .addRequirements(null)
             .build();
     
     private static final Component O1_TITLE = Component.literal("Kill 30 enemies while they're on fire");

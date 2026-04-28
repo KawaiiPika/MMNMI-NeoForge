@@ -7,7 +7,6 @@ import net.minecraft.world.phys.Vec3;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.OverheatEntity;
 
-/** Overheat — Heated string rope attack. */
 public class OverheatAbility extends Ability {
     private static final ResourceLocation FRUIT = ResourceLocation.fromNamespaceAndPath("mineminenomi", "ito_ito_no_mi");
     
@@ -18,12 +17,16 @@ public class OverheatAbility extends Ability {
     @Override
     protected void startUsing(LivingEntity entity) {
         if (!entity.level().isClientSide) {
-            OverheatEntity projectile = new OverheatEntity(entity.level(), entity);
             Vec3 look = entity.getLookAngle();
-            projectile.shoot(look.x, look.y, look.z, 2.0F, 1.0F);
+            OverheatEntity projectile = new OverheatEntity(entity.level(), entity);
+            projectile.shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 2.5F, 0.0F);
             entity.level().addFreshEntity(projectile);
             
-            xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper.sendAbilityMessage(entity, Component.translatable("ability.mineminenomi.overheat.on"));
+            entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(),
+                net.minecraft.sounds.SoundEvents.FIRECHARGE_USE,
+                net.minecraft.sounds.SoundSource.PLAYERS, 1.5F, 1.0F);
+
+            this.startCooldown(entity, 200);
         }
     }
 

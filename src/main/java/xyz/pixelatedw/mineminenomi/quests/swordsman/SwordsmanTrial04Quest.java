@@ -15,7 +15,7 @@ import xyz.pixelatedw.mineminenomi.quests.objectives.TimedKillEntityObjective;
 public class SwordsmanTrial04Quest extends Quest {
     public static final String ID = "trial_tatsu_maki";
     public static final QuestId<SwordsmanTrial04Quest> INSTANCE = new QuestId.Builder<>(SwordsmanTrial04Quest::new)
-            .addRequirements(ModQuests.SWORDSMAN_TRIAL_03)
+            .addRequirements(null)
             .build();
     
     private static final Component O1_TITLE = Component.literal("Damage 20 enemies with sweeping attacks");

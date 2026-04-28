@@ -1,72 +1,50 @@
 package xyz.pixelatedw.mineminenomi.entities.projectiles;
 
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
-import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 
-public class WhiteOutEntity extends ThrowableItemProjectile {
-    private int life = 0;
-    private final int maxLife = 60;
-
-    public WhiteOutEntity(EntityType<? extends WhiteOutEntity> type, Level world) {
-        super(type, world);
-    }
-
-    public WhiteOutEntity(Level world, LivingEntity owner) {
-        super(ModEntities.WHITE_OUT.get(), owner, world);
-    }
-
+public class WhiteOutEntity extends ThrowableProjectile {
     @Override
-    protected Item getDefaultItem() {
-        return Items.AIR;
+    protected void defineSynchedData(net.minecraft.network.syncher.SynchedEntityData.Builder builder) {
     }
 
-    @Override
-    public void tick() {
-        super.tick();
-        life++;
-        if (life > maxLife) {
-            this.discard();
-        }
-        
-        if (this.level().isClientSide) {
-            for (int i = 0; i < 3; i++) {
-                this.level().addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, 
-                    this.getX() + (this.random.nextDouble() - 0.5) * 0.5, 
-                    this.getY() + (this.random.nextDouble() - 0.5) * 0.5, 
-                    this.getZ() + (this.random.nextDouble() - 0.5) * 0.5, 
-                    0, 0, 0);
-            }
-        }
+    public WhiteOutEntity(EntityType<? extends ThrowableProjectile> type, Level level) {
+        super(type, level);
+    }
+
+    public WhiteOutEntity(Level level, LivingEntity thrower) {
+        super(ModEntities.WHITE_OUT.get(), thrower, level);
     }
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         if (result.getEntity() instanceof LivingEntity target) {
-            target.addEffect(new MobEffectInstance(ModEffects.MOVEMENT_BLOCKED, 100, 0));
-        }
-    }
-
-    @Override
-    protected void onHit(HitResult result) {
-        super.onHit(result);
-        if (!this.level().isClientSide) {
+            target.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 200, 2));
+            target.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.BLINDNESS, 200, 0));
             this.discard();
         }
     }
 
     @Override
-    public boolean deflect(net.minecraft.world.entity.projectile.ProjectileDeflection deflection, net.minecraft.world.entity.Entity entity, net.minecraft.world.entity.Entity owner, boolean deflects) {
-        return false; // These elemental projectiles are too dense/volatile to deflect normally
+    protected void onHitBlock(BlockHitResult result) {
+        super.onHitBlock(result);
+        if (!this.level().isClientSide) {
+            this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(5.0)).forEach(target -> {
+                target.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 200, 2));
+                target.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.BLINDNESS, 200, 0));
+            });
+            this.discard();
+        }
+    }
+
+    @Override
+    public boolean shouldRenderAtSqrDistance(double distance) {
+        return true;
     }
 }

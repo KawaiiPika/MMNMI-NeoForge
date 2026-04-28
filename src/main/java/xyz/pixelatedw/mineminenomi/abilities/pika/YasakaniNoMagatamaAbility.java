@@ -4,8 +4,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.YasakaniEntity;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.YasakaniNoMagatamaEntity;
 
 public class YasakaniNoMagatamaAbility extends Ability {
 
@@ -29,7 +28,7 @@ public class YasakaniNoMagatamaAbility extends Ability {
         if (duration % 2 == 0) {
             if (!entity.level().isClientSide) {
                 for (int i = 0; i < 2; i++) {
-                    YasakaniEntity yasakani = new YasakaniEntity(entity.level(), entity);
+                    YasakaniNoMagatamaEntity yasakani = new YasakaniNoMagatamaEntity(entity.level(), entity);
                     float spread = 25.0F;
                     float xRot = entity.getXRot() + (entity.getRandom().nextFloat() - 0.5F) * spread;
                     float yRot = entity.getYRot() + (entity.getRandom().nextFloat() - 0.5F) * spread;

@@ -7,21 +7,24 @@ import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.WhiteBlowEntity;
 
 public class WhiteBlowAbility extends Ability {
+    private static final ResourceLocation FRUIT = ResourceLocation.fromNamespaceAndPath("mineminenomi", "moku_moku_no_mi");
 
     public WhiteBlowAbility() {
-        super(ResourceLocation.fromNamespaceAndPath("mineminenomi", "moku_moku_no_mi"));
+        super(FRUIT);
     }
 
     @Override
     protected void startUsing(LivingEntity entity) {
         if (!entity.level().isClientSide) {
-            WhiteBlowEntity blow = new WhiteBlowEntity(entity.level(), entity);
-            blow.shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 2.0F, 1.0F);
-            entity.level().addFreshEntity(blow);
+            WhiteBlowEntity projectile = new WhiteBlowEntity(entity.level(), entity);
+            projectile.shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 2.0F, 0.5F);
+            entity.level().addFreshEntity(projectile);
             
             entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), 
-                net.minecraft.sounds.SoundEvents.GENERIC_EXPLODE.value(), 
-                net.minecraft.sounds.SoundSource.PLAYERS, 0.5F, 1.5F);
+                xyz.pixelatedw.mineminenomi.init.ModSounds.MOKU_SFX.get(),
+                net.minecraft.sounds.SoundSource.PLAYERS, 1.5F, 1.0F);
+
+            this.startCooldown(entity, 60);
         }
     }
 

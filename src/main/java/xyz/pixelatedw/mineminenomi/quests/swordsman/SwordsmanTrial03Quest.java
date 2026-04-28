@@ -15,7 +15,7 @@ import xyz.pixelatedw.mineminenomi.quests.objectives.KillEntityObjective;
 public class SwordsmanTrial03Quest extends Quest {
     public static final String ID = "trial_sanbyakurokuju_pound_ho";
     public static final QuestId<SwordsmanTrial03Quest> INSTANCE = new QuestId.Builder<>(SwordsmanTrial03Quest::new)
-            .addRequirements(ModQuests.SWORDSMAN_TRIAL_01)
+            .addRequirements(null)
             .build();
     
     private static final KillEntityObjective.IKillCheck YAKKODORI_KILL_CHECK = (player, victim, source) -> {

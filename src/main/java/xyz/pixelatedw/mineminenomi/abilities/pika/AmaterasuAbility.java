@@ -3,6 +3,7 @@ package xyz.pixelatedw.mineminenomi.abilities.pika;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.phys.Vec3;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.AmaterasuEntity;
@@ -56,8 +57,9 @@ public class AmaterasuAbility extends Ability {
             }
         } else if (duration == CHARGE_TICKS) {
             if (!entity.level().isClientSide) {
-                AmaterasuEntity amaterasu = new AmaterasuEntity(entity.level(), entity);
-                amaterasu.shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 2.0F, 0.0F);
+                Vec3 look = entity.getLookAngle();
+                AmaterasuEntity amaterasu = new AmaterasuEntity(entity.level(), entity, look.scale(0.1));
+                amaterasu.setPos(entity.getX(), entity.getEyeY(), entity.getZ());
                 entity.level().addFreshEntity(amaterasu);
                 
                 entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), 
@@ -65,6 +67,7 @@ public class AmaterasuAbility extends Ability {
                     net.minecraft.sounds.SoundSource.PLAYERS, 2.0F, 1.5F);
             }
             stopUsing(entity);
+            this.startCooldown(entity, 300);
         }
     }
 

@@ -7,33 +7,27 @@ import net.minecraft.world.phys.Vec3;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 
 public class WhitePullAbility extends Ability {
-
-    private static final int MAX_DURATION = 100;
-    private static final double RANGE = 20.0; // Optimized range from 100 to 20 for standard queries
+    private static final ResourceLocation FRUIT = ResourceLocation.fromNamespaceAndPath("mineminenomi", "moku_moku_no_mi");
 
     public WhitePullAbility() {
-        super(ResourceLocation.fromNamespaceAndPath("mineminenomi", "moku_moku_no_mi"));
+        super(FRUIT);
     }
 
     @Override
     protected void startUsing(LivingEntity entity) {
-        // Starts the continuity
-    }
-
-    @Override
-    protected void onTick(LivingEntity entity, long duration) {
         if (!entity.level().isClientSide) {
-            entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(RANGE)).forEach(target -> {
-                if (target != entity && target.hasEffect(net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN)) {
-                    Vec3 pull = entity.position().subtract(target.position()).normalize().scale(0.5);
-                    target.setDeltaMovement(pull.x, pull.y, pull.z);
-                    target.hurtMarked = true;
-                }
-            });
+            net.minecraft.world.phys.HitResult hit = entity.pick(30.0D, 0.0F, false);
+            if (hit.getType() != net.minecraft.world.phys.HitResult.Type.MISS) {
+                Vec3 targetPos = hit.getLocation();
+                Vec3 pullVec = targetPos.subtract(entity.position()).normalize().scale(2.5);
+                entity.setDeltaMovement(pullVec);
+                entity.hurtMarked = true;
 
-            if (duration >= MAX_DURATION) {
-                this.stop(entity);
-                this.startCooldown(entity, 200);
+                entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(),
+                    xyz.pixelatedw.mineminenomi.init.ModSounds.MOKU_SFX.get(),
+                    net.minecraft.sounds.SoundSource.PLAYERS, 1.5F, 1.0F);
+
+                this.startCooldown(entity, 100);
             }
         }
     }
