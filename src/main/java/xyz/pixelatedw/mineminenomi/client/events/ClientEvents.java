@@ -100,7 +100,7 @@ public class ClientEvents {
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.HYAKUHACHI_POUND_HO_PROJECTILE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.2F, true));
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.SENHACHIJU_POUND_HO_PROJECTILE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 2.5F, true));
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.RELAX_HOUR_PROJECTILE.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
->>>>>>> 1ee21eb0 (WIP: Pre-merge stash)
+>>>>>>> 687cfa0f (Port Batch 6 fruit abilities and custom projectiles to NeoForge 1.21.1)
 
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.STRONG_RIGHT.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
         event.registerEntityRenderer(xyz.pixelatedw.mineminenomi.init.ModEntities.RADICAL_BEAM.get(), ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.0F, true));
