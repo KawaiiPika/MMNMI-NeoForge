@@ -1,9 +1,0 @@
---- src/main/java/xyz/pixelatedw/mineminenomi/quests/swordsman/SwordsmanTrial02Quest.java
-+++ src/main/java/xyz/pixelatedw/mineminenomi/quests/swordsman/SwordsmanTrial02Quest.java
-@@ -48,7 +48,7 @@
-         if (stats != null) {
--            stats.grantAbility(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "yakkodori"));
-+            stats.grantAbility(((net.neoforged.neoforge.registries.DeferredHolder<xyz.pixelatedw.mineminenomi.api.abilities.Ability, ? extends xyz.pixelatedw.mineminenomi.api.abilities.Ability>) xyz.pixelatedw.mineminenomi.init.ModAbilities.YAKKODORI).getId());
-             stats.grantAbility(xyz.pixelatedw.mineminenomi.init.ModAbilities.SWORDSMAN_DAMAGE_PERK.get().getAbilityId());
-             stats.sync(player);
-         }

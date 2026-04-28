@@ -5,14 +5,15 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.neoforge.gametest.GameTestHolder;
+import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 
 @GameTestHolder("mineminenomi")
-@net.neoforged.neoforge.gametest.PrefixGameTestTemplate(false)
+@PrefixGameTestTemplate(false)
 public class HakiGameTest {
 
-    @GameTest(template="empty")
+    @GameTest(template="empty_chest")
     public void testBusoshokuDamageBoost(GameTestHelper helper) {
         LivingEntity attacker = helper.spawn(EntityType.PIG, 1, 1, 1);
         LivingEntity target = helper.spawn(EntityType.COW, 2, 1, 2);
@@ -39,7 +40,7 @@ public class HakiGameTest {
         helper.succeed();
     }
 
-    @GameTest(template="empty")
+    @GameTest(template="empty_chest")
     public void testHakiDamageTakenExpGain(GameTestHelper helper) {
         LivingEntity attacker = helper.spawn(EntityType.PIG, 1, 1, 1);
         PlayerStats stats = PlayerStats.get(attacker);

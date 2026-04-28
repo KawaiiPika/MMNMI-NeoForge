@@ -5,13 +5,14 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
 import net.neoforged.neoforge.gametest.GameTestHolder;
+import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import xyz.pixelatedw.mineminenomi.api.enums.TrainingPointType;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.PlayerStats;
 import xyz.pixelatedw.mineminenomi.services.ProgressionService;
 
 @GameTestHolder("mineminenomi")
-@net.neoforged.neoforge.gametest.PrefixGameTestTemplate(false)
+@PrefixGameTestTemplate(false)
 public class ProgressionGameTest {
 
     @GameTest(template="empty")

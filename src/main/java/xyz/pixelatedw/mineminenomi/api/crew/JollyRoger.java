@@ -295,57 +295,46 @@ public class JollyRoger {
             try {
                BufferedImage jollyRogerImage = new BufferedImage(128, 128, 2);
 
-               java.util.List<java.util.concurrent.CompletableFuture<BufferedImage>> backgroundTasks = new java.util.ArrayList<>();
-               for (JollyRogerElement backgroundElement : this.backgrounds) {
-                   if (backgroundElement != null) {
-                       backgroundTasks.add(java.util.concurrent.CompletableFuture.supplyAsync(() -> {
-                           try {
-                               return this.elementToImage(backgroundElement);
-                           } catch (Exception e) {
-                               throw new java.util.concurrent.CompletionException(e);
-                           }
-                       }, xyz.pixelatedw.mineminenomi.api.util.ModExecutors.VIRTUAL_THREAD_EXECUTOR));
-                   }
-               }
-
-               java.util.concurrent.CompletableFuture<BufferedImage> baseTask = null;
-               if (this.getBase() != null) {
-                   baseTask = java.util.concurrent.CompletableFuture.supplyAsync(() -> {
-                       try {
-                           return this.elementToImage(this.getBase());
-                       } catch (Exception e) {
-                           throw new java.util.concurrent.CompletionException(e);
+               try (var scope = new java.util.concurrent.StructuredTaskScope.ShutdownOnFailure()) {
+                   java.util.List<java.util.concurrent.StructuredTaskScope.Subtask<BufferedImage>> backgroundTasks = new java.util.ArrayList<>();
+                   for (JollyRogerElement backgroundElement : this.backgrounds) {
+                       if (backgroundElement != null) {
+                           backgroundTasks.add(scope.fork(() -> this.elementToImage(backgroundElement)));
                        }
-                   }, xyz.pixelatedw.mineminenomi.api.util.ModExecutors.VIRTUAL_THREAD_EXECUTOR);
-               }
-
-               java.util.List<java.util.concurrent.CompletableFuture<BufferedImage>> detailTasks = new java.util.ArrayList<>();
-               for (JollyRogerElement detailElement : this.details) {
-                   if (detailElement != null) {
-                       detailTasks.add(java.util.concurrent.CompletableFuture.supplyAsync(() -> {
-                           try {
-                               return this.elementToImage(detailElement);
-                           } catch (Exception e) {
-                               throw new java.util.concurrent.CompletionException(e);
-                           }
-                       }, xyz.pixelatedw.mineminenomi.api.util.ModExecutors.VIRTUAL_THREAD_EXECUTOR));
                    }
-               }
 
-               for (var task : backgroundTasks) {
-                   jollyRogerImage.getGraphics().drawImage(task.join(), 0, 0, (ImageObserver)null);
-               }
+                   java.util.concurrent.StructuredTaskScope.Subtask<BufferedImage> baseTask = null;
+                   if (this.getBase() != null) {
+                       baseTask = scope.fork(() -> this.elementToImage(this.getBase()));
+                   }
 
-               if (baseTask != null) {
-                   jollyRogerImage.getGraphics().drawImage(baseTask.join(), 0, 0, (ImageObserver)null);
-               }
+                   java.util.List<java.util.concurrent.StructuredTaskScope.Subtask<BufferedImage>> detailTasks = new java.util.ArrayList<>();
+                   for (JollyRogerElement detailElement : this.details) {
+                       if (detailElement != null) {
+                           detailTasks.add(scope.fork(() -> this.elementToImage(detailElement)));
+                       }
+                   }
 
-               for (var task : detailTasks) {
-                   jollyRogerImage.getGraphics().drawImage(task.join(), 0, 0, (ImageObserver)null);
+                   scope.join();
+                   scope.throwIfFailed();
+
+                   for (var task : backgroundTasks) {
+                       jollyRogerImage.getGraphics().drawImage(task.get(), 0, 0, (ImageObserver)null);
+                   }
+
+                   if (baseTask != null) {
+                       jollyRogerImage.getGraphics().drawImage(baseTask.get(), 0, 0, (ImageObserver)null);
+                   }
+
+                   for (var task : detailTasks) {
+                       jollyRogerImage.getGraphics().drawImage(task.get(), 0, 0, (ImageObserver)null);
+                   }
+               } catch (InterruptedException | java.util.concurrent.ExecutionException e) {
+                   throw new IOException("Failed to load Jolly Roger elements", e);
                }
 
                this.cachedImage = jollyRogerImage;
-            } catch (Exception e) {
+            } catch (IOException e) {
                LOGGER.error(e.getMessage());
                this.loadingDispatched.set(false);
             }

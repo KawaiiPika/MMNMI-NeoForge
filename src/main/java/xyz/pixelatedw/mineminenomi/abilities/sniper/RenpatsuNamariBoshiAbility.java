@@ -14,7 +14,7 @@ public class RenpatsuNamariBoshiAbility extends SniperProjectileAbility {
         for (int i = 0; i < 3; i++) {
             SniperPelletEntity pellet = new SniperPelletEntity(ModEntities.SNIPER_PELLET.get(), entity.level());
             pellet.setOwner(entity);
-            pellet.teleportTo(entity.getX(), entity.getY() + entity.getEyeHeight(), entity.getZ());
+            pellet.setPos(entity.getX(), entity.getY() + entity.getEyeHeight(), entity.getZ());
             pellet.setDamage(6.0f);
             
             this.shootProjectile(entity, pellet, 3.5f, 5.0f);

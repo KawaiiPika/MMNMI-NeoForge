@@ -30,5 +30,13 @@ public class PikaLogiaAbility extends Ability {
     protected void startUsing(LivingEntity entity) {}
 
 @Override
+    public void onLogiaDodge(LivingEntity entity, LivingEntity attacker) {
+        super.onLogiaDodge(entity, attacker);
+        if (entity.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+            serverLevel.sendParticles(net.minecraft.core.particles.ParticleTypes.END_ROD, entity.getX(), entity.getY() + entity.getBbHeight() / 2, entity.getZ(), 20, entity.getBbWidth(), entity.getBbHeight() / 2, entity.getBbWidth(), 0.1);
+        }
+    }
+
+@Override
     public Component getDisplayName() { return Component.translatable("ability.mineminenomi.logia_invulnerability_pika"); }
 }

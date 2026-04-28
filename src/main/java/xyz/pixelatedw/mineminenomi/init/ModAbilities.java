@@ -340,12 +340,23 @@ public class ModAbilities {
     public static final java.util.function.Supplier<Ability> ALLOSAURUS_WALK_POINT = ABILITIES.register("allosaurus_walk_point", xyz.pixelatedw.mineminenomi.abilities.ryuallosaurus.AllosaurusWalkPointAbility::new);
 
     // Race Abilities
-                public static final java.util.function.Supplier<Ability> MANTRA = ABILITIES.register("mantra", xyz.pixelatedw.mineminenomi.abilities.race.MantraAbility::new);
+    public static final java.util.function.Supplier<Ability> ELECTRO = ABILITIES.register("electro", xyz.pixelatedw.mineminenomi.abilities.race.ElectroAbility::new);
+    public static final java.util.function.Supplier<Ability> FISHMAN_STRENGTH = ABILITIES.register("fishman_strength", xyz.pixelatedw.mineminenomi.abilities.race.FishmanStrengthAbility::new);
+    public static final java.util.function.Supplier<Ability> CYBORG_BODY = ABILITIES.register("cyborg_body", xyz.pixelatedw.mineminenomi.abilities.race.CyborgBodyAbility::new);
+    public static final java.util.function.Supplier<Ability> MANTRA = ABILITIES.register("mantra", xyz.pixelatedw.mineminenomi.abilities.race.MantraAbility::new);
     public static final java.util.function.Supplier<Ability> ALLOSAURUS_HEAVY_POINT = ABILITIES.register("allosaurus_heavy_point", xyz.pixelatedw.mineminenomi.abilities.ryuallosaurus.AllosaurusHeavyPointAbility::new);
     public static final java.util.function.Supplier<Ability> ANCIENT_BITE = ABILITIES.register("ancient_bite", xyz.pixelatedw.mineminenomi.abilities.ryuallosaurus.AncientBiteAbility::new);
     public static final java.util.function.Supplier<Ability> ANCIENT_TAIL_SPIN = ABILITIES.register("ancient_tail_spin", xyz.pixelatedw.mineminenomi.abilities.ryuallosaurus.AncientTailSpinAbility::new);
 
     // Fishman Karate
+    public static final java.util.function.Supplier<Ability> MIZU_TAIHO = ABILITIES.register("mizu_taiho", xyz.pixelatedw.mineminenomi.api.abilities.race.MizuTaihoAbility::new);
+    public static final java.util.function.Supplier<Ability> UCHIMIZU = ABILITIES.register("uchimizu", xyz.pixelatedw.mineminenomi.api.abilities.race.UchimizuAbility::new);
+    public static final java.util.function.Supplier<Ability> YARINAMI = ABILITIES.register("yarinami", xyz.pixelatedw.mineminenomi.api.abilities.race.YarinamiAbility::new);
+    public static final java.util.function.Supplier<Ability> KACHIAGE_HAISOKU = ABILITIES.register("kachiage_haisoku", xyz.pixelatedw.mineminenomi.api.abilities.race.KachiageHaisokuAbility::new);
+    public static final java.util.function.Supplier<Ability> KARAKUSAGAWARA_SEIKEN = ABILITIES.register("karakusagawara_seiken", xyz.pixelatedw.mineminenomi.api.abilities.race.KarakusagawaraSeikenAbility::new);
+    public static final java.util.function.Supplier<Ability> MIZU_SHURYUDAN = ABILITIES.register("mizu_shuryudan", xyz.pixelatedw.mineminenomi.api.abilities.race.MizuShuryudanAbility::new);
+    public static final java.util.function.Supplier<Ability> PACK_OF_SHARKS = ABILITIES.register("pack_of_sharks", xyz.pixelatedw.mineminenomi.api.abilities.race.PackOfSharksAbility::new);
+    public static final java.util.function.Supplier<Ability> SHARK_ON_TOOTH = ABILITIES.register("shark_on_tooth", xyz.pixelatedw.mineminenomi.api.abilities.race.SharkOnToothAbility::new);
 
     // Ryu Ryu no Mi (Brachiosaurus)
     public static final java.util.function.Supplier<Ability> BRACHIOSAURUS_GUARD_POINT = ABILITIES.register("brachiosaurus_guard_point", xyz.pixelatedw.mineminenomi.abilities.ryubrachiosaurus.BrachiosaurusGuardPointAbility::new);
@@ -445,6 +456,8 @@ public class ModAbilities {
     public static final java.util.function.Supplier<Ability> YOMI_NO_REIKI = ABILITIES.register("yomi_no_reiki", xyz.pixelatedw.mineminenomi.abilities.yomi.YomiNoReikiAbility::new);
     public static final java.util.function.Supplier<Ability> YOMI_IMMUNITY = ABILITIES.register("yomi_immunity", xyz.pixelatedw.mineminenomi.abilities.yomi.YomiImmunityAbility::new);
 
+<<<<<<< HEAD
+=======
 
     public static final Supplier<Ability> COLA_BACKPACK_BONUS = ABILITIES.register("cola_backpack_bonus", xyz.pixelatedw.mineminenomi.abilities.cyborg.ColaBackpackBonusAbility::new);
     public static final Supplier<Ability> COLA_FUEL = ABILITIES.register("cola_fuel", xyz.pixelatedw.mineminenomi.abilities.cyborg.ColaFuelAbility::new);
@@ -497,6 +510,7 @@ public class ModAbilities {
     public static final Supplier<Ability> RYU_NO_KAGIZUME = ABILITIES.register("ryu_no_kagizume", xyz.pixelatedw.mineminenomi.abilities.ryusoken.RyuNoKagizumeAbility::new);
     public static final Supplier<Ability> RYUSOKEN_PASSIVE_BONUSES = ABILITIES.register("ryusoken_passive_bonuses", xyz.pixelatedw.mineminenomi.abilities.ryusoken.RyusokenPassiveBonusesAbility::new);
 
+>>>>>>> 3ca7050b (resolve conflicts)
     public static void register(IEventBus bus) {
         ABILITIES.register(bus);
     }

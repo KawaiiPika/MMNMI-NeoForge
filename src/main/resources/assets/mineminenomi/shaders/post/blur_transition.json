@@ -1,0 +1,1 @@
+{"targets":["swap"],"passes":[{"name":"blit","intarget":"minecraft:main","outtarget":"swap"},{"name":"mineminenomi:wobble","intarget":"swap","outtarget":"minecraft:main","uniforms":[{"name":"WobbleAmount","values":[0.01,0.01]},{"name":"Frequency","values":[20.0,20.0]}]}]}

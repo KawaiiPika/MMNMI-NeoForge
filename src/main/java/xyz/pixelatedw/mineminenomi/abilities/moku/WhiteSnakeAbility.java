@@ -6,25 +6,23 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 
+/** White Snake — launches a massive rope of smoke that pulls enemies in. */
 public class WhiteSnakeAbility extends Ability {
     private static final ResourceLocation FRUIT = ResourceLocation.fromNamespaceAndPath("mineminenomi", "moku_moku_no_mi");
     public WhiteSnakeAbility() { super(FRUIT); }
 
     @Override
     protected void startUsing(LivingEntity entity) {
-        if (!entity.level().isClientSide) {
-            Vec3 look = entity.getLookAngle();
-            entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(4.0).move(look.scale(8.0))).forEach(target -> {
-                if (target != entity) {
-                    Vec3 pull = entity.position().subtract(target.position()).normalize().scale(2.5);
-                    target.setDeltaMovement(pull.x, pull.y + 0.3, pull.z);
-                    target.hurt(entity.damageSources().mobAttack(entity), 5.0F);
-                    target.addEffect(new net.minecraft.world.effect.MobEffectInstance(
-                        net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 60, 2));
-                    target.hurtMarked = true;
-                }
-            });
-            this.startCooldown(entity, 240);
+        Vec3 look = entity.getLookAngle();
+        for (var target : entity.level().getEntities(entity, entity.getBoundingBox().inflate(4.0).move(look.scale(8.0)))) {
+            if (target instanceof LivingEntity living) {
+                Vec3 pull = entity.position().subtract(living.position()).normalize().scale(2.5);
+                living.setDeltaMovement(pull.x, pull.y + 0.3, pull.z);
+                living.hurt(entity.damageSources().mobAttack(entity), 5.0F);
+                living.addEffect(new net.minecraft.world.effect.MobEffectInstance(
+                    net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 60, 2));
+                living.hurtMarked = true;
+            }
         }
     }
 

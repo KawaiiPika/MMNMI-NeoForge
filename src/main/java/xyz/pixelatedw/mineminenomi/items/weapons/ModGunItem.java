@@ -9,15 +9,7 @@ import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.stats.Stats;
 import xyz.pixelatedw.mineminenomi.init.ModTags;
-import xyz.pixelatedw.mineminenomi.init.ModSounds;
-import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 
 import java.util.function.Predicate;
 
@@ -103,7 +95,6 @@ public class ModGunItem extends ProjectileWeaponItem {
         } else if (!player.getAbilities().instabuild && !flag) {
             return InteractionResultHolder.fail(itemStack);
         } else {
-            playLoadSound(itemStack, player);
             player.startUsingItem(hand);
             return InteractionResultHolder.consume(itemStack);
         }
@@ -128,10 +119,8 @@ public class ModGunItem extends ProjectileWeaponItem {
                 if (powder instanceof xyz.pixelatedw.mineminenomi.items.BulletItem bulletItem) {
                     Object projObj = bulletItem.createProjectile(level, player);
                     if (projObj instanceof net.minecraft.world.entity.projectile.Projectile proj) {
-                        if (level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
-                            this.shootProjectile(player, proj, 0, this.bulletSpeed, this.inaccuracy, 0.0F, null);
-                            level.addFreshEntity(proj);
-                        }
+                        this.shootProjectile(player, proj, 0, this.bulletSpeed, this.inaccuracy, 0.0F, null);
+                        level.addFreshEntity(proj);
                     }
                 } else if (itemStack.is(xyz.pixelatedw.mineminenomi.init.ModWeapons.BAZOOKA.get())) {
                     // TODO: Create Cannonball entity once ported, for now do nothing
@@ -140,10 +129,7 @@ public class ModGunItem extends ProjectileWeaponItem {
                     // TODO: Generic projectile creation
                 }
 
-                playShootSound(itemStack, player);
-                this.spawnParticles(player);
                 itemStack.hurtAndBreak(1, player, net.minecraft.world.entity.LivingEntity.getSlotForHand(player.getUsedItemHand()));
-                player.awardStat(Stats.ITEM_USED.get(this));
             }
 
             player.getCooldowns().addCooldown(this.asItem(), this.shotCooldown);
@@ -158,35 +144,6 @@ public class ModGunItem extends ProjectileWeaponItem {
             ammoStack.shrink(1);
             if (ammoStack.isEmpty()) {
                 player.getInventory().removeItem(ammoStack);
-            }
-        }
-    }
-
-    public static void playLoadSound(ItemStack stack, LivingEntity entity) {
-        entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.GUN_LOAD.get(), SoundSource.PLAYERS, 1.5F, 0.75F + entity.getRandom().nextFloat() / 4.0F);
-    }
-
-    public static void playShootSound(ItemStack stack, LivingEntity entity) {
-        if (stack.getItem() != ModWeapons.FLINTLOCK.get() && stack.getItem() != ModWeapons.WALKER.get()) {
-            if (stack.getItem() == ModWeapons.BAZOOKA.get()) {
-                entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.GENERIC_EXPLOSION.get(), SoundSource.PLAYERS, 2.0F, 0.75F + entity.getRandom().nextFloat() / 4.0F);
-            } else if (stack.getItem() == ModWeapons.SENRIKU.get()) {
-                entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.SNIPER_SHOOT.get(), SoundSource.PLAYERS, 2.0F, 0.75F + entity.getRandom().nextFloat() / 4.0F);
-            }
-        } else {
-            entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.PISTOL_SHOOT.get(), SoundSource.PLAYERS, 2.0F, 0.75F + entity.getRandom().nextFloat() / 4.0F);
-        }
-    }
-
-    public void spawnParticles(LivingEntity entity) {
-        Vec3 lookVec = entity.getLookAngle().yRot((float) Math.toRadians(-30.0F));
-        Vec3 particlePos = entity.position().add(0.0F, entity.getEyeHeight(), 0.0F).add(lookVec);
-
-        for (int p = 0; p < 10; ++p) {
-            if (p % 2 == 0) {
-                if (entity.level() instanceof ServerLevel serverLevel) serverLevel.sendParticles(ParticleTypes.SMOKE, particlePos.x, particlePos.y, particlePos.z, 1, 0, 0, 0, 0);
-            } else {
-                if (entity.level() instanceof ServerLevel serverLevel) serverLevel.sendParticles(ParticleTypes.FLAME, particlePos.x, particlePos.y, particlePos.z, 1, 0, 0, 0, 0);
             }
         }
     }

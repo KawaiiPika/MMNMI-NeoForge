@@ -180,11 +180,4 @@ public class ModFruits {
             () -> new AkumaNoMiItem(3, FruitType.PARAMECIA));
 
     public static void init() {}
-    public static java.util.List<AkumaNoMiItem> getDevilFruits() {
-        return ModRegistry.ITEMS.getEntries().stream()
-                .map(java.util.function.Supplier::get)
-                .filter(item -> item instanceof AkumaNoMiItem)
-                .map(item -> (AkumaNoMiItem) item)
-                .collect(java.util.stream.Collectors.toList());
-    }
 }
