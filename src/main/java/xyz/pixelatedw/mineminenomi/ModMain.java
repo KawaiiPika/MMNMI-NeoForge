@@ -25,8 +25,6 @@ public class ModMain {
         
         xyz.pixelatedw.mineminenomi.init.ModRegistries.init(modEventBus);
         xyz.pixelatedw.mineminenomi.init.ModRegistry.init(modEventBus);
-        xyz.pixelatedw.mineminenomi.init.ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
-
         xyz.pixelatedw.mineminenomi.init.ModDataComponents.init(modEventBus);
         xyz.pixelatedw.mineminenomi.init.ModSounds.init();
         xyz.pixelatedw.mineminenomi.init.ModDataAttachments.init();

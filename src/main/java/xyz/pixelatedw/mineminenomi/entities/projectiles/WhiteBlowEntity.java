@@ -37,9 +37,12 @@ public class WhiteBlowEntity extends ThrowableProjectile {
             this.discard();
         }
     }
+<<<<<<< HEAD
+=======
 
     @Override
     public boolean shouldRenderAtSqrDistance(double distance) {
         return true;
     }
+>>>>>>> 1ee21eb0 (WIP: Pre-merge stash)
 }

@@ -30,6 +30,8 @@ public class WhiteOutEntity extends ThrowableProjectile {
             this.discard();
         }
     }
+<<<<<<< HEAD
+=======
 
     @Override
     protected void onHitBlock(BlockHitResult result) {
@@ -47,4 +49,5 @@ public class WhiteOutEntity extends ThrowableProjectile {
     public boolean shouldRenderAtSqrDistance(double distance) {
         return true;
     }
+>>>>>>> 1ee21eb0 (WIP: Pre-merge stash)
 }
