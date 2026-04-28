@@ -1,3 +1,0 @@
-CONFLICT IN ./patch_TargetHelper.diff
-CONFLICT IN ./patch_requiresSword.diff
-CONFLICT IN ./moddiff.txt

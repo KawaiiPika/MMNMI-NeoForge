@@ -1,2 +1,0 @@
-origin	https://github.com/KawaiiPika/MMNMI-NeoForge (fetch)
-origin	https://github.com/KawaiiPika/MMNMI-NeoForge (push)

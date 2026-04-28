@@ -7,11 +7,6 @@ import net.minecraft.world.entity.player.Player;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 
 public class AbareHimatsuriAbility extends Ability {
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-
-public class AbareHimatsuriAbility extends Ability {
-    private static final int COOLDOWN = 300;
-    private static final int HOLD_TIME = 1200;
 
     public AbareHimatsuriAbility() {
         super(ResourceLocation.fromNamespaceAndPath("mineminenomi", "zushi_zushi_no_mi"));
@@ -49,19 +44,6 @@ public class AbareHimatsuriAbility extends Ability {
                 player.onUpdateAbilities();
             }
         }
-    }
-
-    @Override
-    protected void onTick(LivingEntity entity, long duration) {
-        if (duration >= HOLD_TIME) {
-            this.stop(entity);
-            return;
-        }
-    }
-
-    @Override
-    protected void stopUsing(LivingEntity entity) {
-        this.startCooldown(entity, COOLDOWN);
     }
 
     @Override

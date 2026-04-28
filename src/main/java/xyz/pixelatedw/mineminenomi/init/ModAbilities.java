@@ -340,23 +340,12 @@ public class ModAbilities {
     public static final java.util.function.Supplier<Ability> ALLOSAURUS_WALK_POINT = ABILITIES.register("allosaurus_walk_point", xyz.pixelatedw.mineminenomi.abilities.ryuallosaurus.AllosaurusWalkPointAbility::new);
 
     // Race Abilities
-    public static final java.util.function.Supplier<Ability> ELECTRO = ABILITIES.register("electro", xyz.pixelatedw.mineminenomi.abilities.race.ElectroAbility::new);
-    public static final java.util.function.Supplier<Ability> FISHMAN_STRENGTH = ABILITIES.register("fishman_strength", xyz.pixelatedw.mineminenomi.abilities.race.FishmanStrengthAbility::new);
-    public static final java.util.function.Supplier<Ability> CYBORG_BODY = ABILITIES.register("cyborg_body", xyz.pixelatedw.mineminenomi.abilities.race.CyborgBodyAbility::new);
-    public static final java.util.function.Supplier<Ability> MANTRA = ABILITIES.register("mantra", xyz.pixelatedw.mineminenomi.abilities.race.MantraAbility::new);
+                public static final java.util.function.Supplier<Ability> MANTRA = ABILITIES.register("mantra", xyz.pixelatedw.mineminenomi.abilities.race.MantraAbility::new);
     public static final java.util.function.Supplier<Ability> ALLOSAURUS_HEAVY_POINT = ABILITIES.register("allosaurus_heavy_point", xyz.pixelatedw.mineminenomi.abilities.ryuallosaurus.AllosaurusHeavyPointAbility::new);
     public static final java.util.function.Supplier<Ability> ANCIENT_BITE = ABILITIES.register("ancient_bite", xyz.pixelatedw.mineminenomi.abilities.ryuallosaurus.AncientBiteAbility::new);
     public static final java.util.function.Supplier<Ability> ANCIENT_TAIL_SPIN = ABILITIES.register("ancient_tail_spin", xyz.pixelatedw.mineminenomi.abilities.ryuallosaurus.AncientTailSpinAbility::new);
 
     // Fishman Karate
-    public static final java.util.function.Supplier<Ability> MIZU_TAIHO = ABILITIES.register("mizu_taiho", xyz.pixelatedw.mineminenomi.api.abilities.race.MizuTaihoAbility::new);
-    public static final java.util.function.Supplier<Ability> UCHIMIZU = ABILITIES.register("uchimizu", xyz.pixelatedw.mineminenomi.api.abilities.race.UchimizuAbility::new);
-    public static final java.util.function.Supplier<Ability> YARINAMI = ABILITIES.register("yarinami", xyz.pixelatedw.mineminenomi.api.abilities.race.YarinamiAbility::new);
-    public static final java.util.function.Supplier<Ability> KACHIAGE_HAISOKU = ABILITIES.register("kachiage_haisoku", xyz.pixelatedw.mineminenomi.api.abilities.race.KachiageHaisokuAbility::new);
-    public static final java.util.function.Supplier<Ability> KARAKUSAGAWARA_SEIKEN = ABILITIES.register("karakusagawara_seiken", xyz.pixelatedw.mineminenomi.api.abilities.race.KarakusagawaraSeikenAbility::new);
-    public static final java.util.function.Supplier<Ability> MIZU_SHURYUDAN = ABILITIES.register("mizu_shuryudan", xyz.pixelatedw.mineminenomi.api.abilities.race.MizuShuryudanAbility::new);
-    public static final java.util.function.Supplier<Ability> PACK_OF_SHARKS = ABILITIES.register("pack_of_sharks", xyz.pixelatedw.mineminenomi.api.abilities.race.PackOfSharksAbility::new);
-    public static final java.util.function.Supplier<Ability> SHARK_ON_TOOTH = ABILITIES.register("shark_on_tooth", xyz.pixelatedw.mineminenomi.api.abilities.race.SharkOnToothAbility::new);
 
     // Ryu Ryu no Mi (Brachiosaurus)
     public static final java.util.function.Supplier<Ability> BRACHIOSAURUS_GUARD_POINT = ABILITIES.register("brachiosaurus_guard_point", xyz.pixelatedw.mineminenomi.abilities.ryubrachiosaurus.BrachiosaurusGuardPointAbility::new);
@@ -507,6 +496,15 @@ public class ModAbilities {
     public static final Supplier<Ability> RYU_NO_IBUKI = ABILITIES.register("ryu_no_ibuki", xyz.pixelatedw.mineminenomi.abilities.ryusoken.RyuNoIbukiAbility::new);
     public static final Supplier<Ability> RYU_NO_KAGIZUME = ABILITIES.register("ryu_no_kagizume", xyz.pixelatedw.mineminenomi.abilities.ryusoken.RyuNoKagizumeAbility::new);
 
+    public static final java.util.function.Supplier<xyz.pixelatedw.mineminenomi.api.abilities.Ability> KILO_PRESS_1 = ABILITIES.register("1_kilo_press", xyz.pixelatedw.mineminenomi.abilities.kilo.KiloPress1Ability::new);
+    public static final java.util.function.Supplier<xyz.pixelatedw.mineminenomi.api.abilities.Ability> KILO_PUNCH_5000 = ABILITIES.register("5000_kilo_punch", xyz.pixelatedw.mineminenomi.abilities.kilo.KiloPunch5000Ability::new);
+    public static final java.util.function.Supplier<xyz.pixelatedw.mineminenomi.api.abilities.Ability> KILO_PRESS_10000 = ABILITIES.register("10000_kilo_press", xyz.pixelatedw.mineminenomi.abilities.kilo.KiloPress10000Ability::new);
+    public static final java.util.function.Supplier<xyz.pixelatedw.mineminenomi.api.abilities.Ability> GRAVI_PULL = ABILITIES.register("gravi_pull", xyz.pixelatedw.mineminenomi.abilities.zushi.GraviPullAbility::new);
+    public static final java.util.function.Supplier<xyz.pixelatedw.mineminenomi.api.abilities.Ability> GRAVI_ZONE = ABILITIES.register("gravi_zone", xyz.pixelatedw.mineminenomi.abilities.zushi.GraviZoneAbility::new);
+    public static final java.util.function.Supplier<xyz.pixelatedw.mineminenomi.api.abilities.Ability> JIGOKU_TABI = ABILITIES.register("jigoku_tabi", xyz.pixelatedw.mineminenomi.abilities.zushi.JigokuTabiAbility::new);
+    public static final java.util.function.Supplier<xyz.pixelatedw.mineminenomi.api.abilities.Ability> MOKO = ABILITIES.register("moko", xyz.pixelatedw.mineminenomi.abilities.zushi.MokoAbility::new);
+    public static final java.util.function.Supplier<xyz.pixelatedw.mineminenomi.api.abilities.Ability> SAGARI_NO_RYUSEI = ABILITIES.register("sagari_no_ryusei", xyz.pixelatedw.mineminenomi.abilities.zushi.SagariNoRyuseiAbility::new);
+    public static final java.util.function.Supplier<xyz.pixelatedw.mineminenomi.api.abilities.Ability> ABARE_HIMATSURI = ABILITIES.register("abare_himatsuri", xyz.pixelatedw.mineminenomi.abilities.zushi.AbareHimatsuriAbility::new);
     public static final java.util.function.Supplier<xyz.pixelatedw.mineminenomi.api.abilities.Ability> KILO_PRESS_1 = ABILITIES.register("1_kilo_press", xyz.pixelatedw.mineminenomi.abilities.kilo.KiloPress1Ability::new);
     public static final java.util.function.Supplier<xyz.pixelatedw.mineminenomi.api.abilities.Ability> KILO_PUNCH_5000 = ABILITIES.register("5000_kilo_punch", xyz.pixelatedw.mineminenomi.abilities.kilo.KiloPunch5000Ability::new);
     public static final java.util.function.Supplier<xyz.pixelatedw.mineminenomi.api.abilities.Ability> KILO_PRESS_10000 = ABILITIES.register("10000_kilo_press", xyz.pixelatedw.mineminenomi.abilities.kilo.KiloPress10000Ability::new);

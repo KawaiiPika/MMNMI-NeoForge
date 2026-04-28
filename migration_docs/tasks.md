@@ -60,7 +60,7 @@
 
 ## Missing Systems (Gap Analysis)
 - [ ] **Animations**: 45+ legacy animations (Backflip, BattoStrike, etc.) and specialized ones for Fruits/Styles.
-  - [x] **Batch 1: Combat & Movement Basics**: Backflip, BattoStrike, Dash, Leap, Block, Dodges.
+  - [ ] **Batch 1: Combat & Movement Basics**: Backflip, BattoStrike, Dash, Leap, Block, Dodges.
   - [ ] **Batch 2: Weapon-Specific Animations**: Sword swings, gun aiming, sniper poses.
   - [ ] **Batch 3: Devil Fruit Animations**: Transformations, logia morphs, specific attack poses.
   - [ ] **Batch 4: Fighting Style Animations**: Rokushiki moves, Fishman Karate, Black Leg kicks.
