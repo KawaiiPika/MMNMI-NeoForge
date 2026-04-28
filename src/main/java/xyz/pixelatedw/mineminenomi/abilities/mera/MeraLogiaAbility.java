@@ -43,13 +43,8 @@ public class MeraLogiaAbility extends Ability {
 
 @Override
     public void onLogiaDodge(LivingEntity entity, LivingEntity attacker) {
-        super.onLogiaDodge(entity, attacker);
         // Side effect: Ignites attacker when dodged
         attacker.setRemainingFireTicks(60);
-
-        if (entity.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
-            serverLevel.sendParticles(net.minecraft.core.particles.ParticleTypes.FLAME, entity.getX(), entity.getY() + entity.getBbHeight() / 2, entity.getZ(), 20, entity.getBbWidth(), entity.getBbHeight() / 2, entity.getBbWidth(), 0.05);
-        }
     }
 
 @Override

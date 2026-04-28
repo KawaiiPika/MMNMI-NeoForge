@@ -117,36 +117,6 @@ public class ClientEvents {
                     mc.getMainRenderTarget().bindWrite(false);
                 }
             }
-
-            if (stats != null) {
-                long timeSinceLogiaDodge = mc.player.level().getGameTime() - stats.getCombat().lastLogiaDodgeTime();
-                if (timeSinceLogiaDodge >= 0 && timeSinceLogiaDodge < 10) { // 0.5 second duration
-                    var chain = xyz.pixelatedw.mineminenomi.client.render.ModRenderTypeBuffers.getInstance().getMorphTransitionPostChain();
-                    if (chain != null) {
-                        chain.process(event.getPartialTick().getGameTimeDeltaPartialTick(true));
-                        mc.getMainRenderTarget().bindWrite(false);
-                    }
-                }
-            }
-
-            if (mc.player.hasData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.MORPH_DATA)) {
-                xyz.pixelatedw.mineminenomi.data.entity.MorphData morphData = mc.player.getData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.MORPH_DATA);
-                long timeSinceMorph = mc.player.level().getGameTime() - morphData.lastMorphTime();
-
-                if (timeSinceMorph >= 0 && timeSinceMorph < 20) { // 1 second duration
-                    var chain = xyz.pixelatedw.mineminenomi.client.render.ModRenderTypeBuffers.getInstance().getMorphTransitionPostChain();
-                    if (chain != null) {
-                        float progress = timeSinceMorph / 20.0f;
-                        float intensity = (float) Math.sin(progress * Math.PI); // Peak in middle
-
-                        // Just an example uniform if using wobble, but for blur_transition we can try to set a uniform if defined in code, otherwise we process the blur.
-                        // Setting uniforms dynamically for the blur pass if they exist
-                        // We will rely on PostChain#process for now which runs the passes
-                        chain.process(event.getPartialTick().getGameTimeDeltaPartialTick(true));
-                        mc.getMainRenderTarget().bindWrite(false);
-                    }
-                }
-            }
         }
     }
 

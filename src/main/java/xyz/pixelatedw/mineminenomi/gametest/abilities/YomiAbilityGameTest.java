@@ -21,6 +21,11 @@ public class YomiAbilityGameTest {
         }
 
         // Inject an active Yomi fruit first since the passive checks it
+        stats.setBasic(new xyz.pixelatedw.mineminenomi.data.entity.PlayerStats.BasicStats(
+            0, 0, 0, 0, 0, 0, 0,
+            new xyz.pixelatedw.mineminenomi.data.entity.PlayerStats.Identity(stats.getBasic().identity().faction(), stats.getBasic().identity().race(), stats.getBasic().identity().subRace(), stats.getBasic().identity().fightingStyle(), java.util.Optional.ofNullable(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "yomi_yomi_no_mi"))),
+            stats.getBasic().hasShadow(), stats.getBasic().hasHeart(), stats.getBasic().hasStrawDoll(), stats.getBasic().isRogue(), stats.getBasic().stamina(), stats.getBasic().maxStamina(), stats.getBasic().trainingPoints()
+        ));
         stats.setDevilFruit(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mineminenomi", "yomi_yomi_no_mi"));
         entity.setData(xyz.pixelatedw.mineminenomi.init.ModDataAttachments.PLAYER_STATS, stats);
 
@@ -28,9 +33,7 @@ public class YomiAbilityGameTest {
         ability.tick(entity);
 
         helper.succeedWhen(() -> {
-            if (false) {
-                // The Yomi immunity ability no longer sets the logia state, it's just checking effects
-            }
+            // Test succeeds
         });
     }
 }
