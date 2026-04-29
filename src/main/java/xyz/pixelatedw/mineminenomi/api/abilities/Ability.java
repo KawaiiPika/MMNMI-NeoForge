@@ -133,6 +133,11 @@ public abstract class Ability {
     }
 
     public void onLogiaDodge(LivingEntity entity, LivingEntity attacker) {
+        xyz.pixelatedw.mineminenomi.data.entity.PlayerStats stats = xyz.pixelatedw.mineminenomi.data.entity.PlayerStats.get(entity);
+        if (stats != null) {
+            stats.setLastLogiaDodgeTime(entity.level().getGameTime());
+            stats.sync(entity);
+        }
     }
 
     public void onDamageTake(LivingEntity entity, net.minecraft.world.damagesource.DamageSource source, float amount) {

@@ -118,6 +118,64 @@ public class ModAnimations {
             ))
             .build();
 
+<<<<<<< HEAD
+=======
+    public static final AnimationDefinition SHARK_ON_TOOTH = AnimationDefinition.Builder.withLength(1.0f).looping()
+            .addAnimation("body", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                    new Keyframe(0f, KeyframeAnimations.degreeVec(90, 0, 0), AnimationChannel.Interpolations.LINEAR),
+                    new Keyframe(0.5f, KeyframeAnimations.degreeVec(90, 180, 0), AnimationChannel.Interpolations.LINEAR),
+                    new Keyframe(1.0f, KeyframeAnimations.degreeVec(90, 360, 0), AnimationChannel.Interpolations.LINEAR)
+            ))
+            .addAnimation("right_arm", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                    new Keyframe(0f, KeyframeAnimations.degreeVec(-90, 0, 0), AnimationChannel.Interpolations.LINEAR)
+            ))
+            .addAnimation("left_arm", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                    new Keyframe(0f, KeyframeAnimations.degreeVec(-90, 0, 0), AnimationChannel.Interpolations.LINEAR)
+            ))
+            .build();
+
+    public static final AnimationDefinition SHUFUKU_SAGYO = AnimationDefinition.Builder.withLength(1.0f).looping()
+            .addAnimation("right_arm", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                    new Keyframe(0f, KeyframeAnimations.degreeVec(-45, -63, -45), AnimationChannel.Interpolations.LINEAR)
+            ))
+            .addAnimation("left_arm", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                    new Keyframe(0f, KeyframeAnimations.degreeVec(-45, 63, 45), AnimationChannel.Interpolations.LINEAR)
+            ))
+            .build();
+
+    public static final AnimationDefinition SPIN_TO_WIN = AnimationDefinition.Builder.withLength(1.0f).looping()
+            .addAnimation("body", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                    new Keyframe(0f, KeyframeAnimations.degreeVec(0, 0, 0), AnimationChannel.Interpolations.LINEAR),
+                    new Keyframe(0.5f, KeyframeAnimations.degreeVec(0, 180, 0), AnimationChannel.Interpolations.LINEAR),
+                    new Keyframe(1.0f, KeyframeAnimations.degreeVec(0, 360, 0), AnimationChannel.Interpolations.LINEAR)
+            ))
+            .addAnimation("right_arm", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                    new Keyframe(0f, KeyframeAnimations.degreeVec(-90, -20, 20), AnimationChannel.Interpolations.LINEAR)
+            ))
+            .addAnimation("left_arm", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                    new Keyframe(0f, KeyframeAnimations.degreeVec(-90, 20, -20), AnimationChannel.Interpolations.LINEAR)
+            ))
+            .addAnimation("right_leg", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                    new Keyframe(0f, KeyframeAnimations.degreeVec(-15, 0, 0), AnimationChannel.Interpolations.LINEAR)
+            ))
+            .addAnimation("left_leg", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                    new Keyframe(0f, KeyframeAnimations.degreeVec(-15, 0, 0), AnimationChannel.Interpolations.LINEAR)
+            ))
+            .build();
+
+    public static final AnimationDefinition BLACK_HOLE = AnimationDefinition.Builder.withLength(1.0f).looping()
+            .addAnimation("right_arm", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                    new Keyframe(0f, KeyframeAnimations.degreeVec(0, 0, 0), AnimationChannel.Interpolations.LINEAR)
+            ))
+            .build();
+
+    public static final AnimationDefinition MIZU_TAIHO = AnimationDefinition.Builder.withLength(1.0f).looping()
+            .addAnimation("right_arm", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                    new Keyframe(0f, KeyframeAnimations.degreeVec(0, 0, 0), AnimationChannel.Interpolations.LINEAR)
+            ))
+            .build();
+
+>>>>>>> origin/main
     static {
         REGISTRY.put("scream", SCREAM);
         REGISTRY.put("backflip", BACKFLIP);
@@ -127,5 +185,13 @@ public class ModAnimations {
         REGISTRY.put("block", BLOCK);
         REGISTRY.put("dodge", DODGE);
 
+<<<<<<< HEAD
+=======
+        REGISTRY.put("shark_on_tooth", SHARK_ON_TOOTH);
+        REGISTRY.put("shufuku_sagyo", SHUFUKU_SAGYO);
+        REGISTRY.put("spin_to_win", SPIN_TO_WIN);
+        REGISTRY.put("black_hole", BLACK_HOLE);
+        REGISTRY.put("mizu_taiho", MIZU_TAIHO);
+>>>>>>> origin/main
     }
 }

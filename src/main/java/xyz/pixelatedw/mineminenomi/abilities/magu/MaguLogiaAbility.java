@@ -41,9 +41,14 @@ public class MaguLogiaAbility extends Ability {
 
 @Override
     public void onLogiaDodge(LivingEntity entity, LivingEntity attacker) {
+        super.onLogiaDodge(entity, attacker);
         // Side effect: Ignites attacker and damages them when dodged
         attacker.setRemainingFireTicks(100);
         attacker.hurt(entity.damageSources().onFire(), 5.0F);
+
+        if (entity.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+            serverLevel.sendParticles(net.minecraft.core.particles.ParticleTypes.LAVA, entity.getX(), entity.getY() + entity.getBbHeight() / 2, entity.getZ(), 20, entity.getBbWidth(), entity.getBbHeight() / 2, entity.getBbWidth(), 0.05);
+        }
     }
 
 @Override

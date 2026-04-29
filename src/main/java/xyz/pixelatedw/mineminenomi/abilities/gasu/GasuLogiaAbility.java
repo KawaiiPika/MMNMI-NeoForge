@@ -38,8 +38,13 @@ public class GasuLogiaAbility extends Ability {
 
 @Override
     public void onLogiaDodge(LivingEntity entity, LivingEntity attacker) {
+        super.onLogiaDodge(entity, attacker);
         // Side effect: Poisons attacker when dodged
         attacker.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 1));
+
+        if (entity.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+            serverLevel.sendParticles(net.minecraft.core.particles.ParticleTypes.EFFECT, entity.getX(), entity.getY() + entity.getBbHeight() / 2, entity.getZ(), 20, entity.getBbWidth(), entity.getBbHeight() / 2, entity.getBbWidth(), 0.05);
+        }
     }
 
 @Override

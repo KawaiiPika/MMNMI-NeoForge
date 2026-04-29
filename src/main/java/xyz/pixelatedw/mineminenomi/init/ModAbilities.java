@@ -457,6 +457,7 @@ public class ModAbilities {
     public static final java.util.function.Supplier<Ability> YOMI_IMMUNITY = ABILITIES.register("yomi_immunity", xyz.pixelatedw.mineminenomi.abilities.yomi.YomiImmunityAbility::new);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
     public static final Supplier<Ability> COLA_BACKPACK_BONUS = ABILITIES.register("cola_backpack_bonus", xyz.pixelatedw.mineminenomi.abilities.cyborg.ColaBackpackBonusAbility::new);
@@ -511,6 +512,8 @@ public class ModAbilities {
     public static final Supplier<Ability> RYUSOKEN_PASSIVE_BONUSES = ABILITIES.register("ryusoken_passive_bonuses", xyz.pixelatedw.mineminenomi.abilities.ryusoken.RyusokenPassiveBonusesAbility::new);
 
 >>>>>>> 3ca7050b (resolve conflicts)
+=======
+>>>>>>> origin/main
     public static void register(IEventBus bus) {
         ABILITIES.register(bus);
     }
